@@ -47,6 +47,7 @@
       --steel-dim: #9ca3af;
       --steel-border: #2a2c35;
       --accent-glow: rgba(244, 244, 245, 0.25);
+      /* 白色愛心 (低透明度) 游標 */
       --heart-cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="rgba(255,255,255,0.45)" stroke="rgba(0,0,0,0.4)" stroke-width="0.8" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>') 12 12, pointer;
     }
 
@@ -331,6 +332,7 @@
       color: #fff;
     }
 
+    /* 電腦版排版加寬：KARINA MEMORY BOX 完全不被截斷 */
     @media (min-width: 768px) {
       .timeline-strip, .deck-controls {
         max-width: 780px;
@@ -543,6 +545,7 @@
 </head>
 <body>
 
+  <!-- 原生 Audio 元件：不帶跨域限制，鎖定本機串流 -->
   <audio id="native-audio" playsinline preload="auto"></audio>
   <iframe id="yt-hidden-player" style="position:absolute; top:-9999px; left:-9999px; width:1px; height:1px;" frameborder="0" allow="autoplay; encrypted-media"></iframe>
 
@@ -777,7 +780,7 @@
   <script type="module">
     import * as THREE from 'three';
 
-    // 專案標準根目錄 URL (確保 iOS Safari 100% 正確解析路徑)
+    // 專案標準根目錄 URL (保證 Safari 與跨平台 100% 正確解析路徑)
     const REPO_BASE = "https://u11150003-arch.github.io/KARINA-PLAYLIST/";
 
     function toAbsUrl(fileName) {
@@ -786,7 +789,7 @@
       return REPO_BASE + encodeURI(fileName.replace(/^\.\//, ''));
     }
 
-    /* 第一個歌單封面與黑膠貼標 */
+    /* 第一個歌單封面與黑膠貼標 (全部對應 GitHub 上的圖片名稱) */
     const COVER_UP = "UP_cover.jpg";
     const COVER_GOOD_STUFF = "GOOD STUFF_cover.jpg";
     const COVER_16_BIT = "16 Bit_cover.jpg";
@@ -1005,7 +1008,7 @@
       }
     ];
 
-    // 清空舊快取，強制載入最新絕對路徑
+    // 清理舊快取，保證永久同步最新路徑
     localStorage.clear();
 
     let store = TWO_PLAYLISTS_DATA;
@@ -1021,6 +1024,9 @@
     let ytTimer = null;
     let hasPlayedFirstTrack = false;
     let isAutoSwitching = false;
+
+    // 解決切歌圖片錯亂的唯一版本序號鎖
+    let currentTextureSeq = 0;
 
     const nativeAudio = document.getElementById('native-audio');
     const ytIframe = document.getElementById('yt-hidden-player');
@@ -1066,7 +1072,7 @@
     }
 
     /* -------------------------------------------------------------
-     * 3. Three.js 3D 渲染 (修復白模、圖片載入失敗問題)
+     * 3. Three.js 3D 渲染 (修復旋轉、自轉與封面覆蓋錯誤)
      * ------------------------------------------------------------*/
     const container = document.getElementById('threejs-box');
     const scene = new THREE.Scene();
@@ -1206,14 +1212,18 @@
       new THREE.MeshStandardMaterial({ color: 0x14151a, roughness: 0.5 }),
       new THREE.MeshStandardMaterial({ color: 0x14151a, roughness: 0.5 }),
       new THREE.MeshStandardMaterial({ color: 0x14151a, roughness: 0.5 }),
-      new THREE.MeshStandardMaterial({ color: 0x222226, roughness: 0.35 }), // 預設深色防止刺眼白模
+      new THREE.MeshStandardMaterial({ color: 0x222226, roughness: 0.35 }),
       new THREE.MeshStandardMaterial({ color: 0x222226, roughness: 0.35 })
     ];
     const coverMesh = new THREE.Mesh(coverGeo, coverSideMat);
     coverMesh.position.set(-0.55, 0, 0);
     turntableGroup.add(coverMesh);
 
+    // 建立獨立黑膠自轉群組，確保在旋轉展示時黑膠也能一直流暢自轉
+    const discSpinGroup = new THREE.Group();
     const discGroup = new THREE.Group();
+    discGroup.add(discSpinGroup);
+
     const discGeo = new THREE.CylinderGeometry(0.95, 0.95, 0.02, 64);
     const discMat = new THREE.MeshStandardMaterial({
       color: 0x14151a,
@@ -1223,7 +1233,7 @@
     });
     const discMesh = new THREE.Mesh(discGeo, discMat);
     discMesh.rotation.x = Math.PI / 2;
-    discGroup.add(discMesh);
+    discSpinGroup.add(discMesh);
 
     const labelGeo = new THREE.CylinderGeometry(0.35, 0.35, 0.025, 32);
     const labelMesh = new THREE.Mesh(
@@ -1235,7 +1245,7 @@
       })
     );
     labelMesh.rotation.x = Math.PI / 2;
-    discGroup.add(labelMesh);
+    discSpinGroup.add(labelMesh);
 
     const VINYL_REST_X = 0.52;
     const VINYL_OUT_X = 0.95;
@@ -1244,11 +1254,14 @@
 
     function applyCoverTo3D(frontUrl, backUrl, labelUrl, scale = 1.0, ox = 0.0, oy = 0.0) {
       if (!frontUrl) return;
+      const thisSeq = ++currentTextureSeq; // 鎖定目前執行的版本
+
       const directFront = toAbsUrl(frontUrl);
       const directBack = backUrl ? toAbsUrl(backUrl) : directFront;
       const directLabel = labelUrl ? toAbsUrl(labelUrl) : directFront;
 
       loadCachedTexture(directFront, (tex) => {
+        if (thisSeq !== currentTextureSeq) return; // 若使用者又切了歌，立刻拋棄舊貼圖避免覆蓋錯誤
         tex.repeat.set(1 / scale, 1 / scale);
         tex.offset.set((1 - 1/scale)/2 - (ox / scale), (1 - 1/scale)/2 - (oy / scale));
         coverMesh.material[4].map = tex;
@@ -1257,12 +1270,14 @@
       });
 
       loadCachedTexture(directBack, (tex) => {
+        if (thisSeq !== currentTextureSeq) return;
         coverMesh.material[5].map = tex;
         coverMesh.material[5].color.set(0xffffff);
         coverMesh.material[5].needsUpdate = true;
       });
 
       loadCachedTexture(directLabel, (tex) => {
+        if (thisSeq !== currentTextureSeq) return;
         labelMesh.material.map = tex;
         labelMesh.material.color.set(0xffffff);
         labelMesh.material.needsUpdate = true;
@@ -1345,6 +1360,11 @@
     function renderLoop() {
       requestAnimationFrame(renderLoop);
 
+      // 黑膠轉動核心修復：播放中或展示旋轉時，黑膠圓盤平滑自轉
+      if (isPlaying || isAutoRotating) {
+        discSpinGroup.rotation.z -= 0.012;
+      }
+
       if (isAutoRotating) {
         const elapsed = performance.now() - autoRotStartTime;
         const progress = Math.min(1, elapsed / AUTO_ROT_DURATION);
@@ -1362,8 +1382,8 @@
         turntableGroup.rotation.x = THREE.MathUtils.lerp(turntableGroup.rotation.x, targetRotX, 0.1);
       }
 
+      // 黑膠推出 / 收回動畫
       if (isPlaying) {
-        discGroup.rotation.z -= 0.010;
         discGroup.position.x = THREE.MathUtils.lerp(discGroup.position.x, VINYL_OUT_X, 0.06);
       } else {
         discGroup.position.x = THREE.MathUtils.lerp(discGroup.position.x, VINYL_REST_X, 0.06);
@@ -1418,7 +1438,6 @@
       updateProgressUI(nativeAudio.currentTime, nativeAudio.duration || totalDuration);
     });
 
-    // 真正發聲時再發送 MediaSession，保證 iOS 鎖定畫面 100% 顯現歌名與封面
     nativeAudio.addEventListener('playing', () => {
       setPlayState(true);
       isAutoSwitching = false;
@@ -1434,7 +1453,6 @@
       }
     });
 
-    // 播放完畢自然切下一首，確保順暢銜接不停頓
     nativeAudio.addEventListener('ended', () => {
       playNext(true);
     });
@@ -1490,7 +1508,6 @@
           updateProgressUI(0, totalDuration);
 
           nativeAudio.src = directSrc;
-          nativeAudio.load(); // 關鍵：通知 Safari 立即重啟音訊管線
           
           const p = nativeAudio.play();
           if (p !== undefined) {
