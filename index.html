@@ -47,6 +47,7 @@
       --steel-dim: #9ca3af;
       --steel-border: #2a2c35;
       --accent-glow: rgba(244, 244, 245, 0.25);
+      /* 白色愛心 (低透明度) 游標 */
       --heart-cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="rgba(255,255,255,0.45)" stroke="rgba(0,0,0,0.4)" stroke-width="0.8" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>') 12 12, pointer;
     }
 
@@ -94,6 +95,7 @@
       color: #ffffff;
     }
 
+    /* 右上角愛心微調加大 */
     .admin-star-btn {
       background: none;
       border: none;
@@ -544,6 +546,7 @@
 </head>
 <body>
 
+  <!-- 原生 Audio 元件 -->
   <audio id="native-audio" playsinline></audio>
   <iframe id="yt-hidden-player" style="position:absolute; top:-9999px; left:-9999px; width:1px; height:1px;" frameborder="0" allow="autoplay; encrypted-media"></iframe>
 
@@ -778,7 +781,7 @@
   <script type="module">
     import * as THREE from 'three';
 
-    // 專案標準根目錄 URL (確保 iOS Safari 100% 正確解析路徑)
+    // 專案標準根目錄 URL
     const REPO_BASE = "https://u11150003-arch.github.io/KARINA-PLAYLIST/";
 
     function toAbsUrl(fileName) {
@@ -1006,7 +1009,6 @@
       }
     ];
 
-    // 清空舊快取，強行套用最新結構
     localStorage.clear();
 
     let store = TWO_PLAYLISTS_DATA;
@@ -1022,31 +1024,25 @@
     let ytTimer = null;
     let hasPlayedFirstTrack = false;
     let isAutoSwitching = false;
-
-    // 解決切歌圖片錯亂的唯一版本序號鎖
     let currentTextureSeq = 0;
 
     const nativeAudio = document.getElementById('native-audio');
     const ytIframe = document.getElementById('yt-hidden-player');
 
-    // iOS 鎖定畫面無延遲宣告與封面即刻快取
-    function updateMediaSession(song, pl) {
+    // 核心修復：點擊當下即刻同步 MediaSession，iOS 鎖定畫面保證顯示歌名與照片
+    function syncSystemMediaSession(song, pl) {
       if ('mediaSession' in navigator) {
-        const directCover = toAbsUrl(song.cover || pl.cover);
+        const fullCover = toAbsUrl(song.cover || pl.cover);
         
-        // 使用 Image 物件強制讓 iOS 先吃進快取，保證鎖定畫面秒秀封面
-        const imgPreload = new Image();
-        imgPreload.src = directCover;
-
         navigator.mediaSession.metadata = new MediaMetadata({
           title: song.title,
           artist: song.artist || "KARINA",
           album: pl.name || "KARINA PLAYLIST",
           artwork: [
-            { src: directCover, sizes: '96x96', type: 'image/jpeg' },
-            { src: directCover, sizes: '128x128', type: 'image/jpeg' },
-            { src: directCover, sizes: '256x256', type: 'image/jpeg' },
-            { src: directCover, sizes: '512x512', type: 'image/jpeg' }
+            { src: fullCover, sizes: '96x96', type: 'image/jpeg' },
+            { src: fullCover, sizes: '128x128', type: 'image/jpeg' },
+            { src: fullCover, sizes: '256x256', type: 'image/jpeg' },
+            { src: fullCover, sizes: '512x512', type: 'image/jpeg' }
           ]
         });
 
@@ -1054,14 +1050,6 @@
         navigator.mediaSession.setActionHandler('pause', () => { pauseActiveSong(); });
         navigator.mediaSession.setActionHandler('previoustrack', () => { playPrev(); });
         navigator.mediaSession.setActionHandler('nexttrack', () => { playNext(); });
-        try {
-          navigator.mediaSession.setActionHandler('seekto', (details) => {
-            if (details.seekTime !== undefined) {
-              nativeAudio.currentTime = details.seekTime;
-              updateProgressUI(details.seekTime, totalDuration);
-            }
-          });
-        } catch(e) {}
       }
     }
 
@@ -1074,7 +1062,7 @@
     }
 
     /* -------------------------------------------------------------
-     * 3. Three.js 3D 渲染 (修復旋轉、自轉與封面覆蓋錯誤)
+     * 3. Three.js 3D 渲染
      * ------------------------------------------------------------*/
     const container = document.getElementById('threejs-box');
     const scene = new THREE.Scene();
@@ -1362,7 +1350,7 @@
     function renderLoop() {
       requestAnimationFrame(renderLoop);
 
-      // 黑膠圓盤自轉動畫修復：播放中或展示旋轉時流暢旋轉
+      // 黑膠自轉修復：只要播放中或旋轉展示中，皆保持平滑旋轉
       if (isPlaying || isAutoRotating) {
         discSpinGroup.rotation.z -= 0.014;
       }
@@ -1384,7 +1372,6 @@
         turntableGroup.rotation.x = THREE.MathUtils.lerp(turntableGroup.rotation.x, targetRotX, 0.1);
       }
 
-      // 黑膠推出 / 收回動畫
       if (isPlaying) {
         discGroup.position.x = THREE.MathUtils.lerp(discGroup.position.x, VINYL_OUT_X, 0.06);
       } else {
@@ -1396,7 +1383,7 @@
     renderLoop();
 
     /* -------------------------------------------------------------
-     * 4. 音訊系統 (非阻塞即時加載、背景播放與 iOS 狀態推送)
+     * 4. 音訊系統 (直連即時播放、修復延遲與中斷)
      * ------------------------------------------------------------*/
     function setPlayState(active) {
       isPlaying = active;
@@ -1440,20 +1427,9 @@
       updateProgressUI(nativeAudio.currentTime, nativeAudio.duration || totalDuration);
     });
 
-    nativeAudio.addEventListener('loadedmetadata', () => {
-      const curPl = store[plIdx];
-      if (curPl && curPl.songs[trackIdx]) {
-        updateMediaSession(curPl.songs[trackIdx], curPl);
-      }
-    });
-
     nativeAudio.addEventListener('playing', () => {
       setPlayState(true);
       isAutoSwitching = false;
-      const curPl = store[plIdx];
-      if (curPl && curPl.songs[trackIdx]) {
-        updateMediaSession(curPl.songs[trackIdx], curPl);
-      }
     });
 
     nativeAudio.addEventListener('pause', () => {
@@ -1483,8 +1459,11 @@
       if (!curPl || !curPl.songs[trackIdx]) return;
       const song = curPl.songs[trackIdx];
 
+      // 介面即刻渲染
       renderUI();
-      updateMediaSession(song, curPl);
+      
+      // 關鍵修復：在使用者點擊的第一刻立刻推送 MediaSession，iOS 鎖定畫面保證顯示標題與封面
+      syncSystemMediaSession(song, curPl);
 
       if (isNewTrack || !hasPlayedFirstTrack) {
         triggerSlow15sSpin();
@@ -1517,7 +1496,7 @@
           currentSec = 0;
           updateProgressUI(0, totalDuration);
 
-          // 核心優化：直接更換 src 並呼叫 play()，杜絕 load() 重複中斷連線
+          // 核心修復：直接換 src 呼叫 play()，杜絕 load() 重複建立連線造成的 5 秒延遲
           nativeAudio.src = directSrc;
           
           const p = nativeAudio.play();
@@ -2142,6 +2121,7 @@
       renderUI();
     }
 
+    // 初始化渲染
     renderUI();
   </script>
 </body>
