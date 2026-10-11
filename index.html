@@ -546,8 +546,8 @@
 </head>
 <body>
 
-  <!-- 原生 Audio 元件 -->
-  <audio id="native-audio" playsinline></audio>
+  <!-- 原生 Audio 元件：啟用 auto 預載以加快串流反應 -->
+  <audio id="native-audio" playsinline preload="auto"></audio>
   <iframe id="yt-hidden-player" style="position:absolute; top:-9999px; left:-9999px; width:1px; height:1px;" frameborder="0" allow="autoplay; encrypted-media"></iframe>
 
   <header>
@@ -1009,6 +1009,7 @@
       }
     ];
 
+    // 清空舊快取，保證永久同步最新路徑
     localStorage.clear();
 
     let store = TWO_PLAYLISTS_DATA;
@@ -1029,7 +1030,17 @@
     const nativeAudio = document.getElementById('native-audio');
     const ytIframe = document.getElementById('yt-hidden-player');
 
-    // 核心修復：點擊當下即刻同步 MediaSession，iOS 鎖定畫面保證顯示歌名與照片
+    // 音訊預載池：以無痛背景方式預先建立請求，解決 5 秒等待問題
+    const audioPreloadPool = new Map();
+    function prefetchAudio(url) {
+      if (!url || audioPreloadPool.has(url)) return;
+      const audioObj = new Audio();
+      audioObj.preload = "auto";
+      audioObj.src = url;
+      audioPreloadPool.set(url, audioObj);
+    }
+
+    // 關鍵修復：在使用者點擊的第一刻立刻推送 MediaSession，iOS 鎖定畫面保證顯示標題與封面
     function syncSystemMediaSession(song, pl) {
       if ('mediaSession' in navigator) {
         const fullCover = toAbsUrl(song.cover || pl.cover);
@@ -1062,7 +1073,7 @@
     }
 
     /* -------------------------------------------------------------
-     * 3. Three.js 3D 渲染
+     * 3. Three.js 3D 渲染 (修復旋轉、自轉與封面覆蓋錯誤)
      * ------------------------------------------------------------*/
     const container = document.getElementById('threejs-box');
     const scene = new THREE.Scene();
@@ -1372,6 +1383,7 @@
         turntableGroup.rotation.x = THREE.MathUtils.lerp(turntableGroup.rotation.x, targetRotX, 0.1);
       }
 
+      // 黑膠推出 / 收回動畫
       if (isPlaying) {
         discGroup.position.x = THREE.MathUtils.lerp(discGroup.position.x, VINYL_OUT_X, 0.06);
       } else {
@@ -1383,7 +1395,7 @@
     renderLoop();
 
     /* -------------------------------------------------------------
-     * 4. 音訊系統 (直連即時播放、修復延遲與中斷)
+     * 4. 音訊系統 (直接串流、秒讀秒開、背景播放與 iOS 狀態推送)
      * ------------------------------------------------------------*/
     function setPlayState(active) {
       isPlaying = active;
@@ -1427,9 +1439,20 @@
       updateProgressUI(nativeAudio.currentTime, nativeAudio.duration || totalDuration);
     });
 
+    nativeAudio.addEventListener('loadedmetadata', () => {
+      const curPl = store[plIdx];
+      if (curPl && curPl.songs[trackIdx]) {
+        syncSystemMediaSession(curPl.songs[trackIdx], curPl);
+      }
+    });
+
     nativeAudio.addEventListener('playing', () => {
       setPlayState(true);
       isAutoSwitching = false;
+      const curPl = store[plIdx];
+      if (curPl && curPl.songs[trackIdx]) {
+        syncSystemMediaSession(curPl.songs[trackIdx], curPl);
+      }
     });
 
     nativeAudio.addEventListener('pause', () => {
@@ -1459,11 +1482,16 @@
       if (!curPl || !curPl.songs[trackIdx]) return;
       const song = curPl.songs[trackIdx];
 
-      // 介面即刻渲染
       renderUI();
       
-      // 關鍵修復：在使用者點擊的第一刻立刻推送 MediaSession，iOS 鎖定畫面保證顯示標題與封面
+      // 關鍵修復：在點擊的當下立刻同步 MediaSession，確保鎖定螢幕及通知欄位 100% 顯現歌名與封面
       syncSystemMediaSession(song, curPl);
+
+      // 自動預加載下一首歌曲，實現無延遲切歌
+      const nextSong = curPl.songs[(trackIdx + 1) % curPl.songs.length];
+      if (nextSong && !nextSong.source.includes('youtube')) {
+        prefetchAudio(toAbsUrl(nextSong.source));
+      }
 
       if (isNewTrack || !hasPlayedFirstTrack) {
         triggerSlow15sSpin();
@@ -1496,7 +1524,7 @@
           currentSec = 0;
           updateProgressUI(0, totalDuration);
 
-          // 核心修復：直接換 src 呼叫 play()，杜絕 load() 重複建立連線造成的 5 秒延遲
+          // 核心修復：直接賦值 src 並呼叫 play()，杜絕重複握手
           nativeAudio.src = directSrc;
           
           const p = nativeAudio.play();
@@ -2126,3 +2154,4 @@
   </script>
 </body>
 </html>
+
