@@ -47,7 +47,6 @@
       --steel-dim: #9ca3af;
       --steel-border: #2a2c35;
       --accent-glow: rgba(244, 244, 245, 0.25);
-      /* 白色愛心 (低透明度) 游標 */
       --heart-cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="rgba(255,255,255,0.45)" stroke="rgba(0,0,0,0.4)" stroke-width="0.8" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>') 12 12, pointer;
     }
 
@@ -95,7 +94,6 @@
       color: #ffffff;
     }
 
-    /* 右上角愛心放大調整 */
     .admin-star-btn {
       background: none;
       border: none;
@@ -333,7 +331,6 @@
       color: #fff;
     }
 
-    /* 電腦版排版加寬：KARINA MEMORY BOX 完全不被截斷 */
     @media (min-width: 768px) {
       .timeline-strip, .deck-controls {
         max-width: 780px;
@@ -546,7 +543,7 @@
 </head>
 <body>
 
-  <!-- 原生背景可播放 Audio 元件，不加跨域阻擋 -->
+  <!-- 原生 Audio 元件：不帶跨域限制，鎖定本機串流 -->
   <audio id="native-audio" playsinline></audio>
   <iframe id="yt-hidden-player" style="position:absolute; top:-9999px; left:-9999px; width:1px; height:1px;" frameborder="0" allow="autoplay; encrypted-media"></iframe>
 
@@ -781,25 +778,25 @@
   <script type="module">
     import * as THREE from 'three';
 
-    /* 第一個歌單封面與黑膠貼標 (直接讀取 GitHub 本機路徑) */
-    const COVER_UP = "UP_cover.jpg";
-    const COVER_GOOD_STUFF = "GOOD STUFF_cover.jpg";
-    const COVER_16_BIT = "16 Bit_cover.jpg";
-    const COVER_TENDERNESS = "May the TENDERNESS be with you_album cover.jpg";
-    const VINYL_TENDERNESS = "May the TENDERNESS be with you_CD cover.jpg";
-    const COVER_SERENADE = "Serenade_album cover.jpg";
-    const VINYL_SERENADE = "Serenade_CD cover.jpg";
+    /* 第一個歌單封面與黑膠貼標 (全部對齊 GitHub 上的圖片名稱) */
+    const COVER_UP = "./UP_cover.jpg";
+    const COVER_GOOD_STUFF = "./GOOD STUFF_cover.jpg";
+    const COVER_16_BIT = "./16 Bit_cover.jpg";
+    const COVER_TENDERNESS = "./May the TENDERNESS be with you_album cover.jpg";
+    const VINYL_TENDERNESS = "./May the TENDERNESS be with you_CD cover.jpg";
+    const COVER_SERENADE = "./Serenade_album cover.jpg";
+    const VINYL_SERENADE = "./Serenade_CD cover.jpg";
 
     /* 第二個歌單封面照片 */
-    const COVER_SPARKLE = "01Sparkle_cover.jpg";
-    const COVER_HARD_TO_SAY = "02Hard to say_cover.jpg";
-    const COVER_SAD_LOVE = "03_cover.jpg";
-    const COVER_AS_YOU_ARE = "04_cover.jpg";
-    const COVER_CANT_TAKE_EYES = "05Cant Take My Eyes Off You_cover.jpg";
-    const COVER_YOU_KNOW = "06Rock_cover.jpg";
+    const COVER_SPARKLE = "./01Sparkle_cover.jpg";
+    const COVER_HARD_TO_SAY = "./02Hard to say_cover.jpg";
+    const COVER_SAD_LOVE = "./03_cover.jpg";
+    const COVER_AS_YOU_ARE = "./04_cover.jpg";
+    const COVER_CANT_TAKE_EYES = "./05Cant Take My Eyes Off You_cover.jpg";
+    const COVER_YOU_KNOW = "./06Rock_cover.jpg";
 
     /* 第二個歌單統一黑膠中央貼標 */
-    const MEMORY_BOX_VINYL_LABEL = "KARINA MEMORY BOX_cover.JPG";
+    const MEMORY_BOX_VINYL_LABEL = "./KARINA MEMORY BOX_cover.JPG";
 
     function parseLrc(txt) {
       if (!txt) return [];
@@ -838,7 +835,7 @@
           {
             title: "UP",
             artist: "KARINA",
-            source: "01Sparkle.mp3",
+            source: "./01Sparkle.mp3",
             cover: COVER_UP,
             labelImg: COVER_UP,
             backCover: COVER_UP,
@@ -852,7 +849,7 @@
           {
             title: "GOOD STUFF",
             artist: "KARINA",
-            source: "02Hard to say.mp3",
+            source: "./02Hard to say.mp3",
             cover: COVER_GOOD_STUFF,
             labelImg: COVER_GOOD_STUFF,
             backCover: COVER_GOOD_STUFF,
@@ -866,7 +863,7 @@
           {
             title: "16 Bit",
             artist: "KARINA",
-            source: "03.mp3",
+            source: "./03.mp3",
             cover: COVER_16_BIT,
             labelImg: COVER_16_BIT,
             backCover: COVER_16_BIT,
@@ -880,7 +877,7 @@
           {
             title: "May the TENDERNESS be with you!",
             artist: "JANNABI feat.KARINA",
-            source: "04.mp3",
+            source: "./04.mp3",
             cover: COVER_TENDERNESS,
             labelImg: VINYL_TENDERNESS,
             backCover: COVER_TENDERNESS,
@@ -894,7 +891,7 @@
           {
             title: "Serenade",
             artist: "KARINA&WINTER",
-            source: "05Cant Take My Eyes Off You.mp3",
+            source: "./05Cant Take My Eyes Off You.mp3",
             cover: COVER_SERENADE,
             labelImg: VINYL_SERENADE,
             backCover: COVER_SERENADE,
@@ -915,7 +912,7 @@
           {
             title: "スパークル(Sparkle)",
             artist: "KARINA",
-            source: "01Sparkle.mp3",
+            source: "./01Sparkle.mp3",
             cover: COVER_SPARKLE,
             labelImg: MEMORY_BOX_VINYL_LABEL,
             backCover: COVER_SPARKLE,
@@ -929,7 +926,7 @@
           {
             title: "愛你但說不出口(Hard to say)",
             artist: "KARINA",
-            source: "02Hard to say.mp3",
+            source: "./02Hard to say.mp3",
             cover: COVER_HARD_TO_SAY,
             labelImg: MEMORY_BOX_VINYL_LABEL,
             backCover: COVER_HARD_TO_SAY,
@@ -943,7 +940,7 @@
           {
             title: "슬픈 사랑 노래",
             artist: "KARINA",
-            source: "03.mp3",
+            source: "./03.mp3",
             cover: COVER_SAD_LOVE,
             labelImg: MEMORY_BOX_VINYL_LABEL,
             backCover: COVER_SAD_LOVE,
@@ -957,7 +954,7 @@
           {
             title: "그대는 그대로",
             artist: "KARINA",
-            source: "04.mp3",
+            source: "./04.mp3",
             cover: COVER_AS_YOU_ARE,
             labelImg: MEMORY_BOX_VINYL_LABEL,
             backCover: COVER_AS_YOU_ARE,
@@ -971,7 +968,7 @@
           {
             title: "Can’t Take My Eyes Off You",
             artist: "KARINA",
-            source: "05Cant Take My Eyes Off You.mp3",
+            source: "./05Cant Take My Eyes Off You.mp3",
             cover: COVER_CANT_TAKE_EYES,
             labelImg: MEMORY_BOX_VINYL_LABEL,
             backCover: COVER_CANT_TAKE_EYES,
@@ -985,7 +982,7 @@
           {
             title: "있잖아 (Rock Ver.)",
             artist: "KARINA",
-            source: "06Rock.mp3",
+            source: "./06Rock.mp3",
             cover: COVER_YOU_KNOW,
             labelImg: MEMORY_BOX_VINYL_LABEL,
             backCover: COVER_YOU_KNOW,
@@ -1000,7 +997,7 @@
       }
     ];
 
-    // 清除舊快取，確保同步最新本機圖檔路徑
+    // 清理舊快取，確保永遠抓取最新本機設定
     localStorage.clear();
 
     let store = TWO_PLAYLISTS_DATA;
@@ -1020,7 +1017,7 @@
     const nativeAudio = document.getElementById('native-audio');
     const ytIframe = document.getElementById('yt-hidden-player');
 
-    // 完整的系統控制中心 / 鎖定畫面媒體資訊推送
+    // 完整的系統媒體狀態推送（包含鎖定畫面、動態島、控制中心、手錶耳機顯示）
     function updateMediaSession(song, pl) {
       if ('mediaSession' in navigator) {
         const fullCoverUrl = getAbsoluteUrl(song.cover || pl.cover);
@@ -1037,7 +1034,6 @@
           ]
         });
 
-        // 系統控制項綁定 (包含耳機控制、背景螢幕控制)
         navigator.mediaSession.setActionHandler('play', () => { playActiveSong(false); });
         navigator.mediaSession.setActionHandler('pause', () => { pauseActiveSong(); });
         navigator.mediaSession.setActionHandler('previoustrack', () => { playPrev(); });
@@ -1188,7 +1184,6 @@
         tex.minFilter = THREE.LinearFilter;
         tex.magFilter = THREE.LinearFilter;
         tex.generateMipmaps = false;
-        tex.anisotropy = renderer.capabilities.getMaxAnisotropy();
         tex.needsUpdate = true;
         textureCache.set(url, tex);
         callback(tex);
@@ -2105,7 +2100,7 @@
     // 初始化介面渲染
     renderUI();
     
-    // 初始化僅更新中繼資訊
+    // 初始化僅更新媒體狀態，不預載音訊以保證最快啟動速度
     if (store[plIdx] && store[plIdx].songs[trackIdx]) {
       const firstSong = store[plIdx].songs[trackIdx];
       updateMediaSession(firstSong, store[plIdx]);
