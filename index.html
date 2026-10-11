@@ -17,8 +17,8 @@
   <meta property="og:type" content="music.playlist">
   <meta property="og:url" content="https://u11150003-arch.github.io/KARINA-PLAYLIST/">
   
-  <meta property="og:image" content="./UP_cover.jpg">
-  <meta property="og:image:secure_url" content="./UP_cover.jpg">
+  <meta property="og:image" content="https://u11150003-arch.github.io/KARINA-PLAYLIST/UP_cover.jpg">
+  <meta property="og:image:secure_url" content="https://u11150003-arch.github.io/KARINA-PLAYLIST/UP_cover.jpg">
   <meta property="og:image:type" content="image/jpeg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
@@ -26,7 +26,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="KARINA PLAYLIST">
   <meta name="twitter:description" content="Playlist for KARINA">
-  <meta name="twitter:image" content="./UP_cover.jpg">
+  <meta name="twitter:image" content="https://u11150003-arch.github.io/KARINA-PLAYLIST/UP_cover.jpg">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -543,8 +543,7 @@
 </head>
 <body>
 
-  <!-- 原生 Audio 元件：不帶跨域限制，鎖定本機串流 -->
-  <audio id="native-audio" playsinline></audio>
+  <audio id="native-audio" playsinline preload="auto"></audio>
   <iframe id="yt-hidden-player" style="position:absolute; top:-9999px; left:-9999px; width:1px; height:1px;" frameborder="0" allow="autoplay; encrypted-media"></iframe>
 
   <header>
@@ -696,7 +695,7 @@
 
           <div class="field-row">
             <label>專輯封面 (正面)</label>
-            <input type="text" id="form-song-cover" placeholder="貼上圖片網址或檔名">
+            <input type="text" id="form-song-cover" placeholder="貼上圖片檔名">
             <div style="margin-top:6px; display:flex; align-items:center; gap:8px;">
               <input type="file" id="local-img-picker" accept="image/*" style="display:none;">
               <button type="button" class="btn-cancel" id="btn-pick-img" style="font-size:0.72rem;">📁 從手機圖庫挑選正面</button>
@@ -778,25 +777,34 @@
   <script type="module">
     import * as THREE from 'three';
 
-    /* 第一個歌單封面與黑膠貼標 (全部對齊 GitHub 上的圖片名稱) */
-    const COVER_UP = "./UP_cover.jpg";
-    const COVER_GOOD_STUFF = "./GOOD STUFF_cover.jpg";
-    const COVER_16_BIT = "./16 Bit_cover.jpg";
-    const COVER_TENDERNESS = "./May the TENDERNESS be with you_album cover.jpg";
-    const VINYL_TENDERNESS = "./May the TENDERNESS be with you_CD cover.jpg";
-    const COVER_SERENADE = "./Serenade_album cover.jpg";
-    const VINYL_SERENADE = "./Serenade_CD cover.jpg";
+    // 專案標準根目錄 URL (確保 iOS Safari 100% 正確解析路徑)
+    const REPO_BASE = "https://u11150003-arch.github.io/KARINA-PLAYLIST/";
+
+    function toAbsUrl(fileName) {
+      if (!fileName) return '';
+      if (fileName.startsWith('http://') || fileName.startsWith('https://')) return fileName;
+      return REPO_BASE + encodeURI(fileName.replace(/^\.\//, ''));
+    }
+
+    /* 第一個歌單封面與黑膠貼標 */
+    const COVER_UP = "UP_cover.jpg";
+    const COVER_GOOD_STUFF = "GOOD STUFF_cover.jpg";
+    const COVER_16_BIT = "16 Bit_cover.jpg";
+    const COVER_TENDERNESS = "May the TENDERNESS be with you_album cover.jpg";
+    const VINYL_TENDERNESS = "May the TENDERNESS be with you_CD cover.jpg";
+    const COVER_SERENADE = "Serenade_album cover.jpg";
+    const VINYL_SERENADE = "Serenade_CD cover.jpg";
 
     /* 第二個歌單封面照片 */
-    const COVER_SPARKLE = "./01Sparkle_cover.jpg";
-    const COVER_HARD_TO_SAY = "./02Hard to say_cover.jpg";
-    const COVER_SAD_LOVE = "./03_cover.jpg";
-    const COVER_AS_YOU_ARE = "./04_cover.jpg";
-    const COVER_CANT_TAKE_EYES = "./05Cant Take My Eyes Off You_cover.jpg";
-    const COVER_YOU_KNOW = "./06Rock_cover.jpg";
+    const COVER_SPARKLE = "01Sparkle_cover.jpg";
+    const COVER_HARD_TO_SAY = "02Hard to say_cover.jpg";
+    const COVER_SAD_LOVE = "03_cover.jpg";
+    const COVER_AS_YOU_ARE = "04_cover.jpg";
+    const COVER_CANT_TAKE_EYES = "05Cant Take My Eyes Off You_cover.jpg";
+    const COVER_YOU_KNOW = "06Rock_cover.jpg";
 
     /* 第二個歌單統一黑膠中央貼標 */
-    const MEMORY_BOX_VINYL_LABEL = "./KARINA MEMORY BOX_cover.JPG";
+    const MEMORY_BOX_VINYL_LABEL = "KARINA MEMORY BOX_cover.JPG";
 
     function parseLrc(txt) {
       if (!txt) return [];
@@ -835,7 +843,7 @@
           {
             title: "UP",
             artist: "KARINA",
-            source: "./01Sparkle.mp3",
+            source: "01Sparkle.mp3",
             cover: COVER_UP,
             labelImg: COVER_UP,
             backCover: COVER_UP,
@@ -849,7 +857,7 @@
           {
             title: "GOOD STUFF",
             artist: "KARINA",
-            source: "./02Hard to say.mp3",
+            source: "02Hard to say.mp3",
             cover: COVER_GOOD_STUFF,
             labelImg: COVER_GOOD_STUFF,
             backCover: COVER_GOOD_STUFF,
@@ -863,7 +871,7 @@
           {
             title: "16 Bit",
             artist: "KARINA",
-            source: "./03.mp3",
+            source: "03.mp3",
             cover: COVER_16_BIT,
             labelImg: COVER_16_BIT,
             backCover: COVER_16_BIT,
@@ -877,7 +885,7 @@
           {
             title: "May the TENDERNESS be with you!",
             artist: "JANNABI feat.KARINA",
-            source: "./04.mp3",
+            source: "04.mp3",
             cover: COVER_TENDERNESS,
             labelImg: VINYL_TENDERNESS,
             backCover: COVER_TENDERNESS,
@@ -891,7 +899,7 @@
           {
             title: "Serenade",
             artist: "KARINA&WINTER",
-            source: "./05Cant Take My Eyes Off You.mp3",
+            source: "05Cant Take My Eyes Off You.mp3",
             cover: COVER_SERENADE,
             labelImg: VINYL_SERENADE,
             backCover: COVER_SERENADE,
@@ -912,7 +920,7 @@
           {
             title: "スパークル(Sparkle)",
             artist: "KARINA",
-            source: "./01Sparkle.mp3",
+            source: "01Sparkle.mp3",
             cover: COVER_SPARKLE,
             labelImg: MEMORY_BOX_VINYL_LABEL,
             backCover: COVER_SPARKLE,
@@ -926,7 +934,7 @@
           {
             title: "愛你但說不出口(Hard to say)",
             artist: "KARINA",
-            source: "./02Hard to say.mp3",
+            source: "02Hard to say.mp3",
             cover: COVER_HARD_TO_SAY,
             labelImg: MEMORY_BOX_VINYL_LABEL,
             backCover: COVER_HARD_TO_SAY,
@@ -940,7 +948,7 @@
           {
             title: "슬픈 사랑 노래",
             artist: "KARINA",
-            source: "./03.mp3",
+            source: "03.mp3",
             cover: COVER_SAD_LOVE,
             labelImg: MEMORY_BOX_VINYL_LABEL,
             backCover: COVER_SAD_LOVE,
@@ -954,7 +962,7 @@
           {
             title: "그대는 그대로",
             artist: "KARINA",
-            source: "./04.mp3",
+            source: "04.mp3",
             cover: COVER_AS_YOU_ARE,
             labelImg: MEMORY_BOX_VINYL_LABEL,
             backCover: COVER_AS_YOU_ARE,
@@ -968,7 +976,7 @@
           {
             title: "Can’t Take My Eyes Off You",
             artist: "KARINA",
-            source: "./05Cant Take My Eyes Off You.mp3",
+            source: "05Cant Take My Eyes Off You.mp3",
             cover: COVER_CANT_TAKE_EYES,
             labelImg: MEMORY_BOX_VINYL_LABEL,
             backCover: COVER_CANT_TAKE_EYES,
@@ -982,7 +990,7 @@
           {
             title: "있잖아 (Rock Ver.)",
             artist: "KARINA",
-            source: "./06Rock.mp3",
+            source: "06Rock.mp3",
             cover: COVER_YOU_KNOW,
             labelImg: MEMORY_BOX_VINYL_LABEL,
             backCover: COVER_YOU_KNOW,
@@ -997,7 +1005,7 @@
       }
     ];
 
-    // 清理舊快取，確保永遠抓取最新本機設定
+    // 清空舊快取，強制載入最新絕對路徑
     localStorage.clear();
 
     let store = TWO_PLAYLISTS_DATA;
@@ -1017,20 +1025,20 @@
     const nativeAudio = document.getElementById('native-audio');
     const ytIframe = document.getElementById('yt-hidden-player');
 
-    // 完整的系統媒體狀態推送（包含鎖定畫面、動態島、控制中心、手錶耳機顯示）
+    // 關鍵修復：在 iOS 真正播放時推送 MediaSession，鎖定畫面、控制中心絕不留白
     function updateMediaSession(song, pl) {
       if ('mediaSession' in navigator) {
-        const fullCoverUrl = getAbsoluteUrl(song.cover || pl.cover);
+        const directCover = toAbsUrl(song.cover || pl.cover);
         
         navigator.mediaSession.metadata = new MediaMetadata({
           title: song.title,
           artist: song.artist || "KARINA",
           album: pl.name || "KARINA PLAYLIST",
           artwork: [
-            { src: fullCoverUrl, sizes: '96x96', type: 'image/jpeg' },
-            { src: fullCoverUrl, sizes: '128x128', type: 'image/jpeg' },
-            { src: fullCoverUrl, sizes: '256x256', type: 'image/jpeg' },
-            { src: fullCoverUrl, sizes: '512x512', type: 'image/jpeg' }
+            { src: directCover, sizes: '96x96', type: 'image/jpeg' },
+            { src: directCover, sizes: '128x128', type: 'image/jpeg' },
+            { src: directCover, sizes: '256x256', type: 'image/jpeg' },
+            { src: directCover, sizes: '512x512', type: 'image/jpeg' }
           ]
         });
 
@@ -1038,21 +1046,15 @@
         navigator.mediaSession.setActionHandler('pause', () => { pauseActiveSong(); });
         navigator.mediaSession.setActionHandler('previoustrack', () => { playPrev(); });
         navigator.mediaSession.setActionHandler('nexttrack', () => { playNext(); });
-        navigator.mediaSession.setActionHandler('seekto', (details) => {
-          if (details.seekTime !== undefined) {
-            nativeAudio.currentTime = details.seekTime;
-            updateProgressUI(details.seekTime, totalDuration);
-          }
-        });
+        try {
+          navigator.mediaSession.setActionHandler('seekto', (details) => {
+            if (details.seekTime !== undefined) {
+              nativeAudio.currentTime = details.seekTime;
+              updateProgressUI(details.seekTime, totalDuration);
+            }
+          });
+        } catch(e) {}
       }
-    }
-
-    function getAbsoluteUrl(relUrl) {
-      if (!relUrl) return '';
-      if (relUrl.startsWith('http://') || relUrl.startsWith('https://')) return relUrl;
-      const clean = relUrl.replace(/^\.\//, '');
-      const base = window.location.href.substring(0, window.location.href.lastIndexOf('/') + 1);
-      return base + encodeURI(clean);
     }
 
     function extractYoutubeId(url) {
@@ -1064,7 +1066,7 @@
     }
 
     /* -------------------------------------------------------------
-     * 3. Three.js 3D 渲染 (記憶體貼圖池，秒開不卡頻寬)
+     * 3. Three.js 3D 渲染 (修復白模、圖片載入失敗問題)
      * ------------------------------------------------------------*/
     const container = document.getElementById('threejs-box');
     const scene = new THREE.Scene();
@@ -1171,6 +1173,7 @@
     }
 
     const texLoader = new THREE.TextureLoader();
+    texLoader.setCrossOrigin('anonymous');
     const textureCache = new Map();
 
     function loadCachedTexture(url, callback) {
@@ -1179,15 +1182,22 @@
         callback(textureCache.get(url));
         return;
       }
-      texLoader.load(url, (tex) => {
-        tex.colorSpace = THREE.SRGBColorSpace;
-        tex.minFilter = THREE.LinearFilter;
-        tex.magFilter = THREE.LinearFilter;
-        tex.generateMipmaps = false;
-        tex.needsUpdate = true;
-        textureCache.set(url, tex);
-        callback(tex);
-      });
+      texLoader.load(
+        url,
+        (tex) => {
+          tex.colorSpace = THREE.SRGBColorSpace;
+          tex.minFilter = THREE.LinearFilter;
+          tex.magFilter = THREE.LinearFilter;
+          tex.generateMipmaps = false;
+          tex.needsUpdate = true;
+          textureCache.set(url, tex);
+          callback(tex);
+        },
+        undefined,
+        (err) => {
+          console.error("貼圖載入失敗:", url, err);
+        }
+      );
     }
 
     const coverGeo = new THREE.BoxGeometry(2.0, 2.0, 0.05);
@@ -1196,8 +1206,8 @@
       new THREE.MeshStandardMaterial({ color: 0x14151a, roughness: 0.5 }),
       new THREE.MeshStandardMaterial({ color: 0x14151a, roughness: 0.5 }),
       new THREE.MeshStandardMaterial({ color: 0x14151a, roughness: 0.5 }),
-      new THREE.MeshStandardMaterial({ color: 0xffffff, roughness: 0.35 }),
-      new THREE.MeshStandardMaterial({ color: 0xffffff, roughness: 0.35 })
+      new THREE.MeshStandardMaterial({ color: 0x222226, roughness: 0.35 }), // 預設深色防止刺眼白模
+      new THREE.MeshStandardMaterial({ color: 0x222226, roughness: 0.35 })
     ];
     const coverMesh = new THREE.Mesh(coverGeo, coverSideMat);
     coverMesh.position.set(-0.55, 0, 0);
@@ -1234,24 +1244,27 @@
 
     function applyCoverTo3D(frontUrl, backUrl, labelUrl, scale = 1.0, ox = 0.0, oy = 0.0) {
       if (!frontUrl) return;
-      const directFront = getAbsoluteUrl(frontUrl);
-      const directBack = backUrl ? getAbsoluteUrl(backUrl) : directFront;
-      const directLabel = labelUrl ? getAbsoluteUrl(labelUrl) : directFront;
+      const directFront = toAbsUrl(frontUrl);
+      const directBack = backUrl ? toAbsUrl(backUrl) : directFront;
+      const directLabel = labelUrl ? toAbsUrl(labelUrl) : directFront;
 
       loadCachedTexture(directFront, (tex) => {
         tex.repeat.set(1 / scale, 1 / scale);
         tex.offset.set((1 - 1/scale)/2 - (ox / scale), (1 - 1/scale)/2 - (oy / scale));
         coverMesh.material[4].map = tex;
+        coverMesh.material[4].color.set(0xffffff);
         coverMesh.material[4].needsUpdate = true;
       });
 
       loadCachedTexture(directBack, (tex) => {
         coverMesh.material[5].map = tex;
+        coverMesh.material[5].color.set(0xffffff);
         coverMesh.material[5].needsUpdate = true;
       });
 
       loadCachedTexture(directLabel, (tex) => {
         labelMesh.material.map = tex;
+        labelMesh.material.color.set(0xffffff);
         labelMesh.material.needsUpdate = true;
       });
     }
@@ -1361,7 +1374,7 @@
     renderLoop();
 
     /* -------------------------------------------------------------
-     * 4. 音訊系統 (直接串流、背景播放保活、無縫切歌)
+     * 4. 音訊系統 (直接串流、背景播放保活、iOS 鎖定畫面無縫推送)
      * ------------------------------------------------------------*/
     function setPlayState(active) {
       isPlaying = active;
@@ -1405,9 +1418,14 @@
       updateProgressUI(nativeAudio.currentTime, nativeAudio.duration || totalDuration);
     });
 
+    // 真正發聲時再發送 MediaSession，保證 iOS 鎖定畫面 100% 顯現歌名與封面
     nativeAudio.addEventListener('playing', () => {
       setPlayState(true);
       isAutoSwitching = false;
+      const curPl = store[plIdx];
+      if (curPl && curPl.songs[trackIdx]) {
+        updateMediaSession(curPl.songs[trackIdx], curPl);
+      }
     });
 
     nativeAudio.addEventListener('pause', () => {
@@ -1416,7 +1434,7 @@
       }
     });
 
-    // 播放完畢自然自動播下一首
+    // 播放完畢自然切下一首，確保順暢銜接不停頓
     nativeAudio.addEventListener('ended', () => {
       playNext(true);
     });
@@ -1438,9 +1456,7 @@
       if (!curPl || !curPl.songs[trackIdx]) return;
       const song = curPl.songs[trackIdx];
 
-      // 介面即時同步
       renderUI();
-      updateMediaSession(song, curPl);
 
       if (isNewTrack || !hasPlayedFirstTrack) {
         triggerSlow15sSpin();
@@ -1465,7 +1481,7 @@
         clearInterval(ytTimer);
         ytIframe.src = '';
 
-        const directSrc = getAbsoluteUrl(song.source);
+        const directSrc = toAbsUrl(song.source);
         nativeAudio.volume = Math.min(1.0, Math.max(0, targetVolume));
 
         if (isNewTrack || nativeAudio.src !== directSrc) {
@@ -1474,6 +1490,7 @@
           updateProgressUI(0, totalDuration);
 
           nativeAudio.src = directSrc;
+          nativeAudio.load(); // 關鍵：通知 Safari 立即重啟音訊管線
           
           const p = nativeAudio.play();
           if (p !== undefined) {
@@ -1743,7 +1760,7 @@
       const title = document.getElementById('form-song-title')?.value.trim() || '未命名歌曲';
       const artist = document.getElementById('form-song-artist')?.value.trim() || 'KARINA';
       const rawCover = document.getElementById('form-song-cover')?.value.trim() || COVER_UP;
-      const direct = getAbsoluteUrl(rawCover);
+      const direct = toAbsUrl(rawCover);
 
       const scale = parseFloat(document.getElementById('form-img-scale')?.value || 1.0);
       const ox = parseFloat(document.getElementById('form-img-ox')?.value || 0.0);
@@ -2097,14 +2114,8 @@
       renderUI();
     }
 
-    // 初始化介面渲染
+    // 初始化渲染
     renderUI();
-    
-    // 初始化僅更新媒體狀態，不預載音訊以保證最快啟動速度
-    if (store[plIdx] && store[plIdx].songs[trackIdx]) {
-      const firstSong = store[plIdx].songs[trackIdx];
-      updateMediaSession(firstSong, store[plIdx]);
-    }
   </script>
 </body>
 </html>
