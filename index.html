@@ -48,7 +48,7 @@
       --steel-border: #2a2c35;
       --accent-glow: rgba(244, 244, 245, 0.25);
       /* 白色愛心 (低透明度) 游標 */
-      --heart-cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="rgba(255,255,255,0.4)" stroke="rgba(0,0,0,0.4)" stroke-width="0.8" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>') 12 12, pointer;
+      --heart-cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="rgba(255,255,255,0.45)" stroke="rgba(0,0,0,0.4)" stroke-width="0.8" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>') 12 12, pointer;
     }
 
     * {
@@ -79,7 +79,7 @@
     }
 
     header {
-      padding: calc(12px + env(safe-area-inset-top, 0px)) 18px 4px;
+      padding: calc(12px + env(safe-area-inset-top, 0px)) 20px 4px;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -95,6 +95,7 @@
       color: #ffffff;
     }
 
+    /* 右上角愛心微調加大 */
     .admin-star-btn {
       background: none;
       border: none;
@@ -102,17 +103,19 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 6px;
-      color: rgba(255, 255, 255, 0.45);
-      font-size: 1.15rem;
+      width: 38px;
+      height: 38px;
+      padding: 4px;
+      color: rgba(255, 255, 255, 0.65);
+      font-size: 1.55rem;
       line-height: 1;
       transition: all 0.25s ease;
-      text-shadow: 0 0 4px rgba(255, 255, 255, 0.2);
+      text-shadow: 0 0 6px rgba(255, 255, 255, 0.35);
     }
     .admin-star-btn:hover, .admin-star-btn:active {
-      color: rgba(255, 255, 255, 0.95);
+      color: rgba(255, 255, 255, 1);
       transform: scale(1.15);
-      text-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
+      text-shadow: 0 0 12px rgba(255, 255, 255, 0.8);
     }
 
     main {
@@ -330,19 +333,21 @@
       color: #fff;
     }
 
+    /* 電腦版排版加寬：KARINA MEMORY BOX 完全不截斷 */
     @media (min-width: 768px) {
       .timeline-strip, .deck-controls {
-        max-width: 640px;
+        max-width: 780px;
       }
       .steel-select {
-        font-size: 0.78rem;
-        padding: 6px 10px;
+        font-size: 0.8rem;
+        padding: 7px 12px;
       }
       #sel-playlist {
-        flex: 0 0 155px;
+        flex: 0 0 215px;
+        min-width: 200px;
       }
       #sel-song {
-        flex: 0 0 240px;
+        flex: 1;
       }
     }
 
@@ -541,7 +546,7 @@
 </head>
 <body>
 
-  <audio id="native-audio" playsinline preload="auto" crossorigin="anonymous"></audio>
+  <audio id="native-audio" playsinline preload="metadata" crossorigin="anonymous"></audio>
   <iframe id="yt-hidden-player" style="position:absolute; top:-9999px; left:-9999px; width:1px; height:1px;" frameborder="0" allow="autoplay; encrypted-media"></iframe>
 
   <header>
@@ -681,7 +686,7 @@
           </div>
           <div class="field-row">
             <label>音訊來源 (本機檔名、GitHub 網址 或 YouTube 連結)</label>
-            <input type="text" id="form-song-source" placeholder="如：01 スパークル（Sparkle）.mp3 或 YouTube 網址">
+            <input type="text" id="form-song-source" placeholder="如：01Sparkle.mp3 或 YouTube 網址">
           </div>
           <div class="field-row">
             <label style="display:flex; justify-content:space-between;">
@@ -734,7 +739,7 @@
             <input type="text" id="form-song-label-img" placeholder="留空則預設跟正面相同">
             <div style="margin-top:6px; display:flex; align-items:center; gap:8px;">
               <input type="file" id="local-label-img-picker" accept="image/*" style="display:none;">
-              <button type="button" class="btn-cancel" id="btn-pick-label-img" style="font-size:0.72rem;">📁 從手機圖庫挑選貼標</button>
+              <button type="button" class="btn-pick-label-img btn-cancel" id="btn-pick-label-img" style="font-size:0.72rem;">📁 從手機圖庫挑選貼標</button>
               <span id="label-img-picker-status" style="font-size:0.72rem; color:#71717a;"></span>
             </div>
           </div>
@@ -775,27 +780,27 @@
   <script type="module">
     import * as THREE from 'three';
 
-    // 指向 KARINA PLAYLIST 專案基礎路徑
     const CD_PROJECT_BASE = "https://u11150003-arch.github.io/KARINA-PLAYLIST/";
-    // 冬季替換備用音訊專案路徑
     const WINTER_FALLBACK_BASE = "https://u11150003-arch.github.io/winter-cd-player/";
 
-    /* 第一個歌單封面與黑膠圖片 (Google Drive 直連) */
+    /* 第一個歌單封面與黑膠圖片 */
     const COVER_UP = "https://lh3.googleusercontent.com/d/19Z35dY8OrrWz74pSPWaZR_UnrZN66Ggt";
     const COVER_GOOD_STUFF = "https://lh3.googleusercontent.com/d/1sG_1h6O37F1kxtRXJw61m2K9PiV8Ka4y";
     const COVER_16_BIT = "https://lh3.googleusercontent.com/d/1eM8XGaFMqFK6R7pCEGRSaB4INrCYpcBe";
-    const COVER_TENDERNESS = "https://lh3.googleusercontent.com/d/1PQa2BCeraaIFttPAB2jsp-Z94lMQW9pF";
-    const COVER_SERENADE = "https://lh3.googleusercontent.com/d/1Fsy98DO_ZK_UPmqk3lf003aP0Lapk7ZT";
+    const COVER_TENDERNESS = "https://lh3.googleusercontent.com/d/1yVnle-XYxepVFY4_Yt2Xl62VwN4YzzJj";
+    const VINYL_TENDERNESS = "https://lh3.googleusercontent.com/d/1PQa2BCeraaIFttPAB2jsp-Z94lMQW9pF";
+    const COVER_SERENADE = "https://lh3.googleusercontent.com/d/1FI-auL_CsmGSiYKfFPqVueYLDvpHvo5o";
+    const VINYL_SERENADE = "https://lh3.googleusercontent.com/d/1Fsy98DO_ZK_UPmqk3lf003aP0Lapk7ZT";
 
     /* 第二個歌單封面圖片 */
     const COVER_SPARKLE = "https://lh3.googleusercontent.com/d/1fG9UaD9-esqpRciez-87e-q_ZuTSwoSH";
     const COVER_HARD_TO_SAY = "https://lh3.googleusercontent.com/d/13F00zb1WQLeASORWSTDK5aWcHU1Z-I3V";
     const COVER_SAD_LOVE = "https://lh3.googleusercontent.com/d/186Ds1Q_YUUO3GWHrT92OUxgC7dmn6DgZ";
     const COVER_AS_YOU_ARE = "https://lh3.googleusercontent.com/d/1SM234iFWE7IafSTkl3Vl0IeS26g9vqu3";
-    const COVER_CANT_TAKE_EYES = "https://lh3.googleusercontent.com/d/1hl_Xt3S2nk7InNYGEgf9dpnbyTW1GYXY/view?usp=drive_link";
+    const COVER_CANT_TAKE_EYES = "https://lh3.googleusercontent.com/d/1hl_Xt3S2nk7InNYGEgf9dpnbyTW1GYXY";
     const COVER_YOU_KNOW = "https://lh3.googleusercontent.com/d/1-0_8HnJspCnImtXw6IfTkUhi2yUd_MqW";
 
-    /* 第二個歌單統一黑膠封面圖片 */
+    /* 第二個歌單黑膠中央貼標 */
     const MEMORY_BOX_VINYL_LABEL = "https://lh3.googleusercontent.com/d/1SmVqgxkxj3n4YAK0yWzZT5wSs3KiEkux";
 
     function parseLrc(txt) {
@@ -825,9 +830,6 @@
       const s = (sec % 60).toFixed(2);
       return `[${String(m).padStart(2,'0')}:${String(s).padStart(5,'0')}]`;
     }
-
-    // 沿用原有的歌詞暫存，後續再調
-    const DUMMY_LRC_TEXT = ``;
 
     const TWO_PLAYLISTS_DATA = [
       {
@@ -882,7 +884,7 @@
             artist: "JANNABI feat.KARINA",
             source: WINTER_FALLBACK_BASE + "Saddle Up (online-audio-converter.com).mp3",
             cover: COVER_TENDERNESS,
-            labelImg: COVER_TENDERNESS,
+            labelImg: VINYL_TENDERNESS,
             backCover: COVER_TENDERNESS,
             imgScale: 1.0,
             imgOffsetX: 0.0,
@@ -896,7 +898,7 @@
             artist: "KARINA&WINTER",
             source: WINTER_FALLBACK_BASE + "Voyage_WlNTER_128k.mp3",
             cover: COVER_SERENADE,
-            labelImg: COVER_SERENADE,
+            labelImg: VINYL_SERENADE,
             backCover: COVER_SERENADE,
             imgScale: 1.0,
             imgOffsetX: 0.0,
@@ -915,7 +917,7 @@
           {
             title: "スパークル(Sparkle)",
             artist: "KARINA",
-            source: "01 スパークル（Sparkle）.mp3",
+            source: "01Sparkle.mp3",
             cover: COVER_SPARKLE,
             labelImg: MEMORY_BOX_VINYL_LABEL,
             backCover: COVER_SPARKLE,
@@ -929,7 +931,7 @@
           {
             title: "愛你但說不出口(Hard to say)",
             artist: "KARINA",
-            source: "02 愛你但說不出口（Hard to say）.mp3",
+            source: "02Hard to say.mp3",
             cover: COVER_HARD_TO_SAY,
             labelImg: MEMORY_BOX_VINYL_LABEL,
             backCover: COVER_HARD_TO_SAY,
@@ -943,7 +945,7 @@
           {
             title: "슬픈 사랑 노래",
             artist: "KARINA",
-            source: "03 슬픈 사랑 노래.mp3",
+            source: "03  2.mp3",
             cover: COVER_SAD_LOVE,
             labelImg: MEMORY_BOX_VINYL_LABEL,
             backCover: COVER_SAD_LOVE,
@@ -957,7 +959,7 @@
           {
             title: "그대는 그대로",
             artist: "KARINA",
-            source: "04 그대는 그대로.mp3",
+            source: "04  2.mp3",
             cover: COVER_AS_YOU_ARE,
             labelImg: MEMORY_BOX_VINYL_LABEL,
             backCover: COVER_AS_YOU_ARE,
@@ -971,7 +973,7 @@
           {
             title: "Can’t Take My Eyes Off You",
             artist: "KARINA",
-            source: "05 Can_t Take My Eyes Off You.mp3",
+            source: "05Cant Take My Eyes Off You.mp3",
             cover: COVER_CANT_TAKE_EYES,
             labelImg: MEMORY_BOX_VINYL_LABEL,
             backCover: COVER_CANT_TAKE_EYES,
@@ -985,7 +987,7 @@
           {
             title: "있잖아 (Rock Ver.)",
             artist: "KARINA",
-            source: "06 있잖아 (Rock Ver.).mp3",
+            source: "06  Rock Ver.mp3",
             cover: COVER_YOU_KNOW,
             labelImg: MEMORY_BOX_VINYL_LABEL,
             backCover: COVER_YOU_KNOW,
@@ -1000,11 +1002,11 @@
       }
     ];
 
-    let store = JSON.parse(localStorage.getItem('karina_playlist_store_v1')) || TWO_PLAYLISTS_DATA;
+    let store = JSON.parse(localStorage.getItem('karina_playlist_store_v4')) || TWO_PLAYLISTS_DATA;
     let modelScale = parseFloat(localStorage.getItem('karina_model_scale')) || 1.0;
 
     function persistData() {
-      localStorage.setItem('karina_playlist_store_v1', JSON.stringify(store));
+      localStorage.setItem('karina_playlist_store_v4', JSON.stringify(store));
       localStorage.setItem('karina_model_scale', modelScale);
     }
 
@@ -1075,7 +1077,7 @@
     }
 
     /* -------------------------------------------------------------
-     * 3. Three.js 3D
+     * 3. Three.js 3D 渲染 (修復貼標曝光與死白問題)
      * ------------------------------------------------------------*/
     const container = document.getElementById('threejs-box');
     const scene = new THREE.Scene();
@@ -1098,14 +1100,15 @@
     renderer.outputColorSpace = THREE.SRGBColorSpace;
     container.appendChild(renderer.domElement);
 
-    const ambLight = new THREE.AmbientLight(0xffffff, 2.2);
+    // 平衡燈光亮度，防止淺色貼圖死白
+    const ambLight = new THREE.AmbientLight(0xffffff, 1.8);
     scene.add(ambLight);
 
-    const dirLight = new THREE.DirectionalLight(0xffffff, 2.6);
+    const dirLight = new THREE.DirectionalLight(0xffffff, 1.9);
     dirLight.position.set(3, 4, 3.5);
     scene.add(dirLight);
 
-    const rimLight = new THREE.DirectionalLight(0xd4d4d8, 2.2);
+    const rimLight = new THREE.DirectionalLight(0xd4d4d8, 1.4);
     rimLight.position.set(4, -1.8, 2.8);
     scene.add(rimLight);
 
@@ -1208,8 +1211,16 @@
     discMesh.rotation.x = Math.PI / 2;
     discGroup.add(discMesh);
 
+    // 貼標改用低反射材質，杜絕強光造成死白
     const labelGeo = new THREE.CylinderGeometry(0.35, 0.35, 0.025, 32);
-    const labelMesh = new THREE.Mesh(labelGeo, new THREE.MeshStandardMaterial({ color: 0xffffff, roughness: 0.25 }));
+    const labelMesh = new THREE.Mesh(
+      labelGeo,
+      new THREE.MeshStandardMaterial({
+        color: 0xffffff,
+        roughness: 0.85,
+        metalness: 0.05
+      })
+    );
     labelMesh.rotation.x = Math.PI / 2;
     discGroup.add(labelMesh);
 
@@ -1295,7 +1306,7 @@
       });
     }
 
-    /* 旋轉展示動態控制 (360度統一旋轉) */
+    /* 旋轉展示動態控制 */
     let isTouching = false;
     let prevPointerX = 0;
     let prevPointerY = 0;
@@ -1401,7 +1412,7 @@
     renderLoop();
 
     /* -------------------------------------------------------------
-     * 4. 音訊系統
+     * 4. 音訊系統 (極速切換、非阻塞非同步加載)
      * ------------------------------------------------------------*/
     function setPlayState(active) {
       isPlaying = active;
@@ -1452,6 +1463,7 @@
       if (!curPl || !curPl.songs[trackIdx]) return;
       const song = curPl.songs[trackIdx];
 
+      // 即時同步 UI，不延遲
       renderUI();
       updateMediaSession(song, curPl);
 
@@ -1498,7 +1510,6 @@
           const p = nativeAudio.play();
           if (p !== undefined) {
             p.then(() => setPlayState(true)).catch(err => {
-              console.log("Waiting for user gesture:", err);
               setPlayState(false);
             });
           }
@@ -1509,7 +1520,6 @@
           const p = nativeAudio.play();
           if (p !== undefined) {
             p.then(() => setPlayState(true)).catch(err => {
-              console.log("Waiting for gesture:", err);
               setPlayState(false);
             });
           }
@@ -2120,7 +2130,7 @@
     // 初始化渲染
     renderUI();
     
-    // 預先掛載第一首音訊
+    // 預先掛載第一首音訊 (非同步靜默設置，不阻塞 UI 載入)
     if (store[plIdx] && store[plIdx].songs[trackIdx]) {
       const firstSong = store[plIdx].songs[trackIdx];
       let firstSrc = firstSong.source.replace(/^\.\//, '');
