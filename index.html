@@ -333,7 +333,7 @@
       color: #fff;
     }
 
-    /* 電腦版排版加寬：KARINA MEMORY BOX 完全不截斷 */
+    /* 電腦版排版加寬：KARINA MEMORY BOX 完全不被截斷 */
     @media (min-width: 768px) {
       .timeline-strip, .deck-controls {
         max-width: 780px;
@@ -739,7 +739,7 @@
             <input type="text" id="form-song-label-img" placeholder="留空則預設跟正面相同">
             <div style="margin-top:6px; display:flex; align-items:center; gap:8px;">
               <input type="file" id="local-label-img-picker" accept="image/*" style="display:none;">
-              <button type="button" class="btn-pick-label-img btn-cancel" id="btn-pick-label-img" style="font-size:0.72rem;">📁 從手機圖庫挑選貼標</button>
+              <button type="button" class="btn-cancel" id="btn-pick-label-img" style="font-size:0.72rem;">📁 從手機圖庫挑選貼標</button>
               <span id="label-img-picker-status" style="font-size:0.72rem; color:#71717a;"></span>
             </div>
           </div>
@@ -780,7 +780,7 @@
   <script type="module">
     import * as THREE from 'three';
 
-    const CD_PROJECT_BASE = "https://u11150003-arch.github.io/KARINA-PLAYLIST/";
+    // 替換備用音訊專案路徑
     const WINTER_FALLBACK_BASE = "https://u11150003-arch.github.io/winter-cd-player/";
 
     /* 第一個歌單封面與黑膠圖片 */
@@ -917,7 +917,7 @@
           {
             title: "スパークル(Sparkle)",
             artist: "KARINA",
-            source: "01Sparkle.mp3",
+            source: "./01Sparkle.mp3",
             cover: COVER_SPARKLE,
             labelImg: MEMORY_BOX_VINYL_LABEL,
             backCover: COVER_SPARKLE,
@@ -931,7 +931,7 @@
           {
             title: "愛你但說不出口(Hard to say)",
             artist: "KARINA",
-            source: "02Hard to say.mp3",
+            source: "./02Hard to say.mp3",
             cover: COVER_HARD_TO_SAY,
             labelImg: MEMORY_BOX_VINYL_LABEL,
             backCover: COVER_HARD_TO_SAY,
@@ -945,7 +945,7 @@
           {
             title: "슬픈 사랑 노래",
             artist: "KARINA",
-            source: "03  2.mp3",
+            source: "./03.mp3",
             cover: COVER_SAD_LOVE,
             labelImg: MEMORY_BOX_VINYL_LABEL,
             backCover: COVER_SAD_LOVE,
@@ -959,7 +959,7 @@
           {
             title: "그대는 그대로",
             artist: "KARINA",
-            source: "04  2.mp3",
+            source: "./04.mp3",
             cover: COVER_AS_YOU_ARE,
             labelImg: MEMORY_BOX_VINYL_LABEL,
             backCover: COVER_AS_YOU_ARE,
@@ -973,7 +973,7 @@
           {
             title: "Can’t Take My Eyes Off You",
             artist: "KARINA",
-            source: "05Cant Take My Eyes Off You.mp3",
+            source: "./05Cant Take My Eyes Off You.mp3",
             cover: COVER_CANT_TAKE_EYES,
             labelImg: MEMORY_BOX_VINYL_LABEL,
             backCover: COVER_CANT_TAKE_EYES,
@@ -987,7 +987,7 @@
           {
             title: "있잖아 (Rock Ver.)",
             artist: "KARINA",
-            source: "06  Rock Ver.mp3",
+            source: "./06Rock.mp3",
             cover: COVER_YOU_KNOW,
             labelImg: MEMORY_BOX_VINYL_LABEL,
             backCover: COVER_YOU_KNOW,
@@ -1002,11 +1002,17 @@
       }
     ];
 
-    let store = JSON.parse(localStorage.getItem('karina_playlist_store_v4')) || TWO_PLAYLISTS_DATA;
+    // 清空舊快取，強制作業系統與瀏覽器讀取最新的相對路徑
+    localStorage.removeItem('karina_playlist_store_v1');
+    localStorage.removeItem('karina_playlist_store_v3');
+    localStorage.removeItem('karina_playlist_store_v4');
+    localStorage.removeItem('karina_playlist_store_v5');
+
+    let store = JSON.parse(localStorage.getItem('karina_playlist_store_v6')) || TWO_PLAYLISTS_DATA;
     let modelScale = parseFloat(localStorage.getItem('karina_model_scale')) || 1.0;
 
     function persistData() {
-      localStorage.setItem('karina_playlist_store_v4', JSON.stringify(store));
+      localStorage.setItem('karina_playlist_store_v6', JSON.stringify(store));
       localStorage.setItem('karina_model_scale', modelScale);
     }
 
@@ -1077,7 +1083,7 @@
     }
 
     /* -------------------------------------------------------------
-     * 3. Three.js 3D 渲染 (修復貼標曝光與死白問題)
+     * 3. Three.js 3D 渲染 (修復貼標過曝問題)
      * ------------------------------------------------------------*/
     const container = document.getElementById('threejs-box');
     const scene = new THREE.Scene();
@@ -1100,7 +1106,6 @@
     renderer.outputColorSpace = THREE.SRGBColorSpace;
     container.appendChild(renderer.domElement);
 
-    // 平衡燈光亮度，防止淺色貼圖死白
     const ambLight = new THREE.AmbientLight(0xffffff, 1.8);
     scene.add(ambLight);
 
@@ -1412,7 +1417,7 @@
     renderLoop();
 
     /* -------------------------------------------------------------
-     * 4. 音訊系統 (極速切換、非阻塞非同步加載)
+     * 4. 音訊系統 (直接支援同一層目錄相對路徑)
      * ------------------------------------------------------------*/
     function setPlayState(active) {
       isPlaying = active;
@@ -1463,7 +1468,6 @@
       if (!curPl || !curPl.songs[trackIdx]) return;
       const song = curPl.songs[trackIdx];
 
-      // 即時同步 UI，不延遲
       renderUI();
       updateMediaSession(song, curPl);
 
@@ -1490,14 +1494,20 @@
         clearInterval(ytTimer);
         ytIframe.src = '';
 
-        let directSrc = song.source.replace(/^\.\//, '');
+        let directSrc = song.source.trim();
+        // 同一層目錄直接以相對路徑開啟
         if (!directSrc.startsWith('http')) {
-          directSrc = CD_PROJECT_BASE + encodeURIComponent(directSrc).replace(/%2F/g, '/');
-        } else if (directSrc.includes('github.com') && directSrc.includes('/blob/')) {
-          directSrc = directSrc.replace('github.com', 'raw.githubusercontent.com').replace('/blob/', '/');
+          if (!directSrc.startsWith('./')) {
+            directSrc = './' + directSrc;
+          }
+          directSrc = encodeURI(directSrc);
         }
 
         nativeAudio.volume = Math.min(1.0, Math.max(0, targetVolume));
+
+        nativeAudio.onerror = () => {
+          console.error("無法加載音檔:", nativeAudio.src);
+        };
 
         if (isNewTrack || nativeAudio.src !== directSrc) {
           nativeAudio.pause();
@@ -2130,12 +2140,12 @@
     // 初始化渲染
     renderUI();
     
-    // 預先掛載第一首音訊 (非同步靜默設置，不阻塞 UI 載入)
+    // 預先掛載第一首音訊
     if (store[plIdx] && store[plIdx].songs[trackIdx]) {
       const firstSong = store[plIdx].songs[trackIdx];
       let firstSrc = firstSong.source.replace(/^\.\//, '');
       if (!firstSrc.startsWith('http')) {
-        firstSrc = CD_PROJECT_BASE + encodeURIComponent(firstSrc).replace(/%2F/g, '/');
+        firstSrc = './' + encodeURI(firstSrc);
       }
       nativeAudio.src = firstSrc;
       updateMediaSession(firstSong, store[plIdx]);
