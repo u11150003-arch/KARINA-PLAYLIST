@@ -16,21 +16,9 @@
   <meta name="description" content="Playlist for KARINA">
   <meta property="og:type" content="music.playlist">
   <meta property="og:url" content="https://u11150003-arch.github.io/KARINA-PLAYLIST/">
-  
-  <meta property="og:image" content="https://lh3.googleusercontent.com/d/19Z35dY8OrrWz74pSPWaZR_UnrZN66Ggt">
-  <meta property="og:image:secure_url" content="https://lh3.googleusercontent.com/d/19Z35dY8OrrWz74pSPWaZR_UnrZN66Ggt">
-  <meta property="og:image:type" content="image/jpeg">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
-
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="KARINA PLAYLIST">
-  <meta name="twitter:description" content="Playlist for KARINA">
-  <meta name="twitter:image" content="https://lh3.googleusercontent.com/d/19Z35dY8OrrWz74pSPWaZR_UnrZN66Ggt">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com">
-  <link rel="preconnect" href="https://cdn.jsdelivr.net">
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800;900&family=Syne:wght@500;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
 
   <style>
@@ -48,6 +36,7 @@
       --steel-dim: #9ca3af;
       --steel-border: #2a2c35;
       --accent-glow: rgba(244, 244, 245, 0.25);
+      /* 白色愛心 (低透明度) 游標 */
       --heart-cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="rgba(255,255,255,0.45)" stroke="rgba(0,0,0,0.4)" stroke-width="0.8" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>') 12 12, pointer;
     }
 
@@ -95,6 +84,7 @@
       color: #ffffff;
     }
 
+    /* 右上角愛心微調加大 */
     .admin-star-btn {
       background: none;
       border: none;
@@ -332,6 +322,7 @@
       color: #fff;
     }
 
+    /* 電腦版排版加寬：KARINA MEMORY BOX 完全不被截斷 */
     @media (min-width: 768px) {
       .timeline-strip, .deck-controls {
         max-width: 780px;
@@ -696,7 +687,7 @@
 
           <div class="field-row">
             <label>專輯封面 (正面)</label>
-            <input type="text" id="form-song-cover" placeholder="貼上圖片網址（自動轉直連）">
+            <input type="text" id="form-song-cover" placeholder="貼上圖片網址或檔名">
             <div style="margin-top:6px; display:flex; align-items:center; gap:8px;">
               <input type="file" id="local-img-picker" accept="image/*" style="display:none;">
               <button type="button" class="btn-cancel" id="btn-pick-img" style="font-size:0.72rem;">📁 從手機圖庫挑選正面</button>
@@ -778,25 +769,25 @@
   <script type="module">
     import * as THREE from 'three';
 
-    /* 第一個歌單封面與黑膠圖片 */
-    const COVER_UP = "https://lh3.googleusercontent.com/d/19Z35dY8OrrWz74pSPWaZR_UnrZN66Ggt";
-    const COVER_GOOD_STUFF = "https://lh3.googleusercontent.com/d/1sG_1h6O37F1kxtRXJw61m2K9PiV8Ka4y";
-    const COVER_16_BIT = "https://lh3.googleusercontent.com/d/1eM8XGaFMqFK6R7pCEGRSaB4INrCYpcBe";
-    const COVER_TENDERNESS = "https://lh3.googleusercontent.com/d/1yVnle-XYxepVFY4_Yt2Xl62VwN4YzzJj";
-    const VINYL_TENDERNESS = "https://lh3.googleusercontent.com/d/1PQa2BCeraaIFttPAB2jsp-Z94lMQW9pF";
-    const COVER_SERENADE = "https://lh3.googleusercontent.com/d/1FI-auL_CsmGSiYKfFPqVueYLDvpHvo5o";
-    const VINYL_SERENADE = "https://lh3.googleusercontent.com/d/1Fsy98DO_ZK_UPmqk3lf003aP0Lapk7ZT";
+    /* 第一個歌單封面與黑膠貼標 (全部對應 GitHub 上的本機照片) */
+    const COVER_UP = "./UP_cover.jpg";
+    const COVER_GOOD_STUFF = "./GOOD STUFF_cover.jpg";
+    const COVER_16_BIT = "./16 Bit_cover.jpg";
+    const COVER_TENDERNESS = "./May the TENDERNESS be with you_album cover.jpg";
+    const VINYL_TENDERNESS = "./May the TENDERNESS be with you_CD cover.jpg";
+    const COVER_SERENADE = "./Serenade_album cover.jpg";
+    const VINYL_SERENADE = "./Serenade_CD cover.jpg";
 
-    /* 第二個歌單封面圖片 */
-    const COVER_SPARKLE = "https://lh3.googleusercontent.com/d/1fG9UaD9-esqpRciez-87e-q_ZuTSwoSH";
-    const COVER_HARD_TO_SAY = "https://lh3.googleusercontent.com/d/13F00zb1WQLeASORWSTDK5aWcHU1Z-I3V";
-    const COVER_SAD_LOVE = "https://lh3.googleusercontent.com/d/186Ds1Q_YUUO3GWHrT92OUxgC7dmn6DgZ";
-    const COVER_AS_YOU_ARE = "https://lh3.googleusercontent.com/d/1SM234iFWE7IafSTkl3Vl0IeS26g9vqu3";
-    const COVER_CANT_TAKE_EYES = "https://lh3.googleusercontent.com/d/1hl_Xt3S2nk7InNYGEgf9dpnbyTW1GYXY";
-    const COVER_YOU_KNOW = "https://lh3.googleusercontent.com/d/1-0_8HnJspCnImtXw6IfTkUhi2yUd_MqW";
+    /* 第二個歌單封面照片 */
+    const COVER_SPARKLE = "./01Sparkle_cover.jpg";
+    const COVER_HARD_TO_SAY = "./02Hard to say_cover.jpg";
+    const COVER_SAD_LOVE = "./03_cover.jpg";
+    const COVER_AS_YOU_ARE = "./04_cover.jpg";
+    const COVER_CANT_TAKE_EYES = "./05Cant Take My Eyes Off You_cover.jpg";
+    const COVER_YOU_KNOW = "./06Rock_cover.jpg";
 
-    /* 第二個歌單黑膠中央貼標 */
-    const MEMORY_BOX_VINYL_LABEL = "https://lh3.googleusercontent.com/d/1SmVqgxkxj3n4YAK0yWzZT5wSs3KiEkux";
+    /* 第二個歌單統一黑膠中央貼標 */
+    const MEMORY_BOX_VINYL_LABEL = "./KARINA MEMORY BOX_cover.JPG";
 
     function parseLrc(txt) {
       if (!txt) return [];
@@ -826,7 +817,6 @@
       return `[${String(m).padStart(2,'0')}:${String(s).padStart(5,'0')}]`;
     }
 
-    /* 兩個歌單全數使用同層極速音檔 */
     const TWO_PLAYLISTS_DATA = [
       {
         id: "pl_karina_song",
@@ -836,7 +826,7 @@
           {
             title: "UP",
             artist: "KARINA",
-            source: "01Sparkle.mp3",
+            source: "./01Sparkle.mp3",
             cover: COVER_UP,
             labelImg: COVER_UP,
             backCover: COVER_UP,
@@ -850,7 +840,7 @@
           {
             title: "GOOD STUFF",
             artist: "KARINA",
-            source: "02Hard to say.mp3",
+            source: "./02Hard to say.mp3",
             cover: COVER_GOOD_STUFF,
             labelImg: COVER_GOOD_STUFF,
             backCover: COVER_GOOD_STUFF,
@@ -864,7 +854,7 @@
           {
             title: "16 Bit",
             artist: "KARINA",
-            source: "03.mp3",
+            source: "./03.mp3",
             cover: COVER_16_BIT,
             labelImg: COVER_16_BIT,
             backCover: COVER_16_BIT,
@@ -878,7 +868,7 @@
           {
             title: "May the TENDERNESS be with you!",
             artist: "JANNABI feat.KARINA",
-            source: "04.mp3",
+            source: "./04.mp3",
             cover: COVER_TENDERNESS,
             labelImg: VINYL_TENDERNESS,
             backCover: COVER_TENDERNESS,
@@ -892,7 +882,7 @@
           {
             title: "Serenade",
             artist: "KARINA&WINTER",
-            source: "05Cant Take My Eyes Off You.mp3",
+            source: "./05Cant Take My Eyes Off You.mp3",
             cover: COVER_SERENADE,
             labelImg: VINYL_SERENADE,
             backCover: COVER_SERENADE,
@@ -900,20 +890,6 @@
             imgOffsetX: 0.0,
             imgOffsetY: 0.0,
             duration: 215,
-            volume: 1.0,
-            lyrics: []
-          },
-          {
-            title: "있잖아 (Rock Ver.)",
-            artist: "KARINA",
-            source: "06Rock.mp3",
-            cover: COVER_UP,
-            labelImg: COVER_UP,
-            backCover: COVER_UP,
-            imgScale: 1.0,
-            imgOffsetX: 0.0,
-            imgOffsetY: 0.0,
-            duration: 190,
             volume: 1.0,
             lyrics: []
           }
@@ -927,7 +903,7 @@
           {
             title: "スパークル(Sparkle)",
             artist: "KARINA",
-            source: "01Sparkle.mp3",
+            source: "./01Sparkle.mp3",
             cover: COVER_SPARKLE,
             labelImg: MEMORY_BOX_VINYL_LABEL,
             backCover: COVER_SPARKLE,
@@ -941,7 +917,7 @@
           {
             title: "愛你但說不出口(Hard to say)",
             artist: "KARINA",
-            source: "02Hard to say.mp3",
+            source: "./02Hard to say.mp3",
             cover: COVER_HARD_TO_SAY,
             labelImg: MEMORY_BOX_VINYL_LABEL,
             backCover: COVER_HARD_TO_SAY,
@@ -955,7 +931,7 @@
           {
             title: "슬픈 사랑 노래",
             artist: "KARINA",
-            source: "03.mp3",
+            source: "./03.mp3",
             cover: COVER_SAD_LOVE,
             labelImg: MEMORY_BOX_VINYL_LABEL,
             backCover: COVER_SAD_LOVE,
@@ -969,7 +945,7 @@
           {
             title: "그대는 그대로",
             artist: "KARINA",
-            source: "04.mp3",
+            source: "./04.mp3",
             cover: COVER_AS_YOU_ARE,
             labelImg: MEMORY_BOX_VINYL_LABEL,
             backCover: COVER_AS_YOU_ARE,
@@ -983,7 +959,7 @@
           {
             title: "Can’t Take My Eyes Off You",
             artist: "KARINA",
-            source: "05Cant Take My Eyes Off You.mp3",
+            source: "./05Cant Take My Eyes Off You.mp3",
             cover: COVER_CANT_TAKE_EYES,
             labelImg: MEMORY_BOX_VINYL_LABEL,
             backCover: COVER_CANT_TAKE_EYES,
@@ -997,7 +973,7 @@
           {
             title: "있잖아 (Rock Ver.)",
             artist: "KARINA",
-            source: "06Rock.mp3",
+            source: "./06Rock.mp3",
             cover: COVER_YOU_KNOW,
             labelImg: MEMORY_BOX_VINYL_LABEL,
             backCover: COVER_YOU_KNOW,
@@ -1012,15 +988,11 @@
       }
     ];
 
-    // 全面重置舊快取
+    // 清理舊快取
     localStorage.clear();
 
     let store = TWO_PLAYLISTS_DATA;
     let modelScale = 1.0;
-
-    function persistData() {
-      localStorage.setItem('karina_playlist_store_v12', JSON.stringify(store));
-    }
 
     let plIdx = 0;
     let trackIdx = 0;
@@ -1038,7 +1010,7 @@
 
     function updateMediaSession(song, pl) {
       if ('mediaSession' in navigator) {
-        const coverUrl = normalizeImageUrl(song.cover || pl.cover);
+        const coverUrl = resolveAssetUrl(song.cover || pl.cover);
         navigator.mediaSession.metadata = new MediaMetadata({
           title: song.title,
           artist: song.artist || "KARINA",
@@ -1055,22 +1027,15 @@
       }
     }
 
-    function normalizeImageUrl(url) {
+    function resolveAssetUrl(url) {
       if (!url) return '';
       url = url.trim();
-      const driveMatch = url.match(/\/file\/d\/([a-zA-Z0-9_-]+)/) || 
-                         url.match(/id=([a-zA-Z0-9_-]+)/) || 
-                         url.match(/\/d\/([a-zA-Z0-9_-]+)/);
-      if (driveMatch) return `https://lh3.googleusercontent.com/d/${driveMatch[1]}`;
-      if (url.includes('dropbox.com')) return url.replace('www.dropbox.com', 'dl.dropboxusercontent.com').replace('?dl=0', '');
-      if (url.includes('imgur.com') && !url.includes('i.imgur.com')) {
-        const id = url.split('/').pop().split('.')[0];
-        return `https://i.imgur.com/${id}.jpg`;
+      if (url.startsWith('http://') || url.startsWith('https://')) {
+        return url;
       }
-      if (url.includes('github.com') && url.includes('/blob/')) {
-        return url.replace('github.com', 'raw.githubusercontent.com').replace('/blob/', '/');
-      }
-      return url;
+      url = url.replace(/^\.\//, '');
+      const basePath = window.location.href.substring(0, window.location.href.lastIndexOf('/') + 1);
+      return basePath + encodeURI(url);
     }
 
     function extractYoutubeId(url) {
@@ -1082,7 +1047,7 @@
     }
 
     /* -------------------------------------------------------------
-     * 3. Three.js 3D 渲染 (平滑低功耗)
+     * 3. Three.js 3D 渲染 (帶貼圖快取池，防止重複載入卡死主線程)
      * ------------------------------------------------------------*/
     const container = document.getElementById('threejs-box');
     const scene = new THREE.Scene();
@@ -1101,7 +1066,7 @@
 
     const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, powerPreference: "high-performance" });
     renderer.setSize(container.clientWidth, container.clientHeight);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 3));
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     renderer.outputColorSpace = THREE.SRGBColorSpace;
     container.appendChild(renderer.domElement);
 
@@ -1189,6 +1154,20 @@
     }
 
     const texLoader = new THREE.TextureLoader();
+    const textureCache = new Map();
+
+    function loadCachedTexture(url, callback) {
+      if (!url) return;
+      if (textureCache.has(url)) {
+        callback(textureCache.get(url));
+        return;
+      }
+      texLoader.load(url, (tex) => {
+        setupHighQualityTexture(tex);
+        textureCache.set(url, tex);
+        callback(tex);
+      });
+    }
 
     const coverGeo = new THREE.BoxGeometry(2.0, 2.0, 0.05);
     const coverSideMat = [
@@ -1237,70 +1216,28 @@
       tex.minFilter = THREE.LinearFilter;
       tex.magFilter = THREE.LinearFilter;
       tex.generateMipmaps = false;
-      tex.anisotropy = renderer.capabilities.getMaxAnisotropy();
       tex.needsUpdate = true;
-    }
-
-    function sampleEdgeColorAndApplySides(img) {
-      try {
-        const canvas = document.createElement('canvas');
-        canvas.width = img.width || 64;
-        canvas.height = img.height || 64;
-        const ctx = canvas.getContext('2d');
-        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-
-        const leftPixel = ctx.getImageData(2, Math.floor(canvas.height / 2), 1, 1).data;
-        const leftColor = new THREE.Color(leftPixel[0]/255, leftPixel[1]/255, leftPixel[2]/255);
-
-        const topPixel = ctx.getImageData(Math.floor(canvas.width / 2), 2, 1, 1).data;
-        const topColor = new THREE.Color(topPixel[0]/255, topPixel[1]/255, topPixel[2]/255);
-
-        const btmPixel = ctx.getImageData(Math.floor(canvas.width / 2), canvas.height - 3, 1, 1).data;
-        const btmColor = new THREE.Color(btmPixel[0]/255, btmPixel[1]/255, btmPixel[2]/255);
-
-        const rightPixel = ctx.getImageData(canvas.width - 3, Math.floor(canvas.height / 2), 1, 1).data;
-        const rightColor = new THREE.Color(rightPixel[0]/255, rightPixel[1]/255, rightPixel[2]/255);
-
-        coverMesh.material[0].color.copy(rightColor);
-        coverMesh.material[1].color.copy(leftColor);
-        coverMesh.material[2].color.copy(topColor);
-        coverMesh.material[3].color.copy(btmColor);
-
-        for (let i = 0; i < 4; i++) {
-          coverMesh.material[i].needsUpdate = true;
-        }
-      } catch (err) {
-        const fallbackColor = new THREE.Color(0x0c0e14);
-        for (let i = 0; i < 4; i++) {
-          coverMesh.material[i].color.copy(fallbackColor);
-          coverMesh.material[i].needsUpdate = true;
-        }
-      }
     }
 
     function applyCoverTo3D(frontUrl, backUrl, labelUrl, scale = 1.0, ox = 0.0, oy = 0.0) {
       if (!frontUrl) return;
-      const directFront = normalizeImageUrl(frontUrl);
-      const directBack = backUrl ? normalizeImageUrl(backUrl) : directFront;
-      const directLabel = labelUrl ? normalizeImageUrl(labelUrl) : directFront;
+      const directFront = resolveAssetUrl(frontUrl);
+      const directBack = backUrl ? resolveAssetUrl(backUrl) : directFront;
+      const directLabel = labelUrl ? resolveAssetUrl(labelUrl) : directFront;
 
-      texLoader.load(directFront, (tex) => {
-        setupHighQualityTexture(tex);
+      loadCachedTexture(directFront, (tex) => {
         tex.repeat.set(1 / scale, 1 / scale);
         tex.offset.set((1 - 1/scale)/2 - (ox / scale), (1 - 1/scale)/2 - (oy / scale));
         coverMesh.material[4].map = tex;
         coverMesh.material[4].needsUpdate = true;
-        sampleEdgeColorAndApplySides(tex.image);
       });
 
-      texLoader.load(directBack, (tex) => {
-        setupHighQualityTexture(tex);
+      loadCachedTexture(directBack, (tex) => {
         coverMesh.material[5].map = tex;
         coverMesh.material[5].needsUpdate = true;
       });
 
-      texLoader.load(directLabel, (tex) => {
-        setupHighQualityTexture(tex);
+      loadCachedTexture(directLabel, (tex) => {
         labelMesh.material.map = tex;
         labelMesh.material.needsUpdate = true;
       });
@@ -1411,7 +1348,7 @@
     renderLoop();
 
     /* -------------------------------------------------------------
-     * 4. 音訊極速 CDN 串流與自動播放修復
+     * 4. 音訊系統 (直接串流與無延遲換曲)
      * ------------------------------------------------------------*/
     function setPlayState(active) {
       isPlaying = active;
@@ -1453,7 +1390,7 @@
       }
     });
 
-    // 播完無縫換曲
+    // 播放結束自動接下一首
     nativeAudio.addEventListener('ended', () => {
       playNext(true);
     });
@@ -1468,18 +1405,6 @@
           playNext(true);
         }
       }, 250);
-    }
-
-    // 將同目錄檔名轉換為 jsDelivr 全球加速 CDN，繞過 GitHub 慢速靜態下載限制
-    function resolveAudioSource(rawSrc) {
-      let src = (rawSrc || '').trim();
-      if (!src) return '';
-      if (src.startsWith('http://') || src.startsWith('https://')) {
-        return src;
-      }
-      src = src.replace(/^\.\//, '');
-      // 使用全球加速串流 CDN
-      return `https://cdn.jsdelivr.net/gh/u11150003-arch/KARINA-PLAYLIST@main/${encodeURI(src)}`;
     }
 
     function playActiveSong(isNewTrack = false, isAutoNext = false) {
@@ -1513,7 +1438,7 @@
         clearInterval(ytTimer);
         ytIframe.src = '';
 
-        const directSrc = resolveAudioSource(song.source);
+        const directSrc = resolveAssetUrl(song.source);
         nativeAudio.volume = Math.min(1.0, Math.max(0, targetVolume));
 
         if (isNewTrack || nativeAudio.src !== directSrc) {
@@ -1521,7 +1446,6 @@
           currentSec = 0;
           updateProgressUI(0, totalDuration);
 
-          // 立即設置並播放
           nativeAudio.src = directSrc;
           
           const p = nativeAudio.play();
@@ -1531,7 +1455,6 @@
               isAutoSwitching = false;
             }).catch(err => {
               if (isAutoNext) {
-                // 自動換曲若被限制，微延遲再度喚起
                 setTimeout(() => {
                   nativeAudio.play().then(() => setPlayState(true)).catch(() => setPlayState(false));
                 }, 100);
@@ -1793,7 +1716,7 @@
       const title = document.getElementById('form-song-title')?.value.trim() || '未命名歌曲';
       const artist = document.getElementById('form-song-artist')?.value.trim() || 'KARINA';
       const rawCover = document.getElementById('form-song-cover')?.value.trim() || COVER_UP;
-      const direct = normalizeImageUrl(rawCover);
+      const direct = resolveAssetUrl(rawCover);
 
       const scale = parseFloat(document.getElementById('form-img-scale')?.value || 1.0);
       const ox = parseFloat(document.getElementById('form-img-ox')?.value || 0.0);
@@ -1889,7 +1812,6 @@
 
       document.getElementById('btn-close-admin').onclick = () => {
         mountPoint.innerHTML = '';
-        persistData();
         renderUI();
       };
 
@@ -1976,7 +1898,6 @@
       store[targetIndex] = temp;
       if (plIdx === pI) plIdx = targetIndex;
       else if (plIdx === targetIndex) plIdx = pI;
-      persistData();
       renderAdminTree();
       renderUI();
     };
@@ -1992,7 +1913,6 @@
         if (trackIdx === sI) trackIdx = targetIndex;
         else if (trackIdx === targetIndex) trackIdx = sI;
       }
-      persistData();
       renderAdminTree();
       renderUI();
     };
@@ -2003,7 +1923,6 @@
         store.splice(pI, 1);
         if (plIdx >= store.length) plIdx = 0;
         trackIdx = 0;
-        persistData();
         renderAdminTree();
         renderUI();
       }
@@ -2014,7 +1933,6 @@
       if (plIdx === pI && trackIdx >= store[pI].songs.length) {
         trackIdx = Math.max(0, store[pI].songs.length - 1);
       }
-      persistData();
       renderAdminTree();
       renderUI();
     };
@@ -2103,9 +2021,9 @@
       const rawLabelImg = document.getElementById('form-song-label-img').value.trim();
       const rawBackCover = document.getElementById('form-song-back-cover').value.trim();
       
-      const cover = normalizeImageUrl(rawCover) || store[targetPl]?.cover || COVER_UP;
-      const labelImg = normalizeImageUrl(rawLabelImg) || '';
-      const backCover = normalizeImageUrl(rawBackCover) || '';
+      const cover = resolveAssetUrl(rawCover) || store[targetPl]?.cover || COVER_UP;
+      const labelImg = resolveAssetUrl(rawLabelImg) || '';
+      const backCover = resolveAssetUrl(rawBackCover) || '';
       const lyricsRaw = document.getElementById('form-song-lyrics').value;
 
       if (!title || !source) return alert('請填寫完整歌名與音訊來源！');
@@ -2137,7 +2055,6 @@
         store[targetPl].songs.push(songObj);
       }
 
-      persistData();
       renderAdminTree();
       renderUI();
       resetSongForm();
@@ -2149,15 +2066,14 @@
       if (!name) return alert('請輸入歌單名稱！');
       store.push({ id: 'pl_' + Date.now(), name, cover: COVER_UP, songs: [] });
       document.getElementById('admin-new-pl-name').value = '';
-      persistData();
       renderAdminTree();
       renderUI();
     }
 
-    // 初始化渲染
+    // 初始化介面渲染
     renderUI();
     
-    // 初始化僅更新中繼資訊
+    // 初始化僅更新媒體狀態
     if (store[plIdx] && store[plIdx].songs[trackIdx]) {
       const firstSong = store[plIdx].songs[trackIdx];
       updateMediaSession(firstSong, store[plIdx]);
