@@ -30,6 +30,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800;900&family=Syne:wght@500;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
 
   <style>
@@ -47,7 +48,6 @@
       --steel-dim: #9ca3af;
       --steel-border: #2a2c35;
       --accent-glow: rgba(244, 244, 245, 0.25);
-      /* 白色愛心 (低透明度) 游標 */
       --heart-cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="rgba(255,255,255,0.45)" stroke="rgba(0,0,0,0.4)" stroke-width="0.8" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>') 12 12, pointer;
     }
 
@@ -95,7 +95,6 @@
       color: #ffffff;
     }
 
-    /* 右上角愛心微調放大 */
     .admin-star-btn {
       background: none;
       border: none;
@@ -333,7 +332,6 @@
       color: #fff;
     }
 
-    /* 電腦版排版加寬：KARINA MEMORY BOX 完全不被截斷 */
     @media (min-width: 768px) {
       .timeline-strip, .deck-controls {
         max-width: 780px;
@@ -828,7 +826,7 @@
       return `[${String(m).padStart(2,'0')}:${String(s).padStart(5,'0')}]`;
     }
 
-    /* 兩個歌單完全採用同目錄音檔，確保快速加載 */
+    /* 兩個歌單全數使用同層極速音檔 */
     const TWO_PLAYLISTS_DATA = [
       {
         id: "pl_karina_song",
@@ -838,7 +836,7 @@
           {
             title: "UP",
             artist: "KARINA",
-            source: "./01Sparkle.mp3",
+            source: "01Sparkle.mp3",
             cover: COVER_UP,
             labelImg: COVER_UP,
             backCover: COVER_UP,
@@ -852,7 +850,7 @@
           {
             title: "GOOD STUFF",
             artist: "KARINA",
-            source: "./02Hard to say.mp3",
+            source: "02Hard to say.mp3",
             cover: COVER_GOOD_STUFF,
             labelImg: COVER_GOOD_STUFF,
             backCover: COVER_GOOD_STUFF,
@@ -866,7 +864,7 @@
           {
             title: "16 Bit",
             artist: "KARINA",
-            source: "./03.mp3",
+            source: "03.mp3",
             cover: COVER_16_BIT,
             labelImg: COVER_16_BIT,
             backCover: COVER_16_BIT,
@@ -880,7 +878,7 @@
           {
             title: "May the TENDERNESS be with you!",
             artist: "JANNABI feat.KARINA",
-            source: "./04.mp3",
+            source: "04.mp3",
             cover: COVER_TENDERNESS,
             labelImg: VINYL_TENDERNESS,
             backCover: COVER_TENDERNESS,
@@ -894,7 +892,7 @@
           {
             title: "Serenade",
             artist: "KARINA&WINTER",
-            source: "./05Cant Take My Eyes Off You.mp3",
+            source: "05Cant Take My Eyes Off You.mp3",
             cover: COVER_SERENADE,
             labelImg: VINYL_SERENADE,
             backCover: COVER_SERENADE,
@@ -908,7 +906,7 @@
           {
             title: "있잖아 (Rock Ver.)",
             artist: "KARINA",
-            source: "./06Rock.mp3",
+            source: "06Rock.mp3",
             cover: COVER_UP,
             labelImg: COVER_UP,
             backCover: COVER_UP,
@@ -929,7 +927,7 @@
           {
             title: "スパークル(Sparkle)",
             artist: "KARINA",
-            source: "./01Sparkle.mp3",
+            source: "01Sparkle.mp3",
             cover: COVER_SPARKLE,
             labelImg: MEMORY_BOX_VINYL_LABEL,
             backCover: COVER_SPARKLE,
@@ -943,7 +941,7 @@
           {
             title: "愛你但說不出口(Hard to say)",
             artist: "KARINA",
-            source: "./02Hard to say.mp3",
+            source: "02Hard to say.mp3",
             cover: COVER_HARD_TO_SAY,
             labelImg: MEMORY_BOX_VINYL_LABEL,
             backCover: COVER_HARD_TO_SAY,
@@ -957,7 +955,7 @@
           {
             title: "슬픈 사랑 노래",
             artist: "KARINA",
-            source: "./03.mp3",
+            source: "03.mp3",
             cover: COVER_SAD_LOVE,
             labelImg: MEMORY_BOX_VINYL_LABEL,
             backCover: COVER_SAD_LOVE,
@@ -971,7 +969,7 @@
           {
             title: "그대는 그대로",
             artist: "KARINA",
-            source: "./04.mp3",
+            source: "04.mp3",
             cover: COVER_AS_YOU_ARE,
             labelImg: MEMORY_BOX_VINYL_LABEL,
             backCover: COVER_AS_YOU_ARE,
@@ -985,7 +983,7 @@
           {
             title: "Can’t Take My Eyes Off You",
             artist: "KARINA",
-            source: "./05Cant Take My Eyes Off You.mp3",
+            source: "05Cant Take My Eyes Off You.mp3",
             cover: COVER_CANT_TAKE_EYES,
             labelImg: MEMORY_BOX_VINYL_LABEL,
             backCover: COVER_CANT_TAKE_EYES,
@@ -999,7 +997,7 @@
           {
             title: "있잖아 (Rock Ver.)",
             artist: "KARINA",
-            source: "./06Rock.mp3",
+            source: "06Rock.mp3",
             cover: COVER_YOU_KNOW,
             labelImg: MEMORY_BOX_VINYL_LABEL,
             backCover: COVER_YOU_KNOW,
@@ -1014,15 +1012,14 @@
       }
     ];
 
-    // 清空舊快取，強制載入最新雙歌單配置
+    // 全面重置舊快取
     localStorage.clear();
 
-    let store = JSON.parse(localStorage.getItem('karina_playlist_store_v11')) || TWO_PLAYLISTS_DATA;
-    let modelScale = parseFloat(localStorage.getItem('karina_model_scale')) || 1.0;
+    let store = TWO_PLAYLISTS_DATA;
+    let modelScale = 1.0;
 
     function persistData() {
-      localStorage.setItem('karina_playlist_store_v11', JSON.stringify(store));
-      localStorage.setItem('karina_model_scale', modelScale);
+      localStorage.setItem('karina_playlist_store_v12', JSON.stringify(store));
     }
 
     let plIdx = 0;
@@ -1051,18 +1048,10 @@
           ]
         });
 
-        navigator.mediaSession.setActionHandler('play', () => {
-          playActiveSong(false);
-        });
-        navigator.mediaSession.setActionHandler('pause', () => {
-          pauseActiveSong();
-        });
-        navigator.mediaSession.setActionHandler('previoustrack', () => {
-          playPrev();
-        });
-        navigator.mediaSession.setActionHandler('nexttrack', () => {
-          playNext();
-        });
+        navigator.mediaSession.setActionHandler('play', () => { playActiveSong(false); });
+        navigator.mediaSession.setActionHandler('pause', () => { pauseActiveSong(); });
+        navigator.mediaSession.setActionHandler('previoustrack', () => { playPrev(); });
+        navigator.mediaSession.setActionHandler('nexttrack', () => { playNext(); });
       }
     }
 
@@ -1093,7 +1082,7 @@
     }
 
     /* -------------------------------------------------------------
-     * 3. Three.js 3D 渲染 (修復曝光)
+     * 3. Three.js 3D 渲染 (平滑低功耗)
      * ------------------------------------------------------------*/
     const container = document.getElementById('threejs-box');
     const scene = new THREE.Scene();
@@ -1298,10 +1287,7 @@
       texLoader.load(directFront, (tex) => {
         setupHighQualityTexture(tex);
         tex.repeat.set(1 / scale, 1 / scale);
-        tex.offset.set(
-          (1 - 1/scale)/2 - (ox / scale),
-          (1 - 1/scale)/2 - (oy / scale)
-        );
+        tex.offset.set((1 - 1/scale)/2 - (ox / scale), (1 - 1/scale)/2 - (oy / scale));
         coverMesh.material[4].map = tex;
         coverMesh.material[4].needsUpdate = true;
         sampleEdgeColorAndApplySides(tex.image);
@@ -1320,7 +1306,6 @@
       });
     }
 
-    /* 旋轉展示動態控制 */
     let isTouching = false;
     let prevPointerX = 0;
     let prevPointerY = 0;
@@ -1426,7 +1411,7 @@
     renderLoop();
 
     /* -------------------------------------------------------------
-     * 4. 音訊系統 (極速加載與自動換曲防暫停架構)
+     * 4. 音訊極速 CDN 串流與自動播放修復
      * ------------------------------------------------------------*/
     function setPlayState(active) {
       isPlaying = active;
@@ -1468,7 +1453,7 @@
       }
     });
 
-    // 播放完畢自然切下一首，防止因換曲延遲而被瀏覽器判定暫停
+    // 播完無縫換曲
     nativeAudio.addEventListener('ended', () => {
       playNext(true);
     });
@@ -1485,6 +1470,7 @@
       }, 250);
     }
 
+    // 將同目錄檔名轉換為 jsDelivr 全球加速 CDN，繞過 GitHub 慢速靜態下載限制
     function resolveAudioSource(rawSrc) {
       let src = (rawSrc || '').trim();
       if (!src) return '';
@@ -1492,8 +1478,8 @@
         return src;
       }
       src = src.replace(/^\.\//, '');
-      const basePath = window.location.href.substring(0, window.location.href.lastIndexOf('/') + 1);
-      return basePath + encodeURI(src);
+      // 使用全球加速串流 CDN
+      return `https://cdn.jsdelivr.net/gh/u11150003-arch/KARINA-PLAYLIST@main/${encodeURI(src)}`;
     }
 
     function playActiveSong(isNewTrack = false, isAutoNext = false) {
@@ -1535,6 +1521,7 @@
           currentSec = 0;
           updateProgressUI(0, totalDuration);
 
+          // 立即設置並播放
           nativeAudio.src = directSrc;
           
           const p = nativeAudio.play();
@@ -1543,12 +1530,11 @@
               setPlayState(true);
               isAutoSwitching = false;
             }).catch(err => {
-              console.log("播放暫緩:", err);
               if (isAutoNext) {
-                // 自動播放遇到限制時，立即進行重試喚起
+                // 自動換曲若被限制，微延遲再度喚起
                 setTimeout(() => {
                   nativeAudio.play().then(() => setPlayState(true)).catch(() => setPlayState(false));
-                }, 150);
+                }, 100);
               } else {
                 setPlayState(false);
               }
