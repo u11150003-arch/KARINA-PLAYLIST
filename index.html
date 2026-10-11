@@ -47,6 +47,7 @@
       --steel-dim: #9ca3af;
       --steel-border: #2a2c35;
       --accent-glow: rgba(244, 244, 245, 0.25);
+      /* 白色愛心 (低透明度) 游標 */
       --heart-cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="rgba(255,255,255,0.45)" stroke="rgba(0,0,0,0.4)" stroke-width="0.8" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>') 12 12, pointer;
     }
 
@@ -94,6 +95,7 @@
       color: #ffffff;
     }
 
+    /* 右上角愛心放大調整 */
     .admin-star-btn {
       background: none;
       border: none;
@@ -331,6 +333,7 @@
       color: #fff;
     }
 
+    /* 電腦版排版加寬：KARINA MEMORY BOX 完全不被截斷 */
     @media (min-width: 768px) {
       .timeline-strip, .deck-controls {
         max-width: 780px;
@@ -543,8 +546,8 @@
 </head>
 <body>
 
-  <!-- 移除 crossorigin 屬性，避免受同源策略阻擋 -->
-  <audio id="native-audio" playsinline preload="metadata"></audio>
+  <!-- preload="none" 解決整首下載卡住問題，確保隨點隨串流播放 -->
+  <audio id="native-audio" playsinline preload="none"></audio>
   <iframe id="yt-hidden-player" style="position:absolute; top:-9999px; left:-9999px; width:1px; height:1px;" frameborder="0" allow="autoplay; encrypted-media"></iframe>
 
   <header>
@@ -914,7 +917,7 @@
           {
             title: "スパークル(Sparkle)",
             artist: "KARINA",
-            source: "01Sparkle.mp3",
+            source: "./01Sparkle.mp3",
             cover: COVER_SPARKLE,
             labelImg: MEMORY_BOX_VINYL_LABEL,
             backCover: COVER_SPARKLE,
@@ -928,7 +931,7 @@
           {
             title: "愛你但說不出口(Hard to say)",
             artist: "KARINA",
-            source: "02Hard to say.mp3",
+            source: "./02Hard to say.mp3",
             cover: COVER_HARD_TO_SAY,
             labelImg: MEMORY_BOX_VINYL_LABEL,
             backCover: COVER_HARD_TO_SAY,
@@ -942,7 +945,7 @@
           {
             title: "슬픈 사랑 노래",
             artist: "KARINA",
-            source: "03.mp3",
+            source: "./03.mp3",
             cover: COVER_SAD_LOVE,
             labelImg: MEMORY_BOX_VINYL_LABEL,
             backCover: COVER_SAD_LOVE,
@@ -956,7 +959,7 @@
           {
             title: "그대는 그대로",
             artist: "KARINA",
-            source: "04.mp3",
+            source: "./04.mp3",
             cover: COVER_AS_YOU_ARE,
             labelImg: MEMORY_BOX_VINYL_LABEL,
             backCover: COVER_AS_YOU_ARE,
@@ -970,7 +973,7 @@
           {
             title: "Can’t Take My Eyes Off You",
             artist: "KARINA",
-            source: "05Cant Take My Eyes Off You.mp3",
+            source: "./05Cant Take My Eyes Off You.mp3",
             cover: COVER_CANT_TAKE_EYES,
             labelImg: MEMORY_BOX_VINYL_LABEL,
             backCover: COVER_CANT_TAKE_EYES,
@@ -984,7 +987,7 @@
           {
             title: "있잖아 (Rock Ver.)",
             artist: "KARINA",
-            source: "06Rock.mp3",
+            source: "./06Rock.mp3",
             cover: COVER_YOU_KNOW,
             labelImg: MEMORY_BOX_VINYL_LABEL,
             backCover: COVER_YOU_KNOW,
@@ -999,18 +1002,19 @@
       }
     ];
 
-    // 清空舊快取，升級至 v7
+    // 清空舊快取，升級至 v8
     localStorage.removeItem('karina_playlist_store_v1');
     localStorage.removeItem('karina_playlist_store_v3');
     localStorage.removeItem('karina_playlist_store_v4');
     localStorage.removeItem('karina_playlist_store_v5');
     localStorage.removeItem('karina_playlist_store_v6');
+    localStorage.removeItem('karina_playlist_store_v7');
 
-    let store = JSON.parse(localStorage.getItem('karina_playlist_store_v7')) || TWO_PLAYLISTS_DATA;
+    let store = JSON.parse(localStorage.getItem('karina_playlist_store_v8')) || TWO_PLAYLISTS_DATA;
     let modelScale = parseFloat(localStorage.getItem('karina_model_scale')) || 1.0;
 
     function persistData() {
-      localStorage.setItem('karina_playlist_store_v7', JSON.stringify(store));
+      localStorage.setItem('karina_playlist_store_v8', JSON.stringify(store));
       localStorage.setItem('karina_model_scale', modelScale);
     }
 
@@ -1214,6 +1218,7 @@
     discMesh.rotation.x = Math.PI / 2;
     discGroup.add(discMesh);
 
+    // 貼標改用高糙度低反射材質，杜絕強光曝光死白
     const labelGeo = new THREE.CylinderGeometry(0.35, 0.35, 0.025, 32);
     const labelMesh = new THREE.Mesh(
       labelGeo,
@@ -1414,7 +1419,7 @@
     renderLoop();
 
     /* -------------------------------------------------------------
-     * 4. 音訊系統 (強化相對路徑解析與容錯)
+     * 4. 音訊系統 (極速邊下載邊播串流架構)
      * ------------------------------------------------------------*/
     function setPlayState(active) {
       isPlaying = active;
@@ -1466,7 +1471,6 @@
       if (src.startsWith('http://') || src.startsWith('https://')) {
         return src;
       }
-      // 確保同一層檔案路徑標準化
       src = src.replace(/^\.\//, '');
       const basePath = window.location.href.substring(0, window.location.href.lastIndexOf('/') + 1);
       return basePath + encodeURI(src);
@@ -1504,21 +1508,14 @@
         ytIframe.src = '';
 
         const directSrc = resolveAudioSource(song.source);
-
         nativeAudio.volume = Math.min(1.0, Math.max(0, targetVolume));
 
-        nativeAudio.onerror = (e) => {
-          console.error("無法加載音檔:", nativeAudio.src, e);
-        };
-
+        // 串流即播：僅在切換曲目時更換 src，立即呼叫 play()
         if (isNewTrack || nativeAudio.src !== directSrc) {
-          nativeAudio.pause();
           currentSec = 0;
           updateProgressUI(0, totalDuration);
 
           nativeAudio.src = directSrc;
-          nativeAudio.load();
-
           const p = nativeAudio.play();
           if (p !== undefined) {
             p.then(() => setPlayState(true)).catch(err => {
@@ -1531,9 +1528,7 @@
           }
           const p = nativeAudio.play();
           if (p !== undefined) {
-            p.then(() => setPlayState(true)).catch(err => {
-              setPlayState(false);
-            });
+            p.then(() => setPlayState(true)).catch(err => setPlayState(false));
           }
         }
       }
@@ -2142,10 +2137,9 @@
     // 初始化渲染
     renderUI();
     
-    // 預先掛載第一首音訊
+    // 初始化僅更新媒體狀態，不預載音訊以節省網路頻寬
     if (store[plIdx] && store[plIdx].songs[trackIdx]) {
       const firstSong = store[plIdx].songs[trackIdx];
-      nativeAudio.src = resolveAudioSource(firstSong.source);
       updateMediaSession(firstSong, store[plIdx]);
     }
   </script>
