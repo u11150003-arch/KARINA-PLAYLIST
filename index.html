@@ -47,6 +47,7 @@
       --steel-dim: #9ca3af;
       --steel-border: #2a2c35;
       --accent-glow: rgba(244, 244, 245, 0.25);
+      /* 白色愛心 (低透明度) 游標 */
       --heart-cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="rgba(255,255,255,0.45)" stroke="rgba(0,0,0,0.4)" stroke-width="0.8" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>') 12 12, pointer;
     }
 
@@ -94,6 +95,7 @@
       color: #ffffff;
     }
 
+    /* 右上角愛心微調放大 */
     .admin-star-btn {
       background: none;
       border: none;
@@ -331,6 +333,7 @@
       color: #fff;
     }
 
+    /* 電腦版排版加寬：KARINA MEMORY BOX 完全不被截斷 */
     @media (min-width: 768px) {
       .timeline-strip, .deck-controls {
         max-width: 780px;
@@ -543,8 +546,7 @@
 </head>
 <body>
 
-  <!-- 自動串流預載模式，支援即播即串流 -->
-  <audio id="native-audio" playsinline preload="auto"></audio>
+  <audio id="native-audio" playsinline></audio>
   <iframe id="yt-hidden-player" style="position:absolute; top:-9999px; left:-9999px; width:1px; height:1px;" frameborder="0" allow="autoplay; encrypted-media"></iframe>
 
   <header>
@@ -778,8 +780,6 @@
   <script type="module">
     import * as THREE from 'three';
 
-    const WINTER_FALLBACK_BASE = "https://u11150003-arch.github.io/winter-cd-player/";
-
     /* 第一個歌單封面與黑膠圖片 */
     const COVER_UP = "https://lh3.googleusercontent.com/d/19Z35dY8OrrWz74pSPWaZR_UnrZN66Ggt";
     const COVER_GOOD_STUFF = "https://lh3.googleusercontent.com/d/1sG_1h6O37F1kxtRXJw61m2K9PiV8Ka4y";
@@ -828,6 +828,7 @@
       return `[${String(m).padStart(2,'0')}:${String(s).padStart(5,'0')}]`;
     }
 
+    /* 兩個歌單完全採用同目錄音檔，確保快速加載 */
     const TWO_PLAYLISTS_DATA = [
       {
         id: "pl_karina_song",
@@ -837,63 +838,63 @@
           {
             title: "UP",
             artist: "KARINA",
-            source: WINTER_FALLBACK_BASE + "lips (online-audio-converter.com).mp3",
+            source: "./01Sparkle.mp3",
             cover: COVER_UP,
             labelImg: COVER_UP,
             backCover: COVER_UP,
             imgScale: 1.0,
             imgOffsetX: 0.0,
             imgOffsetY: 0.0,
-            duration: 230,
-            volume: 0.85,
+            duration: 220,
+            volume: 1.0,
             lyrics: []
           },
           {
             title: "GOOD STUFF",
             artist: "KARINA",
-            source: WINTER_FALLBACK_BASE + "spark (online-audio-converter.com).mp3",
+            source: "./02Hard to say.mp3",
             cover: COVER_GOOD_STUFF,
             labelImg: COVER_GOOD_STUFF,
             backCover: COVER_GOOD_STUFF,
             imgScale: 1.0,
             imgOffsetX: 0.0,
             imgOffsetY: 0.0,
-            duration: 195,
-            volume: 0.85,
+            duration: 210,
+            volume: 1.0,
             lyrics: []
           },
           {
             title: "16 Bit",
             artist: "KARINA",
-            source: WINTER_FALLBACK_BASE + "blue (online-audio-converter.com).mp3",
+            source: "./03.mp3",
             cover: COVER_16_BIT,
             labelImg: COVER_16_BIT,
             backCover: COVER_16_BIT,
             imgScale: 1.0,
             imgOffsetX: 0.0,
             imgOffsetY: 0.0,
-            duration: 211,
-            volume: 0.85,
+            duration: 198,
+            volume: 1.0,
             lyrics: []
           },
           {
             title: "May the TENDERNESS be with you!",
             artist: "JANNABI feat.KARINA",
-            source: WINTER_FALLBACK_BASE + "Saddle Up (online-audio-converter.com).mp3",
+            source: "./04.mp3",
             cover: COVER_TENDERNESS,
             labelImg: VINYL_TENDERNESS,
             backCover: COVER_TENDERNESS,
             imgScale: 1.0,
             imgOffsetX: 0.0,
             imgOffsetY: 0.0,
-            duration: 230,
-            volume: 0.85,
+            duration: 245,
+            volume: 1.0,
             lyrics: []
           },
           {
             title: "Serenade",
             artist: "KARINA&WINTER",
-            source: WINTER_FALLBACK_BASE + "Voyage_WlNTER_128k.mp3",
+            source: "./05Cant Take My Eyes Off You.mp3",
             cover: COVER_SERENADE,
             labelImg: VINYL_SERENADE,
             backCover: COVER_SERENADE,
@@ -901,7 +902,21 @@
             imgOffsetX: 0.0,
             imgOffsetY: 0.0,
             duration: 215,
-            volume: 0.85,
+            volume: 1.0,
+            lyrics: []
+          },
+          {
+            title: "있잖아 (Rock Ver.)",
+            artist: "KARINA",
+            source: "./06Rock.mp3",
+            cover: COVER_UP,
+            labelImg: COVER_UP,
+            backCover: COVER_UP,
+            imgScale: 1.0,
+            imgOffsetX: 0.0,
+            imgOffsetY: 0.0,
+            duration: 190,
+            volume: 1.0,
             lyrics: []
           }
         ]
@@ -914,7 +929,7 @@
           {
             title: "スパークル(Sparkle)",
             artist: "KARINA",
-            source: "01Sparkle.mp3",
+            source: "./01Sparkle.mp3",
             cover: COVER_SPARKLE,
             labelImg: MEMORY_BOX_VINYL_LABEL,
             backCover: COVER_SPARKLE,
@@ -928,7 +943,7 @@
           {
             title: "愛你但說不出口(Hard to say)",
             artist: "KARINA",
-            source: "02Hard to say.mp3",
+            source: "./02Hard to say.mp3",
             cover: COVER_HARD_TO_SAY,
             labelImg: MEMORY_BOX_VINYL_LABEL,
             backCover: COVER_HARD_TO_SAY,
@@ -942,7 +957,7 @@
           {
             title: "슬픈 사랑 노래",
             artist: "KARINA",
-            source: "03.mp3",
+            source: "./03.mp3",
             cover: COVER_SAD_LOVE,
             labelImg: MEMORY_BOX_VINYL_LABEL,
             backCover: COVER_SAD_LOVE,
@@ -956,7 +971,7 @@
           {
             title: "그대는 그대로",
             artist: "KARINA",
-            source: "04.mp3",
+            source: "./04.mp3",
             cover: COVER_AS_YOU_ARE,
             labelImg: MEMORY_BOX_VINYL_LABEL,
             backCover: COVER_AS_YOU_ARE,
@@ -970,7 +985,7 @@
           {
             title: "Can’t Take My Eyes Off You",
             artist: "KARINA",
-            source: "05Cant Take My Eyes Off You.mp3",
+            source: "./05Cant Take My Eyes Off You.mp3",
             cover: COVER_CANT_TAKE_EYES,
             labelImg: MEMORY_BOX_VINYL_LABEL,
             backCover: COVER_CANT_TAKE_EYES,
@@ -984,7 +999,7 @@
           {
             title: "있잖아 (Rock Ver.)",
             artist: "KARINA",
-            source: "06Rock.mp3",
+            source: "./06Rock.mp3",
             cover: COVER_YOU_KNOW,
             labelImg: MEMORY_BOX_VINYL_LABEL,
             backCover: COVER_YOU_KNOW,
@@ -999,20 +1014,14 @@
       }
     ];
 
-    // 清空舊快取，更新快取版本至 v9
-    localStorage.removeItem('karina_playlist_store_v1');
-    localStorage.removeItem('karina_playlist_store_v3');
-    localStorage.removeItem('karina_playlist_store_v4');
-    localStorage.removeItem('karina_playlist_store_v5');
-    localStorage.removeItem('karina_playlist_store_v6');
-    localStorage.removeItem('karina_playlist_store_v7');
-    localStorage.removeItem('karina_playlist_store_v8');
+    // 清空舊快取，強制載入最新雙歌單配置
+    localStorage.clear();
 
-    let store = JSON.parse(localStorage.getItem('karina_playlist_store_v9')) || TWO_PLAYLISTS_DATA;
+    let store = JSON.parse(localStorage.getItem('karina_playlist_store_v11')) || TWO_PLAYLISTS_DATA;
     let modelScale = parseFloat(localStorage.getItem('karina_model_scale')) || 1.0;
 
     function persistData() {
-      localStorage.setItem('karina_playlist_store_v9', JSON.stringify(store));
+      localStorage.setItem('karina_playlist_store_v11', JSON.stringify(store));
       localStorage.setItem('karina_model_scale', modelScale);
     }
 
@@ -1025,7 +1034,7 @@
     let totalDuration = 230;
     let ytTimer = null;
     let hasPlayedFirstTrack = false;
-    let isTransitioning = false;
+    let isAutoSwitching = false;
 
     const nativeAudio = document.getElementById('native-audio');
     const ytIframe = document.getElementById('yt-hidden-player');
@@ -1084,7 +1093,7 @@
     }
 
     /* -------------------------------------------------------------
-     * 3. Three.js 3D 渲染 (防貼標死白)
+     * 3. Three.js 3D 渲染 (修復曝光)
      * ------------------------------------------------------------*/
     const container = document.getElementById('threejs-box');
     const scene = new THREE.Scene();
@@ -1417,7 +1426,7 @@
     renderLoop();
 
     /* -------------------------------------------------------------
-     * 4. 音訊系統 (無縫切歌、快取預讀、防阻擋機制)
+     * 4. 音訊系統 (極速加載與自動換曲防暫停架構)
      * ------------------------------------------------------------*/
     function setPlayState(active) {
       isPlaying = active;
@@ -1447,19 +1456,19 @@
       if (playMode !== 'file' || isDraggingSeek) return;
       updateProgressUI(nativeAudio.currentTime, nativeAudio.duration || totalDuration);
     });
-    
+
     nativeAudio.addEventListener('playing', () => {
       setPlayState(true);
-      isTransitioning = false;
+      isAutoSwitching = false;
     });
 
     nativeAudio.addEventListener('pause', () => {
-      if (!isTransitioning) {
+      if (!isAutoSwitching) {
         setPlayState(false);
       }
     });
 
-    // 播完自然切下一首，確保順暢銜接不停頓
+    // 播放完畢自然切下一首，防止因換曲延遲而被瀏覽器判定暫停
     nativeAudio.addEventListener('ended', () => {
       playNext(true);
     });
@@ -1487,21 +1496,6 @@
       return basePath + encodeURI(src);
     }
 
-    // 預讀下一首音訊以加速換曲反應
-    function preloadNextTrack() {
-      const pl = store[plIdx];
-      if (!pl || pl.songs.length <= 1) return;
-      const nextIdx = (trackIdx + 1) % pl.songs.length;
-      const nextSong = pl.songs[nextIdx];
-      if (nextSong && !nextSong.source.includes('youtube') && !nextSong.source.includes('youtu.be')) {
-        const prefetchLink = document.createElement('link');
-        prefetchLink.rel = 'prefetch';
-        prefetchLink.as = 'fetch';
-        prefetchLink.href = resolveAudioSource(nextSong.source);
-        document.head.appendChild(prefetchLink);
-      }
-    }
-
     function playActiveSong(isNewTrack = false, isAutoNext = false) {
       const curPl = store[plIdx];
       if (!curPl || !curPl.songs[trackIdx]) return;
@@ -1517,7 +1511,7 @@
 
       totalDuration = song.duration || 211;
       const ytId = extractYoutubeId(song.source);
-      const targetVolume = (typeof song.volume === 'number') ? song.volume : (plIdx === 1 ? 1.6 : 0.85);
+      const targetVolume = (typeof song.volume === 'number') ? song.volume : (plIdx === 1 ? 1.6 : 1.0);
 
       if (ytId) {
         playMode = 'yt';
@@ -1537,43 +1531,37 @@
         nativeAudio.volume = Math.min(1.0, Math.max(0, targetVolume));
 
         if (isNewTrack || nativeAudio.src !== directSrc) {
-          isTransitioning = true;
+          isAutoSwitching = isAutoNext;
           currentSec = 0;
           updateProgressUI(0, totalDuration);
 
           nativeAudio.src = directSrc;
           
-          const executePlay = () => {
-            const p = nativeAudio.play();
-            if (p !== undefined) {
-              p.then(() => {
-                setPlayState(true);
-                isTransitioning = false;
-                preloadNextTrack();
-              }).catch(err => {
-                console.log("瀏覽器阻擋自動播放，保留播放就緒狀態:", err);
-                if (isAutoNext) {
-                  // 自動播下一首若被瀏覽器攔截，再度喚醒音訊連線
-                  setTimeout(() => { nativeAudio.play().catch(() => setPlayState(false)); }, 100);
-                } else {
-                  setPlayState(false);
-                }
-                isTransitioning = false;
-              });
-            }
-          };
-
-          executePlay();
+          const p = nativeAudio.play();
+          if (p !== undefined) {
+            p.then(() => {
+              setPlayState(true);
+              isAutoSwitching = false;
+            }).catch(err => {
+              console.log("播放暫緩:", err);
+              if (isAutoNext) {
+                // 自動播放遇到限制時，立即進行重試喚起
+                setTimeout(() => {
+                  nativeAudio.play().then(() => setPlayState(true)).catch(() => setPlayState(false));
+                }, 150);
+              } else {
+                setPlayState(false);
+              }
+              isAutoSwitching = false;
+            });
+          }
         } else {
           if (currentSec > 0 && Math.abs(nativeAudio.currentTime - currentSec) > 1) {
             nativeAudio.currentTime = currentSec;
           }
           const p = nativeAudio.play();
           if (p !== undefined) {
-            p.then(() => {
-              setPlayState(true);
-              preloadNextTrack();
-            }).catch(() => setPlayState(false));
+            p.then(() => setPlayState(true)).catch(() => setPlayState(false));
           }
         }
       }
@@ -1581,7 +1569,7 @@
 
     function pauseActiveSong() {
       setPlayState(false);
-      isTransitioning = false;
+      isAutoSwitching = false;
       if (playMode === 'file') {
         currentSec = nativeAudio.currentTime;
         nativeAudio.pause();
@@ -1975,7 +1963,7 @@
         p.songs.forEach((s, sI) => {
           const isFirstSong = sI === 0;
           const isLastSong = sI === p.songs.length - 1;
-          const volDisplay = typeof s.volume === 'number' ? s.volume : (pI === 1 ? 1.6 : 0.85);
+          const volDisplay = typeof s.volume === 'number' ? s.volume : (pI === 1 ? 1.6 : 1.0);
 
           const sRow = document.createElement('div');
           sRow.className = 'song-item-row';
@@ -2054,7 +2042,7 @@
       document.getElementById('form-song-artist').value = s.artist || 'KARINA';
       document.getElementById('form-song-source').value = s.source;
 
-      const currentVol = (typeof s.volume === 'number') ? s.volume : (pI === 1 ? 1.6 : 0.85);
+      const currentVol = (typeof s.volume === 'number') ? s.volume : (pI === 1 ? 1.6 : 1.0);
       document.getElementById('form-song-vol').value = currentVol;
       document.getElementById('form-vol-lbl').textContent = `${currentVol.toFixed(2)}x`;
 
@@ -2183,7 +2171,7 @@
     // 初始化渲染
     renderUI();
     
-    // 初始化僅更新媒體狀態，不預載音訊以節省網路頻寬
+    // 初始化僅更新中繼資訊
     if (store[plIdx] && store[plIdx].songs[trackIdx]) {
       const firstSong = store[plIdx].songs[trackIdx];
       updateMediaSession(firstSong, store[plIdx]);
