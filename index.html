@@ -47,7 +47,6 @@
       --steel-dim: #9ca3af;
       --steel-border: #2a2c35;
       --accent-glow: rgba(244, 244, 245, 0.25);
-      /* 白色愛心 (低透明度) 游標 */
       --heart-cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="rgba(255,255,255,0.45)" stroke="rgba(0,0,0,0.4)" stroke-width="0.8" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>') 12 12, pointer;
     }
 
@@ -332,7 +331,6 @@
       color: #fff;
     }
 
-    /* 電腦版排版加寬：KARINA MEMORY BOX 完全不被截斷 */
     @media (min-width: 768px) {
       .timeline-strip, .deck-controls {
         max-width: 780px;
@@ -545,7 +543,7 @@
 </head>
 <body>
 
-  <!-- 純原生 Audio 元件，無 Web Audio 衝突以保證系統級背景連線 -->
+  <!-- 原生 Audio 元件 -->
   <audio id="native-audio" playsinline preload="auto"></audio>
   <iframe id="yt-hidden-player" style="position:absolute; top:-9999px; left:-9999px; width:1px; height:1px;" frameborder="0" allow="autoplay; encrypted-media"></iframe>
 
@@ -805,7 +803,7 @@
     const COVER_YOU_KNOW = "06Rock_cover.jpg";
     const MEMORY_BOX_VINYL_LABEL = "KARINA MEMORY BOX_cover.JPG";
 
-    /* 強效雙行與多行容錯歌詞解析器（解決中文漏掉或不顯示問題） */
+    /* 強效雙行與多行容錯歌詞解析器 */
     function parseLrc(txt) {
       if (!txt) return [];
       const lines = txt.split('\n');
@@ -1354,6 +1352,52 @@ Yeah, yeah，盡管說吧，隨你怎麼講
 [00:30.08]오늘 아침 쑥 캐고 옴
 今天早上還去採了艾草`;
 
+    /* 第二歌單《スパークル (Sparkle)》動態歌詞配置 */
+    const LRC_SPARKLE = `[00:21.81]まだこの世界は 僕を飼いならしてたいみたいだ
+這個世界似乎依然想將我馴服
+[00:29.97]望み通りいいだろう 美しくもがくよ
+如你所願，我會美麗地掙扎
+[00:37.17]互いの砂時計 眺めながらキスをしようよ
+讓我們凝望著彼此的沙漏，深情一吻吧
+[00:44.77]「さよなら」から一番 遠い 場所で待ち合わせよう
+約好在離「再見」最遙遠的地方相見吧
+[00:52.55]ついに時はきた 昨日までは序章の序章で
+時機終於到來，直至昨天都只是序章中的序章 
+[01:00.43]飛ばし読みでいいから ここからが僕だよ
+即使略覽也無妨，從這裡開始，才是真正的我
+[01:07.85]経験と知識と カビの生えかかった勇気を持って
+帶著經驗、知識，以及幾乎快發霉的勇氣
+[01:15.62]いまだかつてないスピードで 君のもとへダイブを
+以從未有的速度，朝你縱身躍去
+[01:22.78]まどろみの中で 生温いコーラに
+於朦朧睡意中，望著已微溫的可樂
+[01:26.58]ここでないどこかを 夢見たよ
+夢見了某個不屬於此的地方
+[01:30.57]教室の窓の外に
+在教室的窗外
+[01:34.37]電車に揺られ 運ばれる朝に
+在電車搖晃的晨光中被載往遠方
+[01:45.15]運命だとか未来とかって 言葉がどれだけ手を
+無論我們如何伸手，都無法觸及那些名為「命運」與「未來」的詞彙
+[01:53.55]伸ばそうと届かない 場所で僕ら恋をする
+我們在伸出手也無法觸及的地方相愛
+[02:00.86]時計の針も二人を 横目に見ながら進む
+就連時鐘指針也斜睨著我們，並向前流轉
+[02:08.65]こんな世界を二人で 一生 いや、何章でも
+讓我們在這樣的世界裡，共度一生——不， 是無論多少篇章
+[02:16.44]生き抜いていこう
+都一起堅持活下去
+[02:23.58]運命だとか未来とかって 言葉がどれだけ手を
+無論我們如何伸手，都無法觸及那些名為「命運」與「未來」的詞彙
+[02:31.69]伸ばそうと届かない 場所で僕ら恋をする
+我們在伸出手也無法觸及的地方相愛
+[02:39.40]時計の針も二人を 横目に見ながら進む
+就連時鐘指針也斜睨著我們，並向前流轉
+[02:47.37]こんな世界を二人で 一生 いや、何章でも
+讓我們在這樣的世界裡，共度一生——不， 是無論多少篇章
+[02:54.91]生き抜いていこう
+都一起堅持活下去`;
+
     const TWO_PLAYLISTS_DATA = [
       {
         id: "pl_karina_song",
@@ -1463,7 +1507,7 @@ Yeah, yeah，盡管說吧，隨你怎麼講
             imgOffsetY: 0.0,
             duration: 220,
             volume: 1.0,
-            lyrics: []
+            lyrics: parseLrc(LRC_SPARKLE)
           },
           {
             title: "愛你但說不出口(Hard to say)",
@@ -1587,7 +1631,7 @@ Yeah, yeah，盡管說吧，隨你怎麼講
     }
 
     /* -------------------------------------------------------------
-     * 3. Three.js 3D 渲染
+     * 3. Three.js 3D 渲染 (修復圖片殘留上一張的問題)
      * ------------------------------------------------------------*/
     const container = document.getElementById('threejs-box');
     const scene = new THREE.Scene();
@@ -1766,6 +1810,7 @@ Yeah, yeah，盡管說吧，隨你怎麼講
     discGroup.position.set(VINYL_REST_X, 0, 0.01);
     turntableGroup.add(discGroup);
 
+    // 核心修復：切換曲目時立即解綁舊圖，解決「殘留上一張專輯幾秒」問題
     function applyCoverTo3D(frontUrl, backUrl, labelUrl, scale = 1.0, ox = 0.0, oy = 0.0) {
       if (!frontUrl) return;
       const thisSeq = ++currentTextureSeq;
@@ -1773,6 +1818,18 @@ Yeah, yeah，盡管說吧，隨你怎麼講
       const directFront = toAbsUrl(frontUrl);
       const directBack = backUrl ? toAbsUrl(backUrl) : directFront;
       const directLabel = labelUrl ? toAbsUrl(labelUrl) : directFront;
+
+      // 如果尚未命中快取，立刻將舊圖 map 卸載，避免顯示上一首的封面
+      if (!textureCache.has(directFront)) {
+        coverMesh.material[4].map = null;
+        coverMesh.material[4].color.set(0x1a1a1f);
+        coverMesh.material[4].needsUpdate = true;
+      }
+      if (!textureCache.has(directLabel)) {
+        labelMesh.material.map = null;
+        labelMesh.material.color.set(0x222226);
+        labelMesh.material.needsUpdate = true;
+      }
 
       loadCachedTexture(directFront, (tex) => {
         if (thisSeq !== currentTextureSeq) return;
@@ -2103,7 +2160,7 @@ Yeah, yeah，盡管說吧，隨你怎麼講
     window.addEventListener('touchend', handleSeekEnd);
 
     /* -------------------------------------------------------------
-     * 6. 歌詞渲染 (切換歌曲強制歸零捲動，避免停在最後一行)
+     * 6. 歌詞渲染
      * ------------------------------------------------------------*/
     function syncLyrics(sec) {
       const song = store[plIdx]?.songs[trackIdx];
@@ -2132,7 +2189,7 @@ Yeah, yeah，盡管說吧，隨你怎麼講
     function renderLyricsList() {
       const scroller = document.getElementById('lyrics-scroller');
       scroller.innerHTML = '';
-      scroller.scrollTop = 0; // 關鍵修復：切換曲目時強制回到頂部第一行
+      scroller.scrollTop = 0;
       const song = store[plIdx]?.songs[trackIdx];
 
       if (!song || !song.lyrics || song.lyrics.length === 0) {
