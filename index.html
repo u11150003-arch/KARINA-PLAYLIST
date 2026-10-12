@@ -17,8 +17,8 @@
   <meta property="og:type" content="music.playlist">
   <meta property="og:url" content="https://u11150003-arch.github.io/KARINA-PLAYLIST/">
   
-  <meta property="og:image" content="./UP_cover.jpg">
-  <meta property="og:image:secure_url" content="./UP_cover.jpg">
+  <meta property="og:image" content="UP_cover.jpg">
+  <meta property="og:image:secure_url" content="UP_cover.jpg">
   <meta property="og:image:type" content="image/jpeg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
@@ -26,7 +26,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="KARINA PLAYLIST">
   <meta name="twitter:description" content="Playlist for KARINA">
-  <meta name="twitter:image" content="./UP_cover.jpg">
+  <meta name="twitter:image" content="UP_cover.jpg">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -332,6 +332,7 @@
       color: #fff;
     }
 
+    /* 電腦版排版加寬：KARINA MEMORY BOX 完全不被截斷 */
     @media (min-width: 768px) {
       .timeline-strip, .deck-controls {
         max-width: 780px;
@@ -544,7 +545,7 @@
 </head>
 <body>
 
-  <!-- 純原生 Audio 元件 -->
+  <!-- 完全比照 WINTER PLAYLIST：原生 audio 直連，不額外添加干擾屬性 -->
   <audio id="native-audio" playsinline></audio>
   <iframe id="yt-hidden-player" style="position:absolute; top:-9999px; left:-9999px; width:1px; height:1px;" frameborder="0" allow="autoplay; encrypted-media"></iframe>
 
@@ -779,7 +780,7 @@
   <script type="module">
     import * as THREE from 'three';
 
-    // 統一完全採用乾淨的相對路徑（徹底消除 ./ 造成的路徑解析延遲）
+    // 參照 WINTER PLAYLIST：完全比照乾淨相對路徑
     const COVER_UP = "UP_cover.jpg";
     const COVER_GOOD_STUFF = "GOOD STUFF_cover.jpg";
     const COVER_16_BIT = "16 Bit_cover.jpg";
@@ -1596,7 +1597,7 @@ Yeah, yeah，盡管說吧，隨你怎麼講
     const nativeAudio = document.getElementById('native-audio');
     const ytIframe = document.getElementById('yt-hidden-player');
 
-    // 比照 WINTER PLAYLIST：簡潔穩定的 MediaSession 推播
+    // 參照 WINTER PLAYLIST：最純粹穩定的 MediaSession 鎖定畫面推播
     function updateMediaSession(song, pl) {
       if ('mediaSession' in navigator) {
         const coverSrc = song.cover || pl.cover;
@@ -1625,7 +1626,7 @@ Yeah, yeah，盡管說吧，隨你怎麼講
     }
 
     /* -------------------------------------------------------------
-     * 3. Three.js 3D 渲染 (比照 WINTER PLAYLIST 原生非同步載圖)
+     * 3. Three.js 3D 渲染 (參照 WINTER PLAYLIST：原生非同步載圖)
      * ------------------------------------------------------------*/
     const container = document.getElementById('threejs-box');
     const scene = new THREE.Scene();
@@ -1798,6 +1799,7 @@ Yeah, yeah，盡管說吧，隨你怎麼講
     discGroup.position.set(VINYL_REST_X, 0, 0.01);
     turntableGroup.add(discGroup);
 
+    // 參照 WINTER PLAYLIST：版本序列鎖定，不強清貼圖，載入完成後順暢替換
     function applyCoverTo3D(frontUrl, backUrl, labelUrl, scale = 1.0, ox = 0.0, oy = 0.0) {
       if (!frontUrl) return;
       const thisSeq = ++currentTextureSeq;
