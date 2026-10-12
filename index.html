@@ -47,7 +47,6 @@
       --steel-dim: #9ca3af;
       --steel-border: #2a2c35;
       --accent-glow: rgba(244, 244, 245, 0.25);
-      /* 白色愛心 (低透明度) 游標 */
       --heart-cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="rgba(255,255,255,0.45)" stroke="rgba(0,0,0,0.4)" stroke-width="0.8" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>') 12 12, pointer;
     }
 
@@ -332,7 +331,6 @@
       color: #fff;
     }
 
-    /* 電腦版排版加寬：KARINA MEMORY BOX 完全不被截斷 */
     @media (min-width: 768px) {
       .timeline-strip, .deck-controls {
         max-width: 780px;
@@ -545,8 +543,7 @@
 </head>
 <body>
 
-  <!-- 原生 Audio 元件：不帶跨域限制，鎖定本機串流 -->
-  <audio id="native-audio" playsinline preload="auto"></audio>
+  <audio id="native-audio" playsinline></audio>
   <iframe id="yt-hidden-player" style="position:absolute; top:-9999px; left:-9999px; width:1px; height:1px;" frameborder="0" allow="autoplay; encrypted-media"></iframe>
 
   <header>
@@ -780,7 +777,7 @@
   <script type="module">
     import * as THREE from 'three';
 
-    // 專案標準根目錄 URL (保證 Safari 與跨平台 100% 正確解析路徑)
+    // 基礎絕對路徑
     const REPO_BASE = "https://u11150003-arch.github.io/KARINA-PLAYLIST/";
 
     function toAbsUrl(fileName) {
@@ -789,7 +786,7 @@
       return REPO_BASE + encodeURI(fileName.replace(/^\.\//, ''));
     }
 
-    /* 第一個歌單封面與黑膠貼標 (全部對應 GitHub 上的圖片名稱) */
+    /* 第一個歌單封面與黑膠貼標 */
     const COVER_UP = "UP_cover.jpg";
     const COVER_GOOD_STUFF = "GOOD STUFF_cover.jpg";
     const COVER_16_BIT = "16 Bit_cover.jpg";
@@ -1008,7 +1005,6 @@
       }
     ];
 
-    // 清理舊快取，保證永久同步最新路徑
     localStorage.clear();
 
     let store = TWO_PLAYLISTS_DATA;
@@ -1024,14 +1020,12 @@
     let ytTimer = null;
     let hasPlayedFirstTrack = false;
     let isAutoSwitching = false;
-
-    // 解決切歌圖片錯亂的唯一版本序號鎖
     let currentTextureSeq = 0;
 
     const nativeAudio = document.getElementById('native-audio');
     const ytIframe = document.getElementById('yt-hidden-player');
 
-    // 關鍵修復：在 iOS 真正播放時推送 MediaSession，鎖定畫面、控制中心絕不留白
+    // 參照 WINTER PLAYLIST：簡潔強效的 MediaSession，即時把封面與歌名交給 iOS / macOS / Windows
     function updateMediaSession(song, pl) {
       if ('mediaSession' in navigator) {
         const directCover = toAbsUrl(song.cover || pl.cover);
@@ -1041,9 +1035,6 @@
           artist: song.artist || "KARINA",
           album: pl.name || "KARINA PLAYLIST",
           artwork: [
-            { src: directCover, sizes: '96x96', type: 'image/jpeg' },
-            { src: directCover, sizes: '128x128', type: 'image/jpeg' },
-            { src: directCover, sizes: '256x256', type: 'image/jpeg' },
             { src: directCover, sizes: '512x512', type: 'image/jpeg' }
           ]
         });
@@ -1052,14 +1043,6 @@
         navigator.mediaSession.setActionHandler('pause', () => { pauseActiveSong(); });
         navigator.mediaSession.setActionHandler('previoustrack', () => { playPrev(); });
         navigator.mediaSession.setActionHandler('nexttrack', () => { playNext(); });
-        try {
-          navigator.mediaSession.setActionHandler('seekto', (details) => {
-            if (details.seekTime !== undefined) {
-              nativeAudio.currentTime = details.seekTime;
-              updateProgressUI(details.seekTime, totalDuration);
-            }
-          });
-        } catch(e) {}
       }
     }
 
@@ -1072,7 +1055,7 @@
     }
 
     /* -------------------------------------------------------------
-     * 3. Three.js 3D 渲染 (修復旋轉、自轉與封面覆蓋錯誤)
+     * 3. Three.js 3D 渲染 (參照 WINTER PLAYLIST 獨立流暢轉動)
      * ------------------------------------------------------------*/
     const container = document.getElementById('threejs-box');
     const scene = new THREE.Scene();
@@ -1219,7 +1202,7 @@
     coverMesh.position.set(-0.55, 0, 0);
     turntableGroup.add(coverMesh);
 
-    // 建立獨立黑膠自轉群組，確保在旋轉展示時黑膠也能一直流暢自轉
+    // 黑膠群組架構
     const discSpinGroup = new THREE.Group();
     const discGroup = new THREE.Group();
     discGroup.add(discSpinGroup);
@@ -1254,14 +1237,14 @@
 
     function applyCoverTo3D(frontUrl, backUrl, labelUrl, scale = 1.0, ox = 0.0, oy = 0.0) {
       if (!frontUrl) return;
-      const thisSeq = ++currentTextureSeq; // 鎖定目前執行的版本
+      const thisSeq = ++currentTextureSeq;
 
       const directFront = toAbsUrl(frontUrl);
       const directBack = backUrl ? toAbsUrl(backUrl) : directFront;
       const directLabel = labelUrl ? toAbsUrl(labelUrl) : directFront;
 
       loadCachedTexture(directFront, (tex) => {
-        if (thisSeq !== currentTextureSeq) return; // 若使用者又切了歌，立刻拋棄舊貼圖避免覆蓋錯誤
+        if (thisSeq !== currentTextureSeq) return;
         tex.repeat.set(1 / scale, 1 / scale);
         tex.offset.set((1 - 1/scale)/2 - (ox / scale), (1 - 1/scale)/2 - (oy / scale));
         coverMesh.material[4].map = tex;
@@ -1360,9 +1343,9 @@
     function renderLoop() {
       requestAnimationFrame(renderLoop);
 
-      // 黑膠轉動核心修復：播放中或展示旋轉時，黑膠圓盤平滑自轉
+      // 黑膠轉動核心：只要播放中或旋轉展示中皆平滑自轉
       if (isPlaying || isAutoRotating) {
-        discSpinGroup.rotation.z -= 0.012;
+        discSpinGroup.rotation.z -= 0.014;
       }
 
       if (isAutoRotating) {
@@ -1382,7 +1365,7 @@
         turntableGroup.rotation.x = THREE.MathUtils.lerp(turntableGroup.rotation.x, targetRotX, 0.1);
       }
 
-      // 黑膠推出 / 收回動畫
+      // 黑膠唱片滑出 / 收合
       if (isPlaying) {
         discGroup.position.x = THREE.MathUtils.lerp(discGroup.position.x, VINYL_OUT_X, 0.06);
       } else {
@@ -1394,7 +1377,7 @@
     renderLoop();
 
     /* -------------------------------------------------------------
-     * 4. 音訊系統 (直接串流、背景播放保活、iOS 鎖定畫面無縫推送)
+     * 4. 音訊系統 (參照 WINTER PLAYLIST：原生極速切換)
      * ------------------------------------------------------------*/
     function setPlayState(active) {
       isPlaying = active;
@@ -1441,10 +1424,6 @@
     nativeAudio.addEventListener('playing', () => {
       setPlayState(true);
       isAutoSwitching = false;
-      const curPl = store[plIdx];
-      if (curPl && curPl.songs[trackIdx]) {
-        updateMediaSession(curPl.songs[trackIdx], curPl);
-      }
     });
 
     nativeAudio.addEventListener('pause', () => {
@@ -1469,12 +1448,17 @@
       }, 250);
     }
 
+    // 極速播放通道（參照 WINTER PLAYLIST，完全移除卡頓源）
     function playActiveSong(isNewTrack = false, isAutoNext = false) {
       const curPl = store[plIdx];
       if (!curPl || !curPl.songs[trackIdx]) return;
       const song = curPl.songs[trackIdx];
 
+      // 1. 介面立即響應
       renderUI();
+      
+      // 2. 參照 WINTER PLAYLIST：在使用者點擊瞬間就同步 MediaSession，確保鎖定畫面不留白
+      updateMediaSession(song, curPl);
 
       if (isNewTrack || !hasPlayedFirstTrack) {
         triggerSlow15sSpin();
@@ -1502,6 +1486,7 @@
         const directSrc = toAbsUrl(song.source);
         nativeAudio.volume = Math.min(1.0, Math.max(0, targetVolume));
 
+        // 3. 核心秒開：如同 WINTER 原版，直接賦值 src 並呼叫 play()
         if (isNewTrack || nativeAudio.src !== directSrc) {
           isAutoSwitching = isAutoNext;
           currentSec = 0;
