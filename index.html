@@ -17,8 +17,8 @@
   <meta property="og:type" content="music.playlist">
   <meta property="og:url" content="https://u11150003-arch.github.io/KARINA-PLAYLIST/">
   
-  <meta property="og:image" content="https://u11150003-arch.github.io/KARINA-PLAYLIST/UP_cover.jpg">
-  <meta property="og:image:secure_url" content="https://u11150003-arch.github.io/KARINA-PLAYLIST/UP_cover.jpg">
+  <meta property="og:image" content="./UP_cover.jpg">
+  <meta property="og:image:secure_url" content="./UP_cover.jpg">
   <meta property="og:image:type" content="image/jpeg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
@@ -26,7 +26,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="KARINA PLAYLIST">
   <meta name="twitter:description" content="Playlist for KARINA">
-  <meta name="twitter:image" content="https://u11150003-arch.github.io/KARINA-PLAYLIST/UP_cover.jpg">
+  <meta name="twitter:image" content="./UP_cover.jpg">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -543,8 +543,8 @@
 </head>
 <body>
 
-  <!-- 原生 Audio 元件 -->
-  <audio id="native-audio" playsinline preload="auto"></audio>
+  <!-- 純原生 Audio，完全比照 WINTER PLAYLIST 原汁原味通道 -->
+  <audio id="native-audio" playsinline></audio>
   <iframe id="yt-hidden-player" style="position:absolute; top:-9999px; left:-9999px; width:1px; height:1px;" frameborder="0" allow="autoplay; encrypted-media"></iframe>
 
   <header>
@@ -684,7 +684,7 @@
           </div>
           <div class="field-row">
             <label>音訊來源 (本機檔名、GitHub 網址 或 YouTube 連結)</label>
-            <input type="text" id="form-song-source" placeholder="如：UP.mp3 或 YouTube 網址">
+            <input type="text" id="form-song-source" placeholder="如：./UP.mp3 或 YouTube 網址">
           </div>
           <div class="field-row">
             <label style="display:flex; justify-content:space-between;">
@@ -778,32 +778,25 @@
   <script type="module">
     import * as THREE from 'three';
 
-    const REPO_BASE = "https://u11150003-arch.github.io/KARINA-PLAYLIST/";
+    // 參照 WINTER PLAYLIST：完全使用本機標準相對路徑，免除二次編碼造成的 404 錯誤
+    const COVER_UP = "./UP_cover.jpg";
+    const COVER_GOOD_STUFF = "./GOOD STUFF_cover.jpg";
+    const COVER_16_BIT = "./16 Bit_cover.jpg";
+    const COVER_TENDERNESS = "./May the TENDERNESS be with you_album cover.jpg";
+    const VINYL_TENDERNESS = "./May the TENDERNESS be with you_CD cover.jpg";
+    const COVER_SERENADE = "./Serenade_album cover.jpg";
+    const VINYL_SERENADE = "./Serenade_CD cover.jpg";
+    const COVER_ORANGE = "./Orange_cover.jpg";
 
-    function toAbsUrl(fileName) {
-      if (!fileName) return '';
-      if (fileName.startsWith('http://') || fileName.startsWith('https://')) return fileName;
-      return REPO_BASE + encodeURI(fileName.replace(/^\.\//, ''));
-    }
+    const COVER_SPARKLE = "./01Sparkle_cover.jpg";
+    const COVER_HARD_TO_SAY = "./02Hard to say_cover.jpg";
+    const COVER_SAD_LOVE = "./03_cover.jpg";
+    const COVER_AS_YOU_ARE = "./04_cover.jpg";
+    const COVER_CANT_TAKE_EYES = "./05Cant Take My Eyes Off You_cover.jpg";
+    const COVER_YOU_KNOW = "./06Rock_cover.jpg";
+    const MEMORY_BOX_VINYL_LABEL = "./KARINA MEMORY BOX_cover.JPG";
 
-    const COVER_UP = "UP_cover.jpg";
-    const COVER_GOOD_STUFF = "GOOD STUFF_cover.jpg";
-    const COVER_16_BIT = "16 Bit_cover.jpg";
-    const COVER_TENDERNESS = "May the TENDERNESS be with you_album cover.jpg";
-    const VINYL_TENDERNESS = "May the TENDERNESS be with you_CD cover.jpg";
-    const COVER_SERENADE = "Serenade_album cover.jpg";
-    const VINYL_SERENADE = "Serenade_CD cover.jpg";
-    const COVER_ORANGE = "Orange_cover.jpg";
-
-    const COVER_SPARKLE = "01Sparkle_cover.jpg";
-    const COVER_HARD_TO_SAY = "02Hard to say_cover.jpg";
-    const COVER_SAD_LOVE = "03_cover.jpg";
-    const COVER_AS_YOU_ARE = "04_cover.jpg";
-    const COVER_CANT_TAKE_EYES = "05Cant Take My Eyes Off You_cover.jpg";
-    const COVER_YOU_KNOW = "06Rock_cover.jpg";
-    const MEMORY_BOX_VINYL_LABEL = "KARINA MEMORY BOX_cover.JPG";
-
-    /* 強效雙行與多行容錯歌詞解析器 */
+    /* 強效歌詞解析器 */
     function parseLrc(txt) {
       if (!txt) return [];
       const lines = txt.split('\n');
@@ -1352,7 +1345,6 @@ Yeah, yeah，盡管說吧，隨你怎麼講
 [00:30.08]오늘 아침 쑥 캐고 옴
 今天早上還去採了艾草`;
 
-    /* 第二歌單《スパークル (Sparkle)》動態歌詞配置 */
     const LRC_SPARKLE = `[00:21.81]まだこの世界は 僕を飼いならしてたいみたいだ
 這個世界似乎依然想將我馴服
 [00:29.97]望み通りいいだろう 美しくもがくよ
@@ -1407,7 +1399,7 @@ Yeah, yeah，盡管說吧，隨你怎麼講
           {
             title: "UP",
             artist: "KARINA",
-            source: "UP.mp3",
+            source: "./UP.mp3",
             cover: COVER_UP,
             labelImg: COVER_UP,
             backCover: COVER_UP,
@@ -1421,7 +1413,7 @@ Yeah, yeah，盡管說吧，隨你怎麼講
           {
             title: "GOOD STUFF",
             artist: "KARINA",
-            source: "GOOD STUFF.mp3",
+            source: "./GOOD STUFF.mp3",
             cover: COVER_GOOD_STUFF,
             labelImg: COVER_GOOD_STUFF,
             backCover: COVER_GOOD_STUFF,
@@ -1435,7 +1427,7 @@ Yeah, yeah，盡管說吧，隨你怎麼講
           {
             title: "16 Bit",
             artist: "KARINA",
-            source: "16Bit.mp3",
+            source: "./16Bit.mp3",
             cover: COVER_16_BIT,
             labelImg: COVER_16_BIT,
             backCover: COVER_16_BIT,
@@ -1449,7 +1441,7 @@ Yeah, yeah，盡管說吧，隨你怎麼講
           {
             title: "May the TENDERNESS be with you!",
             artist: "JANNABI ft.KARINA",
-            source: "May the TENDERNESS be with you.mp3",
+            source: "./May the TENDERNESS be with you.mp3",
             cover: COVER_TENDERNESS,
             labelImg: VINYL_TENDERNESS,
             backCover: COVER_TENDERNESS,
@@ -1463,7 +1455,7 @@ Yeah, yeah，盡管說吧，隨你怎麼講
           {
             title: "Serenade",
             artist: "KARINA&WINTER",
-            source: "Serenade.mp3",
+            source: "./Serenade.mp3",
             cover: COVER_SERENADE,
             labelImg: VINYL_SERENADE,
             backCover: COVER_SERENADE,
@@ -1477,7 +1469,7 @@ Yeah, yeah，盡管說吧，隨你怎麼講
           {
             title: "你知道嗎그거 아세요",
             artist: "KARINA ft.Lee Mujin",
-            source: "Orange.mp3",
+            source: "./Orange.mp3",
             cover: COVER_ORANGE,
             labelImg: COVER_ORANGE,
             backCover: COVER_ORANGE,
@@ -1498,7 +1490,7 @@ Yeah, yeah，盡管說吧，隨你怎麼講
           {
             title: "スパークル(Sparkle)",
             artist: "KARINA",
-            source: "01Sparkle.mp3",
+            source: "./01Sparkle.mp3",
             cover: COVER_SPARKLE,
             labelImg: MEMORY_BOX_VINYL_LABEL,
             backCover: COVER_SPARKLE,
@@ -1512,7 +1504,7 @@ Yeah, yeah，盡管說吧，隨你怎麼講
           {
             title: "愛你但說不出口(Hard to say)",
             artist: "KARINA",
-            source: "02Hard to say.mp3",
+            source: "./02Hard to say.mp3",
             cover: COVER_HARD_TO_SAY,
             labelImg: MEMORY_BOX_VINYL_LABEL,
             backCover: COVER_HARD_TO_SAY,
@@ -1526,7 +1518,7 @@ Yeah, yeah，盡管說吧，隨你怎麼講
           {
             title: "슬픈 사랑 노래",
             artist: "KARINA",
-            source: "03.mp3",
+            source: "./03.mp3",
             cover: COVER_SAD_LOVE,
             labelImg: MEMORY_BOX_VINYL_LABEL,
             backCover: COVER_SAD_LOVE,
@@ -1540,7 +1532,7 @@ Yeah, yeah，盡管說吧，隨你怎麼講
           {
             title: "그대는 그대로",
             artist: "KARINA",
-            source: "04.mp3",
+            source: "./04.mp3",
             cover: COVER_AS_YOU_ARE,
             labelImg: MEMORY_BOX_VINYL_LABEL,
             backCover: COVER_AS_YOU_ARE,
@@ -1554,7 +1546,7 @@ Yeah, yeah，盡管說吧，隨你怎麼講
           {
             title: "Can’t Take My Eyes Off You",
             artist: "KARINA",
-            source: "05Cant Take My Eyes Off You.mp3",
+            source: "./05Cant Take My Eyes Off You.mp3",
             cover: COVER_CANT_TAKE_EYES,
             labelImg: MEMORY_BOX_VINYL_LABEL,
             backCover: COVER_CANT_TAKE_EYES,
@@ -1568,7 +1560,7 @@ Yeah, yeah，盡管說吧，隨你怎麼講
           {
             title: "있잖아 (Rock Ver.)",
             artist: "KARINA",
-            source: "06Rock.mp3",
+            source: "./06Rock.mp3",
             cover: COVER_YOU_KNOW,
             labelImg: MEMORY_BOX_VINYL_LABEL,
             backCover: COVER_YOU_KNOW,
@@ -1603,15 +1595,16 @@ Yeah, yeah，盡管說吧，隨你怎麼講
     const nativeAudio = document.getElementById('native-audio');
     const ytIframe = document.getElementById('yt-hidden-player');
 
+    // 參照 WINTER PLAYLIST：最純粹穩定的 MediaSession 鎖定畫面推播
     function updateMediaSession(song, pl) {
       if ('mediaSession' in navigator) {
-        const directCover = toAbsUrl(song.cover || pl.cover);
+        const coverSrc = song.cover || pl.cover;
         navigator.mediaSession.metadata = new MediaMetadata({
           title: song.title,
           artist: song.artist || "KARINA",
           album: pl.name || "KARINA PLAYLIST",
           artwork: [
-            { src: directCover, sizes: '512x512', type: 'image/jpeg' }
+            { src: coverSrc, sizes: '512x512', type: 'image/jpeg' }
           ]
         });
 
@@ -1631,7 +1624,7 @@ Yeah, yeah，盡管說吧，隨你怎麼講
     }
 
     /* -------------------------------------------------------------
-     * 3. Three.js 3D 渲染 (修復圖片殘留上一張的問題)
+     * 3. Three.js 3D 渲染 (參照 WINTER PLAYLIST：原生非同步載圖)
      * ------------------------------------------------------------*/
     const container = document.getElementById('threejs-box');
     const scene = new THREE.Scene();
@@ -1738,7 +1731,6 @@ Yeah, yeah，盡管說吧，隨你怎麼講
     }
 
     const texLoader = new THREE.TextureLoader();
-    texLoader.setCrossOrigin('anonymous');
     const textureCache = new Map();
 
     function loadCachedTexture(url, callback) {
@@ -1757,10 +1749,6 @@ Yeah, yeah，盡管說吧，隨你怎麼講
           tex.needsUpdate = true;
           textureCache.set(url, tex);
           callback(tex);
-        },
-        undefined,
-        (err) => {
-          console.error("貼圖載入失敗:", url, err);
         }
       );
     }
@@ -1771,8 +1759,8 @@ Yeah, yeah，盡管說吧，隨你怎麼講
       new THREE.MeshStandardMaterial({ color: 0x14151a, roughness: 0.5 }),
       new THREE.MeshStandardMaterial({ color: 0x14151a, roughness: 0.5 }),
       new THREE.MeshStandardMaterial({ color: 0x14151a, roughness: 0.5 }),
-      new THREE.MeshStandardMaterial({ color: 0x222226, roughness: 0.35 }),
-      new THREE.MeshStandardMaterial({ color: 0x222226, roughness: 0.35 })
+      new THREE.MeshStandardMaterial({ color: 0xffffff, roughness: 0.35 }),
+      new THREE.MeshStandardMaterial({ color: 0xffffff, roughness: 0.35 })
     ];
     const coverMesh = new THREE.Mesh(coverGeo, coverSideMat);
     coverMesh.position.set(-0.55, 0, 0);
@@ -1810,47 +1798,32 @@ Yeah, yeah，盡管說吧，隨你怎麼講
     discGroup.position.set(VINYL_REST_X, 0, 0.01);
     turntableGroup.add(discGroup);
 
-    // 核心修復：切換曲目時立即解綁舊圖，解決「殘留上一張專輯幾秒」問題
+    // 參照 WINTER PLAYLIST：版本序列鎖定，不強清貼圖，載入完成後順暢替換
     function applyCoverTo3D(frontUrl, backUrl, labelUrl, scale = 1.0, ox = 0.0, oy = 0.0) {
       if (!frontUrl) return;
       const thisSeq = ++currentTextureSeq;
 
-      const directFront = toAbsUrl(frontUrl);
-      const directBack = backUrl ? toAbsUrl(backUrl) : directFront;
-      const directLabel = labelUrl ? toAbsUrl(labelUrl) : directFront;
-
-      // 如果尚未命中快取，立刻將舊圖 map 卸載，避免顯示上一首的封面
-      if (!textureCache.has(directFront)) {
-        coverMesh.material[4].map = null;
-        coverMesh.material[4].color.set(0x1a1a1f);
-        coverMesh.material[4].needsUpdate = true;
-      }
-      if (!textureCache.has(directLabel)) {
-        labelMesh.material.map = null;
-        labelMesh.material.color.set(0x222226);
-        labelMesh.material.needsUpdate = true;
-      }
+      const directFront = frontUrl;
+      const directBack = backUrl || frontUrl;
+      const directLabel = labelUrl || frontUrl;
 
       loadCachedTexture(directFront, (tex) => {
         if (thisSeq !== currentTextureSeq) return;
         tex.repeat.set(1 / scale, 1 / scale);
         tex.offset.set((1 - 1/scale)/2 - (ox / scale), (1 - 1/scale)/2 - (oy / scale));
         coverMesh.material[4].map = tex;
-        coverMesh.material[4].color.set(0xffffff);
         coverMesh.material[4].needsUpdate = true;
       });
 
       loadCachedTexture(directBack, (tex) => {
         if (thisSeq !== currentTextureSeq) return;
         coverMesh.material[5].map = tex;
-        coverMesh.material[5].color.set(0xffffff);
         coverMesh.material[5].needsUpdate = true;
       });
 
       loadCachedTexture(directLabel, (tex) => {
         if (thisSeq !== currentTextureSeq) return;
         labelMesh.material.map = tex;
-        labelMesh.material.color.set(0xffffff);
         labelMesh.material.needsUpdate = true;
       });
     }
@@ -1931,6 +1904,7 @@ Yeah, yeah，盡管說吧，隨你怎麼講
     function renderLoop() {
       requestAnimationFrame(renderLoop);
 
+      // 黑膠平滑自轉
       if (isPlaying || isAutoRotating) {
         discSpinGroup.rotation.z -= 0.014;
       }
@@ -1952,6 +1926,7 @@ Yeah, yeah，盡管說吧，隨你怎麼講
         turntableGroup.rotation.x = THREE.MathUtils.lerp(turntableGroup.rotation.x, targetRotX, 0.1);
       }
 
+      // 黑膠滑出 / 收合
       if (isPlaying) {
         discGroup.position.x = THREE.MathUtils.lerp(discGroup.position.x, VINYL_OUT_X, 0.06);
       } else {
@@ -1963,7 +1938,7 @@ Yeah, yeah，盡管說吧，隨你怎麼講
     renderLoop();
 
     /* -------------------------------------------------------------
-     * 4. 音訊系統 (純原生通道，保證背景/分頁不中斷)
+     * 4. 音訊系統 (參照 WINTER PLAYLIST：原生極速播放)
      * ------------------------------------------------------------*/
     function setPlayState(active) {
       isPlaying = active;
@@ -2064,7 +2039,7 @@ Yeah, yeah，盡管說吧，隨你怎麼講
         clearInterval(ytTimer);
         ytIframe.src = '';
 
-        const directSrc = toAbsUrl(song.source);
+        const directSrc = song.source;
         nativeAudio.volume = Math.min(1.0, Math.max(0, song.volume || 1.0));
 
         if (isNewTrack || nativeAudio.src !== directSrc) {
@@ -2072,6 +2047,7 @@ Yeah, yeah，盡管說吧，隨你怎麼講
           currentSec = 0;
           updateProgressUI(0, totalDuration);
 
+          // 直接指定相對路徑給 src，秒開秒放
           nativeAudio.src = directSrc;
           
           const p = nativeAudio.play();
@@ -2156,11 +2132,11 @@ Yeah, yeah，盡管說吧，隨你怎麼講
     window.addEventListener('mouseup', handleSeekEnd);
 
     seekContainer.addEventListener('touchstart', (e) => { isDraggingSeek = true; handleSeekMove(e); }, { passive: false });
-    window.addEventListener('touchmove', handleSeekMove);
+    window.addEventListener('touchmove', handleSeekMove, { passive: false });
     window.addEventListener('touchend', handleSeekEnd);
 
     /* -------------------------------------------------------------
-     * 6. 歌詞渲染
+     * 6. 歌詞渲染 (切歌時即時重置捲動至第 1 行)
      * ------------------------------------------------------------*/
     function syncLyrics(sec) {
       const song = store[plIdx]?.songs[trackIdx];
@@ -2189,7 +2165,7 @@ Yeah, yeah，盡管說吧，隨你怎麼講
     function renderLyricsList() {
       const scroller = document.getElementById('lyrics-scroller');
       scroller.innerHTML = '';
-      scroller.scrollTop = 0;
+      scroller.scrollTop = 0; // 切換曲目瞬間立刻滾動回最上方第一行
       const song = store[plIdx]?.songs[trackIdx];
 
       if (!song || !song.lyrics || song.lyrics.length === 0) {
@@ -2343,7 +2319,7 @@ Yeah, yeah，盡管說吧，隨你怎麼講
       const title = document.getElementById('form-song-title')?.value.trim() || '未命名歌曲';
       const artist = document.getElementById('form-song-artist')?.value.trim() || 'KARINA';
       const rawCover = document.getElementById('form-song-cover')?.value.trim() || COVER_UP;
-      const direct = toAbsUrl(rawCover);
+      const direct = rawCover;
 
       const scale = parseFloat(document.getElementById('form-img-scale')?.value || 1.0);
       const ox = parseFloat(document.getElementById('form-img-ox')?.value || 0.0);
