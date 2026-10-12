@@ -47,7 +47,6 @@
       --steel-dim: #9ca3af;
       --steel-border: #2a2c35;
       --accent-glow: rgba(244, 244, 245, 0.25);
-      /* 白色愛心 (低透明度) 游標 */
       --heart-cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="rgba(255,255,255,0.45)" stroke="rgba(0,0,0,0.4)" stroke-width="0.8" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>') 12 12, pointer;
     }
 
@@ -95,7 +94,6 @@
       color: #ffffff;
     }
 
-    /* 右上角愛心微調加大 */
     .admin-star-btn {
       background: none;
       border: none;
@@ -333,7 +331,6 @@
       color: #fff;
     }
 
-    /* 電腦版排版加寬：KARINA MEMORY BOX 完全不被截斷 */
     @media (min-width: 768px) {
       .timeline-strip, .deck-controls {
         max-width: 780px;
@@ -546,7 +543,6 @@
 </head>
 <body>
 
-  <!-- 原生 Audio 元件：完全比照 WINTER PLAYLIST 快速串流模式 -->
   <audio id="native-audio" playsinline></audio>
   <iframe id="yt-hidden-player" style="position:absolute; top:-9999px; left:-9999px; width:1px; height:1px;" frameborder="0" allow="autoplay; encrypted-media"></iframe>
 
@@ -694,7 +690,7 @@
               <span>音量增益調整 (Volume Gain)</span>
               <span id="form-vol-lbl">1.00x</span>
             </label>
-            <input type="range" id="form-song-vol" min="0.3" max="2.2" step="0.05" value="1.0" style="width:100%; margin-top:4px;">
+            <input type="range" id="form-song-vol" min="0.3" max="2.5" step="0.05" value="1.0" style="width:100%; margin-top:4px;">
           </div>
 
           <div class="field-row">
@@ -781,7 +777,6 @@
   <script type="module">
     import * as THREE from 'three';
 
-    // 專案標準根目錄 URL
     const REPO_BASE = "https://u11150003-arch.github.io/KARINA-PLAYLIST/";
 
     function toAbsUrl(fileName) {
@@ -790,7 +785,7 @@
       return REPO_BASE + encodeURI(fileName.replace(/^\.\//, ''));
     }
 
-    /* 第一個歌單封面與黑膠貼標 */
+    /* 圖片檔名對應表 */
     const COVER_UP = "UP_cover.jpg";
     const COVER_GOOD_STUFF = "GOOD STUFF_cover.jpg";
     const COVER_16_BIT = "16 Bit_cover.jpg";
@@ -800,17 +795,15 @@
     const VINYL_SERENADE = "Serenade_CD cover.jpg";
     const COVER_ORANGE = "Orange_cover.jpg";
 
-    /* 第二個歌單封面照片 */
     const COVER_SPARKLE = "01Sparkle_cover.jpg";
     const COVER_HARD_TO_SAY = "02Hard to say_cover.jpg";
     const COVER_SAD_LOVE = "03_cover.jpg";
     const COVER_AS_YOU_ARE = "04_cover.jpg";
     const COVER_CANT_TAKE_EYES = "05Cant Take My Eyes Off You_cover.jpg";
     const COVER_YOU_KNOW = "06Rock_cover.jpg";
-
-    /* 第二個歌單統一黑膠中央貼標 */
     const MEMORY_BOX_VINYL_LABEL = "KARINA MEMORY BOX_cover.JPG";
 
+    /* LRC 歌詞解析 */
     function parseLrc(txt) {
       if (!txt) return [];
       const lines = txt.split('\n');
@@ -838,6 +831,208 @@
       const s = (sec % 60).toFixed(2);
       return `[${String(m).padStart(2,'0')}:${String(s).padStart(5,'0')}]`;
     }
+
+    /* 內建歌詞字串 */
+    const LRC_TENDERNESS = `[00:05.51]단순함이라는 거 우린 알 수 있을까
+我們能否真正理解，何謂簡單？
+[00:20.11]사랑은 먼 별에서 온 복잡한 일들만 같고
+愛情彷彿是來自遙遠星辰的種種繁複
+[00:27.51]이 시대는 내겐 아직 어지러워
+對我來說，這個時代依然令人感到迷惘
+[00:40.26](어디든) 사랑을 찾아서
+（無論何處）尋覓愛情
+[00:44.44](빛바래진) 그 의미를 찾아서
+（逐漸褪色的）尋回那份意義
+[00:47.82](이 밤도) 쏟아지는 사람들 사람들
+（今夜也）人潮如雨，接連湧現
+[00:54.21]이곳은 답을 쫓는 연인들의 밤하늘과 테라스
+這裡是追尋答案的戀人們仰望的夜空與露臺
+[01:01.65]사랑의 이름으로-
+以愛之名——
+[01:05.04]To You
+獻給你
+[01:12.70]단순함이라는 건 진리의 가장 앳된 얼굴
+所謂的「簡單」，正是真理最稚嫩的面容
+[01:27.00]굴하지 않는 미소는 우리의 자랑이니까
+因為不向命運低頭的微笑，是我們的驕傲
+[01:34.70]다정함이 깃들기를
+願溫柔在此停留
+[01:40.23]어디든 사랑을 찾아서
+無論身在何處，都要尋覓愛情
+[01:45.00](빛바래진) 그 의미를 찾아서
+（逐漸褪色的）尋回那份意義
+[01:47.34](이 밤도) 쏟아지는 사람들 사람들
+（今夜也）人潮如雨，接連湧現
+[01:54.23]이곳은 답을 쫓는 연인들의 밤하늘과 테라스
+這裡是追尋答案的戀人們仰望的夜空與露臺
+[02:01.68]사랑의 이름으로-
+以愛之名——
+[02:33.07](잊지 마) 찾아온 사랑과
+（別忘了）那份如期而至的愛
+[02:37.31](눈 감으면) 그를 둘러싼 어둠과
+（閉上雙眼）以及環繞著它的黑暗
+[02:40.18](그 위로) 발재간을 부리던 작은 춤
+（在那之上）那一支輕巧起舞的舞步
+[02:47.11]그러다 나는 너를 사랑하고
+於是，我愛上了你
+[02:51.89]너도 날 사랑하는
+而你也愛著我
+[02:54.54]“이 시절을 기억해! 그리 길진 못할 거야!”
+「記住這段時光！它不會持續太久！」
+[03:01.46]사랑의 이름으로!
+以愛之名！
+[03:05.18]To You
+獻給你`;
+
+    const LRC_SERENADE = `[00:01.51]Sorry to break it to you
+抱歉打破你的幻想
+[00:05.23]But this is our covenant
+但這是我們的盟約
+[00:09.49]Our bodies built our future
+我們以血肉之軀，鑄就未來
+[00:13.20]We'll forever serenade (Yeah)
+將永遠高唱小夜曲
+[00:19.00]I've got to intervene
+換我來主宰
+[00:21.32]Show what I mean to me
+見識我的姿態 
+[00:23.45]In my reality
+在我的世界裡
+[00:25.58]Keep rising naturally
+一路攀升，勢不可擋
+[00:26.91]So let 'em say what they like (Yeah)
+任憑他們議論
+[00:29.05]Tongue as sharp as a knife (Yeah)
+任憑惡言如刀
+[00:31.18]Yes, I've chosen this life
+沒錯，這就是我選擇的人生
+[00:32.46]We don't ever sleep, we do it all night (Yeah)
+不眠不休 ，徹夜盡情燃燒
+[00:35.59]Sorry to break it to you (Break it to you)
+抱歉打破你的幻想（打破幻想）
+[00:39.31]But this is our covenant (Covenant)
+但這是我們的盟約（盟約）
+[00:43.56]Our bodies built our future
+我們以血肉之軀，鑄就未來
+[00:47.21]We'll forever serenade
+將永遠高唱小夜曲
+[00:51.20]Life is a cinch and I'm in my prime
+活得游刃有餘，而我正值巔峰
+[00:53.32]I get kicks when they don't like
+他們越看不慣，我越樂在其中 
+[00:55.13]Yeah, call me crazy, call me wild
+說我瘋狂也好，說我狂野也罷
+[00:57.25]But life's a cinch and I like the ride
+人生不過如此，而我樂在其中
+[00:59.33]Life is a cinch and I'm in my prime
+人生輕而易舉，而我正值巔峰
+[01:01.46]I get kicks when they don't like
+他們越是不認同，我越覺得痛快
+[01:03.31]Yeah, call me crazy, call me wild
+說我瘋狂也好，說我狂野也罷
+[01:05.12]But life's a cinch and I like the ride
+人生不過如此，而我樂在其中
+[01:07.45]Running the scene, we take what we need
+掌控全局，我們予取予求 
+[01:10.63]Too many eyes on me, I like the way they stare at me
+萬眾矚目，我就享受這種注視
+[01:14.55]I'ma take it, drop your superficial vision
+我照單全收，收起你那膚淺的眼光 
+[01:16.53]All that sugarcoated talk, not my thing
+那些糖衣包裝的廢話，不合我胃口
+[01:19.25]No restrictions, I just live it
+不受任何束縛，只管活出自己
+[01:21.17]So let me do it all night
+就讓我徹夜狂放
+[01:22.76]Sorry to break it to you, but this is our covenant
+抱歉，恐怕得打破你的幻想，但這是我們的盟約
+[01:26.74]Our bodies built our future, we'll forever serenade
+我們以血肉之軀，鑄就未來，並將永遠高唱小夜曲
+[01:30.72]Don't wait here for the thunder, moving when the lightning hits
+不必等到雷聲響起，閃電劈落便出擊
+[01:35.02]We let the storm rage longer 'cause I love to feel the rain
+任憑風暴肆虐，我就愛大雨淋漓
+[01:39.73]Life is a cinch and I'm in my prime
+人生輕而易舉，而我正值巔峰
+[01:41.73]I get kicks when they don't like
+他們越是不認同，我越覺得痛快
+[01:43.52]Yeah, call me crazy, call me wild
+說我瘋狂也好，說我狂野也罷
+[01:45.51]But life's a cinch and I like the ride
+人生不過如此，而我樂在其中
+[01:47.70]Life is a cinch and I'm in my prime
+人生輕而易舉，而我正值巔峰
+[01:49.69]I get kicks when they don't like
+他們越是不認同，我越覺得痛快
+[01:51.42]Yeah, call me crazy, call me wild
+說我瘋狂也好，說我狂野也罷
+[01:53.42]But life's a cinch and I like the ride
+人生不過如此，而我樂在其中
+[01:57.79]Life is a cinch and I'm in my prime
+人生輕而易舉，而我正值巔峰
+[02:01.78]Life's a cinch and I like the ride
+人生不過如此，而我樂在其中
+[02:05.96]Life is a cinch and I'm in my prime
+一切得心應手，我正迎來巔峰
+[02:09.94]Life's a cinch and I like the ride
+人生盡在掌握，我享受這趟旅程
+[02:12.07](I-I-I-I-I-I-I-I—)
+[02:14.38](I get kicks when they don't like)
+（他們越是不認同，我越覺得痛快）
+[02:15.90](Yeah, call me crazy, call me wild)
+（說我瘋狂也好，說我狂野也罷）
+[02:17.81](I get kicks when they don't like)
+（越是看不慣，我越覺得痛快）
+[02:20.00](Yeah, life's a cinch and I like the ride)
+（人生不過如此，而我樂在其中）
+[02:22.24](Ri-ri-ri-ri-ri-ri-ride)
+[02:23.76](Yeah, call me crazy, call me wild)
+（說我瘋癲也好，說我狂野也罷）
+[02:25.88](But life's a cinch and I like the ride)
+（但人生不過如此，而我樂在其中）
+[02:28.08]Life is a beat and we feel it now
+人生如節拍，此刻我們深陷其中
+[02:30.07]We do everything we like
+隨心所欲，一切由我們主宰 
+[02:31.67]Yeah, see me rising, see me shine
+看我一路攀升，看我耀眼奪目 
+[02:33.66]'Cause life is our beat until we die
+這節奏由我掌控，直至生命盡頭 
+[02:36.05]Life is a beat and we feel it now
+人生如節拍，此刻我們正感受它的律動
+[02:38.05]We do everything we like
+隨心所欲，一切由我們主宰 
+[02:39.84]Yeah, see me rising, see me shine
+看我一路攀升，看我耀眼奪目
+[02:41.84]'Cause life is our beat until we die
+這節奏由我掌控，直至生命盡頭
+[02:46.28]Life is a beat and we feel it now (Life is a)
+人生如節拍，此刻我們深陷其中（這人生） 
+[02:50.27]Life is our beat, until we die
+人生隨我們律動，直至生命盡頭
+[02:54.26]Life is a beat and we feel it now
+人生就是節拍，此刻我們正感受它的律動
+[02:58.25]Life is our beat until we die
+人生隨我們律動，直至生命盡頭`;
+
+    const LRC_ORANGE = `[00:01.52]그거 아세요?
+你知道嗎？
+[00:05.23]귤에 붙어 있는 하얀 거
+橘子上那層白色的絲絡
+[00:07.57]이름은 귤락입니다
+它的名字叫作「橘絡」
+[00:12.09]찰떡아이스는 세 알이었고
+年糕冰淇淋有三粒
+[00:14.74]하와이안 피자는
+至於夏威夷披薩
+[00:16.00]캐나다에서 만들었죠
+其實是加拿大發明的
+[00:18.92]제가 또 계란을 기가 맥히게 삶습니다
+我還超級無敵會煮雞蛋
+[00:26.35]우리 아빠 안경 썼어요
+我爸爸戴眼鏡
+[00:30.08]오늘 아침 쑥 캐고 옴
+今天早上還去採了艾草`;
 
     const TWO_PLAYLISTS_DATA = [
       {
@@ -899,7 +1094,7 @@
             imgOffsetY: 0.0,
             duration: 245,
             volume: 1.0,
-            lyrics: []
+            lyrics: parseLrc(LRC_TENDERNESS)
           },
           {
             title: "Serenade",
@@ -913,10 +1108,10 @@
             imgOffsetY: 0.0,
             duration: 215,
             volume: 1.0,
-            lyrics: []
+            lyrics: parseLrc(LRC_SERENADE)
           },
           {
-            title: "Orange Song그거 아세요",
+            title: "你知道嗎그거 아세요",
             artist: "KARINA ft.Lee Mujin",
             source: "Orange.mp3",
             cover: COVER_ORANGE,
@@ -926,8 +1121,8 @@
             imgOffsetX: 0.0,
             imgOffsetY: 0.0,
             duration: 205,
-            volume: 1.0,
-            lyrics: []
+            volume: 2.0, // 音量調大為 2.0x 增益，與其他首相當
+            lyrics: parseLrc(LRC_ORANGE)
           }
         ]
       },
@@ -947,7 +1142,7 @@
             imgOffsetX: 0.0,
             imgOffsetY: 0.0,
             duration: 220,
-            volume: 1.6,
+            volume: 2.0, // 音量調大為 2.0x
             lyrics: []
           },
           {
@@ -961,7 +1156,7 @@
             imgOffsetX: 0.0,
             imgOffsetY: 0.0,
             duration: 210,
-            volume: 1.6,
+            volume: 2.0, // 音量調大為 2.0x
             lyrics: []
           },
           {
@@ -975,7 +1170,7 @@
             imgOffsetX: 0.0,
             imgOffsetY: 0.0,
             duration: 198,
-            volume: 1.6,
+            volume: 2.0, // 音量調大為 2.0x
             lyrics: []
           },
           {
@@ -989,7 +1184,7 @@
             imgOffsetX: 0.0,
             imgOffsetY: 0.0,
             duration: 245,
-            volume: 1.6,
+            volume: 2.0, // 音量調大為 2.0x
             lyrics: []
           },
           {
@@ -1003,7 +1198,7 @@
             imgOffsetX: 0.0,
             imgOffsetY: 0.0,
             duration: 215,
-            volume: 1.6,
+            volume: 2.0, // 音量調大為 2.0x
             lyrics: []
           },
           {
@@ -1017,14 +1212,13 @@
             imgOffsetX: 0.0,
             imgOffsetY: 0.0,
             duration: 190,
-            volume: 1.6,
+            volume: 2.0, // 音量調大為 2.0x
             lyrics: []
           }
         ]
       }
     ];
 
-    // 清空舊快取，保證永久同步最新配置
     localStorage.clear();
 
     let store = TWO_PLAYLISTS_DATA;
@@ -1045,11 +1239,42 @@
     const nativeAudio = document.getElementById('native-audio');
     const ytIframe = document.getElementById('yt-hidden-player');
 
-    // 參照 WINTER PLAYLIST：簡潔強效的 MediaSession 同步機制
+    /* Web Audio API 增益節點（突破 1.0 上限實現 2.0x 音量放大） */
+    let audioCtx = null;
+    let gainNode = null;
+    let audioSourceNode = null;
+
+    function initWebAudioGain() {
+      if (!audioCtx) {
+        const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+        audioCtx = new AudioContextClass();
+        gainNode = audioCtx.createGain();
+        audioSourceNode = audioCtx.createMediaElementSource(nativeAudio);
+        audioSourceNode.connect(gainNode);
+        gainNode.connect(audioCtx.destination);
+      }
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+    }
+
+    function applyVolumeGain(vol) {
+      try {
+        initWebAudioGain();
+        if (gainNode) {
+          gainNode.gain.setValueAtTime(vol, audioCtx.currentTime);
+          nativeAudio.volume = 1.0;
+        } else {
+          nativeAudio.volume = Math.min(1.0, Math.max(0, vol));
+        }
+      } catch (err) {
+        nativeAudio.volume = Math.min(1.0, Math.max(0, vol));
+      }
+    }
+
     function updateMediaSession(song, pl) {
       if ('mediaSession' in navigator) {
         const directCover = toAbsUrl(song.cover || pl.cover);
-        
         navigator.mediaSession.metadata = new MediaMetadata({
           title: song.title,
           artist: song.artist || "KARINA",
@@ -1075,7 +1300,7 @@
     }
 
     /* -------------------------------------------------------------
-     * 3. Three.js 3D 渲染 (平滑低延遲架構)
+     * 3. Three.js 3D 渲染
      * ------------------------------------------------------------*/
     const container = document.getElementById('threejs-box');
     const scene = new THREE.Scene();
@@ -1222,7 +1447,6 @@
     coverMesh.position.set(-0.55, 0, 0);
     turntableGroup.add(coverMesh);
 
-    // 黑膠群組架構
     const discSpinGroup = new THREE.Group();
     const discGroup = new THREE.Group();
     discGroup.add(discSpinGroup);
@@ -1363,7 +1587,6 @@
     function renderLoop() {
       requestAnimationFrame(renderLoop);
 
-      // 黑膠轉動核心：只要播放中或旋轉展示中皆平滑自轉
       if (isPlaying || isAutoRotating) {
         discSpinGroup.rotation.z -= 0.014;
       }
@@ -1385,7 +1608,6 @@
         turntableGroup.rotation.x = THREE.MathUtils.lerp(turntableGroup.rotation.x, targetRotX, 0.1);
       }
 
-      // 黑膠唱片滑出 / 收合
       if (isPlaying) {
         discGroup.position.x = THREE.MathUtils.lerp(discGroup.position.x, VINYL_OUT_X, 0.06);
       } else {
@@ -1397,7 +1619,7 @@
     renderLoop();
 
     /* -------------------------------------------------------------
-     * 4. 音訊系統 (參照 WINTER PLAYLIST：原生極速切換)
+     * 4. 音訊系統
      * ------------------------------------------------------------*/
     function setPlayState(active) {
       isPlaying = active;
@@ -1468,16 +1690,12 @@
       }, 250);
     }
 
-    // 極速播放通道（比照 WINTER PLAYLIST，秒讀秒出聲）
     function playActiveSong(isNewTrack = false, isAutoNext = false) {
       const curPl = store[plIdx];
       if (!curPl || !curPl.songs[trackIdx]) return;
       const song = curPl.songs[trackIdx];
 
-      // 1. 介面立即響應
       renderUI();
-      
-      // 2. 比照 WINTER PLAYLIST：在使用者點擊瞬間同步 MediaSession，確保鎖定畫面即時顯示
       updateMediaSession(song, curPl);
 
       if (isNewTrack || !hasPlayedFirstTrack) {
@@ -1487,7 +1705,7 @@
 
       totalDuration = song.duration || 211;
       const ytId = extractYoutubeId(song.source);
-      const targetVolume = (typeof song.volume === 'number') ? song.volume : (plIdx === 1 ? 1.6 : 1.0);
+      const targetVolume = (typeof song.volume === 'number') ? song.volume : 1.0;
 
       if (ytId) {
         playMode = 'yt';
@@ -1504,9 +1722,8 @@
         ytIframe.src = '';
 
         const directSrc = toAbsUrl(song.source);
-        nativeAudio.volume = Math.min(1.0, Math.max(0, targetVolume));
+        applyVolumeGain(targetVolume);
 
-        // 3. 核心秒開：直接指派 src 並喚起 play()，不重新銷毀連線
         if (isNewTrack || nativeAudio.src !== directSrc) {
           isAutoSwitching = isAutoNext;
           currentSec = 0;
@@ -1596,7 +1813,7 @@
     window.addEventListener('mouseup', handleSeekEnd);
 
     seekContainer.addEventListener('touchstart', (e) => { isDraggingSeek = true; handleSeekMove(e); }, { passive: false });
-    window.addEventListener('touchmove', handleSeekMove, { passive: false });
+    window.addEventListener('touchmove', handleSeekMove);
     window.addEventListener('touchend', handleSeekEnd);
 
     /* -------------------------------------------------------------
@@ -1937,7 +2154,7 @@
         p.songs.forEach((s, sI) => {
           const isFirstSong = sI === 0;
           const isLastSong = sI === p.songs.length - 1;
-          const volDisplay = typeof s.volume === 'number' ? s.volume : (pI === 1 ? 1.6 : 1.0);
+          const volDisplay = typeof s.volume === 'number' ? s.volume : 1.0;
 
           const sRow = document.createElement('div');
           sRow.className = 'song-item-row';
@@ -2012,7 +2229,7 @@
       document.getElementById('form-song-artist').value = s.artist || 'KARINA';
       document.getElementById('form-song-source').value = s.source;
 
-      const currentVol = (typeof s.volume === 'number') ? s.volume : (pI === 1 ? 1.6 : 1.0);
+      const currentVol = (typeof s.volume === 'number') ? s.volume : 1.0;
       document.getElementById('form-song-vol').value = currentVol;
       document.getElementById('form-vol-lbl').textContent = `${currentVol.toFixed(2)}x`;
 
@@ -2136,7 +2353,6 @@
       renderUI();
     }
 
-    // 初始化渲染
     renderUI();
   </script>
 </body>
