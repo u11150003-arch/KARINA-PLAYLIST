@@ -47,6 +47,7 @@
       --steel-dim: #9ca3af;
       --steel-border: #2a2c35;
       --accent-glow: rgba(244, 244, 245, 0.25);
+      /* 白色愛心 (低透明度) 游標 */
       --heart-cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="rgba(255,255,255,0.45)" stroke="rgba(0,0,0,0.4)" stroke-width="0.8" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>') 12 12, pointer;
     }
 
@@ -331,6 +332,7 @@
       color: #fff;
     }
 
+    /* 電腦版排版加寬：KARINA MEMORY BOX 完全不被截斷 */
     @media (min-width: 768px) {
       .timeline-strip, .deck-controls {
         max-width: 780px;
@@ -786,7 +788,6 @@
       return REPO_BASE + encodeURI(fileName.replace(/^\.\//, ''));
     }
 
-    /* 圖片檔名對應表 */
     const COVER_UP = "UP_cover.jpg";
     const COVER_GOOD_STUFF = "GOOD STUFF_cover.jpg";
     const COVER_16_BIT = "16 Bit_cover.jpg";
@@ -804,7 +805,7 @@
     const COVER_YOU_KNOW = "06Rock_cover.jpg";
     const MEMORY_BOX_VINYL_LABEL = "KARINA MEMORY BOX_cover.JPG";
 
-    /* LRC 歌詞解析 */
+    /* 強效雙行與多行容錯歌詞解析器（解決中文漏掉或不顯示問題） */
     function parseLrc(txt) {
       if (!txt) return [];
       const lines = txt.split('\n');
@@ -819,8 +820,12 @@
           if (currentItem) result.push(currentItem);
           const t = parseInt(m[1]) * 60 + parseFloat(m[2]);
           currentItem = { time: t, text: m[3] || '', trans: '' };
-        } else if (currentItem && !currentItem.trans) {
-          currentItem.trans = line;
+        } else if (currentItem) {
+          if (!currentItem.trans) {
+            currentItem.trans = line;
+          } else {
+            currentItem.trans += ' ' + line;
+          }
         }
       }
       if (currentItem) result.push(currentItem);
@@ -952,65 +957,124 @@
 讓氣氛持續升溫`;
 
     const LRC_GOOD_STUFF = `[00:00.00]Good stuff
+好東西
 [00:01.54]Good stuff
+好東西
 [00:02.86]I’m so good, I’m so mad
+我如此出色，也如此狂野
 [00:05.65]아무도 모르게, let you know
+不動聲色，卻讓你知曉
 [00:08.44]I switch up, make it look brand new
+變換風格，展現全新模樣
 [00:11.03]Meet me in the back, that’s a rendezvous
+後方見，來場私下約會
 [00:13.82]I don’t need hype, yeah, what you feel like
+我不需要炒作，你又是什麼感覺
 [00:16.61]아닌 척 걸어 난 관심꺼, keep it light
+若無其事地走過，我毫不在意，輕鬆就好
 [00:19.40]Yeah, yeah, blah, blah, say what you like
+Yeah, yeah，盡管說吧，隨你怎麼講
 [00:22.19]여기 넘쳐나, I’m everybody’s type
+魅力在此滿溢，我是眾人心中的理想型
 [00:26.17]Class is in session
+現在開始上課
 [00:28.96]Come pay attention
+都給我專心聽好
 [00:31.74]서서히 놀랄걸
+你很快就會大吃一驚
 [00:33.86]봐 so good, wanna take a bite?
+看，多麼誘人，想不想嚐一口？
 [00:36.47]Got me cookin’, goody, goody, yeah, you can’t get enough
+讓我大展身手，美味連連，你怎麼也嚐不夠
 [00:39.16]I’m getting money, money, money, keep on running it up
+財富不斷累積，金錢源源而來
 [00:41.95]Top down, 뭔가 달라, giddy, giddy it up
+敞篷馳騁，氣氛截然不同，讓興奮持續升溫
 [00:44.74]I got the good stuff, good stuff
+我有真正的好東西
 [00:47.73]Got me cookin’, goody, goody, yeah, switch to the top
+讓我大展身手，美味連連，直登巔峰
 [00:50.32]You like that honey, honey, honey, yeah, 어질어질해
+你很喜歡吧，甜心，已讓你暈頭轉向
 [00:53.30]Top down, 뭔가 달라, giddy, giddy it up
+敞篷馳騁，氣氛截然不同，讓興奮持續升溫
 [00:56.09]I got the good stuff, good stuff
+我有真正的好東西
 [00:59.28]왠지 좀 다른느낌, face screwed up
+感覺就是與眾不同，讓你驚訝得變了臉色
 [01:02.09]Good stuff, 색다른 기분, get clued up
+好東西，前所未有的感受，快來見識
 [01:04.69]When I pull up, 여기저기 물어봐
+我一登場，四處便有人打聽
 [01:07.48]When I pull up, everybody’s getting down
+我一現身，全場立刻沸騰
 [01:10.27]I don’t need the hype, I’m one of a kind, I got my glow in my mind
+我不需要炒作，我獨一無二，光芒自心底綻放
 [01:13.79]Sippin’ on that gold and ice, ice, ice, ice
+啜飲金黃美酒與冰塊
 [01:15.89]And they look good on me, so good it makes you hungry
+穿在我身上如此出色，甚至讓你垂涎
 [01:18.48]And if KARINA said to do it, then you do it, honey
+只要 KARINA 開了口，你就照做吧，甜心
 [01:22.58]Class is in session
+現在開始上課
 [01:25.37]Come pay attention
+都給我專心聽好
 [01:28.16]서서히 놀랄걸
+你很快就會大吃一驚
 [01:30.35]봐 so good, wanna take a bite?
+看，多麼誘人，想不想嚐一口？
 [01:32.73]Got me cookin’, goody, goody, goody, yeah, you can’t get enough
+讓我大展身手，美味連連，你怎麼也嚐不夠
 [01:35.53]I’m getting money, money, money, keep on running it up
+財富不斷累積，金錢源源而來
 [01:38.52]Top down, 뭔가 달라, giddy, giddy it up
+敞篷馳騁，氣氛截然不同，讓興奮持續升溫
 [01:41.11]I got the good stuff, good stuff
+我有真正的好東西
 [01:44.11]Got me cookin’, goody, goody, yeah, switch to the top
+讓我大展身手，美味連連，直登巔峰
 [01:46.70]You like that honey, honey, honey, yeah, 어질어질해
+你很喜歡吧，甜心，已讓你暈頭轉向
 [01:49.68]Top down, 뭔가 달라, giddy, giddy it up
+敞篷馳騁，氣氛截然不同，讓興奮持續升溫
 [01:52.47]I got the good stuff, good stuff
+我有真正的好東西
 [01:56.06]I’m so good, I’m so mad
+我如此出色，也如此狂野
 [01:58.78]I don’t want it to let you know
+我不想讓你看穿
 [02:01.37]I’m so good, I’m so bad
+我如此出色，也如此不羈
 [02:04.36]I don’t want it to let you know
+我不想讓你看穿
 [02:06.94]I’m so good, I’m so mad
+我如此出色，也如此狂野
 [02:10.13]I don’t want it to let you know
+我不想讓你看穿
 [02:12.73]I’m so good, I’m so mad
+我如此出色，也如此狂野
 [02:15.32]I don’t want it to let you know
+我不想讓你看穿
 [02:17.90]Got me cookin’, goody, goody, goody, yeah, you can’t get enough
+讓我大展身手，美味連連，你怎麼也嚐不夠
 [02:20.69]I’m getting money, money, money, keep on running it up
+財富不斷累積，金錢源源而來
 [02:23.59]Top down, 뭔가 달라, giddy, giddy it up
+敞篷馳騁，氣氛截然不同，讓興奮持續升溫
 [02:26.38]I got the good stuff, good stuff
+我有真正的好東西
 [02:29.36]Got me cookin’, goody, goody, goody, yeah, switch to the top
+讓我大展身手，美味連連，直登巔峰
 [02:32.15]You like that honey, honey, honey, yeah, 어질어질해
+你很喜歡吧，甜心，已讓你暈頭轉向
 [02:34.94]Top down, 뭔가 달라, giddy, giddy it up
+敞篷馳騁，氣氛截然不同，讓興奮持續升溫
 [02:37.53]I got the good stuff, good stuff
+我有真正的好東西
 [02:42.78]Uh, yeah
-[02:51.35]Good stuff`;
+[02:51.35]Good stuff
+好東西`;
 
     const LRC_16_BIT = `[00:12.26]I'm breaking down, 이 깊은 어둠, 속에 갇혀 나
 我逐漸崩潰，困在這片深邃的黑暗之中
@@ -2035,11 +2099,11 @@
     window.addEventListener('mouseup', handleSeekEnd);
 
     seekContainer.addEventListener('touchstart', (e) => { isDraggingSeek = true; handleSeekMove(e); }, { passive: false });
-    window.addEventListener('touchmove', handleSeekMove, { passive: false });
+    window.addEventListener('touchmove', handleSeekMove);
     window.addEventListener('touchend', handleSeekEnd);
 
     /* -------------------------------------------------------------
-     * 6. 歌詞渲染 (切歌時即時捲動至頂部)
+     * 6. 歌詞渲染 (切換歌曲強制歸零捲動，避免停在最後一行)
      * ------------------------------------------------------------*/
     function syncLyrics(sec) {
       const song = store[plIdx]?.songs[trackIdx];
