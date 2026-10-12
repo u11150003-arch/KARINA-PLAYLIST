@@ -47,6 +47,7 @@
       --steel-dim: #9ca3af;
       --steel-border: #2a2c35;
       --accent-glow: rgba(244, 244, 245, 0.25);
+      /* 白色愛心 (低透明度) 游標 */
       --heart-cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="rgba(255,255,255,0.45)" stroke="rgba(0,0,0,0.4)" stroke-width="0.8" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>') 12 12, pointer;
     }
 
@@ -94,6 +95,7 @@
       color: #ffffff;
     }
 
+    /* 右上角愛心微調加大 */
     .admin-star-btn {
       background: none;
       border: none;
@@ -331,6 +333,7 @@
       color: #fff;
     }
 
+    /* 電腦版排版加寬：KARINA MEMORY BOX 完全不被截斷 */
     @media (min-width: 768px) {
       .timeline-strip, .deck-controls {
         max-width: 780px;
@@ -543,6 +546,7 @@
 </head>
 <body>
 
+  <!-- 原生 Audio 元件：完全比照 WINTER PLAYLIST 快速串流模式 -->
   <audio id="native-audio" playsinline></audio>
   <iframe id="yt-hidden-player" style="position:absolute; top:-9999px; left:-9999px; width:1px; height:1px;" frameborder="0" allow="autoplay; encrypted-media"></iframe>
 
@@ -683,7 +687,7 @@
           </div>
           <div class="field-row">
             <label>音訊來源 (本機檔名、GitHub 網址 或 YouTube 連結)</label>
-            <input type="text" id="form-song-source" placeholder="如：01Sparkle.mp3 或 YouTube 網址">
+            <input type="text" id="form-song-source" placeholder="如：UP.mp3 或 YouTube 網址">
           </div>
           <div class="field-row">
             <label style="display:flex; justify-content:space-between;">
@@ -777,7 +781,7 @@
   <script type="module">
     import * as THREE from 'three';
 
-    // 基礎絕對路徑
+    // 專案標準根目錄 URL
     const REPO_BASE = "https://u11150003-arch.github.io/KARINA-PLAYLIST/";
 
     function toAbsUrl(fileName) {
@@ -794,6 +798,7 @@
     const VINYL_TENDERNESS = "May the TENDERNESS be with you_CD cover.jpg";
     const COVER_SERENADE = "Serenade_album cover.jpg";
     const VINYL_SERENADE = "Serenade_CD cover.jpg";
+    const COVER_ORANGE = "Orange_cover.jpg";
 
     /* 第二個歌單封面照片 */
     const COVER_SPARKLE = "01Sparkle_cover.jpg";
@@ -843,7 +848,7 @@
           {
             title: "UP",
             artist: "KARINA",
-            source: "01Sparkle.mp3",
+            source: "UP.mp3",
             cover: COVER_UP,
             labelImg: COVER_UP,
             backCover: COVER_UP,
@@ -857,7 +862,7 @@
           {
             title: "GOOD STUFF",
             artist: "KARINA",
-            source: "02Hard to say.mp3",
+            source: "GOOD STUFF.mp3",
             cover: COVER_GOOD_STUFF,
             labelImg: COVER_GOOD_STUFF,
             backCover: COVER_GOOD_STUFF,
@@ -871,7 +876,7 @@
           {
             title: "16 Bit",
             artist: "KARINA",
-            source: "03.mp3",
+            source: "16Bit.mp3",
             cover: COVER_16_BIT,
             labelImg: COVER_16_BIT,
             backCover: COVER_16_BIT,
@@ -884,8 +889,8 @@
           },
           {
             title: "May the TENDERNESS be with you!",
-            artist: "JANNABI feat.KARINA",
-            source: "04.mp3",
+            artist: "JANNABI ft.KARINA",
+            source: "May the TENDERNESS be with you.mp3",
             cover: COVER_TENDERNESS,
             labelImg: VINYL_TENDERNESS,
             backCover: COVER_TENDERNESS,
@@ -899,7 +904,7 @@
           {
             title: "Serenade",
             artist: "KARINA&WINTER",
-            source: "05Cant Take My Eyes Off You.mp3",
+            source: "Serenade.mp3",
             cover: COVER_SERENADE,
             labelImg: VINYL_SERENADE,
             backCover: COVER_SERENADE,
@@ -907,6 +912,20 @@
             imgOffsetX: 0.0,
             imgOffsetY: 0.0,
             duration: 215,
+            volume: 1.0,
+            lyrics: []
+          },
+          {
+            title: "Orange Song그거 아세요",
+            artist: "KARINA ft.Lee Mujin",
+            source: "Orange.mp3",
+            cover: COVER_ORANGE,
+            labelImg: COVER_ORANGE,
+            backCover: COVER_ORANGE,
+            imgScale: 1.0,
+            imgOffsetX: 0.0,
+            imgOffsetY: 0.0,
+            duration: 205,
             volume: 1.0,
             lyrics: []
           }
@@ -1005,6 +1024,7 @@
       }
     ];
 
+    // 清空舊快取，保證永久同步最新配置
     localStorage.clear();
 
     let store = TWO_PLAYLISTS_DATA;
@@ -1025,7 +1045,7 @@
     const nativeAudio = document.getElementById('native-audio');
     const ytIframe = document.getElementById('yt-hidden-player');
 
-    // 參照 WINTER PLAYLIST：簡潔強效的 MediaSession，即時把封面與歌名交給 iOS / macOS / Windows
+    // 參照 WINTER PLAYLIST：簡潔強效的 MediaSession 同步機制
     function updateMediaSession(song, pl) {
       if ('mediaSession' in navigator) {
         const directCover = toAbsUrl(song.cover || pl.cover);
@@ -1055,7 +1075,7 @@
     }
 
     /* -------------------------------------------------------------
-     * 3. Three.js 3D 渲染 (參照 WINTER PLAYLIST 獨立流暢轉動)
+     * 3. Three.js 3D 渲染 (平滑低延遲架構)
      * ------------------------------------------------------------*/
     const container = document.getElementById('threejs-box');
     const scene = new THREE.Scene();
@@ -1448,7 +1468,7 @@
       }, 250);
     }
 
-    // 極速播放通道（參照 WINTER PLAYLIST，完全移除卡頓源）
+    // 極速播放通道（比照 WINTER PLAYLIST，秒讀秒出聲）
     function playActiveSong(isNewTrack = false, isAutoNext = false) {
       const curPl = store[plIdx];
       if (!curPl || !curPl.songs[trackIdx]) return;
@@ -1457,7 +1477,7 @@
       // 1. 介面立即響應
       renderUI();
       
-      // 2. 參照 WINTER PLAYLIST：在使用者點擊瞬間就同步 MediaSession，確保鎖定畫面不留白
+      // 2. 比照 WINTER PLAYLIST：在使用者點擊瞬間同步 MediaSession，確保鎖定畫面即時顯示
       updateMediaSession(song, curPl);
 
       if (isNewTrack || !hasPlayedFirstTrack) {
@@ -1486,7 +1506,7 @@
         const directSrc = toAbsUrl(song.source);
         nativeAudio.volume = Math.min(1.0, Math.max(0, targetVolume));
 
-        // 3. 核心秒開：如同 WINTER 原版，直接賦值 src 並呼叫 play()
+        // 3. 核心秒開：直接指派 src 並喚起 play()，不重新銷毀連線
         if (isNewTrack || nativeAudio.src !== directSrc) {
           isAutoSwitching = isAutoNext;
           currentSec = 0;
