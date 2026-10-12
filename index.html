@@ -543,7 +543,7 @@
 </head>
 <body>
 
-  <!-- 純原生 Audio，完全比照 WINTER PLAYLIST 原汁原味通道 -->
+  <!-- 完全比照 WINTER PLAYLIST：原生 audio 直連，不額外添加干擾屬性 -->
   <audio id="native-audio" playsinline></audio>
   <iframe id="yt-hidden-player" style="position:absolute; top:-9999px; left:-9999px; width:1px; height:1px;" frameborder="0" allow="autoplay; encrypted-media"></iframe>
 
@@ -778,7 +778,880 @@
   <script type="module">
     import * as THREE from 'three';
 
-    // 參照 WINTER PLAYLIST：完全使用本機標準相對路徑，免除二次編碼造成的 404 錯誤
+    // 參照 WINTER PLAYLIST：完全採用直接相對路徑，免除二次編碼造成的 404
+    const COVER_UP = "./UP_cover.jpg";
+    const COVER_GOOD_STUFF = "./GOOD STUFF_cover.jpg";
+    const COVER_16_BIT = "./16 Bit_cover.jpg";
+    const COVER_TENDERNESS = "./May the TENDERNESS be with you_album cover.jpg";
+    const VINYL_TENDERNESS = "./May the TENDERNESS be with you_CD cover.jpg";
+    const COVER_SERENADE = "./Serenade_album cover.jpg";
+    const VINYL_SERENADE = "./Serenade_CD cover.jpg";
+    const COVER_ORANGE = "./Orange_cover.jpg";
+
+    const COVER_SPARKLE = "./01Sparkle_cover.jpg";
+    const COVER_HARD_TO_SAY = "./02Hard to say_cover.jpg";
+    const COVER_SAD_LOVE = "./03_cover.jpg";
+    const COVER_AS_YOU_ARE = "./04_cover.jpg";
+    const COVER_CANT_TAKE_EYES = "./05Cant Take My Eyes Off You_cover.jpg";
+    const COVER_YOU_KNOW = "./06Rock_cover.jpg";
+    const MEMORY_BOX_VINYL_LABEL = "./KARINA MEMORY BOX_cover.JPG";
+
+    /* 強效雙行與多行容錯歌詞解析器 */
+    function parseLrc(txt) {
+      if (!txt) return [];
+      const lines = txt.split('\n');
+      const result = [];
+      let currentItem = null;
+
+      for (let i = 0; i < lines.length; i++) {
+        const line = lines[i].trim();
+        if (!line) continue;
+        const m = line.match(/\[(\d+):(\d+(?:\.\d+)?)\]\s*(.*)/);
+        if (m) {
+          if (currentItem) result.push(currentItem);
+          const t = parseInt(m[1]) * 60 + parseFloat(m[2]);
+          currentItem = { time: t, text: m[3] || '', trans: '' };
+        } else if (currentItem) {
+          if (!currentItem.trans) {
+            currentItem.trans = line;
+          } else {
+            currentItem.trans += ' ' + line;
+          }
+        }
+      }
+      if (currentItem) result.push(currentItem);
+      return result.sort((a,b) => a.time - b.time);
+    }
+
+    function formatLrcTime(sec) {
+      const m = Math.floor(sec / 60);
+      const s = (sec % 60).toFixed(2);
+      return `[${String(m).padStart(2,'0')}:${String(s).padStart(5,'0')}]`;
+    }
+
+    /* 內建動態歌詞 */
+    const LRC_UP = `[00:09.74]다들 뻔해 또 거짓말 just fine
+大家心知肚明，又一次謊無妨
+[00:12.26]Don't switch it up whenever you like
+別想隨心所欲地改變一切
+[00:14.85]번듯한 말 get it, get it, all out
+動聽的話語，就放手去爭取
+[00:17.04]I pump it, I pump it, I pump it up, up
+我不斷讓熱度節節攀升
+[00:19.64]So we roll up every weekend (yeah)
+每個週末，我們都要盡情狂歡
+[00:22.03]어디든 뛰어다녀 여기저기 freakin'
+四處奔走，無論身在何方
+[00:24.35]'Cause we be winning, be winning in a row (yeah)
+因為我們一路連勝，勢不可擋
+[00:26.74]다 가져갈게, yeah, yeah
+我會將一切盡收囊中
+[00:28.93]I'ma run it up, get it, get it all mine
+我要向上，把一切都握在手中
+[00:31.72]한 순간에 and I'm losing my mind
+就在一瞬間，我幾乎失去理智
+[00:34.11]타올라 다 I'm never gon' stop it
+盡情燃燒吧，我絕不停止
+[00:36.51]I pump it, I pump it, I pump it up (yeah)
+我不斷讓熱度節節攀升
+[00:39.10]Spice it up, up, up, hold up
+讓興致逐漸升溫然後停下 
+[00:為了解決讀取過慢的問題，我們需要比照 `WINTER PLAYLIST` 最原始、最乾淨的核心邏輯來做：
+
+### 關鍵效能修復重點：
+1. **完全移除自訂的圖片卸載邏輯**：
+   先前版本加入了 `coverMesh.material[4].map = null` 等清空動作，這會導致每次切歌都強制觸發 WebGL 重新編譯著色器（Shader Recompilation），造成主執行緒嚴重掉幀、卡死數秒，進而拖垮音訊載入。現在改回跟 WINTER 一樣的直接複寫機制。
+2. **切換音訊時即刻觸發播放**：
+   切歌時直接指派 `nativeAudio.src = directSrc;` 並立即喚起 `.play()`，完全不呼叫任何中斷管線的函式，讓瀏覽器原生多執行緒直接拉取 MP3 串流。
+3. **保留全套完整資料與設定**：
+   包含更新後的曲名《你知道嗎그거 아세요》、兩大歌單所有歌曲的完整動態中韓雙語歌詞、3D 黑膠自轉以及 MediaSession 系統通知欄位顯示。
+
+---
+
+### 完整 `index.html` 程式碼：
+
+```html
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="theme-color" content="#131418">
+
+  <title>KARINA PLAYLIST</title>
+
+  <!-- Open Graph 標籤 -->
+  <meta property="og:site_name" content="KARINA PLAYLIST">
+  <meta property="og:title" content="KARINA PLAYLIST">
+  <meta property="og:description" content="Playlist for KARINA">
+  <meta name="description" content="Playlist for KARINA">
+  <meta property="og:type" content="music.playlist">
+  <meta property="og:url" content="[https://u11150003-arch.github.io/KARINA-PLAYLIST/](https://u11150003-arch.github.io/KARINA-PLAYLIST/)">
+  
+  <meta property="og:image" content="./UP_cover.jpg">
+  <meta property="og:image:secure_url" content="./UP_cover.jpg">
+  <meta property="og:image:type" content="image/jpeg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="KARINA PLAYLIST">
+  <meta name="twitter:description" content="Playlist for KARINA">
+  <meta name="twitter:image" content="./UP_cover.jpg">
+
+  <link rel="preconnect" href="[https://fonts.googleapis.com](https://fonts.googleapis.com)">
+  <link rel="preconnect" href="[https://fonts.gstatic.com](https://fonts.gstatic.com)">
+  <link href="[https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800;900&family=Syne:wght@500;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap](https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800;900&family=Syne:wght@500;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap)" rel="stylesheet">
+
+  <style>
+    @font-face {
+      font-family: 'Chocolate Classical Sans';
+      src: local('Chocolate Classical Sans'), local('ChocolateClassicalSans'), local('Chocolate Classical Sans Medium');
+      font-weight: normal;
+      font-style: normal;
+    }
+
+    :root {
+      --bg: #18191e;
+      --deck-bg: #131418;
+      --steel: #f4f4f5;
+      --steel-dim: #9ca3af;
+      --steel-border: #2a2c35;
+      --accent-glow: rgba(244, 244, 245, 0.25);
+      --heart-cursor: url('data:image/svg+xml;utf8,<svg xmlns="[http://www.w3.org/2000/svg](http://www.w3.org/2000/svg)" width="24" height="24" viewBox="0 0 24 24"><path fill="rgba(255,255,255,0.45)" stroke="rgba(0,0,0,0.4)" stroke-width="0.8" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>') 12 12, pointer;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    button, select, input[type="range"], .menu-link-item, .seek-groove, .lyric-row, .brand-title {
+      cursor: var(--heart-cursor) !important;
+    }
+
+    html, body {
+      width: 100vw;
+      height: 100vh;
+      height: 100dvh;
+      background: var(--bg) !important;
+      color: var(--steel);
+      font-family: 'Syne', 'Chocolate Classical Sans', 'Noto Sans TC', sans-serif;
+      overflow: hidden;
+      position: fixed;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    header {
+      padding: calc(12px + env(safe-area-inset-top, 0px)) 20px 4px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      z-index: 30;
+      background: var(--bg) !important;
+    }
+
+    .brand-title {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.15rem;
+      font-weight: 800;
+      letter-spacing: 2px;
+      color: #ffffff;
+    }
+
+    .admin-star-btn {
+      background: none;
+      border: none;
+      outline: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 38px;
+      height: 38px;
+      padding: 4px;
+      color: rgba(255, 255, 255, 0.65);
+      font-size: 1.55rem;
+      line-height: 1;
+      transition: all 0.25s ease;
+      text-shadow: 0 0 6px rgba(255, 255, 255, 0.35);
+    }
+    .admin-star-btn:hover, .admin-star-btn:active {
+      color: rgba(255, 255, 255, 1);
+      transform: scale(1.15);
+      text-shadow: 0 0 12px rgba(255, 255, 255, 0.8);
+    }
+
+    main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      min-height: 0;
+      overflow: hidden;
+      background: var(--bg) !important;
+    }
+
+    #threejs-box {
+      width: 100%;
+      height: 52%;
+      position: relative;
+      touch-action: none;
+      cursor: grab;
+      background: transparent !important;
+    }
+    #threejs-box:active {
+      cursor: grabbing;
+    }
+
+    .info-lyrics-container {
+      height: 48%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      padding: 0 16px;
+      mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%);
+      -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%);
+    }
+
+    .track-meta {
+      text-align: center;
+      margin-bottom: 2px;
+      z-index: 10;
+    }
+    .track-meta h1 {
+      font-family: 'Orbitron', 'Syne', 'Chocolate Classical Sans', sans-serif;
+      font-size: 1.05rem;
+      letter-spacing: 1px;
+      color: #ffffff;
+    }
+    .track-meta p {
+      font-size: 0.75rem;
+      color: var(--steel-dim);
+      margin-top: 2px;
+      font-family: 'Syne', sans-serif;
+      letter-spacing: 1px;
+    }
+
+    .lyrics-view {
+      width: 100%;
+      max-width: 580px;
+      flex: 1;
+      overflow-y: auto;
+      scroll-behavior: smooth;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      padding: 24px 16px 80px;
+      scrollbar-width: none;
+    }
+    .lyrics-view::-webkit-scrollbar {
+      display: none;
+    }
+
+    .lyric-row {
+      text-align: center;
+      color: #6b7280;
+      line-height: 1.45;
+      transition: all 0.25s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 3px;
+    }
+    .lyric-primary {
+      font-size: 0.85rem;
+      font-family: 'Syne', 'Chocolate Classical Sans', sans-serif;
+    }
+    .lyric-trans {
+      font-size: 0.78rem;
+      color: #585c6d;
+      font-family: 'Chocolate Classical Sans', sans-serif;
+      letter-spacing: 0.5px;
+    }
+
+    .lyric-row.active {
+      transform: scale(1.02);
+    }
+    .lyric-row.active .lyric-primary {
+      color: #ffffff;
+      font-size: 0.98rem;
+      font-weight: 600;
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
+    }
+    .lyric-row.active .lyric-trans {
+      color: #e4e4e7;
+      font-size: 0.88rem;
+      font-weight: 500;
+    }
+
+    footer.retro-deck {
+      background: var(--deck-bg) !important;
+      border-top: 1px solid var(--steel-border);
+      box-shadow: 0 -8px 30px rgba(0,0,0,0.5);
+      padding: 10px 14px calc(24px + env(safe-area-inset-bottom, 20px));
+      z-index: 25;
+      width: 100%;
+      flex-shrink: 0;
+    }
+
+    .timeline-strip {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      max-width: 480px;
+      margin: 0 auto 10px;
+      padding: 0 4px;
+    }
+    .retro-time {
+      font-family: 'Orbitron', monospace;
+      font-size: 0.7rem;
+      color: var(--steel-dim);
+      min-width: 36px;
+    }
+
+    .seek-groove {
+      flex: 1;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      position: relative;
+      touch-action: none;
+    }
+    .seek-track {
+      width: 100%;
+      height: 4px;
+      background: #23252d;
+      border-radius: 2px;
+      position: relative;
+    }
+    .seek-bar {
+      height: 100%;
+      background: linear-gradient(90deg, #6b7280, #e4e4e7);
+      border-radius: 2px;
+      width: 0%;
+      pointer-events: none;
+      position: relative;
+    }
+    .seek-thumb {
+      position: absolute;
+      right: -5px;
+      top: -4px;
+      width: 12px;
+      height: 12px;
+      background: #ffffff;
+      border-radius: 50%;
+      box-shadow: 0 0 8px rgba(255,255,255,0.8);
+      pointer-events: none;
+    }
+
+    .deck-controls {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: 480px;
+      margin: 0 auto;
+      gap: 8px;
+      padding: 0 2px;
+    }
+
+    .steel-select-group {
+      display: flex;
+      gap: 6px;
+      flex: 1;
+      min-width: 0;
+    }
+
+    .steel-select {
+      background: #1c1d24;
+      border: 1px solid #333642;
+      color: #e4e4e7;
+      font-family: 'Syne', sans-serif !important;
+      font-size: 0.7rem;
+      letter-spacing: 0.2px;
+      font-weight: 600;
+      padding: 5px 6px;
+      border-radius: 6px;
+      outline: none;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      transition: all 0.2s ease;
+    }
+    #sel-playlist {
+      flex: 0 0 120px;
+      min-width: 110px;
+    }
+    #sel-song {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .steel-select:focus, .steel-select:hover {
+      border-color: #555869;
+    }
+    .steel-select option {
+      font-family: 'Syne', sans-serif !important;
+      background: #1c1d24;
+      color: #fff;
+    }
+
+    @media (min-width: 768px) {
+      .timeline-strip, .deck-controls {
+        max-width: 780px;
+      }
+      .steel-select {
+        font-size: 0.8rem;
+        padding: 7px 12px;
+      }
+      #sel-playlist {
+        flex: 0 0 215px;
+        min-width: 200px;
+      }
+      #sel-song {
+        flex: 1;
+      }
+    }
+
+    .buttons-group {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+    .steel-knob-btn {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 35%, #2a2c36 0%, #171820 100%);
+      border: 1px solid #3e414f;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.5), inset 0 1px 1px rgba(255,255,255,0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.15s ease;
+      flex-shrink: 0;
+    }
+    .steel-knob-btn:active {
+      transform: scale(0.92);
+    }
+    .steel-knob-btn svg {
+      width: 14px;
+      height: 14px;
+      fill: #d1d5db;
+    }
+
+    .play-master-btn {
+      width: 46px;
+      height: 46px;
+      background: radial-gradient(circle at 35% 35%, #4b4e5d 0%, #20222a 100%);
+      border: 1.5px solid #8b90a0;
+      box-shadow: 0 0 12px var(--accent-glow), inset 0 1px 2px rgba(255,255,255,0.25);
+    }
+    .play-master-btn svg {
+      width: 17px;
+      height: 17px;
+      fill: #ffffff;
+    }
+
+    .modal-veil {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.85);
+      backdrop-filter: blur(8px);
+      z-index: 100;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+    }
+    .modal-inner {
+      background: #181920;
+      border: 1px solid #333642;
+      border-radius: 12px;
+      width: 100%;
+      max-width: 520px;
+      max-height: 85vh;
+      overflow-y: auto;
+      padding: 20px;
+      font-family: 'Syne', 'Chocolate Classical Sans', sans-serif;
+    }
+    .modal-inner h3 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.05rem;
+      color: #f4f4f5;
+      margin-bottom: 12px;
+      letter-spacing: 1px;
+    }
+
+    .menu-link-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 14px;
+      background: #111216;
+      border: 1px solid #282a35;
+      border-radius: 8px;
+      color: #f4f4f5;
+      text-decoration: none;
+      font-size: 0.88rem;
+      margin-bottom: 8px;
+      transition: all 0.2s ease;
+    }
+    .menu-link-item:hover {
+      background: #1d1f27;
+      border-color: #4b4e5d;
+      transform: translateX(2px);
+    }
+    .menu-link-item span.desc {
+      font-size: 0.72rem;
+      color: #9ca3af;
+      font-family: 'Chocolate Classical Sans', sans-serif;
+    }
+
+    .field-row {
+      margin-bottom: 12px;
+    }
+    .field-row label {
+      display: block;
+      font-size: 0.78rem;
+      color: var(--steel-dim);
+      margin-bottom: 4px;
+    }
+    .field-row input, .field-row textarea, .field-row select {
+      width: 100%;
+      background: #111216;
+      border: 1px solid #2d303a;
+      border-radius: 6px;
+      color: #fff;
+      font-size: 0.85rem;
+      padding: 8px 10px;
+      outline: none;
+    }
+    .field-row textarea {
+      font-family: monospace;
+      font-size: 0.78rem;
+      resize: vertical;
+    }
+    .btn-steel {
+      background: #2b2e3a;
+      border: 1px solid #454959;
+      color: #fafafa;
+      font-weight: 600;
+      padding: 8px 14px;
+      border-radius: 6px;
+    }
+    .btn-cancel {
+      background: transparent;
+      border: 1px solid #333642;
+      color: #9ca3af;
+      padding: 8px 12px;
+      border-radius: 6px;
+    }
+    .song-item-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 6px 10px;
+      background: #111216;
+      border: 1px solid #242630;
+      margin-bottom: 4px;
+      border-radius: 4px;
+      font-size: 0.8rem;
+    }
+    .song-actions {
+      display: flex;
+      gap: 4px;
+      align-items: center;
+    }
+    .btn-act {
+      border: none;
+      border-radius: 3px;
+      padding: 3px 6px;
+      font-size: 0.72rem;
+    }
+    .btn-edit { background: #3b82f6; color: #fff; }
+    .btn-del { background: #ef4444; color: #fff; }
+    .btn-order { background: #27272a; color: #d4d4d8; border: 1px solid #3f3f46; font-size: 0.7rem; padding: 2px 5px; }
+    .btn-order:disabled { opacity: 0.3; cursor: not-allowed; }
+
+    .preview-card-box {
+      background: #101115;
+      border: 1px dashed #3f4252;
+      border-radius: 8px;
+      padding: 10px;
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      margin-bottom: 14px;
+    }
+    .preview-cover-thumb {
+      width: 72px;
+      height: 72px;
+      border-radius: 4px;
+      border: 1px solid #2c2d38;
+      background-size: cover;
+      background-position: center;
+      flex-shrink: 0;
+      position: relative;
+      overflow: hidden;
+    }
+  </style>
+
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "[https://unpkg.com/three@0.160.0/build/three.module.js](https://unpkg.com/three@0.160.0/build/three.module.js)"
+      }
+    }
+  </script>
+</head>
+<body>
+
+  <!-- 原生 Audio：完全比照 WINTER PLAYLIST 極速原生串流 -->
+  <audio id="native-audio" playsinline></audio>
+  <iframe id="yt-hidden-player" style="position:absolute; top:-9999px; left:-9999px; width:1px; height:1px;" frameborder="0" allow="autoplay; encrypted-media"></iframe>
+
+  <header>
+    <div class="brand-title" id="logo-trigger">KARINA PLAYLIST</div>
+    <button class="admin-star-btn" id="btn-open-menu" title="Navigation & Settings">♥</button>
+  </header>
+
+  <main>
+    <div id="threejs-box"></div>
+    <div class="info-lyrics-container">
+      <div class="track-meta">
+        <h1 id="disp-title">UP</h1>
+        <p id="disp-artist">KARINA</p>
+      </div>
+      <div class="lyrics-view" id="lyrics-scroller"></div>
+    </div>
+  </main>
+
+  <footer class="retro-deck">
+    <div class="timeline-strip">
+      <span class="retro-time" id="lbl-curr">00:00</span>
+      <div class="seek-groove" id="seek-container">
+        <div class="seek-track">
+          <div class="seek-bar" id="seek-progress">
+            <div class="seek-thumb"></div>
+          </div>
+        </div>
+      </div>
+      <span class="retro-time" id="lbl-total">00:00</span>
+    </div>
+
+    <div class="deck-controls">
+      <div class="steel-select-group">
+        <select class="steel-select" id="sel-playlist"></select>
+        <select class="steel-select" id="sel-song"></select>
+      </div>
+
+      <div class="buttons-group">
+        <button class="steel-knob-btn" id="btn-prev" title="上一首">
+          <svg viewBox="0 0 24 24"><path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/></svg>
+        </button>
+        <button class="steel-knob-btn play-master-btn" id="btn-play" title="播放 / 暫停">
+          <svg id="play-svg-icon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+        </button>
+        <button class="steel-knob-btn" id="btn-next" title="下一首">
+          <svg viewBox="0 0 24 24"><path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/></svg>
+        </button>
+      </div>
+    </div>
+  </footer>
+
+  <div class="modal-veil" id="nav-modal">
+    <div class="modal-inner" style="max-width: 360px;">
+      <h3>KARINA SPACE</h3>
+      <div style="display:flex; flex-direction:column; gap:4px; margin-top:14px;">
+        <div class="menu-link-item" id="menu-btn-admin" style="border-color: #3b82f6; background: rgba(59,130,246,0.08);">
+          <div>
+            <div style="color: #60a5fa;">⚙️ System Access</div>
+            <span class="desc">管理者後台</span>
+          </div>
+          <span style="color: #60a5fa;">🔒</span>
+        </div>
+      </div>
+      <div style="text-align:right; margin-top:14px;">
+        <button class="btn-cancel" id="btn-close-nav">關閉選單</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="admin-mount-point"></div>
+
+  <template id="auth-tpl">
+    <div class="modal-veil" id="auth-modal" style="display:flex;">
+      <div class="modal-inner" style="max-width: 300px; text-align: center;">
+        <h3>System Access</h3>
+        <div class="field-row" style="margin-top: 14px;">
+          <input type="password" id="auth-input" placeholder="請輸入管理密碼" autocomplete="off">
+        </div>
+        <div style="display:flex; justify-content:center; gap:8px; margin-top:14px;">
+          <button class="btn-cancel" id="btn-auth-close">取消</button>
+          <button class="btn-steel" id="btn-auth-submit">驗證</button>
+        </div>
+      </div>
+    </div>
+  </template>
+
+  <template id="admin-tpl">
+    <div class="modal-veil" id="admin-modal" style="display:flex;">
+      <div class="modal-inner">
+        <h3>歌單與曲目核心管理</h3>
+
+        <div style="display:flex; gap:8px; margin-bottom:14px;">
+          <button class="btn-steel" id="btn-copy-code" style="flex:1; font-size:0.75rem;">📋 複製當前更新程式碼</button>
+          <button class="btn-cancel" id="btn-dl-html" style="font-size:0.75rem;">💾 下載更新 HTML</button>
+        </div>
+
+        <div style="background:#111216; padding:10px; border-radius:6px; border:1px solid #282a35; margin-bottom:12px;">
+          <label style="font-size:0.75rem; color:#a1a1aa; display:flex; justify-content:space-between;">
+            <span>黑膠與封面尺寸縮放</span>
+            <span id="scale-val-lbl">1.0x</span>
+          </label>
+          <input type="range" id="scale-slider" min="0.6" max="1.5" step="0.05" value="1.0" style="width:100%; margin-top:6px;">
+        </div>
+
+        <div style="background:#111216; padding:10px; border-radius:6px; border:1px solid #282a35; margin-bottom:12px;">
+          <label style="font-size:0.78rem; color:#e4e4e7; font-weight:bold;">新增歌單</label>
+          <div style="display:flex; gap:8px; margin-top:6px;">
+            <input type="text" id="admin-new-pl-name" placeholder="歌單名稱...">
+            <button class="btn-steel" id="btn-add-pl">新增</button>
+          </div>
+        </div>
+
+        <div style="background:#111216; padding:12px; border-radius:6px; border:1px solid #282a35; margin-bottom:12px;">
+          <h4 id="form-mode-title" style="color:#fafafa; font-size:0.85rem; margin-bottom:8px;">✦ 新增歌曲</h4>
+          <input type="hidden" id="edit-song-id" value="">
+
+          <div class="preview-card-box">
+            <div class="preview-cover-thumb" id="preview-box-thumb"></div>
+            <div style="flex:1; min-width:0;">
+              <div style="font-size:0.72rem; color:#60a5fa; font-weight:bold;">✦ 即時預覽 (LIVE PREVIEW)</div>
+              <div id="preview-box-title" style="font-size:0.84rem; font-weight:bold; color:#fff; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; margin-top:2px;">歌曲名稱</div>
+              <div id="preview-box-artist" style="font-size:0.72rem; color:#9ca3af;">KARINA</div>
+            </div>
+          </div>
+
+          <div class="field-row">
+            <label>所屬歌單</label>
+            <select id="form-pl-target"></select>
+          </div>
+          <div class="field-row">
+            <label>歌曲名稱</label>
+            <input type="text" id="form-song-title" placeholder="例如：UP">
+          </div>
+          <div class="field-row">
+            <label>演唱者 / 專輯名稱</label>
+            <input type="text" id="form-song-artist" placeholder="KARINA" value="KARINA">
+          </div>
+          <div class="field-row">
+            <label>音訊來源 (本機檔名、GitHub 網址 或 YouTube 連結)</label>
+            <input type="text" id="form-song-source" placeholder="如：./UP.mp3 或 YouTube 網址">
+          </div>
+          <div class="field-row">
+            <label style="display:flex; justify-content:space-between;">
+              <span>音量增益調整 (Volume Gain)</span>
+              <span id="form-vol-lbl">1.00x</span>
+            </label>
+            <input type="range" id="form-song-vol" min="0.3" max="1.0" step="0.05" value="1.0" style="width:100%; margin-top:4px;">
+          </div>
+
+          <div class="field-row">
+            <label>專輯封面 (正面)</label>
+            <input type="text" id="form-song-cover" placeholder="貼上圖片檔名">
+            <div style="margin-top:6px; display:flex; align-items:center; gap:8px;">
+              <input type="file" id="local-img-picker" accept="image/*" style="display:none;">
+              <button type="button" class="btn-cancel" id="btn-pick-img" style="font-size:0.72rem;">📁 從手機圖庫挑選正面</button>
+              <span id="img-picker-status" style="font-size:0.72rem; color:#71717a;"></span>
+            </div>
+          </div>
+
+          <div style="background:#171822; padding:10px; border-radius:6px; border:1px solid #282a3c; margin-bottom:12px;">
+            <div style="font-size:0.75rem; color:#e4e4e7; font-weight:bold; margin-bottom:8px;">🖼️ 封面照片尺寸與位置微調</div>
+            
+            <div class="field-row" style="margin-bottom:8px;">
+              <label style="display:flex; justify-content:space-between;">
+                <span>圖片縮放倍率 (Scale)</span>
+                <span id="lbl-img-scale">1.00x</span>
+              </label>
+              <input type="range" id="form-img-scale" min="0.6" max="2.5" step="0.05" value="1.0">
+            </div>
+
+            <div class="field-row" style="margin-bottom:8px;">
+              <label style="display:flex; justify-content:space-between;">
+                <span>水平位置移動 (Offset X)</span>
+                <span id="lbl-img-ox">0%</span>
+              </label>
+              <input type="range" id="form-img-ox" min="-0.5" max="0.5" step="0.02" value="0.0">
+            </div>
+
+            <div class="field-row" style="margin-bottom:0;">
+              <label style="display:flex; justify-content:space-between;">
+                <span>垂直位置移動 (Offset Y)</span>
+                <span id="lbl-img-oy">0%</span>
+              </label>
+              <input type="range" id="form-img-oy" min="-0.5" max="0.5" step="0.02" value="0.0">
+            </div>
+          </div>
+
+          <div class="field-row">
+            <label>黑膠中央圓形貼標 (留空則預設同正面封面)</label>
+            <input type="text" id="form-song-label-img" placeholder="留空則預設跟正面相同">
+            <div style="margin-top:6px; display:flex; align-items:center; gap:8px;">
+              <input type="file" id="local-label-img-picker" accept="image/*" style="display:none;">
+              <button type="button" class="btn-cancel" id="btn-pick-label-img" style="font-size:0.72rem;">📁 從手機圖庫挑選貼標</button>
+              <span id="label-img-picker-status" style="font-size:0.72rem; color:#71717a;"></span>
+            </div>
+          </div>
+
+          <div class="field-row">
+            <label>專輯外殼 (背面，留空則預設同正面)</label>
+            <input type="text" id="form-song-back-cover" placeholder="留空則預設跟正面相同">
+            <div style="margin-top:6px; display:flex; align-items:center; gap:8px;">
+              <input type="file" id="local-back-img-picker" accept="image/*" style="display:none;">
+              <button type="button" class="btn-cancel" id="btn-pick-back-img" style="font-size:0.72rem;">📁 從手機圖庫挑選背面</button>
+              <span id="back-img-picker-status" style="font-size:0.72rem; color:#71717a;"></span>
+            </div>
+          </div>
+
+          <div class="field-row">
+            <label>動態歌詞 (支援 [分:秒.毫秒] 與下一行中文翻譯)</label>
+            <textarea id="form-song-lyrics" rows="6" placeholder="[00:12.21]原語歌詞&#10;中文翻譯&#10;[00:18.70]第二句原語&#10;第二句中文"></textarea>
+          </div>
+
+          <div style="display:flex; gap:8px; margin-top:8px;">
+            <button class="btn-steel" id="btn-save-song" style="flex:1;">儲存歌曲</button>
+            <button class="btn-cancel" id="btn-cancel-edit" style="display:none;">取消編輯</button>
+          </div>
+        </div>
+
+        <div>
+          <label style="font-size:0.75rem; color:#71717a; margin-bottom:6px; display:block;">歌單與歌曲排序管理</label>
+          <div id="admin-tree-view"></div>
+        </div>
+
+        <div style="text-align:right; margin-top:14px;">
+          <button class="btn-cancel" id="btn-close-admin">關閉管理後台</button>
+        </div>
+      </div>
+    </div>
+  </template>
+
+  <script type="module">
+    import * as THREE from 'three';
+
+    // 完全比照 WINTER PLAYLIST 相對路徑格式
     const COVER_UP = "./UP_cover.jpg";
     const COVER_GOOD_STUFF = "./GOOD STUFF_cover.jpg";
     const COVER_16_BIT = "./16 Bit_cover.jpg";
@@ -860,7 +1733,7 @@
 盡情燃燒，看我掌控全場
 [00:44.29]Up, up, up, roll up (mm)
 不斷攀升，席捲而來
-[00:47.08]내게 좀 더 가까이 (가까이)
+[00:47.08]내게 좀 더 가까이 (加까이)
 再靠近我一點（更近一點）
 [00:48.66]살며시 스르르, 스르르, 스르르 널
 悄然無聲地，一點一點將你纏繞
@@ -900,7 +1773,7 @@
 盡情燃燒，看我掌控全場
 [01:32.61]Up, up, up, roll up (uh)
 不斷攀升，席捲而來
-[01:35.40]내게 좀 더 가까이 (가까이)
+[01:35.40]내게 좀 더 가까이 (加까이)
 再靠近我一點（更近一點）
 [01:37.00]살며시 스르르, 스르르, 스르르 널
 悄然無聲地，一點一點將你纏繞
@@ -1746,7 +2619,6 @@ Yeah, yeah，盡管說吧，隨你怎麼講
           tex.minFilter = THREE.LinearFilter;
           tex.magFilter = THREE.LinearFilter;
           tex.generateMipmaps = false;
-          tex.needsUpdate = true;
           textureCache.set(url, tex);
           callback(tex);
         }
@@ -2031,7 +2903,7 @@ Yeah, yeah，盡管說吧，隨你怎麼講
         nativeAudio.removeAttribute('src');
 
         const startSec = Math.floor(currentSec || 0);
-        ytIframe.src = `https://www.youtube.com/embed/${ytId}?autoplay=1&start=${startSec}&playsinline=1&controls=0&enablejsapi=1`;
+        ytIframe.src = `[https://www.youtube.com/embed/$](https://www.youtube.com/embed/$){ytId}?autoplay=1&start=${startSec}&playsinline=1&controls=0&enablejsapi=1`;
         setPlayState(true);
         startYtProgressTimer();
       } else {
