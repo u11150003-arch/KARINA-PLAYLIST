@@ -543,7 +543,7 @@
 </head>
 <body>
 
-  <!-- 原生 Audio 元件：不強行串接 Web Audio，徹底維持 iOS 系統背景音訊焦點 -->
+  <!-- 純原生 Audio 元件，無 Web Audio 衝突以保證系統級背景連線 -->
   <audio id="native-audio" playsinline preload="auto"></audio>
   <iframe id="yt-hidden-player" style="position:absolute; top:-9999px; left:-9999px; width:1px; height:1px;" frameborder="0" allow="autoplay; encrypted-media"></iframe>
 
@@ -691,7 +691,7 @@
               <span>音量增益調整 (Volume Gain)</span>
               <span id="form-vol-lbl">1.00x</span>
             </label>
-            <input type="range" id="form-song-vol" min="0.3" max="3.5" step="0.05" value="1.0" style="width:100%; margin-top:4px;">
+            <input type="range" id="form-song-vol" min="0.3" max="1.0" step="0.05" value="1.0" style="width:100%; margin-top:4px;">
           </div>
 
           <div class="field-row">
@@ -950,6 +950,67 @@
 我要繼續向前，不斷攀升（umm, yeah）
 [02:40.24]Spice it up, up, up, roll up
 讓氣氛持續升溫`;
+
+    const LRC_GOOD_STUFF = `[00:00.00]Good stuff
+[00:01.54]Good stuff
+[00:02.86]I’m so good, I’m so mad
+[00:05.65]아무도 모르게, let you know
+[00:08.44]I switch up, make it look brand new
+[00:11.03]Meet me in the back, that’s a rendezvous
+[00:13.82]I don’t need hype, yeah, what you feel like
+[00:16.61]아닌 척 걸어 난 관심꺼, keep it light
+[00:19.40]Yeah, yeah, blah, blah, say what you like
+[00:22.19]여기 넘쳐나, I’m everybody’s type
+[00:26.17]Class is in session
+[00:28.96]Come pay attention
+[00:31.74]서서히 놀랄걸
+[00:33.86]봐 so good, wanna take a bite?
+[00:36.47]Got me cookin’, goody, goody, yeah, you can’t get enough
+[00:39.16]I’m getting money, money, money, keep on running it up
+[00:41.95]Top down, 뭔가 달라, giddy, giddy it up
+[00:44.74]I got the good stuff, good stuff
+[00:47.73]Got me cookin’, goody, goody, yeah, switch to the top
+[00:50.32]You like that honey, honey, honey, yeah, 어질어질해
+[00:53.30]Top down, 뭔가 달라, giddy, giddy it up
+[00:56.09]I got the good stuff, good stuff
+[00:59.28]왠지 좀 다른느낌, face screwed up
+[01:02.09]Good stuff, 색다른 기분, get clued up
+[01:04.69]When I pull up, 여기저기 물어봐
+[01:07.48]When I pull up, everybody’s getting down
+[01:10.27]I don’t need the hype, I’m one of a kind, I got my glow in my mind
+[01:13.79]Sippin’ on that gold and ice, ice, ice, ice
+[01:15.89]And they look good on me, so good it makes you hungry
+[01:18.48]And if KARINA said to do it, then you do it, honey
+[01:22.58]Class is in session
+[01:25.37]Come pay attention
+[01:28.16]서서히 놀랄걸
+[01:30.35]봐 so good, wanna take a bite?
+[01:32.73]Got me cookin’, goody, goody, goody, yeah, you can’t get enough
+[01:35.53]I’m getting money, money, money, keep on running it up
+[01:38.52]Top down, 뭔가 달라, giddy, giddy it up
+[01:41.11]I got the good stuff, good stuff
+[01:44.11]Got me cookin’, goody, goody, yeah, switch to the top
+[01:46.70]You like that honey, honey, honey, yeah, 어질어질해
+[01:49.68]Top down, 뭔가 달라, giddy, giddy it up
+[01:52.47]I got the good stuff, good stuff
+[01:56.06]I’m so good, I’m so mad
+[01:58.78]I don’t want it to let you know
+[02:01.37]I’m so good, I’m so bad
+[02:04.36]I don’t want it to let you know
+[02:06.94]I’m so good, I’m so mad
+[02:10.13]I don’t want it to let you know
+[02:12.73]I’m so good, I’m so mad
+[02:15.32]I don’t want it to let you know
+[02:17.90]Got me cookin’, goody, goody, goody, yeah, you can’t get enough
+[02:20.69]I’m getting money, money, money, keep on running it up
+[02:23.59]Top down, 뭔가 달라, giddy, giddy it up
+[02:26.38]I got the good stuff, good stuff
+[02:29.36]Got me cookin’, goody, goody, goody, yeah, switch to the top
+[02:32.15]You like that honey, honey, honey, yeah, 어질어질해
+[02:34.94]Top down, 뭔가 달라, giddy, giddy it up
+[02:37.53]I got the good stuff, good stuff
+[02:42.78]Uh, yeah
+[02:51.35]Good stuff`;
 
     const LRC_16_BIT = `[00:12.26]I'm breaking down, 이 깊은 어둠, 속에 갇혀 나
 我逐漸崩潰，困在這片深邃的黑暗之中
@@ -1261,7 +1322,7 @@
             imgOffsetY: 0.0,
             duration: 210,
             volume: 1.0,
-            lyrics: []
+            lyrics: parseLrc(LRC_GOOD_STUFF)
           },
           {
             title: "16 Bit",
@@ -1316,7 +1377,7 @@
             imgOffsetX: 0.0,
             imgOffsetY: 0.0,
             duration: 205,
-            volume: 3.5, // 數位增益調大至 3.5x，大幅放大音量
+            volume: 1.0,
             lyrics: parseLrc(LRC_ORANGE)
           }
         ]
@@ -1337,7 +1398,7 @@
             imgOffsetX: 0.0,
             imgOffsetY: 0.0,
             duration: 220,
-            volume: 3.5, // 音量放大至 3.5x
+            volume: 1.0,
             lyrics: []
           },
           {
@@ -1351,7 +1412,7 @@
             imgOffsetX: 0.0,
             imgOffsetY: 0.0,
             duration: 210,
-            volume: 3.5,
+            volume: 1.0,
             lyrics: []
           },
           {
@@ -1365,7 +1426,7 @@
             imgOffsetX: 0.0,
             imgOffsetY: 0.0,
             duration: 198,
-            volume: 3.5,
+            volume: 1.0,
             lyrics: []
           },
           {
@@ -1379,7 +1440,7 @@
             imgOffsetX: 0.0,
             imgOffsetY: 0.0,
             duration: 245,
-            volume: 3.5,
+            volume: 1.0,
             lyrics: []
           },
           {
@@ -1393,7 +1454,7 @@
             imgOffsetX: 0.0,
             imgOffsetY: 0.0,
             duration: 215,
-            volume: 3.5,
+            volume: 1.0,
             lyrics: []
           },
           {
@@ -1407,7 +1468,7 @@
             imgOffsetX: 0.0,
             imgOffsetY: 0.0,
             duration: 190,
-            volume: 3.5,
+            volume: 1.0,
             lyrics: []
           }
         ]
@@ -1433,36 +1494,6 @@
 
     const nativeAudio = document.getElementById('native-audio');
     const ytIframe = document.getElementById('yt-hidden-player');
-
-    // 支援無暫停的背景放大通道
-    let globalAudioCtx = null;
-    let globalGainNode = null;
-    let globalSourceNode = null;
-
-    function applySafeVolumeGain(vol) {
-      if (vol <= 1.0) {
-        nativeAudio.volume = Math.max(0, vol);
-        if (globalGainNode) globalGainNode.gain.value = 1.0;
-        return;
-      }
-      try {
-        if (!globalAudioCtx) {
-          const AudioContextClass = window.AudioContext || window.webkitAudioContext;
-          globalAudioCtx = new AudioContextClass();
-          globalGainNode = globalAudioCtx.createGain();
-          globalSourceNode = globalAudioCtx.createMediaElementSource(nativeAudio);
-          globalSourceNode.connect(globalGainNode);
-          globalGainNode.connect(globalAudioCtx.destination);
-        }
-        if (globalAudioCtx.state === 'suspended') {
-          globalAudioCtx.resume();
-        }
-        nativeAudio.volume = 1.0;
-        globalGainNode.gain.setValueAtTime(vol, globalAudioCtx.currentTime);
-      } catch (e) {
-        nativeAudio.volume = 1.0;
-      }
-    }
 
     function updateMediaSession(song, pl) {
       if ('mediaSession' in navigator) {
@@ -1811,7 +1842,7 @@
     renderLoop();
 
     /* -------------------------------------------------------------
-     * 4. 音訊系統
+     * 4. 音訊系統 (純原生通道，保證背景/分頁不中斷)
      * ------------------------------------------------------------*/
     function setPlayState(active) {
       isPlaying = active;
@@ -1897,7 +1928,6 @@
 
       totalDuration = song.duration || 211;
       const ytId = extractYoutubeId(song.source);
-      const targetVolume = (typeof song.volume === 'number') ? song.volume : 1.0;
 
       if (ytId) {
         playMode = 'yt';
@@ -1914,7 +1944,7 @@
         ytIframe.src = '';
 
         const directSrc = toAbsUrl(song.source);
-        applySafeVolumeGain(targetVolume);
+        nativeAudio.volume = Math.min(1.0, Math.max(0, song.volume || 1.0));
 
         if (isNewTrack || nativeAudio.src !== directSrc) {
           isAutoSwitching = isAutoNext;
@@ -2009,7 +2039,7 @@
     window.addEventListener('touchend', handleSeekEnd);
 
     /* -------------------------------------------------------------
-     * 6. 歌詞渲染
+     * 6. 歌詞渲染 (切歌時即時捲動至頂部)
      * ------------------------------------------------------------*/
     function syncLyrics(sec) {
       const song = store[plIdx]?.songs[trackIdx];
@@ -2038,6 +2068,7 @@
     function renderLyricsList() {
       const scroller = document.getElementById('lyrics-scroller');
       scroller.innerHTML = '';
+      scroller.scrollTop = 0; // 關鍵修復：切換曲目時強制回到頂部第一行
       const song = store[plIdx]?.songs[trackIdx];
 
       if (!song || !song.lyrics || song.lyrics.length === 0) {
