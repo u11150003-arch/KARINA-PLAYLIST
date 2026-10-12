@@ -543,7 +543,7 @@
 </head>
 <body>
 
-  <!-- 原生 Audio 元件：不綁定 Web Audio，徹底維持 iOS 系統背景音訊焦點 -->
+  <!-- 原生 Audio 元件：不強行串接 Web Audio，徹底維持 iOS 系統背景音訊焦點 -->
   <audio id="native-audio" playsinline preload="auto"></audio>
   <iframe id="yt-hidden-player" style="position:absolute; top:-9999px; left:-9999px; width:1px; height:1px;" frameborder="0" allow="autoplay; encrypted-media"></iframe>
 
@@ -691,7 +691,7 @@
               <span>音量增益調整 (Volume Gain)</span>
               <span id="form-vol-lbl">1.00x</span>
             </label>
-            <input type="range" id="form-song-vol" min="0.3" max="2.0" step="0.05" value="1.0" style="width:100%; margin-top:4px;">
+            <input type="range" id="form-song-vol" min="0.3" max="3.5" step="0.05" value="1.0" style="width:100%; margin-top:4px;">
           </div>
 
           <div class="field-row">
@@ -786,6 +786,7 @@
       return REPO_BASE + encodeURI(fileName.replace(/^\.\//, ''));
     }
 
+    /* 圖片檔名對應表 */
     const COVER_UP = "UP_cover.jpg";
     const COVER_GOOD_STUFF = "GOOD STUFF_cover.jpg";
     const COVER_16_BIT = "16 Bit_cover.jpg";
@@ -803,6 +804,7 @@
     const COVER_YOU_KNOW = "06Rock_cover.jpg";
     const MEMORY_BOX_VINYL_LABEL = "KARINA MEMORY BOX_cover.JPG";
 
+    /* LRC 歌詞解析 */
     function parseLrc(txt) {
       if (!txt) return [];
       const lines = txt.split('\n');
@@ -830,6 +832,201 @@
       const s = (sec % 60).toFixed(2);
       return `[${String(m).padStart(2,'0')}:${String(s).padStart(5,'0')}]`;
     }
+
+    /* 內建動態歌詞 */
+    const LRC_UP = `[00:09.74]다들 뻔해 또 거짓말 just fine
+大家心知肚明，又一次謊無妨
+[00:12.26]Don't switch it up whenever you like
+別想隨心所欲地改變一切
+[00:14.85]번듯한 말 get it, get it, all out
+動聽的話語，就放手去爭取
+[00:17.04]I pump it, I pump it, I pump it up, up
+我不斷讓熱度節節攀升
+[00:19.64]So we roll up every weekend (yeah)
+每個週末，我們都要盡情狂歡
+[00:22.03]어디든 뛰어다녀 여기저기 freakin'
+四處奔走，無論身在何方
+[00:24.35]'Cause we be winning, be winning in a row (yeah)
+因為我們一路連勝，勢不可擋
+[00:26.74]다 가져갈게, yeah, yeah
+我會將一切盡收囊中
+[00:28.93]I'ma run it up, get it, get it all mine
+我要向上，把一切都握在手中
+[00:31.72]한 순간에 and I'm losing my mind
+就在一瞬間，我幾乎失去理智
+[00:34.11]타올라 다 I'm never gon' stop it
+盡情燃燒吧，我絕不停止
+[00:36.51]I pump it, I pump it, I pump it up (yeah)
+我不斷讓熱度節節攀升
+[00:39.10]Spice it up, up, up, hold up
+讓興致逐漸升溫然後停下 
+[00:42.09]Burn it up, see me down, controller
+盡情燃燒，看我掌控全場
+[00:44.29]Up, up, up, roll up (mm)
+不斷攀升，席捲而來
+[00:47.08]내게 좀 더 가까이 (가까이)
+再靠近我一點（更近一點）
+[00:48.66]살며시 스르르, 스르르, 스르르 널
+悄然無聲地，一點一點將你纏繞
+[00:51.25]감아 니 안에 모든 걸 잊게 해
+讓你深陷其中，忘卻一切
+[00:53.65]Run it up, up, up, up
+繼續攀升，不斷向上
+[00:56.33]Yeah, I feel it in my body
+這股悸動，我全身都能感受到
+[00:59.12]Whippin', whippin', 친절히 너를 감아내
+鞭策著 ，輕柔地將你纏繞
+[01:01.32]이제부터 난 네 모든 걸 다 알아내 (hey)
+從現在起，我要看透你的一切
+[01:03.92]They're hating, 너나 나나 눈치는 없거든
+他們儘管嫉妒，你我都不在乎旁人的眼光
+[01:06.17]They're faking, 괜히 들러붙기만 하거든
+他們虛情假意，只會一味地攀附
+[01:07.95]And like my, my, my so fine
+而我依然如此耀眼，無可挑剔
+[01:10.52]Looking like a ten, ten, ten, times five
+魅力滿分，甚至超越五倍
+[01:12.77]왜 쉬어 move (move)
+為何停下？繼續動起來
+[01:14.68]느낌을 알아 get groove up (groove up)
+掌握這份感覺，跟上節奏
+[01:17.47]I'ma run it up, get it get it all mine
+我要不斷向上，把一切都握在手中
+[01:20.26]한 순간에 and I'm losing my mind
+就在一瞬間，我幾乎失去理智
+[01:22.45]타올라 다 I'm never gon' stop it
+盡情燃燒吧，我絕不會停下
+[01:25.05]I pump it, I pump it, I pump it up
+我不斷讓熱度節節攀升
+[01:27.43]Spice it up, up, up, hold up
+讓興致逐漸升溫然後停下
+[01:30.42]Burn it up, see me down, controller
+盡情燃燒，看我掌控全場
+[01:32.61]Up, up, up, roll up (uh)
+不斷攀升，席捲而來
+[01:35.40]내게 좀 더 가까이 (가까이)
+再靠近我一點（更近一點）
+[01:37.00]살며시 스르르, 스르르, 스르르 널
+悄然無聲地，一點一點將你纏繞
+[01:39.52]감아 니 안에 모든 걸 잊게 해
+讓你深陷其中，忘卻一切
+[01:42.11]Run it up, up, up, up
+繼續攀升，不斷向上
+[01:44.81]Yeah, I feel it in my body
+這股悸動，我全身都能感受到
+[01:49.79]Knockin', knockin', knock
+敲響心門，一聲又一聲
+[01:50.88]Make you fall in love (like a choir sings)
+讓你墜入愛河（宛如合唱團高聲吟唱）
+[01:54.58]아무도 넘보지 못한 height
+那是無人能企及的高度
+[01:56.97]다른 누구도 겸비 못 할
+旁人無法兼得的本領
+[01:59.17]When I say never know (yeah)
+當我說出「永遠無法預料」（yeah）
+[02:01.36]버려 be watching how it's done (yeah)
+拋開一切，看我如何做到（yeah）
+[02:03.75]I'ma show you where I'm from (yeah)
+我要讓你見識，我來自何方（yeah）
+[02:06.73]Everybody knows I don't leave no clues (yeah)
+所有人都知道，我從不留下任何線索（yeah）
+[02:11.10]Spice it up, up, up, hold up
+讓興致逐漸升溫然後停下
+[02:14.09]Burn it up, see me down, controller (uh)
+盡情燃燒，看我掌控全場（uh）
+[02:16.49]Up, up, up, roll up (uh)
+不斷攀升，席捲而來（uh）
+[02:19.28]내게 좀 더 가까이 (내게 좀 더 가까이)
+再靠近我一點（再靠近我一點）
+[02:21.52]꽉 잡아 놓지마 (놓지마)
+緊緊抓住，別放開（別放開）
+[02:23.71]니 안에 모든 걸 잊게 돼 (잊게 돼)
+讓你忘卻心中的一切（忘卻一切）
+[02:25.71]Run it up, up, up, up
+繼續攀升，不斷向上
+[02:28.49]Yeah, I feel it in my body (yeah, uh)
+這股悸動，我全身都能感受到（yeah, uh）
+[02:32.47]I'ma run it, I'ma run it up (umm, yeah)
+我要繼續向前，不斷攀升（umm, yeah）
+[02:40.24]Spice it up, up, up, roll up
+讓氣氛持續升溫`;
+
+    const LRC_16_BIT = `[00:12.26]I'm breaking down, 이 깊은 어둠, 속에 갇혀 나
+我逐漸崩潰，困在這片深邃的黑暗之中
+[00:18.44]I've had enough, 똑같은 환상, 속에 빠졌나
+我已厭倦，難道又陷入那千篇一律的幻象 
+[00:25.01]These days, I can't picture my face
+這些日子，我甚至看不清自己的模樣
+[00:30.39]눈을 뜨면 다를까, ah, ah, ah, ah
+若睜開雙眼，一切是否就會不同
+[00:36.96]I'm sixteen bit, pixelated
+我化作十六位元的像素，逐漸失真
+[00:40.35]I can't focus on me, baby, no
+迷失了焦距，再也看不清自己
+[00:45.52]Ah, ah, ah, ah
+[00:48.43]Ah, ah, ah, ah (Ooh)
+[00:51.16]Pixelated (Ooh) in a thousand pieces (Ooh)
+像素化的我，碎裂成千萬片段
+[00:56.85]되돌려줘, so real me, bye, ah, ah, ah, ah
+將真實的我還給我，就此告別
+[01:03.83]I can't do anything to stop me, can't no more
+無法阻止失控的自己，已無能為力
+[01:10.01]비겁해진 attitude, no more gain, no more (Gain, no more)
+日漸怯懦的姿態，一無所獲，再無（再無所獲） 
+[01:26.67]Baby
+[01:28.25]Now, shut that "Blah, blah, blah," is that all you got? Yeah
+現在，收起那些「喋喋不休」，你就只有這點本事？是的
+[01:32.83]Daily
+日復一日
+[01:34.23]Been so much a battle or two (Battle or two), not for you (Not for you)
+早已歷經無數次苦戰，但不是為了你
+[01:39.58]Sorry, camouflaged
+抱歉，我曾以偽裝掩飾自己
+[01:41.97]Don't you wanna breathe? Come out (Don't you wanna breathe?)
+難道不想好好呼吸？走出來吧（難道不想呼吸嗎？）
+[01:45.75]Story, without any lies
+褪去謊言的故事
+[01:48.54]A tragedy, Ms. R.I.P, I came for a reason
+一場悲劇，輓歌女士，我的到來自有理由
+[01:51.24]These days, I can't picture my face
+這些日子，我已看不清自己的模樣
+[01:56.61]벗어날 수 없을까
+難道再也無法掙脫了嗎
+[01:59.21]Ah, ah, ah, ah
+[02:02.20]Ah, ah, ah, ah (Ooh)
+[02:04.98]Pixelated (Ooh) in a thousand pieces (Ooh)
+像素化的我，碎裂成千萬片段
+[02:10.76]되돌려줘, so real me, bye, ah, ah, ah, ah
+把真實的我還給我，就此告別
+[02:17.53]I can't do anything to stop me, can't no more
+無法阻止失控的自己，已無能為力
+[02:23.91]비겁해진 attitude, no more gain, no more (No more)
+日漸怯懦的姿態，不再奢求，不再繼續（不再繼續）
+[02:27.62]Click once to repeat, click once to delete
+點擊重播，一鍵刪除 
+[02:32.01]Oh, look, I'm faded now
+噢，看吧，我已逐漸消散 
+[02:33.80]Click once to repeat, click once to delete
+點擊重播，一鍵刪除
+[02:38.18]Oh, I'm gon' phase you out
+噢，我要將你徹底抹去
+[02:39.78]Click once to repeat (Once to repeat), click once to delete (Once to delete)
+點擊重播（反覆重播），一鍵刪除（就此抹除） 
+[02:44.16]Oh, look, I'm faded now
+看吧，我已逐漸消散 
+[02:45.95]Click once to repeat (Once to repeat), click once to delete (Once to delete)
+點擊重播（反覆重播），一鍵刪除（就此抹除)
+[02:50.44]Once to delete
+就此抹除
+[02:54.62]Ah-ah-ah-ah, ah-ah-ah-ah
+[03:06.99]Ah-ah-ah-ah, ah-ah-ah-ah
+[03:16.94]I'm sixteen bit, pixelated, 아무것도 찾지 못해, no
+我化作十六位元的像素，卻什麼也尋不著
+[03:25.43]Ah-ah-ah-ah, ah-ah-ah-ah
+[03:33.00]Hmm
+[03:34.72]Hmm
+[03:38.11]Hmm
+[03:41.09]Hmm`;
 
     const LRC_TENDERNESS = `[00:05.51]단순함이라는 거 우린 알 수 있을까
 我們能否真正理解，何謂簡單？
@@ -1032,83 +1229,6 @@
 [00:30.08]오늘 아침 쑥 캐고 옴
 今天早上還去採了艾草`;
 
-    const LRC_16_BIT = `[00:12.26]I'm breaking down, 이 깊은 어둠, 속에 갇혀 나
-我逐漸崩潰，困在這片深邃的黑暗之中
-[00:18.44]I've had enough, 똑같은 환상, 속에 빠졌나
-我已厭倦，難道又陷入那千篇一律的幻象 
-[00:25.01]These days, I can't picture my face
-這些日子，我甚至看不清自己的模樣
-[00:30.39]눈을 뜨면 다를까, ah, ah, ah, ah
-若睜開雙眼，一切是否就會不同
-[00:36.96]I'm sixteen bit, pixelated
-我化作十六位元的像素，逐漸失真
-[00:40.35]I can't focus on me, baby, no
-迷失了焦距，再也看不清自己
-[00:45.52]Ah, ah, ah, ah
-[00:48.43]Ah, ah, ah, ah (Ooh)
-[00:51.16]Pixelated (Ooh) in a thousand pieces (Ooh)
-像素化的我，碎裂成千萬片段
-[00:56.85]되돌려줘, so real me, bye, ah, ah, ah, ah
-將真實的我還給我，就此告別
-[01:03.83]I can't do anything to stop me, can't no more
-無法阻止失控的自己，已無能為力
-[01:10.01]비겁해진 attitude, no more gain, no more (Gain, no more)
-日漸怯懦的姿態，一無所獲，再無（再無所獲） 
-[01:26.67]Baby
-[01:28.25]Now, shut that "Blah, blah, blah," is that all you got? Yeah
-現在，收起那些「喋喋不休」，你就只有這點本事？是的
-[01:32.83]Daily
-日復一日
-[01:34.23]Been so much a battle or two (Battle or two), not for you (Not for you)
-早已歷經無數次苦戰，但不是為了你
-[01:39.58]Sorry, camouflaged
-抱歉，我曾以偽裝掩飾自己
-[01:41.97]Don't you wanna breathe? Come out (Don't you wanna breathe?)
-難道不想好好呼吸？走出來吧（難道不想呼吸嗎？）
-[01:45.75]Story, without any lies
-褪去謊言的故事
-[01:48.54]A tragedy, Ms. R.I.P, I came for a reason
-一場悲劇，輓歌女士，我的到來自有理由
-[01:51.24]These days, I can't picture my face
-這些日子，我已看不清自己的模樣
-[01:56.61]벗어날 수 없을까
-難道再也無法掙脫了嗎
-[01:59.21]Ah, ah, ah, ah
-[02:02.20]Ah, ah, ah, ah (Ooh)
-[02:04.98]Pixelated (Ooh) in a thousand pieces (Ooh)
-像素化的我，碎裂成千萬片段
-[02:10.76]되돌려줘, so real me, bye, ah, ah, ah, ah
-把真實的我還給我，就此告別
-[02:17.53]I can't do anything to stop me, can't no more
-無法阻止失控的自己，已無能為力
-[02:23.91]비겁해진 attitude, no more gain, no more (No more)
-日漸怯懦的姿態，不再奢求，不再繼續（不再繼續）
-[02:27.62]Click once to repeat, click once to delete
-點擊重播，一鍵刪除 
-[02:32.01]Oh, look, I'm faded now
-噢，看吧，我已逐漸消散 
-[02:33.80]Click once to repeat, click once to delete
-點擊重播，一鍵刪除
-[02:38.18]Oh, I'm gon' phase you out
-噢，我要將你徹底抹去
-[02:39.78]Click once to repeat (Once to repeat), click once to delete (Once to delete)
-點擊重播（反覆重播），一鍵刪除（就此抹除） 
-[02:44.16]Oh, look, I'm faded now
-看吧，我已逐漸消散 
-[02:45.95]Click once to repeat (Once to repeat), click once to delete (Once to delete)
-點擊重播（反覆重播），一鍵刪除（就此抹除)
-[02:50.44]Once to delete
-就此抹除
-[02:54.62]Ah-ah-ah-ah, ah-ah-ah-ah
-[03:06.99]Ah-ah-ah-ah, ah-ah-ah-ah
-[03:16.94]I'm sixteen bit, pixelated, 아무것도 찾지 못해, no
-我化作十六位元的像素，卻什麼也尋不著
-[03:25.43]Ah-ah-ah-ah, ah-ah-ah-ah
-[03:33.00]Hmm
-[03:34.72]Hmm
-[03:38.11]Hmm
-[03:41.09]Hmm`;
-
     const TWO_PLAYLISTS_DATA = [
       {
         id: "pl_karina_song",
@@ -1127,7 +1247,7 @@
             imgOffsetY: 0.0,
             duration: 220,
             volume: 1.0,
-            lyrics: []
+            lyrics: parseLrc(LRC_UP)
           },
           {
             title: "GOOD STUFF",
@@ -1196,7 +1316,7 @@
             imgOffsetX: 0.0,
             imgOffsetY: 0.0,
             duration: 205,
-            volume: 1.0,
+            volume: 3.5, // 數位增益調大至 3.5x，大幅放大音量
             lyrics: parseLrc(LRC_ORANGE)
           }
         ]
@@ -1217,7 +1337,7 @@
             imgOffsetX: 0.0,
             imgOffsetY: 0.0,
             duration: 220,
-            volume: 1.0,
+            volume: 3.5, // 音量放大至 3.5x
             lyrics: []
           },
           {
@@ -1231,7 +1351,7 @@
             imgOffsetX: 0.0,
             imgOffsetY: 0.0,
             duration: 210,
-            volume: 1.0,
+            volume: 3.5,
             lyrics: []
           },
           {
@@ -1245,7 +1365,7 @@
             imgOffsetX: 0.0,
             imgOffsetY: 0.0,
             duration: 198,
-            volume: 1.0,
+            volume: 3.5,
             lyrics: []
           },
           {
@@ -1259,7 +1379,7 @@
             imgOffsetX: 0.0,
             imgOffsetY: 0.0,
             duration: 245,
-            volume: 1.0,
+            volume: 3.5,
             lyrics: []
           },
           {
@@ -1273,7 +1393,7 @@
             imgOffsetX: 0.0,
             imgOffsetY: 0.0,
             duration: 215,
-            volume: 1.0,
+            volume: 3.5,
             lyrics: []
           },
           {
@@ -1287,7 +1407,7 @@
             imgOffsetX: 0.0,
             imgOffsetY: 0.0,
             duration: 190,
-            volume: 1.0,
+            volume: 3.5,
             lyrics: []
           }
         ]
@@ -1313,6 +1433,36 @@
 
     const nativeAudio = document.getElementById('native-audio');
     const ytIframe = document.getElementById('yt-hidden-player');
+
+    // 支援無暫停的背景放大通道
+    let globalAudioCtx = null;
+    let globalGainNode = null;
+    let globalSourceNode = null;
+
+    function applySafeVolumeGain(vol) {
+      if (vol <= 1.0) {
+        nativeAudio.volume = Math.max(0, vol);
+        if (globalGainNode) globalGainNode.gain.value = 1.0;
+        return;
+      }
+      try {
+        if (!globalAudioCtx) {
+          const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+          globalAudioCtx = new AudioContextClass();
+          globalGainNode = globalAudioCtx.createGain();
+          globalSourceNode = globalAudioCtx.createMediaElementSource(nativeAudio);
+          globalSourceNode.connect(globalGainNode);
+          globalGainNode.connect(globalAudioCtx.destination);
+        }
+        if (globalAudioCtx.state === 'suspended') {
+          globalAudioCtx.resume();
+        }
+        nativeAudio.volume = 1.0;
+        globalGainNode.gain.setValueAtTime(vol, globalAudioCtx.currentTime);
+      } catch (e) {
+        nativeAudio.volume = 1.0;
+      }
+    }
 
     function updateMediaSession(song, pl) {
       if ('mediaSession' in navigator) {
@@ -1661,7 +1811,7 @@
     renderLoop();
 
     /* -------------------------------------------------------------
-     * 4. 音訊系統 (完全比照 WINTER PLAYLIST 原生後台播放機制)
+     * 4. 音訊系統
      * ------------------------------------------------------------*/
     function setPlayState(active) {
       isPlaying = active;
@@ -1747,6 +1897,7 @@
 
       totalDuration = song.duration || 211;
       const ytId = extractYoutubeId(song.source);
+      const targetVolume = (typeof song.volume === 'number') ? song.volume : 1.0;
 
       if (ytId) {
         playMode = 'yt';
@@ -1763,7 +1914,7 @@
         ytIframe.src = '';
 
         const directSrc = toAbsUrl(song.source);
-        nativeAudio.volume = 1.0;
+        applySafeVolumeGain(targetVolume);
 
         if (isNewTrack || nativeAudio.src !== directSrc) {
           isAutoSwitching = isAutoNext;
