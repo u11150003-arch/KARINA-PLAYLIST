@@ -543,7 +543,8 @@
 </head>
 <body>
 
-  <audio id="native-audio" playsinline></audio>
+  <!-- 原生 Audio 元件：不綁定 Web Audio，徹底維持 iOS 系統背景音訊焦點 -->
+  <audio id="native-audio" playsinline preload="auto"></audio>
   <iframe id="yt-hidden-player" style="position:absolute; top:-9999px; left:-9999px; width:1px; height:1px;" frameborder="0" allow="autoplay; encrypted-media"></iframe>
 
   <header>
@@ -690,7 +691,7 @@
               <span>音量增益調整 (Volume Gain)</span>
               <span id="form-vol-lbl">1.00x</span>
             </label>
-            <input type="range" id="form-song-vol" min="0.3" max="2.5" step="0.05" value="1.0" style="width:100%; margin-top:4px;">
+            <input type="range" id="form-song-vol" min="0.3" max="2.0" step="0.05" value="1.0" style="width:100%; margin-top:4px;">
           </div>
 
           <div class="field-row">
@@ -785,7 +786,6 @@
       return REPO_BASE + encodeURI(fileName.replace(/^\.\//, ''));
     }
 
-    /* 圖片檔名對應表 */
     const COVER_UP = "UP_cover.jpg";
     const COVER_GOOD_STUFF = "GOOD STUFF_cover.jpg";
     const COVER_16_BIT = "16 Bit_cover.jpg";
@@ -803,7 +803,6 @@
     const COVER_YOU_KNOW = "06Rock_cover.jpg";
     const MEMORY_BOX_VINYL_LABEL = "KARINA MEMORY BOX_cover.JPG";
 
-    /* LRC 歌詞解析 */
     function parseLrc(txt) {
       if (!txt) return [];
       const lines = txt.split('\n');
@@ -832,7 +831,6 @@
       return `[${String(m).padStart(2,'0')}:${String(s).padStart(5,'0')}]`;
     }
 
-    /* 內建歌詞字串 */
     const LRC_TENDERNESS = `[00:05.51]단순함이라는 거 우린 알 수 있을까
 我們能否真正理解，何謂簡單？
 [00:20.11]사랑은 먼 별에서 온 복잡한 일들만 같고
@@ -1034,6 +1032,83 @@
 [00:30.08]오늘 아침 쑥 캐고 옴
 今天早上還去採了艾草`;
 
+    const LRC_16_BIT = `[00:12.26]I'm breaking down, 이 깊은 어둠, 속에 갇혀 나
+我逐漸崩潰，困在這片深邃的黑暗之中
+[00:18.44]I've had enough, 똑같은 환상, 속에 빠졌나
+我已厭倦，難道又陷入那千篇一律的幻象 
+[00:25.01]These days, I can't picture my face
+這些日子，我甚至看不清自己的模樣
+[00:30.39]눈을 뜨면 다를까, ah, ah, ah, ah
+若睜開雙眼，一切是否就會不同
+[00:36.96]I'm sixteen bit, pixelated
+我化作十六位元的像素，逐漸失真
+[00:40.35]I can't focus on me, baby, no
+迷失了焦距，再也看不清自己
+[00:45.52]Ah, ah, ah, ah
+[00:48.43]Ah, ah, ah, ah (Ooh)
+[00:51.16]Pixelated (Ooh) in a thousand pieces (Ooh)
+像素化的我，碎裂成千萬片段
+[00:56.85]되돌려줘, so real me, bye, ah, ah, ah, ah
+將真實的我還給我，就此告別
+[01:03.83]I can't do anything to stop me, can't no more
+無法阻止失控的自己，已無能為力
+[01:10.01]비겁해진 attitude, no more gain, no more (Gain, no more)
+日漸怯懦的姿態，一無所獲，再無（再無所獲） 
+[01:26.67]Baby
+[01:28.25]Now, shut that "Blah, blah, blah," is that all you got? Yeah
+現在，收起那些「喋喋不休」，你就只有這點本事？是的
+[01:32.83]Daily
+日復一日
+[01:34.23]Been so much a battle or two (Battle or two), not for you (Not for you)
+早已歷經無數次苦戰，但不是為了你
+[01:39.58]Sorry, camouflaged
+抱歉，我曾以偽裝掩飾自己
+[01:41.97]Don't you wanna breathe? Come out (Don't you wanna breathe?)
+難道不想好好呼吸？走出來吧（難道不想呼吸嗎？）
+[01:45.75]Story, without any lies
+褪去謊言的故事
+[01:48.54]A tragedy, Ms. R.I.P, I came for a reason
+一場悲劇，輓歌女士，我的到來自有理由
+[01:51.24]These days, I can't picture my face
+這些日子，我已看不清自己的模樣
+[01:56.61]벗어날 수 없을까
+難道再也無法掙脫了嗎
+[01:59.21]Ah, ah, ah, ah
+[02:02.20]Ah, ah, ah, ah (Ooh)
+[02:04.98]Pixelated (Ooh) in a thousand pieces (Ooh)
+像素化的我，碎裂成千萬片段
+[02:10.76]되돌려줘, so real me, bye, ah, ah, ah, ah
+把真實的我還給我，就此告別
+[02:17.53]I can't do anything to stop me, can't no more
+無法阻止失控的自己，已無能為力
+[02:23.91]비겁해진 attitude, no more gain, no more (No more)
+日漸怯懦的姿態，不再奢求，不再繼續（不再繼續）
+[02:27.62]Click once to repeat, click once to delete
+點擊重播，一鍵刪除 
+[02:32.01]Oh, look, I'm faded now
+噢，看吧，我已逐漸消散 
+[02:33.80]Click once to repeat, click once to delete
+點擊重播，一鍵刪除
+[02:38.18]Oh, I'm gon' phase you out
+噢，我要將你徹底抹去
+[02:39.78]Click once to repeat (Once to repeat), click once to delete (Once to delete)
+點擊重播（反覆重播），一鍵刪除（就此抹除） 
+[02:44.16]Oh, look, I'm faded now
+看吧，我已逐漸消散 
+[02:45.95]Click once to repeat (Once to repeat), click once to delete (Once to delete)
+點擊重播（反覆重播），一鍵刪除（就此抹除)
+[02:50.44]Once to delete
+就此抹除
+[02:54.62]Ah-ah-ah-ah, ah-ah-ah-ah
+[03:06.99]Ah-ah-ah-ah, ah-ah-ah-ah
+[03:16.94]I'm sixteen bit, pixelated, 아무것도 찾지 못해, no
+我化作十六位元的像素，卻什麼也尋不著
+[03:25.43]Ah-ah-ah-ah, ah-ah-ah-ah
+[03:33.00]Hmm
+[03:34.72]Hmm
+[03:38.11]Hmm
+[03:41.09]Hmm`;
+
     const TWO_PLAYLISTS_DATA = [
       {
         id: "pl_karina_song",
@@ -1080,7 +1155,7 @@
             imgOffsetY: 0.0,
             duration: 198,
             volume: 1.0,
-            lyrics: []
+            lyrics: parseLrc(LRC_16_BIT)
           },
           {
             title: "May the TENDERNESS be with you!",
@@ -1121,7 +1196,7 @@
             imgOffsetX: 0.0,
             imgOffsetY: 0.0,
             duration: 205,
-            volume: 2.0, // 音量調大為 2.0x 增益，與其他首相當
+            volume: 1.0,
             lyrics: parseLrc(LRC_ORANGE)
           }
         ]
@@ -1142,7 +1217,7 @@
             imgOffsetX: 0.0,
             imgOffsetY: 0.0,
             duration: 220,
-            volume: 2.0, // 音量調大為 2.0x
+            volume: 1.0,
             lyrics: []
           },
           {
@@ -1156,7 +1231,7 @@
             imgOffsetX: 0.0,
             imgOffsetY: 0.0,
             duration: 210,
-            volume: 2.0, // 音量調大為 2.0x
+            volume: 1.0,
             lyrics: []
           },
           {
@@ -1170,7 +1245,7 @@
             imgOffsetX: 0.0,
             imgOffsetY: 0.0,
             duration: 198,
-            volume: 2.0, // 音量調大為 2.0x
+            volume: 1.0,
             lyrics: []
           },
           {
@@ -1184,7 +1259,7 @@
             imgOffsetX: 0.0,
             imgOffsetY: 0.0,
             duration: 245,
-            volume: 2.0, // 音量調大為 2.0x
+            volume: 1.0,
             lyrics: []
           },
           {
@@ -1198,7 +1273,7 @@
             imgOffsetX: 0.0,
             imgOffsetY: 0.0,
             duration: 215,
-            volume: 2.0, // 音量調大為 2.0x
+            volume: 1.0,
             lyrics: []
           },
           {
@@ -1212,7 +1287,7 @@
             imgOffsetX: 0.0,
             imgOffsetY: 0.0,
             duration: 190,
-            volume: 2.0, // 音量調大為 2.0x
+            volume: 1.0,
             lyrics: []
           }
         ]
@@ -1238,39 +1313,6 @@
 
     const nativeAudio = document.getElementById('native-audio');
     const ytIframe = document.getElementById('yt-hidden-player');
-
-    /* Web Audio API 增益節點（突破 1.0 上限實現 2.0x 音量放大） */
-    let audioCtx = null;
-    let gainNode = null;
-    let audioSourceNode = null;
-
-    function initWebAudioGain() {
-      if (!audioCtx) {
-        const AudioContextClass = window.AudioContext || window.webkitAudioContext;
-        audioCtx = new AudioContextClass();
-        gainNode = audioCtx.createGain();
-        audioSourceNode = audioCtx.createMediaElementSource(nativeAudio);
-        audioSourceNode.connect(gainNode);
-        gainNode.connect(audioCtx.destination);
-      }
-      if (audioCtx.state === 'suspended') {
-        audioCtx.resume();
-      }
-    }
-
-    function applyVolumeGain(vol) {
-      try {
-        initWebAudioGain();
-        if (gainNode) {
-          gainNode.gain.setValueAtTime(vol, audioCtx.currentTime);
-          nativeAudio.volume = 1.0;
-        } else {
-          nativeAudio.volume = Math.min(1.0, Math.max(0, vol));
-        }
-      } catch (err) {
-        nativeAudio.volume = Math.min(1.0, Math.max(0, vol));
-      }
-    }
 
     function updateMediaSession(song, pl) {
       if ('mediaSession' in navigator) {
@@ -1619,7 +1661,7 @@
     renderLoop();
 
     /* -------------------------------------------------------------
-     * 4. 音訊系統
+     * 4. 音訊系統 (完全比照 WINTER PLAYLIST 原生後台播放機制)
      * ------------------------------------------------------------*/
     function setPlayState(active) {
       isPlaying = active;
@@ -1705,7 +1747,6 @@
 
       totalDuration = song.duration || 211;
       const ytId = extractYoutubeId(song.source);
-      const targetVolume = (typeof song.volume === 'number') ? song.volume : 1.0;
 
       if (ytId) {
         playMode = 'yt';
@@ -1722,7 +1763,7 @@
         ytIframe.src = '';
 
         const directSrc = toAbsUrl(song.source);
-        applyVolumeGain(targetVolume);
+        nativeAudio.volume = 1.0;
 
         if (isNewTrack || nativeAudio.src !== directSrc) {
           isAutoSwitching = isAutoNext;
@@ -1813,7 +1854,7 @@
     window.addEventListener('mouseup', handleSeekEnd);
 
     seekContainer.addEventListener('touchstart', (e) => { isDraggingSeek = true; handleSeekMove(e); }, { passive: false });
-    window.addEventListener('touchmove', handleSeekMove);
+    window.addEventListener('touchmove', handleSeekMove, { passive: false });
     window.addEventListener('touchend', handleSeekEnd);
 
     /* -------------------------------------------------------------
