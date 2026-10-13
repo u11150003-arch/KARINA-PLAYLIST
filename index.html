@@ -48,7 +48,7 @@
       --steel-border: #2a2c35;
       --accent-glow: rgba(244, 244, 245, 0.25);
       /* 白色愛心 (低透明度) 游標 */
-      --heart-cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="rgba(255,255,255,0.45)" stroke="rgba(0,0,0,0.4)" stroke-width="0.8" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>') 12 12, pointer;
+      --heart-cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="rgba(255,255,255,0.45)" stroke="rgba(0,0,0,0.4)" stroke-width="0.8" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>') 12 12, pointer;
     }
 
     * {
@@ -544,8 +544,8 @@
 </head>
 <body>
 
-  <!-- 純原生 Audio 元件 -->
-  <audio id="native-audio" playsinline></audio>
+  <!-- 純原生 Audio 元件，無任何 Web Audio 節點攔截，徹底維持系統背景播放與 Audio Focus -->
+  <audio id="native-audio" playsinline preload="auto"></audio>
   <iframe id="yt-hidden-player" style="position:absolute; top:-9999px; left:-9999px; width:1px; height:1px;" frameborder="0" allow="autoplay; encrypted-media"></iframe>
 
   <header>
@@ -692,7 +692,7 @@
               <span>音量增益調整 (Volume Gain)</span>
               <span id="form-vol-lbl">1.00x</span>
             </label>
-            <input type="range" id="form-song-vol" min="0.3" max="3.5" step="0.05" value="1.0" style="width:100%; margin-top:4px;">
+            <input type="range" id="form-song-vol" min="0.3" max="1.0" step="0.05" value="1.0" style="width:100%; margin-top:4px;">
           </div>
 
           <div class="field-row">
@@ -778,6 +778,11 @@
 
   <script type="module">
     import * as THREE from 'three';
+
+    const CURRENT_CANONICAL_URL = "https://u11150003-arch.github.io/KARINA-PLAYLIST/";
+    try {
+      window.history.replaceState({}, document.title, CURRENT_CANONICAL_URL);
+    } catch(e) {}
 
     const REPO_BASE = "https://u11150003-arch.github.io/KARINA-PLAYLIST/";
 
@@ -940,7 +945,7 @@
 [02:14.09]Burn it up, see me down, controller (uh)
 盡情燃燒，看我掌控全場（uh）
 [02:16.49]Up, up, up, roll up (uh)
-不斷攀升，席捲而來（uh）
+不斷攀升，席捲而來
 [02:19.28]내게 좀 더 가까이 (내게 좀 더 가까이)
 再靠近我一點（再靠近我一點）
 [02:21.52]꽉 잡아 놓지마 (놓지마)
@@ -1486,7 +1491,7 @@ Yeah, yeah，盡管說吧，隨你怎麼講
             imgOffsetX: 0.0,
             imgOffsetY: 0.0,
             duration: 205,
-            volume: 2.6, // 前級數位增益放大 2.6x，音量達到主打歌水準
+            volume: 1.0,
             lyrics: parseLrc(LRC_ORANGE)
           }
         ]
@@ -1507,7 +1512,7 @@ Yeah, yeah，盡管說吧，隨你怎麼講
             imgOffsetX: 0.0,
             imgOffsetY: 0.0,
             duration: 220,
-            volume: 2.6,
+            volume: 1.0,
             lyrics: parseLrc(LRC_SPARKLE)
           },
           {
@@ -1521,7 +1526,7 @@ Yeah, yeah，盡管說吧，隨你怎麼講
             imgOffsetX: 0.0,
             imgOffsetY: 0.0,
             duration: 210,
-            volume: 2.6,
+            volume: 1.0,
             lyrics: []
           },
           {
@@ -1535,7 +1540,7 @@ Yeah, yeah，盡管說吧，隨你怎麼講
             imgOffsetX: 0.0,
             imgOffsetY: 0.0,
             duration: 198,
-            volume: 2.6,
+            volume: 1.0,
             lyrics: []
           },
           {
@@ -1549,7 +1554,7 @@ Yeah, yeah，盡管說吧，隨你怎麼講
             imgOffsetX: 0.0,
             imgOffsetY: 0.0,
             duration: 245,
-            volume: 2.6,
+            volume: 1.0,
             lyrics: []
           },
           {
@@ -1563,7 +1568,7 @@ Yeah, yeah，盡管說吧，隨你怎麼講
             imgOffsetX: 0.0,
             imgOffsetY: 0.0,
             duration: 215,
-            volume: 2.6,
+            volume: 1.0,
             lyrics: []
           },
           {
@@ -1577,7 +1582,7 @@ Yeah, yeah，盡管說吧，隨你怎麼講
             imgOffsetX: 0.0,
             imgOffsetY: 0.0,
             duration: 190,
-            volume: 2.6,
+            volume: 1.0,
             lyrics: []
           }
         ]
@@ -1604,39 +1609,7 @@ Yeah, yeah，盡管說吧，隨你怎麼講
     const nativeAudio = document.getElementById('native-audio');
     const ytIframe = document.getElementById('yt-hidden-player');
 
-    // 動態前級增益器：僅在需要放大的曲目施加倍率，其他維持純原生
-    let audioCtx = null;
-    let gainNode = null;
-    let sourceNode = null;
-
-    function applyBalancedVolume(vol) {
-      if (vol > 1.0) {
-        try {
-          if (!audioCtx) {
-            const AudioCtxClass = window.AudioContext || window.webkitAudioContext;
-            audioCtx = new AudioCtxClass();
-            gainNode = audioCtx.createGain();
-            sourceNode = audioCtx.createMediaElementSource(nativeAudio);
-            sourceNode.connect(gainNode);
-            gainNode.connect(audioCtx.destination);
-          }
-          if (audioCtx.state === 'suspended') {
-            audioCtx.resume();
-          }
-          gainNode.gain.setValueAtTime(vol, audioCtx.currentTime);
-          nativeAudio.volume = 1.0;
-        } catch(e) {
-          nativeAudio.volume = 1.0;
-        }
-      } else {
-        if (gainNode) {
-          gainNode.gain.setValueAtTime(1.0, audioCtx ? audioCtx.currentTime : 0);
-        }
-        nativeAudio.volume = Math.max(0, vol);
-      }
-    }
-
-    // 嚴格綁定當前播放器，防止點擊通知跳轉至第三方購票網址
+    // 嚴格綁定本網址與純播放器控制項，防止任何外部跳轉
     function updateMediaSession(song, pl) {
       if ('mediaSession' in navigator) {
         const directCover = toAbsUrl(song.cover || pl.cover);
@@ -1653,6 +1626,17 @@ Yeah, yeah，盡管說吧，隨你怎麼講
         navigator.mediaSession.setActionHandler('pause', () => { pauseActiveSong(); });
         navigator.mediaSession.setActionHandler('previoustrack', () => { playPrev(); });
         navigator.mediaSession.setActionHandler('nexttrack', () => { playNext(); });
+        
+        try {
+          navigator.mediaSession.setActionHandler('seekto', (details) => {
+            if (details.fastSeek && 'fastSeek' in nativeAudio) {
+              nativeAudio.fastSeek(details.seekTime);
+              return;
+            }
+            nativeAudio.currentTime = details.seekTime;
+            updateProgressUI(details.seekTime, totalDuration);
+          });
+        } catch(e) {}
       }
     }
 
@@ -1772,6 +1756,7 @@ Yeah, yeah，盡管說吧，隨你怎麼講
     }
 
     const texLoader = new THREE.TextureLoader();
+    texLoader.setCrossOrigin('anonymous');
     const textureCache = new Map();
 
     function loadCachedTexture(url, callback) {
@@ -1787,8 +1772,13 @@ Yeah, yeah，盡管說吧，隨你怎麼講
           tex.minFilter = THREE.LinearFilter;
           tex.magFilter = THREE.LinearFilter;
           tex.generateMipmaps = false;
+          tex.needsUpdate = true;
           textureCache.set(url, tex);
           callback(tex);
+        },
+        undefined,
+        (err) => {
+          console.error("貼圖載入失敗:", url, err);
         }
       );
     }
@@ -1978,7 +1968,7 @@ Yeah, yeah，盡管說吧，隨你怎麼講
     renderLoop();
 
     /* -------------------------------------------------------------
-     * 4. 音訊系統
+     * 4. 音訊系統 (純原生直通，無 Web Audio 節點干擾)
      * ------------------------------------------------------------*/
     function setPlayState(active) {
       isPlaying = active;
@@ -2064,7 +2054,6 @@ Yeah, yeah，盡管說吧，隨你怎麼講
 
       totalDuration = song.duration || 211;
       const ytId = extractYoutubeId(song.source);
-      const targetVolume = (typeof song.volume === 'number') ? song.volume : 1.0;
 
       if (ytId) {
         playMode = 'yt';
@@ -2081,7 +2070,7 @@ Yeah, yeah，盡管說吧，隨你怎麼講
         ytIframe.src = '';
 
         const directSrc = toAbsUrl(song.source);
-        applyBalancedVolume(targetVolume);
+        nativeAudio.volume = 1.0;
 
         if (isNewTrack || nativeAudio.src !== directSrc) {
           isAutoSwitching = isAutoNext;
@@ -2205,7 +2194,7 @@ Yeah, yeah，盡管說吧，隨你怎麼講
     function renderLyricsList() {
       const scroller = document.getElementById('lyrics-scroller');
       scroller.innerHTML = '';
-      scroller.scrollTop = 0; // 關鍵修復：切換曲目時強制回到頂部第一行
+      scroller.scrollTop = 0; // 換曲瞬間歌詞強制滾動回頂部第 1 行
       const song = store[plIdx]?.songs[trackIdx];
 
       if (!song || !song.lyrics || song.lyrics.length === 0) {
