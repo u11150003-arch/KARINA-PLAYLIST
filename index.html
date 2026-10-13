@@ -9,7 +9,7 @@
 
   <title>KARINA PLAYLIST</title>
 
-  <!-- Open Graph 標籤：修正正確指向播放器音樂網址，非售票系統 -->
+  <!-- Open Graph 標籤 -->
   <meta property="og:site_name" content="KARINA PLAYLIST">
   <meta property="og:title" content="KARINA PLAYLIST">
   <meta property="og:description" content="Playlist for KARINA">
@@ -17,8 +17,8 @@
   <meta property="og:type" content="music.playlist">
   <meta property="og:url" content="https://u11150003-arch.github.io/KARINA-PLAYLIST/">
   
-  <meta property="og:image" content="./UP_cover.jpg">
-  <meta property="og:image:secure_url" content="./UP_cover.jpg">
+  <meta property="og:image" content="UP_cover.jpg">
+  <meta property="og:image:secure_url" content="UP_cover.jpg">
   <meta property="og:image:type" content="image/jpeg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
@@ -26,7 +26,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="KARINA PLAYLIST">
   <meta name="twitter:description" content="Playlist for KARINA">
-  <meta name="twitter:image" content="./UP_cover.jpg">
+  <meta name="twitter:image" content="UP_cover.jpg">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -691,7 +691,7 @@
               <span>音量增益調整 (Volume Gain)</span>
               <span id="form-vol-lbl">1.00x</span>
             </label>
-            <input type="range" id="form-song-vol" min="0.3" max="2.5" step="0.05" value="1.0" style="width:100%; margin-top:4px;">
+            <input type="range" id="form-song-vol" min="0.3" max="1.0" step="0.05" value="1.0" style="width:100%; margin-top:4px;">
           </div>
 
           <div class="field-row">
@@ -778,7 +778,6 @@
   <script type="module">
     import * as THREE from 'three';
 
-    // 乾淨路徑，消除 ./ 帶來的延遲
     const COVER_UP = "UP_cover.jpg";
     const COVER_GOOD_STUFF = "GOOD STUFF_cover.jpg";
     const COVER_16_BIT = "16 Bit_cover.jpg";
@@ -1390,7 +1389,6 @@ Yeah, yeah，盡管說吧，隨你怎麼講
 [02:54.91]生き抜いていこう
 都一起堅持活下去`;
 
-    // 關鍵優化：音量設定明確分級，其他歌曲不衰減，第二歌單與《你知道嗎》經由動態軟體增益匹配
     const TWO_PLAYLISTS_DATA = [
       {
         id: "pl_karina_song",
@@ -1478,7 +1476,7 @@ Yeah, yeah，盡管說吧，隨你怎麼講
             imgOffsetX: 0.0,
             imgOffsetY: 0.0,
             duration: 205,
-            volume: 2.2, // 針對錄音音壓補償至 2.2x
+            volume: 1.0,
             lyrics: parseLrc(LRC_ORANGE)
           }
         ]
@@ -1499,7 +1497,7 @@ Yeah, yeah，盡管說吧，隨你怎麼講
             imgOffsetX: 0.0,
             imgOffsetY: 0.0,
             duration: 220,
-            volume: 2.2,
+            volume: 1.0,
             lyrics: parseLrc(LRC_SPARKLE)
           },
           {
@@ -1513,7 +1511,7 @@ Yeah, yeah，盡管說吧，隨你怎麼講
             imgOffsetX: 0.0,
             imgOffsetY: 0.0,
             duration: 210,
-            volume: 2.2,
+            volume: 1.0,
             lyrics: []
           },
           {
@@ -1527,7 +1525,7 @@ Yeah, yeah，盡管說吧，隨你怎麼講
             imgOffsetX: 0.0,
             imgOffsetY: 0.0,
             duration: 198,
-            volume: 2.2,
+            volume: 1.0,
             lyrics: []
           },
           {
@@ -1541,7 +1539,7 @@ Yeah, yeah，盡管說吧，隨你怎麼講
             imgOffsetX: 0.0,
             imgOffsetY: 0.0,
             duration: 245,
-            volume: 2.2,
+            volume: 1.0,
             lyrics: []
           },
           {
@@ -1555,7 +1553,7 @@ Yeah, yeah，盡管說吧，隨你怎麼講
             imgOffsetX: 0.0,
             imgOffsetY: 0.0,
             duration: 215,
-            volume: 2.2,
+            volume: 1.0,
             lyrics: []
           },
           {
@@ -1569,7 +1567,7 @@ Yeah, yeah，盡管說吧，隨你怎麼講
             imgOffsetX: 0.0,
             imgOffsetY: 0.0,
             duration: 190,
-            volume: 2.2,
+            volume: 1.0,
             lyrics: []
           }
         ]
@@ -1596,59 +1594,7 @@ Yeah, yeah，盡管說吧，隨你怎麼講
     const nativeAudio = document.getElementById('native-audio');
     const ytIframe = document.getElementById('yt-hidden-player');
 
-    /* 螢幕常亮喚醒鎖 (Screen Wake Lock)：解決無觸碰自動熄屏中斷播放 */
-    let wakeLockSentinel = null;
-    async function requestScreenWakeLock() {
-      try {
-        if ('wakeLock' in navigator && !wakeLockSentinel) {
-          wakeLockSentinel = await navigator.wakeLock.request('screen');
-          wakeLockSentinel.addEventListener('release', () => {
-            wakeLockSentinel = null;
-          });
-        }
-      } catch (err) {}
-    }
-
-    function releaseScreenWakeLock() {
-      if (wakeLockSentinel) {
-        wakeLockSentinel.release().catch(() => {});
-        wakeLockSentinel = null;
-      }
-    }
-
-    document.addEventListener('visibilitychange', () => {
-      if (document.visibilityState === 'visible' && isPlaying) {
-        requestScreenWakeLock();
-      }
-    });
-
-    /* 動態音量倍率處理：不改動其他首音量，且不破壞原生物件焦點 */
-    function applySmartVolume(targetVol) {
-      if (targetVol <= 1.0) {
-        nativeAudio.volume = Math.max(0, targetVol);
-      } else {
-        nativeAudio.volume = 1.0;
-        // 針對需要放大的歌曲微調增益節點（僅在必要時掛接）
-        try {
-          if (!window._audioCtx) {
-            const AudioContextClass = window.AudioContext || window.webkitAudioContext;
-            window._audioCtx = new AudioContextClass();
-            window._gainNode = window._audioCtx.createGain();
-            window._sourceNode = window._audioCtx.createMediaElementSource(nativeAudio);
-            window._sourceNode.connect(window._gainNode);
-            window._gainNode.connect(window._audioCtx.destination);
-          }
-          if (window._audioCtx.state === 'suspended') {
-            window._audioCtx.resume();
-          }
-          window._gainNode.gain.setValueAtTime(targetVol, window._audioCtx.currentTime);
-        } catch (e) {
-          nativeAudio.volume = 1.0;
-        }
-      }
-    }
-
-    /* 系統鎖定畫面與媒體中心推播 */
+    // 參照 WINTER PLAYLIST：最純粹穩定的 MediaSession 鎖定畫面推播
     function updateMediaSession(song, pl) {
       if ('mediaSession' in navigator) {
         const directCover = toAbsUrl(song.cover || pl.cover);
@@ -1677,7 +1623,7 @@ Yeah, yeah，盡管說吧，隨你怎麼講
     }
 
     /* -------------------------------------------------------------
-     * 3. Three.js 3D 渲染
+     * 3. Three.js 3D 渲染 (參照 WINTER PLAYLIST：原生非同步載圖)
      * ------------------------------------------------------------*/
     const container = document.getElementById('threejs-box');
     const scene = new THREE.Scene();
@@ -1784,7 +1730,6 @@ Yeah, yeah，盡管說吧，隨你怎麼講
     }
 
     const texLoader = new THREE.TextureLoader();
-    texLoader.setCrossOrigin('anonymous');
     const textureCache = new Map();
 
     function loadCachedTexture(url, callback) {
@@ -1800,13 +1745,8 @@ Yeah, yeah，盡管說吧，隨你怎麼講
           tex.minFilter = THREE.LinearFilter;
           tex.magFilter = THREE.LinearFilter;
           tex.generateMipmaps = false;
-          tex.needsUpdate = true;
           textureCache.set(url, tex);
           callback(tex);
-        },
-        undefined,
-        (err) => {
-          console.error("貼圖載入失敗:", url, err);
         }
       );
     }
@@ -1817,8 +1757,8 @@ Yeah, yeah，盡管說吧，隨你怎麼講
       new THREE.MeshStandardMaterial({ color: 0x14151a, roughness: 0.5 }),
       new THREE.MeshStandardMaterial({ color: 0x14151a, roughness: 0.5 }),
       new THREE.MeshStandardMaterial({ color: 0x14151a, roughness: 0.5 }),
-      new THREE.MeshStandardMaterial({ color: 0x222226, roughness: 0.35 }),
-      new THREE.MeshStandardMaterial({ color: 0x222226, roughness: 0.35 })
+      new THREE.MeshStandardMaterial({ color: 0xffffff, roughness: 0.35 }),
+      new THREE.MeshStandardMaterial({ color: 0xffffff, roughness: 0.35 })
     ];
     const coverMesh = new THREE.Mesh(coverGeo, coverSideMat);
     coverMesh.position.set(-0.55, 0, 0);
@@ -1869,21 +1809,18 @@ Yeah, yeah，盡管說吧，隨你怎麼講
         tex.repeat.set(1 / scale, 1 / scale);
         tex.offset.set((1 - 1/scale)/2 - (ox / scale), (1 - 1/scale)/2 - (oy / scale));
         coverMesh.material[4].map = tex;
-        coverMesh.material[4].color.set(0xffffff);
         coverMesh.material[4].needsUpdate = true;
       });
 
       loadCachedTexture(directBack, (tex) => {
         if (thisSeq !== currentTextureSeq) return;
         coverMesh.material[5].map = tex;
-        coverMesh.material[5].color.set(0xffffff);
         coverMesh.material[5].needsUpdate = true;
       });
 
       loadCachedTexture(directLabel, (tex) => {
         if (thisSeq !== currentTextureSeq) return;
         labelMesh.material.map = tex;
-        labelMesh.material.color.set(0xffffff);
         labelMesh.material.needsUpdate = true;
       });
     }
@@ -1996,17 +1933,15 @@ Yeah, yeah，盡管說吧，隨你怎麼講
     renderLoop();
 
     /* -------------------------------------------------------------
-     * 4. 音訊系統
+     * 4. 音訊系統 (完全純原生，杜絕 Web Audio 造成卡死)
      * ------------------------------------------------------------*/
     function setPlayState(active) {
       isPlaying = active;
       const svg = document.getElementById('play-svg-icon');
       if (active) {
         svg.innerHTML = '<path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>';
-        requestScreenWakeLock(); // 音樂播放時維持螢幕恆亮
       } else {
         svg.innerHTML = '<path d="M8 5v14l11-7z"/>';
-        releaseScreenWakeLock(); // 暫停時釋放防休眠鎖
       }
       if ('mediaSession' in navigator) {
         navigator.mediaSession.playbackState = active ? "playing" : "paused";
@@ -2084,7 +2019,6 @@ Yeah, yeah，盡管說吧，隨你怎麼講
 
       totalDuration = song.duration || 211;
       const ytId = extractYoutubeId(song.source);
-      const targetVolume = (typeof song.volume === 'number') ? song.volume : 1.0;
 
       if (ytId) {
         playMode = 'yt';
@@ -2101,7 +2035,7 @@ Yeah, yeah，盡管說吧，隨你怎麼講
         ytIframe.src = '';
 
         const directSrc = toAbsUrl(song.source);
-        applySmartVolume(targetVolume);
+        nativeAudio.volume = 1.0;
 
         if (isNewTrack || nativeAudio.src !== directSrc) {
           isAutoSwitching = isAutoNext;
@@ -2196,7 +2130,7 @@ Yeah, yeah，盡管說吧，隨你怎麼講
     window.addEventListener('touchend', handleSeekEnd);
 
     /* -------------------------------------------------------------
-     * 6. 歌詞渲染 (切換歌曲強制歸零捲動至第 1 行)
+     * 6. 歌詞渲染 (切換歌曲即時捲動歸零)
      * ------------------------------------------------------------*/
     function syncLyrics(sec) {
       const song = store[plIdx]?.songs[trackIdx];
@@ -2225,7 +2159,7 @@ Yeah, yeah，盡管說吧，隨你怎麼講
     function renderLyricsList() {
       const scroller = document.getElementById('lyrics-scroller');
       scroller.innerHTML = '';
-      scroller.scrollTop = 0; // 關鍵修復：切換曲目瞬間立刻滾動回最上方第一行
+      scroller.scrollTop = 0; // 核心修復：換曲時強制歌詞立刻回到第一行
       const song = store[plIdx]?.songs[trackIdx];
 
       if (!song || !song.lyrics || song.lyrics.length === 0) {
