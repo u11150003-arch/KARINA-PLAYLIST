@@ -444,42 +444,52 @@
       display: flex;
       align-items: center;
       gap: 12px;
+      min-width: 0;
     }
+    /* 針對手機 Safari 強制鎖定 SVG 圖標尺寸，防止縮小為 0 */
     .menu-item-icon {
-      width: 20px;
-      height: 20px;
-      fill: #9ca3af;
+      width: 22px;
+      height: 22px;
+      min-width: 22px;
+      min-height: 22px;
       display: flex;
       align-items: center;
       justify-content: center;
       flex-shrink: 0;
-      transition: fill 0.2s ease;
     }
-    .menu-link-item:hover .menu-item-icon {
-      fill: #ffffff;
+    .menu-item-icon svg {
+      width: 20px;
+      height: 20px;
+      fill: #d1d5db;
+      display: block;
     }
     .menu-item-title {
       color: #ffffff;
       font-weight: 600;
       font-size: 0.86rem;
       letter-spacing: 0.5px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
     .menu-item-desc {
       font-size: 0.72rem;
       color: #9ca3af;
       font-family: 'Chocolate Classical Sans', sans-serif;
-      margin-top: 1px;
+      margin-top: 2px;
     }
     .menu-item-arrow {
       width: 14px;
       height: 14px;
+      min-width: 14px;
       fill: #6b7280;
+      flex-shrink: 0;
     }
 
     /* 現代低飽和說明提示欄位 */
     .menu-notice-card {
-      margin-top: 10px;
-      padding: 12px 14px;
+      margin-top: 8px;
+      padding: 11px 13px;
       background: #121319;
       border: 1px solid #232530;
       border-radius: 8px;
@@ -490,6 +500,7 @@
     .menu-notice-icon {
       width: 16px;
       height: 16px;
+      min-width: 16px;
       fill: #9ca3af;
       flex-shrink: 0;
       margin-top: 2px;
@@ -600,7 +611,7 @@
 </head>
 <body>
 
-  <!-- 純原生 Audio 元件：不接入任何 Web Audio API，徹底維持 iOS/Android 系統背景播放焦點 -->
+  <!-- 純原生 Audio 元件，無 Web Audio 衝突以保證系統級背景連線 -->
   <audio id="native-audio" playsinline></audio>
   <iframe id="yt-hidden-player" style="position:absolute; top:-9999px; left:-9999px; width:1px; height:1px;" frameborder="0" allow="autoplay; encrypted-media"></iframe>
 
@@ -658,41 +669,49 @@
       <h3>KARINA SPACE</h3>
       <div style="display:flex; flex-direction:column; gap:6px; margin-top:14px;">
         
-        <!-- 極簡現代風格：重新整理 -->
+        <!-- Reset Playlist 重新整理 -->
         <div class="menu-link-item" id="menu-btn-reload">
           <div class="menu-item-left">
             <div class="menu-item-icon">
-              <svg viewBox="0 0 24 24"><path d="M17.65 6.35A7.958 7.958 0 0 0 12 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08A5.99 5.99 0 0 1 12 18c-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"/></svg>
+              <svg viewBox="0 0 24 24" width="20" height="20"><path d="M17.65 6.35A7.958 7.958 0 0 0 12 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08A5.99 5.99 0 0 1 12 18c-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"/></svg>
             </div>
             <div>
-              <div class="menu-item-title">Reset Playlist</div>
+              <div class="menu-item-title">Reset Playlist 重新整理</div>
               <div class="menu-item-desc">重新整理並回到預設曲目 (UP)</div>
             </div>
           </div>
-          <svg class="menu-item-arrow" viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/></svg>
+          <svg class="menu-item-arrow" viewBox="0 0 24 24" width="14" height="14"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/></svg>
         </div>
 
-        <!-- 極簡現代風格：管理後台 -->
+        <!-- System Access 管理者設定 -->
         <div class="menu-link-item" id="menu-btn-admin">
           <div class="menu-item-left">
             <div class="menu-item-icon">
-              <svg viewBox="0 0 24 24"><path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/></svg>
+              <svg viewBox="0 0 24 24" width="20" height="20"><path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/></svg>
             </div>
             <div>
-              <div class="menu-item-title">System Access</div>
+              <div class="menu-item-title">System Access 管理者設定</div>
               <div class="menu-item-desc">曲目、封面與介面參數設定</div>
             </div>
           </div>
-          <svg class="menu-item-arrow" viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/></svg>
+          <svg class="menu-item-arrow" viewBox="0 0 24 24" width="14" height="14"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/></svg>
         </div>
 
       </div>
 
-      <!-- 新增：低飽和現代風格提示卡片 -->
+      <!-- 說明欄位 1：重整提示 -->
       <div class="menu-notice-card">
-        <svg class="menu-notice-icon" viewBox="0 0 24 24"><path d="M11 17h2v-6h-2v6zm1-15C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zM11 9h2V7h-2v2z"/></svg>
+        <svg class="menu-notice-icon" viewBox="0 0 24 24" width="16" height="16"><path d="M11 17h2v-6h-2v6zm1-15C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zM11 9h2V7h-2v2z"/></svg>
         <div class="menu-notice-text">
-          若歌曲或圖示無法順利載入，請點擊上方「⟳ Reset Playlist」按鍵重新整理回到預設狀態。
+          若歌曲或圖示無法順利載入，請點擊上方「Reset Playlist 重新整理」按鍵重整回到預設狀態。
+        </div>
+      </div>
+
+      <!-- 說明欄位 2：加入主畫面提示 -->
+      <div class="menu-notice-card" style="margin-top: 6px;">
+        <svg class="menu-notice-icon" viewBox="0 0 24 24" width="16" height="16"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"/></svg>
+        <div class="menu-notice-text">
+          手機點擊瀏覽器「分享」按鈕，選擇「加入主畫面」，即可開啟全螢幕獲得最佳聆聽體驗。
         </div>
       </div>
 
@@ -866,7 +885,6 @@
   <script type="module">
     import * as THREE from 'three';
 
-    // 宣告標準 Canonical URL
     const CANONICAL_URL = "https://u11150003-arch.github.io/KARINA-PLAYLIST/";
     try {
       window.history.replaceState({}, document.title, CANONICAL_URL);
@@ -1033,7 +1051,7 @@
 [02:14.09]Burn it up, see me down, controller (uh)
 盡情燃燒，看我掌控全場（uh）
 [02:16.49]Up, up, up, roll up (uh)
-不斷攀升，席捲而來（uh）
+不斷攀升，席捲而來
 [02:19.28]내게 좀 더 가까이 (내게 좀 더 가까이)
 再靠近我一點（再靠近我一點）
 [02:21.52]꽉 잡아 놓지마 (놓지마)
@@ -1716,7 +1734,7 @@ Yeah, yeah，盡管說吧，隨你怎麼講
             imgOffsetX: 0.0,
             imgOffsetY: 0.0,
             duration: 205,
-            volume: 2.8,
+            volume: 1.0,
             lyrics: parseLrc(LRC_ORANGE)
           }
         ]
@@ -1737,7 +1755,7 @@ Yeah, yeah，盡管說吧，隨你怎麼講
             imgOffsetX: 0.0,
             imgOffsetY: 0.0,
             duration: 220,
-            volume: 2.8,
+            volume: 1.0,
             lyrics: parseLrc(LRC_SPARKLE)
           },
           {
@@ -1751,7 +1769,7 @@ Yeah, yeah，盡管說吧，隨你怎麼講
             imgOffsetX: 0.0,
             imgOffsetY: 0.0,
             duration: 210,
-            volume: 2.8,
+            volume: 1.0,
             lyrics: parseLrc(LRC_HARD_TO_SAY)
           },
           {
@@ -1765,7 +1783,7 @@ Yeah, yeah，盡管說吧，隨你怎麼講
             imgOffsetX: 0.0,
             imgOffsetY: 0.0,
             duration: 198,
-            volume: 2.8,
+            volume: 1.0,
             lyrics: []
           },
           {
@@ -1779,7 +1797,7 @@ Yeah, yeah，盡管說吧，隨你怎麼講
             imgOffsetX: 0.0,
             imgOffsetY: 0.0,
             duration: 245,
-            volume: 2.8,
+            volume: 1.0,
             lyrics: []
           },
           {
@@ -1793,7 +1811,7 @@ Yeah, yeah，盡管說吧，隨你怎麼講
             imgOffsetX: 0.0,
             imgOffsetY: 0.0,
             duration: 215,
-            volume: 2.8,
+            volume: 1.0,
             lyrics: parseLrc(LRC_CANT_TAKE_EYES)
           },
           {
@@ -1807,7 +1825,7 @@ Yeah, yeah，盡管說吧，隨你怎麼講
             imgOffsetX: 0.0,
             imgOffsetY: 0.0,
             duration: 190,
-            volume: 2.8,
+            volume: 1.0,
             lyrics: []
           }
         ]
@@ -1833,36 +1851,6 @@ Yeah, yeah，盡管說吧，隨你怎麼講
 
     const nativeAudio = document.getElementById('native-audio');
     const ytIframe = document.getElementById('yt-hidden-player');
-
-    // 背景完全保活的音量放大通道
-    let globalAudioCtx = null;
-    let globalGainNode = null;
-    let globalSourceNode = null;
-
-    function applySafeVolumeGain(vol) {
-      if (vol <= 1.0) {
-        nativeAudio.volume = Math.max(0, vol);
-        if (globalGainNode) globalGainNode.gain.value = 1.0;
-        return;
-      }
-      try {
-        if (!globalAudioCtx) {
-          const AudioContextClass = window.AudioContext || window.webkitAudioContext;
-          globalAudioCtx = new AudioContextClass();
-          globalGainNode = globalAudioCtx.createGain();
-          globalSourceNode = globalAudioCtx.createMediaElementSource(nativeAudio);
-          globalSourceNode.connect(globalGainNode);
-          globalGainNode.connect(globalAudioCtx.destination);
-        }
-        if (globalAudioCtx.state === 'suspended') {
-          globalAudioCtx.resume();
-        }
-        nativeAudio.volume = 1.0;
-        globalGainNode.gain.setValueAtTime(vol, globalAudioCtx.currentTime);
-      } catch (e) {
-        nativeAudio.volume = 1.0;
-      }
-    }
 
     function updateMediaSession(song, pl) {
       if ('mediaSession' in navigator) {
@@ -2210,7 +2198,7 @@ Yeah, yeah，盡管說吧，隨你怎麼講
     renderLoop();
 
     /* -------------------------------------------------------------
-     * 4. 音訊系統
+     * 4. 音訊系統 (純原生直通模式，保證鎖屏、切換分頁不中斷)
      * ------------------------------------------------------------*/
     function setPlayState(active) {
       isPlaying = active;
@@ -2296,7 +2284,6 @@ Yeah, yeah，盡管說吧，隨你怎麼講
 
       totalDuration = song.duration || 211;
       const ytId = extractYoutubeId(song.source);
-      const targetVolume = (typeof song.volume === 'number') ? song.volume : 1.0;
 
       if (ytId) {
         playMode = 'yt';
@@ -2313,7 +2300,7 @@ Yeah, yeah，盡管說吧，隨你怎麼講
         ytIframe.src = '';
 
         const directSrc = toAbsUrl(song.source);
-        applySafeVolumeGain(targetVolume);
+        nativeAudio.volume = 1.0;
 
         if (isNewTrack || nativeAudio.src !== directSrc) {
           isAutoSwitching = isAutoNext;
@@ -2408,7 +2395,7 @@ Yeah, yeah，盡管說吧，隨你怎麼講
     window.addEventListener('touchend', handleSeekEnd);
 
     /* -------------------------------------------------------------
-     * 6. 歌詞渲染 (切換歌曲強制歸零捲動至第 1 行)
+     * 6. 歌詞渲染 (切換歌曲強制歸零捲動，避免停在最後一行)
      * ------------------------------------------------------------*/
     function syncLyrics(sec) {
       const song = store[plIdx]?.songs[trackIdx];
@@ -2436,10 +2423,11 @@ Yeah, yeah，盡管說吧，隨你怎麼講
 
     function renderLyricsList() {
       const scroller = document.getElementById('lyrics-scroller');
-      // 切換歌曲時強制關閉平滑滾動並瞬時歸零，保證 100% 停留在第 1 行
+      // 強制瞬時置頂
       scroller.style.scrollBehavior = 'auto';
       scroller.scrollTop = 0;
       scroller.innerHTML = '';
+      
       const song = store[plIdx]?.songs[trackIdx];
 
       if (!song || !song.lyrics || song.lyrics.length === 0) {
@@ -2471,7 +2459,6 @@ Yeah, yeah，盡管說吧，隨你怎麼講
         scroller.appendChild(div);
       });
 
-      // DOM 渲染後再次歸零並復原平滑滾動
       scroller.scrollTop = 0;
       scroller.style.scrollBehavior = 'smooth';
     }
