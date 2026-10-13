@@ -9,7 +9,7 @@
 
   <title>KARINA PLAYLIST</title>
 
-  <!-- Open Graph 標籤 -->
+  <!-- Open Graph 標籤：修正正確指向播放器音樂網址，非售票系統 -->
   <meta property="og:site_name" content="KARINA PLAYLIST">
   <meta property="og:title" content="KARINA PLAYLIST">
   <meta property="og:description" content="Playlist for KARINA">
@@ -17,8 +17,8 @@
   <meta property="og:type" content="music.playlist">
   <meta property="og:url" content="https://u11150003-arch.github.io/KARINA-PLAYLIST/">
   
-  <meta property="og:image" content="https://u11150003-arch.github.io/KARINA-PLAYLIST/UP_cover.jpg">
-  <meta property="og:image:secure_url" content="https://u11150003-arch.github.io/KARINA-PLAYLIST/UP_cover.jpg">
+  <meta property="og:image" content="./UP_cover.jpg">
+  <meta property="og:image:secure_url" content="./UP_cover.jpg">
   <meta property="og:image:type" content="image/jpeg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
@@ -26,7 +26,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="KARINA PLAYLIST">
   <meta name="twitter:description" content="Playlist for KARINA">
-  <meta name="twitter:image" content="https://u11150003-arch.github.io/KARINA-PLAYLIST/UP_cover.jpg">
+  <meta name="twitter:image" content="./UP_cover.jpg">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -47,8 +47,7 @@
       --steel-dim: #9ca3af;
       --steel-border: #2a2c35;
       --accent-glow: rgba(244, 244, 245, 0.25);
-      /* 白色愛心 (低透明度) 游標 */
-      --heart-cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="rgba(255,255,255,0.45)" stroke="rgba(0,0,0,0.4)" stroke-width="0.8" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>') 12 12, pointer;
+      --heart-cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="rgba(255,255,255,0.45)" stroke="rgba(0,0,0,0.4)" stroke-width="0.8" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>') 12 12, pointer;
     }
 
     * {
@@ -332,7 +331,6 @@
       color: #fff;
     }
 
-    /* 電腦版排版加寬：KARINA MEMORY BOX 完全不被截斷 */
     @media (min-width: 768px) {
       .timeline-strip, .deck-controls {
         max-width: 780px;
@@ -545,7 +543,7 @@
 </head>
 <body>
 
-  <!-- 純原生 Audio 元件，無 Web Audio 衝突以保證系統級背景連線 -->
+  <!-- 原生 Audio：直連播放，不阻斷瀏覽器音訊通道 -->
   <audio id="native-audio" playsinline></audio>
   <iframe id="yt-hidden-player" style="position:absolute; top:-9999px; left:-9999px; width:1px; height:1px;" frameborder="0" allow="autoplay; encrypted-media"></iframe>
 
@@ -693,7 +691,7 @@
               <span>音量增益調整 (Volume Gain)</span>
               <span id="form-vol-lbl">1.00x</span>
             </label>
-            <input type="range" id="form-song-vol" min="0.3" max="1.0" step="0.05" value="1.0" style="width:100%; margin-top:4px;">
+            <input type="range" id="form-song-vol" min="0.3" max="2.5" step="0.05" value="1.0" style="width:100%; margin-top:4px;">
           </div>
 
           <div class="field-row">
@@ -780,15 +778,7 @@
   <script type="module">
     import * as THREE from 'three';
 
-    const REPO_BASE = "https://u11150003-arch.github.io/KARINA-PLAYLIST/";
-
-    function toAbsUrl(fileName) {
-      if (!fileName) return '';
-      if (fileName.startsWith('http://') || fileName.startsWith('https://')) return fileName;
-      return REPO_BASE + encodeURI(fileName.replace(/^\.\//, ''));
-    }
-
-    /* 圖片檔名對應表 */
+    // 乾淨路徑，消除 ./ 帶來的延遲
     const COVER_UP = "UP_cover.jpg";
     const COVER_GOOD_STUFF = "GOOD STUFF_cover.jpg";
     const COVER_16_BIT = "16 Bit_cover.jpg";
@@ -1400,6 +1390,7 @@ Yeah, yeah，盡管說吧，隨你怎麼講
 [02:54.91]生き抜いていこう
 都一起堅持活下去`;
 
+    // 關鍵優化：音量設定明確分級，其他歌曲不衰減，第二歌單與《你知道嗎》經由動態軟體增益匹配
     const TWO_PLAYLISTS_DATA = [
       {
         id: "pl_karina_song",
@@ -1487,7 +1478,7 @@ Yeah, yeah，盡管說吧，隨你怎麼講
             imgOffsetX: 0.0,
             imgOffsetY: 0.0,
             duration: 205,
-            volume: 1.0,
+            volume: 2.2, // 針對錄音音壓補償至 2.2x
             lyrics: parseLrc(LRC_ORANGE)
           }
         ]
@@ -1508,7 +1499,7 @@ Yeah, yeah，盡管說吧，隨你怎麼講
             imgOffsetX: 0.0,
             imgOffsetY: 0.0,
             duration: 220,
-            volume: 1.0,
+            volume: 2.2,
             lyrics: parseLrc(LRC_SPARKLE)
           },
           {
@@ -1522,7 +1513,7 @@ Yeah, yeah，盡管說吧，隨你怎麼講
             imgOffsetX: 0.0,
             imgOffsetY: 0.0,
             duration: 210,
-            volume: 1.0,
+            volume: 2.2,
             lyrics: []
           },
           {
@@ -1536,7 +1527,7 @@ Yeah, yeah，盡管說吧，隨你怎麼講
             imgOffsetX: 0.0,
             imgOffsetY: 0.0,
             duration: 198,
-            volume: 1.0,
+            volume: 2.2,
             lyrics: []
           },
           {
@@ -1550,7 +1541,7 @@ Yeah, yeah，盡管說吧，隨你怎麼講
             imgOffsetX: 0.0,
             imgOffsetY: 0.0,
             duration: 245,
-            volume: 1.0,
+            volume: 2.2,
             lyrics: []
           },
           {
@@ -1564,7 +1555,7 @@ Yeah, yeah，盡管說吧，隨你怎麼講
             imgOffsetX: 0.0,
             imgOffsetY: 0.0,
             duration: 215,
-            volume: 1.0,
+            volume: 2.2,
             lyrics: []
           },
           {
@@ -1578,7 +1569,7 @@ Yeah, yeah，盡管說吧，隨你怎麼講
             imgOffsetX: 0.0,
             imgOffsetY: 0.0,
             duration: 190,
-            volume: 1.0,
+            volume: 2.2,
             lyrics: []
           }
         ]
@@ -1605,6 +1596,59 @@ Yeah, yeah，盡管說吧，隨你怎麼講
     const nativeAudio = document.getElementById('native-audio');
     const ytIframe = document.getElementById('yt-hidden-player');
 
+    /* 螢幕常亮喚醒鎖 (Screen Wake Lock)：解決無觸碰自動熄屏中斷播放 */
+    let wakeLockSentinel = null;
+    async function requestScreenWakeLock() {
+      try {
+        if ('wakeLock' in navigator && !wakeLockSentinel) {
+          wakeLockSentinel = await navigator.wakeLock.request('screen');
+          wakeLockSentinel.addEventListener('release', () => {
+            wakeLockSentinel = null;
+          });
+        }
+      } catch (err) {}
+    }
+
+    function releaseScreenWakeLock() {
+      if (wakeLockSentinel) {
+        wakeLockSentinel.release().catch(() => {});
+        wakeLockSentinel = null;
+      }
+    }
+
+    document.addEventListener('visibilitychange', () => {
+      if (document.visibilityState === 'visible' && isPlaying) {
+        requestScreenWakeLock();
+      }
+    });
+
+    /* 動態音量倍率處理：不改動其他首音量，且不破壞原生物件焦點 */
+    function applySmartVolume(targetVol) {
+      if (targetVol <= 1.0) {
+        nativeAudio.volume = Math.max(0, targetVol);
+      } else {
+        nativeAudio.volume = 1.0;
+        // 針對需要放大的歌曲微調增益節點（僅在必要時掛接）
+        try {
+          if (!window._audioCtx) {
+            const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+            window._audioCtx = new AudioContextClass();
+            window._gainNode = window._audioCtx.createGain();
+            window._sourceNode = window._audioCtx.createMediaElementSource(nativeAudio);
+            window._sourceNode.connect(window._gainNode);
+            window._gainNode.connect(window._audioCtx.destination);
+          }
+          if (window._audioCtx.state === 'suspended') {
+            window._audioCtx.resume();
+          }
+          window._gainNode.gain.setValueAtTime(targetVol, window._audioCtx.currentTime);
+        } catch (e) {
+          nativeAudio.volume = 1.0;
+        }
+      }
+    }
+
+    /* 系統鎖定畫面與媒體中心推播 */
     function updateMediaSession(song, pl) {
       if ('mediaSession' in navigator) {
         const directCover = toAbsUrl(song.cover || pl.cover);
@@ -1952,15 +1996,17 @@ Yeah, yeah，盡管說吧，隨你怎麼講
     renderLoop();
 
     /* -------------------------------------------------------------
-     * 4. 音訊系統 (純原生通道，保證背景/熄屏不中斷)
+     * 4. 音訊系統
      * ------------------------------------------------------------*/
     function setPlayState(active) {
       isPlaying = active;
       const svg = document.getElementById('play-svg-icon');
       if (active) {
         svg.innerHTML = '<path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>';
+        requestScreenWakeLock(); // 音樂播放時維持螢幕恆亮
       } else {
         svg.innerHTML = '<path d="M8 5v14l11-7z"/>';
+        releaseScreenWakeLock(); // 暫停時釋放防休眠鎖
       }
       if ('mediaSession' in navigator) {
         navigator.mediaSession.playbackState = active ? "playing" : "paused";
@@ -2038,6 +2084,7 @@ Yeah, yeah，盡管說吧，隨你怎麼講
 
       totalDuration = song.duration || 211;
       const ytId = extractYoutubeId(song.source);
+      const targetVolume = (typeof song.volume === 'number') ? song.volume : 1.0;
 
       if (ytId) {
         playMode = 'yt';
@@ -2054,14 +2101,13 @@ Yeah, yeah，盡管說吧，隨你怎麼講
         ytIframe.src = '';
 
         const directSrc = toAbsUrl(song.source);
-        nativeAudio.volume = Math.min(1.0, Math.max(0, song.volume || 1.0));
+        applySmartVolume(targetVolume);
 
         if (isNewTrack || nativeAudio.src !== directSrc) {
           isAutoSwitching = isAutoNext;
           currentSec = 0;
           updateProgressUI(0, totalDuration);
 
-          // 純原生直接指定，避免任何中斷
           nativeAudio.src = directSrc;
           
           const p = nativeAudio.play();
@@ -2150,7 +2196,7 @@ Yeah, yeah，盡管說吧，隨你怎麼講
     window.addEventListener('touchend', handleSeekEnd);
 
     /* -------------------------------------------------------------
-     * 6. 歌詞渲染 (切歌時即時重置捲動至第 1 行)
+     * 6. 歌詞渲染 (切換歌曲強制歸零捲動至第 1 行)
      * ------------------------------------------------------------*/
     function syncLyrics(sec) {
       const song = store[plIdx]?.songs[trackIdx];
@@ -2179,7 +2225,7 @@ Yeah, yeah，盡管說吧，隨你怎麼講
     function renderLyricsList() {
       const scroller = document.getElementById('lyrics-scroller');
       scroller.innerHTML = '';
-      scroller.scrollTop = 0; // 關鍵修復：切換曲目時強制回到頂部第一行
+      scroller.scrollTop = 0; // 關鍵修復：切換曲目瞬間立刻滾動回最上方第一行
       const song = store[plIdx]?.songs[trackIdx];
 
       if (!song || !song.lyrics || song.lyrics.length === 0) {
