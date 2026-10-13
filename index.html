@@ -48,7 +48,7 @@
       --steel-border: #2a2c35;
       --accent-glow: rgba(244, 244, 245, 0.25);
       /* 白色愛心 (低透明度) 游標 */
-      --heart-cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="rgba(255,255,255,0.45)" stroke="rgba(0,0,0,0.4)" stroke-width="0.8" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>') 12 12, pointer;
+      --heart-cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="rgba(255,255,255,0.45)" stroke="rgba(0,0,0,0.4)" stroke-width="0.8" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>') 12 12, pointer;
     }
 
     * {
@@ -332,6 +332,7 @@
       color: #fff;
     }
 
+    /* 電腦版排版加寬：KARINA MEMORY BOX 完全不被截斷 */
     @media (min-width: 768px) {
       .timeline-strip, .deck-controls {
         max-width: 780px;
@@ -544,8 +545,8 @@
 </head>
 <body>
 
-  <!-- 原生 Audio 元件：不強行串接 Web Audio，徹底維持 iOS 系統背景音訊焦點 -->
-  <audio id="native-audio" playsinline preload="auto"></audio>
+  <!-- 純原生 Audio 元件，無 Web Audio 衝突以保證系統級背景連線 -->
+  <audio id="native-audio" playsinline></audio>
   <iframe id="yt-hidden-player" style="position:absolute; top:-9999px; left:-9999px; width:1px; height:1px;" frameborder="0" allow="autoplay; encrypted-media"></iframe>
 
   <header>
@@ -692,7 +693,7 @@
               <span>音量增益調整 (Volume Gain)</span>
               <span id="form-vol-lbl">1.00x</span>
             </label>
-            <input type="range" id="form-song-vol" min="0.3" max="3.5" step="0.05" value="1.0" style="width:100%; margin-top:4px;">
+            <input type="range" id="form-song-vol" min="0.3" max="1.0" step="0.05" value="1.0" style="width:100%; margin-top:4px;">
           </div>
 
           <div class="field-row">
@@ -803,7 +804,7 @@
     const COVER_AS_YOU_ARE = "04_cover.jpg";
     const COVER_CANT_TAKE_EYES = "05Cant Take My Eyes Off You_cover.jpg";
     const COVER_YOU_KNOW = "06Rock_cover.jpg";
-    const MEMORY_BOX_VINYL_LABEL = "KARINA MEMORY BOX_cover.JPG";
+    const MEMORY_BOX_VINYL_LABEL = "KARINA MEMORY BOX_cover_compress.jpg";
 
     /* 強效雙行與多行容錯歌詞解析器 */
     function parseLrc(txt) {
@@ -1486,7 +1487,7 @@ Yeah, yeah，盡管說吧，隨你怎麼講
             imgOffsetX: 0.0,
             imgOffsetY: 0.0,
             duration: 205,
-            volume: 3.5, // 數位增益調大至 3.5x，大幅放大音量
+            volume: 1.0,
             lyrics: parseLrc(LRC_ORANGE)
           }
         ]
@@ -1507,7 +1508,7 @@ Yeah, yeah，盡管說吧，隨你怎麼講
             imgOffsetX: 0.0,
             imgOffsetY: 0.0,
             duration: 220,
-            volume: 3.5, // 音量放大至 3.5x
+            volume: 1.0,
             lyrics: parseLrc(LRC_SPARKLE)
           },
           {
@@ -1521,7 +1522,7 @@ Yeah, yeah，盡管說吧，隨你怎麼講
             imgOffsetX: 0.0,
             imgOffsetY: 0.0,
             duration: 210,
-            volume: 3.5,
+            volume: 1.0,
             lyrics: []
           },
           {
@@ -1535,7 +1536,7 @@ Yeah, yeah，盡管說吧，隨你怎麼講
             imgOffsetX: 0.0,
             imgOffsetY: 0.0,
             duration: 198,
-            volume: 3.5,
+            volume: 1.0,
             lyrics: []
           },
           {
@@ -1549,7 +1550,7 @@ Yeah, yeah，盡管說吧，隨你怎麼講
             imgOffsetX: 0.0,
             imgOffsetY: 0.0,
             duration: 245,
-            volume: 3.5,
+            volume: 1.0,
             lyrics: []
           },
           {
@@ -1563,7 +1564,7 @@ Yeah, yeah，盡管說吧，隨你怎麼講
             imgOffsetX: 0.0,
             imgOffsetY: 0.0,
             duration: 215,
-            volume: 3.5,
+            volume: 1.0,
             lyrics: []
           },
           {
@@ -1577,7 +1578,7 @@ Yeah, yeah，盡管說吧，隨你怎麼講
             imgOffsetX: 0.0,
             imgOffsetY: 0.0,
             duration: 190,
-            volume: 3.5,
+            volume: 1.0,
             lyrics: []
           }
         ]
@@ -1603,36 +1604,6 @@ Yeah, yeah，盡管說吧，隨你怎麼講
 
     const nativeAudio = document.getElementById('native-audio');
     const ytIframe = document.getElementById('yt-hidden-player');
-
-    // 支援無暫停的背景放大通道
-    let globalAudioCtx = null;
-    let globalGainNode = null;
-    let globalSourceNode = null;
-
-    function applySafeVolumeGain(vol) {
-      if (vol <= 1.0) {
-        nativeAudio.volume = Math.max(0, vol);
-        if (globalGainNode) globalGainNode.gain.value = 1.0;
-        return;
-      }
-      try {
-        if (!globalAudioCtx) {
-          const AudioContextClass = window.AudioContext || window.webkitAudioContext;
-          globalAudioCtx = new AudioContextClass();
-          globalGainNode = globalAudioCtx.createGain();
-          globalSourceNode = globalAudioCtx.createMediaElementSource(nativeAudio);
-          globalSourceNode.connect(globalGainNode);
-          globalGainNode.connect(globalAudioCtx.destination);
-        }
-        if (globalAudioCtx.state === 'suspended') {
-          globalAudioCtx.resume();
-        }
-        nativeAudio.volume = 1.0;
-        globalGainNode.gain.setValueAtTime(vol, globalAudioCtx.currentTime);
-      } catch (e) {
-        nativeAudio.volume = 1.0;
-      }
-    }
 
     function updateMediaSession(song, pl) {
       if ('mediaSession' in navigator) {
@@ -1785,6 +1756,7 @@ Yeah, yeah，盡管說吧，隨你怎麼講
           tex.minFilter = THREE.LinearFilter;
           tex.magFilter = THREE.LinearFilter;
           tex.generateMipmaps = false;
+          tex.needsUpdate = true;
           textureCache.set(url, tex);
           callback(tex);
         },
@@ -1980,7 +1952,7 @@ Yeah, yeah，盡管說吧，隨你怎麼講
     renderLoop();
 
     /* -------------------------------------------------------------
-     * 4. 音訊系統
+     * 4. 音訊系統 (純原生通道，保證背景/熄屏不中斷)
      * ------------------------------------------------------------*/
     function setPlayState(active) {
       isPlaying = active;
@@ -2066,7 +2038,6 @@ Yeah, yeah，盡管說吧，隨你怎麼講
 
       totalDuration = song.duration || 211;
       const ytId = extractYoutubeId(song.source);
-      const targetVolume = (typeof song.volume === 'number') ? song.volume : 1.0;
 
       if (ytId) {
         playMode = 'yt';
@@ -2083,13 +2054,14 @@ Yeah, yeah，盡管說吧，隨你怎麼講
         ytIframe.src = '';
 
         const directSrc = toAbsUrl(song.source);
-        applySafeVolumeGain(targetVolume);
+        nativeAudio.volume = Math.min(1.0, Math.max(0, song.volume || 1.0));
 
         if (isNewTrack || nativeAudio.src !== directSrc) {
           isAutoSwitching = isAutoNext;
           currentSec = 0;
           updateProgressUI(0, totalDuration);
 
+          // 純原生直接指定，避免任何中斷
           nativeAudio.src = directSrc;
           
           const p = nativeAudio.play();
@@ -2178,7 +2150,7 @@ Yeah, yeah，盡管說吧，隨你怎麼講
     window.addEventListener('touchend', handleSeekEnd);
 
     /* -------------------------------------------------------------
-     * 6. 歌詞渲染
+     * 6. 歌詞渲染 (切歌時即時重置捲動至第 1 行)
      * ------------------------------------------------------------*/
     function syncLyrics(sec) {
       const song = store[plIdx]?.songs[trackIdx];
@@ -2207,6 +2179,7 @@ Yeah, yeah，盡管說吧，隨你怎麼講
     function renderLyricsList() {
       const scroller = document.getElementById('lyrics-scroller');
       scroller.innerHTML = '';
+      scroller.scrollTop = 0; // 關鍵修復：切換曲目時強制回到頂部第一行
       const song = store[plIdx]?.songs[trackIdx];
 
       if (!song || !song.lyrics || song.lyrics.length === 0) {
