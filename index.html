@@ -544,7 +544,7 @@
 </head>
 <body>
 
-  <!-- 純原生 Audio 元件，無任何 Web Audio 節點攔截，徹底維持系統背景播放與 Audio Focus -->
+  <!-- 原生 Audio 元件：不強行串接 Web Audio，徹底維持 iOS 系統背景音訊焦點 -->
   <audio id="native-audio" playsinline preload="auto"></audio>
   <iframe id="yt-hidden-player" style="position:absolute; top:-9999px; left:-9999px; width:1px; height:1px;" frameborder="0" allow="autoplay; encrypted-media"></iframe>
 
@@ -692,7 +692,7 @@
               <span>音量增益調整 (Volume Gain)</span>
               <span id="form-vol-lbl">1.00x</span>
             </label>
-            <input type="range" id="form-song-vol" min="0.3" max="1.0" step="0.05" value="1.0" style="width:100%; margin-top:4px;">
+            <input type="range" id="form-song-vol" min="0.3" max="3.5" step="0.05" value="1.0" style="width:100%; margin-top:4px;">
           </div>
 
           <div class="field-row">
@@ -779,11 +779,6 @@
   <script type="module">
     import * as THREE from 'three';
 
-    const CURRENT_CANONICAL_URL = "https://u11150003-arch.github.io/KARINA-PLAYLIST/";
-    try {
-      window.history.replaceState({}, document.title, CURRENT_CANONICAL_URL);
-    } catch(e) {}
-
     const REPO_BASE = "https://u11150003-arch.github.io/KARINA-PLAYLIST/";
 
     function toAbsUrl(fileName) {
@@ -808,7 +803,7 @@
     const COVER_AS_YOU_ARE = "04_cover.jpg";
     const COVER_CANT_TAKE_EYES = "05Cant Take My Eyes Off You_cover.jpg";
     const COVER_YOU_KNOW = "06Rock_cover.jpg";
-    const MEMORY_BOX_VINYL_LABEL = "KARINA MEMORY BOX_cover_compress.jpg";
+    const MEMORY_BOX_VINYL_LABEL = "KARINA MEMORY BOX_cover.JPG";
 
     /* 強效雙行與多行容錯歌詞解析器 */
     function parseLrc(txt) {
@@ -1404,6 +1399,143 @@ Yeah, yeah，盡管說吧，隨你怎麼講
 [02:54.91]生き抜いていこう
 都一起堅持活下去`;
 
+    const LRC_HARD_TO_SAY = `[00:17.12]寶貝 今晚的我有點醉
+[00:22.96]別理會你聽的那些謊話
+[00:26.67]我沒辦法
+[00:29.07]把真相都證明給你啊
+[00:31.99]So 我的寶貝
+[00:34.91]你別看我渣也會累
+[00:38.89]脆弱的心被你一擊就碎
+[00:42.60]So what you say?
+[00:45.01]能不能再給個機會?
+[00:49.26]誰能把你的心撫慰?
+[00:51.87]就算天黑 我也不怕會疲憊
+[00:57.46]犯過的罪沒人能體會
+[01:00.37]是我不對 剩自己在流淚
+[01:05.15]我想念你 我恨自己錯過
+[01:10.20]愛你但說不出口
+[01:13.65]你說太累所以是誰惹的禍
+[01:16.86]是我 愛你但說不出口
+[01:29.30]你說太累所以是誰惹的禍
+[01:32.76]是我 愛你但說不出口
+[01:37.21]寶貝 今晚的我有點累
+[01:43.07]不知道該跟你說些什麼
+[01:46.52]寫了這首歌 送給你一個交代
+[01:53.17]誰能把你的心撫慰?
+[01:55.82]就算天黑 我也不怕會疲憊
+[02:01.40]犯過的罪 沒人能體會
+[02:04.59]是我不對 剩自己在流淚
+[02:09.10]我想念你 我恨自己錯過
+[02:14.18]愛你 但說不出口
+[02:17.61]你說太累所以是誰惹的禍
+[02:20.80]是我 愛你但說不出口
+[02:33.29]你說太累所以是誰惹的禍
+[02:36.74]是我 愛你但說不出口
+[02:54.24]愛你但說不出口`;
+
+    const LRC_CANT_TAKE_EYES = `[00:21.49]You're just too good to be true
+你美好得令人難以置信
+[00:24.13]Can't keep my eyes off you
+讓我無法將目光從你身上移開
+[00:26.98]You feel like heaven to touch
+觸碰你，彷彿觸及天堂
+[00:29.64]I wanna hold you so much
+我多麼渴望將你緊緊擁入懷中
+[00:32.31]At long last love has arrived
+漫長等待後，愛終於降臨
+[00:34.97]And I thank God I'm alive
+感謝上天，讓我有幸活著遇見你
+[00:37.64]You're just too good to be true
+你美好得宛如夢境
+[00:40.29]Can't take my eyes off you
+我的目光始終離不開你
+[00:47.16]I need you, baby
+我需要你，親愛的
+[00:50.88]And if it's quite all right
+如果你願意接受
+[00:53.53]I need you, baby
+我需要你，親愛的
+[00:56.21]To warm the lonely nights
+為我孤寂的長夜帶來溫暖
+[00:58.86]I love you, baby
+我愛你，親愛的
+[01:02.04]Trust in me when I say ok
+請相信我說的每一句話
+[01:08.63]Oh, pretty baby
+噢，親愛的
+[01:12.36]Don't bring me down, I pray
+求你別讓我失望
+[01:14.97]Oh, pretty baby
+噢，親愛的
+[01:17.62]Now that I found you, stay
+既然終於找到你，就請留在我身邊
+[01:20.28]And let me love you, baby
+讓我好好愛你，親愛的
+[01:23.67]Baby let me love you all day
+讓我好好愛你每一天
+[01:31.58]You're just too good to be true
+你美好得宛如夢境
+[01:34.45]Can't take my eyes off you
+我的目光始終離不開你
+[01:37.03]You feel like heaven to touch
+觸碰你，宛如觸及天堂
+[01:39.70]I wanna hold you so much
+我多麼渴望將你緊緊擁入懷中
+[01:42.37]At long last love has arrived
+盼望已久的愛，終於降臨
+[01:45.03]And I thank God I'm alive
+感謝上天，讓我有幸遇見你
+[01:47.68]You're just too good to be true
+你美好得宛如夢境
+[01:50.60]Can't take my eyes off you
+我的目光始終離不開你
+[01:54.58]I need you, baby
+我需要你，親愛的
+[01:58.24]And if it's quite all right
+如果你願意接受
+[02:01.16]I need you, baby
+我需要你，親愛的
+[02:03.55]To warm the lonely nights
+為我寂寥的漫漫長夜帶來溫暖
+[02:06.21]I love you, baby
+我愛你，親愛的
+[02:09.39]Trust in me when I say ok
+請相信我對你說的話
+[02:15.98]It's pretty baby
+親愛的
+[02:19.65]Don't let me down, I pray
+求你別讓我滿懷期待化為失落
+[02:22.52]Oh, pretty baby
+噢，親愛的
+[02:25.13]Now that I found you, stay
+既然終於找到你，就請留在我身邊
+[02:27.73]And let me love you
+讓我好好愛你
+[02:30.86]Baby let me love you all day
+讓我好好愛你每一天，親愛的
+[02:39.06]You're just too good to be true
+你美好得令人難以置信
+[02:41.71]Can't keep my eyes off you
+讓我無法將目光從你身上移開
+[02:44.36]You feel like heaven to touch
+觸碰你，宛如觸及天堂
+[02:47.27]I wanna hold you so much
+我多麼渴望將你緊緊擁入懷中
+[02:49.87]At long last love has arrived
+盼望已久的愛，終於降臨
+[02:52.52]And I thank God I'm alive
+感謝上天，讓我有幸遇見你
+[02:55.18]You're just too good to be true
+你美好得宛如夢境
+[02:57.84]Can't take my eyes off you
+我的目光始終離不開你
+[03:01.22]Too good to be true
+美好得令人難以置信
+[03:03.36]Can't take my eyes off you
+我的目光始終離不開你
+[03:06.54]Too good to be true
+美好得宛如夢境`;
+
     const TWO_PLAYLISTS_DATA = [
       {
         id: "pl_karina_song",
@@ -1527,7 +1659,7 @@ Yeah, yeah，盡管說吧，隨你怎麼講
             imgOffsetY: 0.0,
             duration: 210,
             volume: 1.0,
-            lyrics: []
+            lyrics: parseLrc(LRC_HARD_TO_SAY)
           },
           {
             title: "슬픈 사랑 노래",
@@ -1569,7 +1701,7 @@ Yeah, yeah，盡管說吧，隨你怎麼講
             imgOffsetY: 0.0,
             duration: 215,
             volume: 1.0,
-            lyrics: []
+            lyrics: parseLrc(LRC_CANT_TAKE_EYES)
           },
           {
             title: "있잖아 (Rock Ver.)",
@@ -1608,6 +1740,33 @@ Yeah, yeah，盡管說吧，隨你怎麼講
 
     const nativeAudio = document.getElementById('native-audio');
     const ytIframe = document.getElementById('yt-hidden-player');
+
+    function updateMediaSession(song, pl) {
+      if ('mediaSession' in navigator) {
+        const directCover = toAbsUrl(song.cover || pl.cover);
+        navigator.mediaSession.metadata = new MediaMetadata({
+          title: song.title,
+          artist: song.artist || "KARINA",
+          album: pl.name || "KARINA PLAYLIST",
+          artwork: [
+            { src: directCover, sizes: '512x512', type: 'image/jpeg' }
+          ]
+        });
+
+        navigator.mediaSession.setActionHandler('play', () => { playActiveSong(false); });
+        navigator.mediaSession.setActionHandler('pause', () => { pauseActiveSong(); });
+        navigator.mediaSession.setActionHandler('previoustrack', () => { playPrev(); });
+        navigator.mediaSession.setActionHandler('nexttrack', () => { playNext(); });
+      }
+    }
+
+    function extractYoutubeId(url) {
+      if (!url) return null;
+      if (url.includes("v=")) return url.split("v=")[1].substring(0, 11);
+      if (url.includes("youtu.be/")) return url.split("youtu.be/")[1].substring(0, 11);
+      if (url.length === 11 && !url.includes("/") && !url.includes(".")) return url.trim();
+      return null;
+    }
 
     /* -------------------------------------------------------------
      * 3. Three.js 3D 渲染
@@ -1928,7 +2087,7 @@ Yeah, yeah，盡管說吧，隨你怎麼講
     renderLoop();
 
     /* -------------------------------------------------------------
-     * 4. 音訊系統 (純原生直通，確保背景、鎖屏與切分頁不中斷)
+     * 4. 音訊系統
      * ------------------------------------------------------------*/
     function setPlayState(active) {
       isPlaying = active;
@@ -2030,7 +2189,7 @@ Yeah, yeah，盡管說吧，隨你怎麼講
         ytIframe.src = '';
 
         const directSrc = toAbsUrl(song.source);
-        nativeAudio.volume = Math.min(1.0, Math.max(0, song.volume || 1.0));
+        nativeAudio.volume = 1.0;
 
         if (isNewTrack || nativeAudio.src !== directSrc) {
           isAutoSwitching = isAutoNext;
@@ -2125,7 +2284,7 @@ Yeah, yeah，盡管說吧，隨你怎麼講
     window.addEventListener('touchend', handleSeekEnd);
 
     /* -------------------------------------------------------------
-     * 6. 歌詞渲染 (切換歌曲強制歸零捲動至第 1 行)
+     * 6. 歌詞渲染
      * ------------------------------------------------------------*/
     function syncLyrics(sec) {
       const song = store[plIdx]?.songs[trackIdx];
@@ -2154,7 +2313,6 @@ Yeah, yeah，盡管說吧，隨你怎麼講
     function renderLyricsList() {
       const scroller = document.getElementById('lyrics-scroller');
       scroller.innerHTML = '';
-      scroller.scrollTop = 0; // 關鍵修復：切換曲目時強制回到頂部第一行
       const song = store[plIdx]?.songs[trackIdx];
 
       if (!song || !song.lyrics || song.lyrics.length === 0) {
