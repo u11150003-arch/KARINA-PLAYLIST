@@ -17,8 +17,8 @@
   <meta property="og:type" content="music.playlist">
   <meta property="og:url" content="https://u11150003-arch.github.io/KARINA-PLAYLIST/">
   
-  <meta property="og:image" content="UP_cover.jpg">
-  <meta property="og:image:secure_url" content="UP_cover.jpg">
+  <meta property="og:image" content="https://u11150003-arch.github.io/KARINA-PLAYLIST/UP_cover.jpg">
+  <meta property="og:image:secure_url" content="https://u11150003-arch.github.io/KARINA-PLAYLIST/UP_cover.jpg">
   <meta property="og:image:type" content="image/jpeg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
@@ -26,7 +26,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="KARINA PLAYLIST">
   <meta name="twitter:description" content="Playlist for KARINA">
-  <meta name="twitter:image" content="UP_cover.jpg">
+  <meta name="twitter:image" content="https://u11150003-arch.github.io/KARINA-PLAYLIST/UP_cover.jpg">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -47,7 +47,8 @@
       --steel-dim: #9ca3af;
       --steel-border: #2a2c35;
       --accent-glow: rgba(244, 244, 245, 0.25);
-      --heart-cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="rgba(255,255,255,0.45)" stroke="rgba(0,0,0,0.4)" stroke-width="0.8" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>') 12 12, pointer;
+      /* 白色愛心 (低透明度) 游標 */
+      --heart-cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="rgba(255,255,255,0.45)" stroke="rgba(0,0,0,0.4)" stroke-width="0.8" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>') 12 12, pointer;
     }
 
     * {
@@ -543,7 +544,7 @@
 </head>
 <body>
 
-  <!-- 原生 Audio：直連播放，不阻斷瀏覽器音訊通道 -->
+  <!-- 純原生 Audio 元件 -->
   <audio id="native-audio" playsinline></audio>
   <iframe id="yt-hidden-player" style="position:absolute; top:-9999px; left:-9999px; width:1px; height:1px;" frameborder="0" allow="autoplay; encrypted-media"></iframe>
 
@@ -691,7 +692,7 @@
               <span>音量增益調整 (Volume Gain)</span>
               <span id="form-vol-lbl">1.00x</span>
             </label>
-            <input type="range" id="form-song-vol" min="0.3" max="1.0" step="0.05" value="1.0" style="width:100%; margin-top:4px;">
+            <input type="range" id="form-song-vol" min="0.3" max="3.5" step="0.05" value="1.0" style="width:100%; margin-top:4px;">
           </div>
 
           <div class="field-row">
@@ -778,6 +779,15 @@
   <script type="module">
     import * as THREE from 'three';
 
+    const REPO_BASE = "https://u11150003-arch.github.io/KARINA-PLAYLIST/";
+
+    function toAbsUrl(fileName) {
+      if (!fileName) return '';
+      if (fileName.startsWith('http://') || fileName.startsWith('https://')) return fileName;
+      return REPO_BASE + encodeURI(fileName.replace(/^\.\//, ''));
+    }
+
+    /* 圖片檔名對應表 */
     const COVER_UP = "UP_cover.jpg";
     const COVER_GOOD_STUFF = "GOOD STUFF_cover.jpg";
     const COVER_16_BIT = "16 Bit_cover.jpg";
@@ -1476,7 +1486,7 @@ Yeah, yeah，盡管說吧，隨你怎麼講
             imgOffsetX: 0.0,
             imgOffsetY: 0.0,
             duration: 205,
-            volume: 1.0,
+            volume: 2.6, // 前級數位增益放大 2.6x，音量達到主打歌水準
             lyrics: parseLrc(LRC_ORANGE)
           }
         ]
@@ -1497,7 +1507,7 @@ Yeah, yeah，盡管說吧，隨你怎麼講
             imgOffsetX: 0.0,
             imgOffsetY: 0.0,
             duration: 220,
-            volume: 1.0,
+            volume: 2.6,
             lyrics: parseLrc(LRC_SPARKLE)
           },
           {
@@ -1511,7 +1521,7 @@ Yeah, yeah，盡管說吧，隨你怎麼講
             imgOffsetX: 0.0,
             imgOffsetY: 0.0,
             duration: 210,
-            volume: 1.0,
+            volume: 2.6,
             lyrics: []
           },
           {
@@ -1525,7 +1535,7 @@ Yeah, yeah，盡管說吧，隨你怎麼講
             imgOffsetX: 0.0,
             imgOffsetY: 0.0,
             duration: 198,
-            volume: 1.0,
+            volume: 2.6,
             lyrics: []
           },
           {
@@ -1539,7 +1549,7 @@ Yeah, yeah，盡管說吧，隨你怎麼講
             imgOffsetX: 0.0,
             imgOffsetY: 0.0,
             duration: 245,
-            volume: 1.0,
+            volume: 2.6,
             lyrics: []
           },
           {
@@ -1553,7 +1563,7 @@ Yeah, yeah，盡管說吧，隨你怎麼講
             imgOffsetX: 0.0,
             imgOffsetY: 0.0,
             duration: 215,
-            volume: 1.0,
+            volume: 2.6,
             lyrics: []
           },
           {
@@ -1567,7 +1577,7 @@ Yeah, yeah，盡管說吧，隨你怎麼講
             imgOffsetX: 0.0,
             imgOffsetY: 0.0,
             duration: 190,
-            volume: 1.0,
+            volume: 2.6,
             lyrics: []
           }
         ]
@@ -1594,7 +1604,39 @@ Yeah, yeah，盡管說吧，隨你怎麼講
     const nativeAudio = document.getElementById('native-audio');
     const ytIframe = document.getElementById('yt-hidden-player');
 
-    // 參照 WINTER PLAYLIST：最純粹穩定的 MediaSession 鎖定畫面推播
+    // 動態前級增益器：僅在需要放大的曲目施加倍率，其他維持純原生
+    let audioCtx = null;
+    let gainNode = null;
+    let sourceNode = null;
+
+    function applyBalancedVolume(vol) {
+      if (vol > 1.0) {
+        try {
+          if (!audioCtx) {
+            const AudioCtxClass = window.AudioContext || window.webkitAudioContext;
+            audioCtx = new AudioCtxClass();
+            gainNode = audioCtx.createGain();
+            sourceNode = audioCtx.createMediaElementSource(nativeAudio);
+            sourceNode.connect(gainNode);
+            gainNode.connect(audioCtx.destination);
+          }
+          if (audioCtx.state === 'suspended') {
+            audioCtx.resume();
+          }
+          gainNode.gain.setValueAtTime(vol, audioCtx.currentTime);
+          nativeAudio.volume = 1.0;
+        } catch(e) {
+          nativeAudio.volume = 1.0;
+        }
+      } else {
+        if (gainNode) {
+          gainNode.gain.setValueAtTime(1.0, audioCtx ? audioCtx.currentTime : 0);
+        }
+        nativeAudio.volume = Math.max(0, vol);
+      }
+    }
+
+    // 嚴格綁定當前播放器，防止點擊通知跳轉至第三方購票網址
     function updateMediaSession(song, pl) {
       if ('mediaSession' in navigator) {
         const directCover = toAbsUrl(song.cover || pl.cover);
@@ -1623,7 +1665,7 @@ Yeah, yeah，盡管說吧，隨你怎麼講
     }
 
     /* -------------------------------------------------------------
-     * 3. Three.js 3D 渲染 (參照 WINTER PLAYLIST：原生非同步載圖)
+     * 3. Three.js 3D 渲染
      * ------------------------------------------------------------*/
     const container = document.getElementById('threejs-box');
     const scene = new THREE.Scene();
@@ -1757,8 +1799,8 @@ Yeah, yeah，盡管說吧，隨你怎麼講
       new THREE.MeshStandardMaterial({ color: 0x14151a, roughness: 0.5 }),
       new THREE.MeshStandardMaterial({ color: 0x14151a, roughness: 0.5 }),
       new THREE.MeshStandardMaterial({ color: 0x14151a, roughness: 0.5 }),
-      new THREE.MeshStandardMaterial({ color: 0xffffff, roughness: 0.35 }),
-      new THREE.MeshStandardMaterial({ color: 0xffffff, roughness: 0.35 })
+      new THREE.MeshStandardMaterial({ color: 0x222226, roughness: 0.35 }),
+      new THREE.MeshStandardMaterial({ color: 0x222226, roughness: 0.35 })
     ];
     const coverMesh = new THREE.Mesh(coverGeo, coverSideMat);
     coverMesh.position.set(-0.55, 0, 0);
@@ -1809,18 +1851,21 @@ Yeah, yeah，盡管說吧，隨你怎麼講
         tex.repeat.set(1 / scale, 1 / scale);
         tex.offset.set((1 - 1/scale)/2 - (ox / scale), (1 - 1/scale)/2 - (oy / scale));
         coverMesh.material[4].map = tex;
+        coverMesh.material[4].color.set(0xffffff);
         coverMesh.material[4].needsUpdate = true;
       });
 
       loadCachedTexture(directBack, (tex) => {
         if (thisSeq !== currentTextureSeq) return;
         coverMesh.material[5].map = tex;
+        coverMesh.material[5].color.set(0xffffff);
         coverMesh.material[5].needsUpdate = true;
       });
 
       loadCachedTexture(directLabel, (tex) => {
         if (thisSeq !== currentTextureSeq) return;
         labelMesh.material.map = tex;
+        labelMesh.material.color.set(0xffffff);
         labelMesh.material.needsUpdate = true;
       });
     }
@@ -1933,7 +1978,7 @@ Yeah, yeah，盡管說吧，隨你怎麼講
     renderLoop();
 
     /* -------------------------------------------------------------
-     * 4. 音訊系統 (完全純原生，杜絕 Web Audio 造成卡死)
+     * 4. 音訊系統
      * ------------------------------------------------------------*/
     function setPlayState(active) {
       isPlaying = active;
@@ -2019,6 +2064,7 @@ Yeah, yeah，盡管說吧，隨你怎麼講
 
       totalDuration = song.duration || 211;
       const ytId = extractYoutubeId(song.source);
+      const targetVolume = (typeof song.volume === 'number') ? song.volume : 1.0;
 
       if (ytId) {
         playMode = 'yt';
@@ -2035,7 +2081,7 @@ Yeah, yeah，盡管說吧，隨你怎麼講
         ytIframe.src = '';
 
         const directSrc = toAbsUrl(song.source);
-        nativeAudio.volume = 1.0;
+        applyBalancedVolume(targetVolume);
 
         if (isNewTrack || nativeAudio.src !== directSrc) {
           isAutoSwitching = isAutoNext;
@@ -2130,7 +2176,7 @@ Yeah, yeah，盡管說吧，隨你怎麼講
     window.addEventListener('touchend', handleSeekEnd);
 
     /* -------------------------------------------------------------
-     * 6. 歌詞渲染 (切換歌曲即時捲動歸零)
+     * 6. 歌詞渲染 (切換歌曲強制歸零捲動至第 1 行)
      * ------------------------------------------------------------*/
     function syncLyrics(sec) {
       const song = store[plIdx]?.songs[trackIdx];
@@ -2159,7 +2205,7 @@ Yeah, yeah，盡管說吧，隨你怎麼講
     function renderLyricsList() {
       const scroller = document.getElementById('lyrics-scroller');
       scroller.innerHTML = '';
-      scroller.scrollTop = 0; // 核心修復：換曲時強制歌詞立刻回到第一行
+      scroller.scrollTop = 0; // 關鍵修復：切換曲目時強制回到頂部第一行
       const song = store[plIdx]?.songs[trackIdx];
 
       if (!song || !song.lyrics || song.lyrics.length === 0) {
