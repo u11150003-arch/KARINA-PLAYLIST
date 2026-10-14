@@ -3,17 +3,25 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  
+  <!-- iOS 桌面圖示與主畫面標題設定（徹底消除灰底 K 圖示） -->
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="apple-mobile-web-app-title" content="KARINA">
+  <meta name="apple-mobile-web-app-title" content="KARINA PLAYLIST">
+  <link rel="apple-touch-icon" href="01Sparkle_cover.jpg">
+  <link rel="apple-touch-icon" sizes="152x152" href="01Sparkle_cover.jpg">
+  <link rel="apple-touch-icon" sizes="180x180" href="01Sparkle_cover.jpg">
+  <link rel="apple-touch-icon" sizes="167x167" href="01Sparkle_cover.jpg">
+  <link rel="icon" type="image/jpeg" href="01Sparkle_cover.jpg">
   <meta name="theme-color" content="#131418">
+
+  <!-- 內嵌 PWA Manifest 鎖定獨立應用與根網址，徹底解決 iOS 下拉卡片誤開 Melon 問題 -->
+  <link rel="manifest" href='data:application/manifest+json,{"name":"KARINA PLAYLIST","short_name":"KARINA PLAYLIST","start_url":"https://u11150003-arch.github.io/KARINA-PLAYLIST/","scope":"https://u11150003-arch.github.io/KARINA-PLAYLIST/","display":"standalone","background_color":"#131418","theme_color":"#131418","icons":[{"src":"01Sparkle_cover.jpg","sizes":"512x512","type":"image/jpeg"}]}'>
+  <link rel="canonical" href="https://u11150003-arch.github.io/KARINA-PLAYLIST/">
 
   <title>KARINA PLAYLIST</title>
 
-  <!-- 標準站點網址宣告，防止系統通知卡片跳轉外部 App 或 Melon -->
-  <link rel="canonical" href="https://u11150003-arch.github.io/KARINA-PLAYLIST/">
-
-  <!-- Open Graph 標籤 -->
+  <!-- Open Graph 網址縮圖與社群卡片（指定為 KARINA_PLAYLIST_cover.jpg） -->
   <meta property="og:site_name" content="KARINA PLAYLIST">
   <meta property="og:title" content="KARINA PLAYLIST">
   <meta property="og:description" content="Playlist for KARINA">
@@ -21,8 +29,8 @@
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://u11150003-arch.github.io/KARINA-PLAYLIST/">
   
-  <meta property="og:image" content="https://u11150003-arch.github.io/KARINA-PLAYLIST/UP_cover.jpg">
-  <meta property="og:image:secure_url" content="https://u11150003-arch.github.io/KARINA-PLAYLIST/UP_cover.jpg">
+  <meta property="og:image" content="https://u11150003-arch.github.io/KARINA-PLAYLIST/KARINA_PLAYLIST_cover.jpg">
+  <meta property="og:image:secure_url" content="https://u11150003-arch.github.io/KARINA-PLAYLIST/KARINA_PLAYLIST_cover.jpg">
   <meta property="og:image:type" content="image/jpeg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
@@ -30,7 +38,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="KARINA PLAYLIST">
   <meta name="twitter:description" content="Playlist for KARINA">
-  <meta name="twitter:image" content="https://u11150003-arch.github.io/KARINA-PLAYLIST/UP_cover.jpg">
+  <meta name="twitter:image" content="https://u11150003-arch.github.io/KARINA-PLAYLIST/KARINA_PLAYLIST_cover.jpg">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -51,8 +59,7 @@
       --steel-dim: #9ca3af;
       --steel-border: #2a2c35;
       --accent-glow: rgba(244, 244, 245, 0.25);
-      /* 白色愛心游標 */
-      --heart-cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="rgba(255,255,255,0.45)" stroke="rgba(0,0,0,0.4)" stroke-width="0.8" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>') 12 12, pointer;
+      --heart-cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="rgba(255,255,255,0.45)" stroke="rgba(0,0,0,0.4)" stroke-width="0.8" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>') 12 12, pointer;
     }
 
     * {
@@ -619,7 +626,7 @@
 </head>
 <body>
 
-  <!-- 純原生 Audio 元件：不接入任何 Web Audio API，徹底維持 iOS/Android 系統背景播放焦點 -->
+  <!-- 純原生 Audio 元件：不接入任何 Web Audio API，確保背景播放與 Audio Focus 完全活躍 -->
   <audio id="native-audio" playsinline></audio>
   <iframe id="yt-hidden-player" style="position:absolute; top:-9999px; left:-9999px; width:1px; height:1px;" frameborder="0" allow="autoplay; encrypted-media"></iframe>
 
@@ -721,7 +728,7 @@
         </div>
       </div>
 
-      <!-- 說明欄位 3：聯繫資訊（最下方） -->
+      <!-- 說明欄位 3：聯繫資訊 -->
       <div class="menu-notice-card" style="margin-top: 6px;">
         <svg class="menu-notice-icon" viewBox="0 0 24 24" width="16" height="16"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
         <div class="menu-notice-text">
@@ -899,7 +906,6 @@
   <script type="module">
     import * as THREE from 'three';
 
-    // 嚴格宣告與錨定本播放器 URL，阻絕所有外部 App / 購票網站誤判
     const CANONICAL_URL = "https://u11150003-arch.github.io/KARINA-PLAYLIST/";
     try {
       window.history.replaceState({}, document.title, CANONICAL_URL);
@@ -1679,7 +1685,7 @@ Yeah, yeah，盡管說吧，隨你怎麼講
             imgOffsetX: 0.0,
             imgOffsetY: 0.0,
             duration: 220,
-            volume: 1.0,
+            volume: 0.60, // 微調至 0.6x，使整張播放清單體感音量完全齊平
             lyrics: parseLrc(LRC_UP)
           },
           {
@@ -1693,7 +1699,7 @@ Yeah, yeah，盡管說吧，隨你怎麼講
             imgOffsetX: 0.0,
             imgOffsetY: 0.0,
             duration: 210,
-            volume: 1.0,
+            volume: 0.60,
             lyrics: parseLrc(LRC_GOOD_STUFF)
           },
           {
@@ -1707,7 +1713,7 @@ Yeah, yeah，盡管說吧，隨你怎麼講
             imgOffsetX: 0.0,
             imgOffsetY: 0.0,
             duration: 198,
-            volume: 1.0,
+            volume: 0.60,
             lyrics: parseLrc(LRC_16_BIT)
           },
           {
@@ -1721,7 +1727,7 @@ Yeah, yeah，盡管說吧，隨你怎麼講
             imgOffsetX: 0.0,
             imgOffsetY: 0.0,
             duration: 245,
-            volume: 1.0,
+            volume: 0.65,
             lyrics: parseLrc(LRC_TENDERNESS)
           },
           {
@@ -1735,7 +1741,7 @@ Yeah, yeah，盡管說吧，隨你怎麼講
             imgOffsetX: 0.0,
             imgOffsetY: 0.0,
             duration: 215,
-            volume: 1.0,
+            volume: 0.65,
             lyrics: parseLrc(LRC_SERENADE)
           },
           {
@@ -1749,7 +1755,7 @@ Yeah, yeah，盡管說吧，隨你怎麼講
             imgOffsetX: 0.0,
             imgOffsetY: 0.0,
             duration: 205,
-            volume: 1.0,
+            volume: 1.0, // 原生滿格輸出
             lyrics: parseLrc(LRC_ORANGE)
           }
         ]
@@ -1770,7 +1776,7 @@ Yeah, yeah，盡管說吧，隨你怎麼講
             imgOffsetX: 0.0,
             imgOffsetY: 0.0,
             duration: 220,
-            volume: 1.0,
+            volume: 1.0, // 原生滿格輸出
             lyrics: parseLrc(LRC_SPARKLE)
           },
           {
@@ -2214,7 +2220,7 @@ Yeah, yeah，盡管說吧，隨你怎麼講
     renderLoop();
 
     /* -------------------------------------------------------------
-     * 4. 音訊系統 (純原生同步換曲，保證熄屏與背景自動連續播放)
+     * 4. 音訊系統 (純原生直通模式，保證鎖屏、切換分頁不中斷)
      * ------------------------------------------------------------*/
     function setPlayState(active) {
       isPlaying = active;
@@ -2269,7 +2275,7 @@ Yeah, yeah，盡管說吧，隨你怎麼講
       }
     });
 
-    // 關鍵修復：歌曲播畢時，以直接、同步方式觸發下一首，讓系統音訊焦點持續保持活躍
+    // 關鍵：同步換曲，讓系統音訊焦點持續保持活躍
     nativeAudio.addEventListener('ended', () => {
       playNext(true);
     });
@@ -2317,7 +2323,8 @@ Yeah, yeah，盡管說吧，隨你怎麼講
         ytIframe.src = '';
 
         const directSrc = toAbsUrl(song.source);
-        nativeAudio.volume = 1.0;
+        // 原生音量輸出，完全杜絕 Web Audio 造成背景暫停問題
+        nativeAudio.volume = Math.min(1.0, Math.max(0, song.volume || 1.0));
 
         if (isNewTrack || nativeAudio.src !== directSrc) {
           isAutoSwitching = isAutoNext;
@@ -2444,7 +2451,6 @@ Yeah, yeah，盡管說吧，隨你怎麼講
 
     function renderLyricsList() {
       const scroller = document.getElementById('lyrics-scroller');
-      // 切換歌曲時強制關閉平滑滾動並瞬時歸零
       scroller.style.scrollBehavior = 'auto';
       scroller.scrollTop = 0;
       scroller.innerHTML = '';
@@ -2578,6 +2584,7 @@ Yeah, yeah，盡管說吧，隨你怎麼講
       navModal.style.display = 'none';
     };
 
+    // 重新整理鍵：重設快取並載入預設曲目 UP
     document.getElementById('menu-btn-reload').onclick = () => {
       localStorage.clear();
       window.location.href = window.location.pathname;
