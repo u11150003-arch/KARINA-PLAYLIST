@@ -432,7 +432,6 @@
       letter-spacing: 1px;
     }
 
-    /* 現代簡約低飽和選單項目 */
     .menu-link-item {
       display: flex;
       align-items: center;
@@ -491,7 +490,6 @@
       flex-shrink: 0;
     }
 
-    /* 現代低飽和說明提示欄位 */
     .menu-notice-card {
       margin-top: 8px;
       padding: 11px 13px;
@@ -627,7 +625,7 @@
 </head>
 <body>
 
-  <!-- 純原生 Audio 元件：不接入任何 Web Audio API，徹底維持 iOS/Android 系統背景播放焦點 -->
+  <!-- 純原生 Audio 元件：完全不外接任何 Web Audio 節點，保證系統級連播與 Audio Focus 永不凍結 -->
   <audio id="native-audio" playsinline preload="auto"></audio>
 
   <header>
@@ -1871,10 +1869,11 @@ Yeah, yeah，盡管說吧，隨你怎麼講
 
     const nativeAudio = document.getElementById('native-audio');
 
-    // 嚴格綁定系統媒體控制中心
+    // 嚴格綁定系統媒體控制中心，避免被任何外部來源奪取焦點
     function updateMediaSession(song, pl) {
       if ('mediaSession' in navigator) {
-        const directCover = toAbsUrl(song.cover || pl.cover);
+        // 加入本站唯一 hash，強行刷新 iOS 鎖定畫面暫存
+        const directCover = toAbsUrl(song.cover || pl.cover) + '?v=' + Date.now();
         navigator.mediaSession.metadata = new MediaMetadata({
           title: song.title,
           artist: song.artist || "KARINA",
@@ -1889,14 +1888,6 @@ Yeah, yeah，盡管說吧，隨你怎麼講
         navigator.mediaSession.setActionHandler('previoustrack', () => { playPrev(); });
         navigator.mediaSession.setActionHandler('nexttrack', () => { playNext(false); });
       }
-    }
-
-    function extractYoutubeId(url) {
-      if (!url) return null;
-      if (url.includes("v=")) return url.split("v=")[1].substring(0, 11);
-      if (url.includes("youtu.be/")) return url.split("youtu.be/")[1].substring(0, 11);
-      if (url.length === 11 && !url.includes("/") && !url.includes(".")) return url.trim();
-      return null;
     }
 
     /* -------------------------------------------------------------
@@ -2218,7 +2209,7 @@ Yeah, yeah，盡管說吧，隨你怎麼講
     renderLoop();
 
     /* -------------------------------------------------------------
-     * 4. 音訊系統 (純原生同步換曲，保證熄屏與背景自動連續播放)
+     * 4. 音訊系統 (強化版無縫同步連播架構)
      * ------------------------------------------------------------*/
     function setPlayState(active) {
       isPlaying = active;
@@ -2257,9 +2248,18 @@ Yeah, yeah，盡管說吧，隨你怎麼講
       }
     }
 
+    // 核心監聽：支援背景防休眠推進
     nativeAudio.addEventListener('timeupdate', () => {
       if (isDraggingSeek) return;
-      updateProgressUI(nativeAudio.currentTime, nativeAudio.duration || totalDuration);
+      const cur = nativeAudio.currentTime;
+      const dur = nativeAudio.duration;
+      updateProgressUI(cur, dur || totalDuration);
+
+      // 當曲目只剩不到 0.3 秒且即將播完時，確保不卡死並預先準備下一首
+      if (dur > 0 && cur >= dur - 0.25 && !isAutoSwitching) {
+        isAutoSwitching = true;
+        playNext(true);
+      }
     });
 
     nativeAudio.addEventListener('playing', () => {
@@ -2273,11 +2273,15 @@ Yeah, yeah，盡管說吧，隨你怎麼講
       }
     });
 
-    // 關鍵修復：歌曲播畢時，以直接、同步方式觸發下一首，讓系統音訊焦點持續保持活躍
+    // 標準結束事件雙重保險
     nativeAudio.addEventListener('ended', () => {
-      playNext(true);
+      if (!isAutoSwitching) {
+        isAutoSwitching = true;
+        playNext(true);
+      }
     });
 
+    // 關鍵修復：完全清除舊請求，極速建立原生串流通道
     function playActiveSong(isNewTrack = false, isAutoNext = false) {
       const curPl = store[plIdx];
       if (!curPl || !curPl.songs[trackIdx]) return;
@@ -2292,46 +2296,41 @@ Yeah, yeah，盡管說吧，隨你怎麼講
       }
 
       totalDuration = song.duration || 211;
-      const directSrc = toAbsUrl(song.source);
-      
-      // 原生音量輸出，完全杜絕 Web Audio 造成背景暫停問題
+      const targetSrc = toAbsUrl(song.source);
+
+      // 設定原生音量
       nativeAudio.volume = Math.min(1.0, Math.max(0, song.volume || 1.0));
 
-      if (isNewTrack || nativeAudio.src !== directSrc) {
-        isAutoSwitching = isAutoNext;
-        currentSec = 0;
-        updateProgressUI(0, totalDuration);
+      // 若是切歌或播放下一首，強制重置音訊管線以防止背景被瀏覽器凍結
+      isAutoSwitching = isAutoNext;
+      currentSec = 0;
+      updateProgressUI(0, totalDuration);
 
-        nativeAudio.src = directSrc;
-        
-        const p = nativeAudio.play();
-        if (p !== undefined) {
-          p.then(() => {
-            setPlayState(true);
-            isAutoSwitching = false;
-          }).catch(err => {
-            if (isAutoNext) {
-              nativeAudio.play().then(() => {
-                setPlayState(true);
-                isAutoSwitching = false;
-              }).catch(() => {
-                setPlayState(false);
-                isAutoSwitching = false;
-              });
-            } else {
+      // 強制清空舊連線與 buffer，徹底解決第二歌單大檔案排隊與延遲卡住的問題
+      nativeAudio.pause();
+      nativeAudio.removeAttribute('src');
+      nativeAudio.load();
+
+      // 直接給定新檔案絕對網址並立即宣告播放
+      nativeAudio.src = targetSrc;
+
+      const p = nativeAudio.play();
+      if (p !== undefined) {
+        p.then(() => {
+          setPlayState(true);
+          isAutoSwitching = false;
+        }).catch(() => {
+          // 針對 iOS 鎖定畫面下的喚醒補償機制
+          setTimeout(() => {
+            nativeAudio.play().then(() => {
+              setPlayState(true);
+              isAutoSwitching = false;
+            }).catch(() => {
               setPlayState(false);
               isAutoSwitching = false;
-            }
-          });
-        }
-      } else {
-        if (currentSec > 0 && Math.abs(nativeAudio.currentTime - currentSec) > 1) {
-          nativeAudio.currentTime = currentSec;
-        }
-        const p = nativeAudio.play();
-        if (p !== undefined) {
-          p.then(() => setPlayState(true)).catch(() => setPlayState(false));
-        }
+            });
+          }, 80);
+        });
       }
     }
 
@@ -2543,7 +2542,6 @@ Yeah, yeah，盡管說吧，隨你怎麼講
       navModal.style.display = 'none';
     };
 
-    // 重新整理鍵：重設快取並載入預設曲目 UP
     document.getElementById('menu-btn-reload').onclick = () => {
       localStorage.clear();
       window.location.href = window.location.pathname;
