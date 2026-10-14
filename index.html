@@ -15,12 +15,13 @@
   <link rel="icon" type="image/jpeg" href="01Sparkle_cover.jpg">
   <meta name="theme-color" content="#131418">
 
+  <!-- 內嵌 PWA Manifest 鎖定獨立應用與根網址，徹底解決 iOS 誤跳外部網址問題 -->
   <link rel="manifest" href='data:application/manifest+json,{"name":"KARINA PLAYLIST","short_name":"KARINA PLAYLIST","start_url":"https://u11150003-arch.github.io/KARINA-PLAYLIST/","scope":"https://u11150003-arch.github.io/KARINA-PLAYLIST/","display":"standalone","background_color":"#131418","theme_color":"#131418","icons":[{"src":"01Sparkle_cover.jpg","sizes":"512x512","type":"image/jpeg"}]}'>
   <link rel="canonical" href="https://u11150003-arch.github.io/KARINA-PLAYLIST/">
 
   <title>KARINA PLAYLIST</title>
 
-  <!-- Open Graph 網址縮圖與社群卡片 -->
+  <!-- Open Graph 網址縮圖與社群卡片（指定為 KARINA_PLAYLIST_cover.jpg） -->
   <meta property="og:site_name" content="KARINA PLAYLIST">
   <meta property="og:title" content="KARINA PLAYLIST">
   <meta property="og:description" content="Playlist for KARINA">
@@ -58,6 +59,7 @@
       --steel-dim: #9ca3af;
       --steel-border: #2a2c35;
       --accent-glow: rgba(244, 244, 245, 0.25);
+      /* 白色愛心游標 */
       --heart-cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="rgba(255,255,255,0.45)" stroke="rgba(0,0,0,0.4)" stroke-width="0.8" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>') 12 12, pointer;
     }
 
@@ -430,6 +432,7 @@
       letter-spacing: 1px;
     }
 
+    /* 現代簡約低飽和選單項目 */
     .menu-link-item {
       display: flex;
       align-items: center;
@@ -680,6 +683,7 @@
       <h3>KARINA SPACE</h3>
       <div style="display:flex; flex-direction:column; gap:6px; margin-top:14px;">
         
+        <!-- Reset Playlist 重新整理 -->
         <div class="menu-link-item" id="menu-btn-reload">
           <div class="menu-item-left">
             <div class="menu-item-icon">
@@ -692,6 +696,7 @@
           <svg class="menu-item-arrow" viewBox="0 0 24 24" width="14" height="14"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/></svg>
         </div>
 
+        <!-- System Access 管理者設定 -->
         <div class="menu-link-item" id="menu-btn-admin">
           <div class="menu-item-left">
             <div class="menu-item-icon">
@@ -706,6 +711,7 @@
 
       </div>
 
+      <!-- 說明欄位 1 -->
       <div class="menu-notice-card">
         <svg class="menu-notice-icon" viewBox="0 0 24 24" width="16" height="16"><path d="M11 17h2v-6h-2v6zm1-15C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zM11 9h2V7h-2v2z"/></svg>
         <div class="menu-notice-text">
@@ -713,6 +719,7 @@
         </div>
       </div>
 
+      <!-- 說明欄位 2 -->
       <div class="menu-notice-card" style="margin-top: 6px;">
         <svg class="menu-notice-icon" viewBox="0 0 24 24" width="16" height="16"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"/></svg>
         <div class="menu-notice-text">
@@ -720,6 +727,7 @@
         </div>
       </div>
 
+      <!-- 說明欄位 3：聯繫資訊 -->
       <div class="menu-notice-card" style="margin-top: 6px;">
         <svg class="menu-notice-icon" viewBox="0 0 24 24" width="16" height="16"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
         <div class="menu-notice-text">
@@ -897,7 +905,7 @@
   <script type="module">
     import * as THREE from 'three';
 
-    // 乾淨相對檔名直連
+    // 乾淨相對檔名直連（完全對齊 Winter 寫法）
     const COVER_UP = "UP_cover.jpg";
     const COVER_GOOD_STUFF = "GOOD STUFF_cover.jpg";
     const COVER_16_BIT = "16 Bit_cover.jpg";
@@ -1538,7 +1546,7 @@ Yeah, yeah，盡管說吧，隨你怎麼講
 [02:17.61]你說太累所以是誰惹的禍
 [02:20.80]是我 愛你但說不出口
 [02:33.29]你說太累所以是誰惹的禍
-[02:36.74]偽我 愛你但說不出口
+[02:36.74]是我 愛你但說不出口
 [02:54.24]愛你但說不出口`;
 
     const LRC_CANT_TAKE_EYES = `[00:21.49]You're just too good to be true
@@ -1841,10 +1849,19 @@ Yeah, yeah，盡管說吧，隨你怎麼講
     let currentSec = 0;
     let totalDuration = 230;
     let hasPlayedFirstTrack = false;
-    let isAutoSwitching = false;
     let currentTextureSeq = 0;
 
     const nativeAudio = document.getElementById('native-audio');
+
+    // 格式化音訊路徑，完全對齊 Winter 的百分之百秒讀寫法
+    function getCleanAudioSrc(src) {
+      if (!src) return '';
+      let clean = src.replace(/^\.\//, '');
+      if (!clean.startsWith('http')) {
+        clean = encodeURIComponent(clean).replace(/%2F/g, '/');
+      }
+      return clean;
+    }
 
     function updateMediaSession(song, pl) {
       if ('mediaSession' in navigator) {
@@ -1861,7 +1878,7 @@ Yeah, yeah，盡管說吧，隨你怎麼講
         navigator.mediaSession.setActionHandler('play', () => { playActiveSong(false); });
         navigator.mediaSession.setActionHandler('pause', () => { pauseActiveSong(); });
         navigator.mediaSession.setActionHandler('previoustrack', () => { playPrev(); });
-        navigator.mediaSession.setActionHandler('nexttrack', () => { playNext(false); });
+        navigator.mediaSession.setActionHandler('nexttrack', () => { playNext(); });
       }
     }
 
@@ -2043,7 +2060,7 @@ Yeah, yeah，盡管說吧，隨你怎麼講
       if (!frontUrl) return;
       const thisSeq = ++currentTextureSeq;
 
-      // 延後加載 3D 貼圖，確保 MP3 取得最優先頻寬
+      // 絕不阻礙音訊下載，非同步排程執行
       setTimeout(() => {
         const directFront = frontUrl;
         const directBack = backUrl || frontUrl;
@@ -2182,7 +2199,7 @@ Yeah, yeah，盡管說吧，隨你怎麼講
     renderLoop();
 
     /* -------------------------------------------------------------
-     * 4. 音訊系統 (極速原生載入，保證換曲秒開與背景連續播放)
+     * 4. 音訊系統 (完全對齊 Winter：最純粹的原生同步播放機制)
      * ------------------------------------------------------------*/
     function setPlayState(active) {
       isPlaying = active;
@@ -2191,9 +2208,6 @@ Yeah, yeah，盡管說吧，隨你怎麼講
         svg.innerHTML = '<path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>';
       } else {
         svg.innerHTML = '<path d="M8 5v14l11-7z"/>';
-      }
-      if ('mediaSession' in navigator) {
-        navigator.mediaSession.playbackState = active ? "playing" : "paused";
       }
     }
 
@@ -2209,41 +2223,21 @@ Yeah, yeah，盡管說吧，隨你怎麼講
       document.getElementById('lbl-curr').textContent = `${String(curM).padStart(2,'0')}:${String(curS).padStart(2,'0')}`;
       document.getElementById('lbl-total').textContent = `${String(totM).padStart(2,'0')}:${String(totS).padStart(2,'0')}`;
       syncLyrics(cur);
-      
-      if ('mediaSession' in navigator && ('setPositionState' in navigator.mediaSession) && totalDuration > 0) {
-        try {
-          navigator.mediaSession.setPositionState({
-            duration: totalDuration,
-            playbackRate: nativeAudio.playbackRate || 1,
-            position: Math.min(cur, totalDuration)
-          });
-        } catch(e) {}
-      }
     }
 
     nativeAudio.addEventListener('timeupdate', () => {
       if (isDraggingSeek) return;
       updateProgressUI(nativeAudio.currentTime, nativeAudio.duration || totalDuration);
     });
-
-    nativeAudio.addEventListener('playing', () => {
-      setPlayState(true);
-      isAutoSwitching = false;
-    });
-
-    nativeAudio.addEventListener('pause', () => {
-      if (!isAutoSwitching) {
-        setPlayState(false);
-      }
-    });
-
-    // 歌曲播放完畢，以同步呼叫直接連貫至下一首
+    nativeAudio.addEventListener('playing', () => setPlayState(true));
+    nativeAudio.addEventListener('pause', () => setPlayState(false));
+    
+    // 關鍵修復：完全比照 Winter，播畢時在 ended 同步直接觸發 playNext()
     nativeAudio.addEventListener('ended', () => {
-      playNext(true);
+      playNext();
     });
 
-    // 關鍵修復：拿掉打斷載入的 nativeAudio.load()，改為直接指派 src 並 play()
-    function playActiveSong(isNewTrack = false, isAutoNext = false) {
+    function playActiveSong(isNewTrack = false) {
       const curPl = store[plIdx];
       if (!curPl || !curPl.songs[trackIdx]) return;
       const song = curPl.songs[trackIdx];
@@ -2257,46 +2251,47 @@ Yeah, yeah，盡管說吧，隨你怎麼講
       }
 
       totalDuration = song.duration || 211;
-      const directSrc = song.source;
+      const directSrc = getCleanAudioSrc(song.source);
 
       nativeAudio.volume = Math.min(1.0, Math.max(0, song.volume || 1.0));
 
-      isAutoSwitching = isAutoNext;
-      currentSec = 0;
-      updateProgressUI(0, totalDuration);
+      // 比照 Winter：換歌時暫停後直接更換 src 並播放，不呼叫打斷握手的 load()
+      if (isNewTrack || nativeAudio.src !== directSrc) {
+        nativeAudio.pause();
+        currentSec = 0;
+        updateProgressUI(0, totalDuration);
 
-      // 直接給予新來源，不呼叫 load() 避免造成 Safari 重建握手卡死
-      nativeAudio.src = directSrc;
-      
-      const p = nativeAudio.play();
-      if (p !== undefined) {
-        p.then(() => {
-          setPlayState(true);
-          isAutoSwitching = false;
-        }).catch(err => {
-          if (isAutoNext) {
-            setTimeout(() => {
-              nativeAudio.play().then(() => {
-                setPlayState(true);
-                isAutoSwitching = false;
-              }).catch(() => {
-                setPlayState(false);
-                isAutoSwitching = false;
-              });
-            }, 50);
-          } else {
+        nativeAudio.src = directSrc;
+        nativeAudio.currentTime = 0;
+
+        const p = nativeAudio.play();
+        if (p !== undefined) {
+          p.then(() => setPlayState(true)).catch(err => {
+            console.log("Waiting for user gesture:", err);
             setPlayState(false);
-            isAutoSwitching = false;
-          }
-        });
+          });
+        }
+      } else {
+        if (currentSec > 0 && Math.abs(nativeAudio.currentTime - currentSec) > 1) {
+          nativeAudio.currentTime = currentSec;
+        }
+        const p = nativeAudio.play();
+        if (p !== undefined) {
+          p.then(() => setPlayState(true)).catch(err => {
+            console.log("Waiting for gesture:", err);
+            setPlayState(false);
+          });
+        }
       }
     }
 
     function pauseActiveSong() {
       setPlayState(false);
-      isAutoSwitching = false;
       currentSec = nativeAudio.currentTime;
       nativeAudio.pause();
+      if ('mediaSession' in navigator) {
+        navigator.mediaSession.playbackState = "paused";
+      }
     }
 
     /* -------------------------------------------------------------
@@ -2368,9 +2363,14 @@ Yeah, yeah，盡管說吧，隨你怎麼講
 
     function renderLyricsList() {
       const scroller = document.getElementById('lyrics-scroller');
+      scroller.innerHTML = '';
+      
       scroller.style.scrollBehavior = 'auto';
       scroller.scrollTop = 0;
-      scroller.innerHTML = '';
+      setTimeout(() => {
+        scroller.style.scrollBehavior = 'smooth';
+      }, 50);
+
       const song = store[plIdx]?.songs[trackIdx];
 
       if (!song || !song.lyrics || song.lyrics.length === 0) {
@@ -2378,9 +2378,9 @@ Yeah, yeah，盡管說吧，隨你怎麼講
         return;
       }
 
-      song.lyrics.forEach((l, idx) => {
+      song.lyrics.forEach(l => {
         const div = document.createElement('div');
-        div.className = idx === 0 ? 'lyric-row active' : 'lyric-row';
+        div.className = 'lyric-row';
 
         const pSpan = document.createElement('div');
         pSpan.className = 'lyric-primary';
@@ -2397,12 +2397,10 @@ Yeah, yeah，盡管說吧，隨你怎麼講
         div.onclick = () => {
           currentSec = l.time;
           nativeAudio.currentTime = currentSec;
+          playActiveSong(false);
         };
         scroller.appendChild(div);
       });
-
-      scroller.scrollTop = 0;
-      scroller.style.scrollBehavior = 'smooth';
     }
 
     function renderUI() {
@@ -2425,12 +2423,12 @@ Yeah, yeah，盡管說吧，隨你怎麼講
       populateDropdowns();
     }
 
-    function playNext(isAuto = false) {
+    function playNext() {
       const pl = store[plIdx];
       if (!pl || pl.songs.length === 0) return;
       trackIdx = (trackIdx + 1) % pl.songs.length;
       currentSec = 0;
-      playActiveSong(true, isAuto);
+      playActiveSong(true);
     }
 
     function playPrev() {
@@ -2438,17 +2436,17 @@ Yeah, yeah，盡管說吧，隨你怎麼講
       if (!pl || pl.songs.length === 0) return;
       trackIdx = (trackIdx - 1 + pl.songs.length) % pl.songs.length;
       currentSec = 0;
-      playActiveSong(true, false);
+      playActiveSong(true);
     }
 
     document.getElementById('btn-play').onclick = () => {
       if (isPlaying) {
         pauseActiveSong();
       } else {
-        playActiveSong(false, false);
+        playActiveSong(false);
       }
     };
-    document.getElementById('btn-next').onclick = () => playNext(false);
+    document.getElementById('btn-next').onclick = playNext;
     document.getElementById('btn-prev').onclick = playPrev;
 
     function populateDropdowns() {
@@ -2478,13 +2476,13 @@ Yeah, yeah，盡管說吧，隨你怎麼講
       plIdx = parseInt(e.target.value);
       trackIdx = 0;
       currentSec = 0;
-      playActiveSong(true, false);
+      playActiveSong(true);
     };
 
     document.getElementById('sel-song').onchange = (e) => {
       trackIdx = parseInt(e.target.value);
       currentSec = 0;
-      playActiveSong(true, false);
+      playActiveSong(true);
     };
 
     /* -------------------------------------------------------------
@@ -2502,7 +2500,7 @@ Yeah, yeah，盡管說吧，隨你怎麼講
 
     document.getElementById('menu-btn-reload').onclick = () => {
       localStorage.clear();
-      window.location.href = window.location.pathname;
+      window.location.reload();
     };
 
     document.getElementById('menu-btn-admin').onclick = () => {
@@ -2885,7 +2883,15 @@ Yeah, yeah，盡管說吧，隨你怎麼講
       renderUI();
     }
 
+    // 初始化渲染
     renderUI();
+    
+    // 比照 Winter：預先掛載第一首音訊，完全消除首次播放延遲
+    if (store && store[plIdx] && store[plIdx].songs && store[plIdx].songs[trackIdx]) {
+      const firstSong = store[plIdx].songs[trackIdx];
+      nativeAudio.src = getCleanAudioSrc(firstSong.source);
+      updateMediaSession(firstSong, store[plIdx]);
+    }
   </script>
 </body>
 </html>
