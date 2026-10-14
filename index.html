@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
   
-  <!-- iOS 桌面圖示與主畫面標題宣告 -->
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="KARINA PLAYLIST">
@@ -15,13 +14,11 @@
   <link rel="icon" type="image/jpeg" href="01Sparkle_cover.jpg">
   <meta name="theme-color" content="#131418">
 
-  <!-- 內嵌 PWA Manifest 鎖定獨立應用與根網址，徹底解決 iOS 誤跳外部網址問題 -->
   <link rel="manifest" href='data:application/manifest+json,{"name":"KARINA PLAYLIST","short_name":"KARINA PLAYLIST","start_url":"https://u11150003-arch.github.io/KARINA-PLAYLIST/","scope":"https://u11150003-arch.github.io/KARINA-PLAYLIST/","display":"standalone","background_color":"#131418","theme_color":"#131418","icons":[{"src":"01Sparkle_cover.jpg","sizes":"512x512","type":"image/jpeg"}]}'>
   <link rel="canonical" href="https://u11150003-arch.github.io/KARINA-PLAYLIST/">
 
   <title>KARINA PLAYLIST</title>
 
-  <!-- Open Graph 網址縮圖與社群卡片 -->
   <meta property="og:site_name" content="KARINA PLAYLIST">
   <meta property="og:title" content="KARINA PLAYLIST">
   <meta property="og:description" content="Playlist for KARINA">
@@ -59,7 +56,6 @@
       --steel-dim: #9ca3af;
       --steel-border: #2a2c35;
       --accent-glow: rgba(244, 244, 245, 0.25);
-      /* 白色愛心游標 */
       --heart-cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="rgba(255,255,255,0.45)" stroke="rgba(0,0,0,0.4)" stroke-width="0.8" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>') 12 12, pointer;
     }
 
@@ -432,7 +428,6 @@
       letter-spacing: 1px;
     }
 
-    /* 現代簡約低飽和選單項目 */
     .menu-link-item {
       display: flex;
       align-items: center;
@@ -491,7 +486,6 @@
       flex-shrink: 0;
     }
 
-    /* 現代低飽和說明提示欄位 */
     .menu-notice-card {
       margin-top: 8px;
       padding: 11px 13px;
@@ -684,7 +678,6 @@
       <h3>KARINA SPACE</h3>
       <div style="display:flex; flex-direction:column; gap:6px; margin-top:14px;">
         
-        <!-- Reset Playlist 重新整理 -->
         <div class="menu-link-item" id="menu-btn-reload">
           <div class="menu-item-left">
             <div class="menu-item-icon">
@@ -697,7 +690,6 @@
           <svg class="menu-item-arrow" viewBox="0 0 24 24" width="14" height="14"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/></svg>
         </div>
 
-        <!-- System Access 管理者設定 -->
         <div class="menu-link-item" id="menu-btn-admin">
           <div class="menu-item-left">
             <div class="menu-item-icon">
@@ -712,7 +704,6 @@
 
       </div>
 
-      <!-- 說明欄位 1 -->
       <div class="menu-notice-card">
         <svg class="menu-notice-icon" viewBox="0 0 24 24" width="16" height="16"><path d="M11 17h2v-6h-2v6zm1-15C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zM11 9h2V7h-2v2z"/></svg>
         <div class="menu-notice-text">
@@ -720,7 +711,6 @@
         </div>
       </div>
 
-      <!-- 說明欄位 2 -->
       <div class="menu-notice-card" style="margin-top: 6px;">
         <svg class="menu-notice-icon" viewBox="0 0 24 24" width="16" height="16"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"/></svg>
         <div class="menu-notice-text">
@@ -728,7 +718,6 @@
         </div>
       </div>
 
-      <!-- 說明欄位 3：聯繫資訊 -->
       <div class="menu-notice-card" style="margin-top: 6px;">
         <svg class="menu-notice-icon" viewBox="0 0 24 24" width="16" height="16"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
         <div class="menu-notice-text">
@@ -906,7 +895,7 @@
   <script type="module">
     import * as THREE from 'three';
 
-    // 乾淨相對檔名直連（完全移除會導致 CORS 與 404 編碼錯誤的 toAbsUrl）
+    // 乾淨相對檔名直連
     const COVER_UP = "UP_cover.jpg";
     const COVER_GOOD_STUFF = "GOOD STUFF_cover.jpg";
     const COVER_16_BIT = "16 Bit_cover.jpg";
@@ -924,7 +913,6 @@
     const COVER_YOU_KNOW = "06Rock_cover.jpg";
     const MEMORY_BOX_VINYL_LABEL = "KARINA MEMORY BOX_cover_compress.jpg";
 
-    /* 強效雙行與多行容錯歌詞解析器 */
     function parseLrc(txt) {
       if (!txt) return [];
       const lines = txt.split('\n');
@@ -957,7 +945,6 @@
       return `[${String(m).padStart(2,'0')}:${String(s).padStart(5,'0')}]`;
     }
 
-    /* 內建動態歌詞配置 */
     const LRC_UP = `[00:09.74]다들 뻔해 또 거짓말 just fine
 大家心知肚明，又一次謊無妨
 [00:12.26]Don't switch it up whenever you like
@@ -1857,10 +1844,8 @@ Yeah, yeah，盡管說吧，隨你怎麼講
 
     const nativeAudio = document.getElementById('native-audio');
 
-    // 嚴格綁定系統媒體控制中心
     function updateMediaSession(song, pl) {
       if ('mediaSession' in navigator) {
-        // 使用乾淨相對路徑加上隨機戳記刷新 iOS 鎖定畫面暫存
         const directCover = (song.cover || pl.cover) + '?v=' + Date.now();
         navigator.mediaSession.metadata = new MediaMetadata({
           title: song.title,
@@ -2060,33 +2045,35 @@ Yeah, yeah，盡管說吧，隨你怎麼講
       if (!frontUrl) return;
       const thisSeq = ++currentTextureSeq;
 
-      // 直接傳遞原始檔名，由瀏覽器最速快取載入，不再受限於編碼轉換
-      const directFront = frontUrl;
-      const directBack = backUrl || frontUrl;
-      const directLabel = labelUrl || frontUrl;
+      // 排入下一次非同步空檔執行，絕不與 MP3 音訊的首次連線搶頻寬
+      setTimeout(() => {
+        const directFront = frontUrl;
+        const directBack = backUrl || frontUrl;
+        const directLabel = labelUrl || frontUrl;
 
-      loadCachedTexture(directFront, (tex) => {
-        if (thisSeq !== currentTextureSeq) return;
-        tex.repeat.set(1 / scale, 1 / scale);
-        tex.offset.set((1 - 1/scale)/2 - (ox / scale), (1 - 1/scale)/2 - (oy / scale));
-        coverMesh.material[4].map = tex;
-        coverMesh.material[4].color.set(0xffffff);
-        coverMesh.material[4].needsUpdate = true;
-      });
+        loadCachedTexture(directFront, (tex) => {
+          if (thisSeq !== currentTextureSeq) return;
+          tex.repeat.set(1 / scale, 1 / scale);
+          tex.offset.set((1 - 1/scale)/2 - (ox / scale), (1 - 1/scale)/2 - (oy / scale));
+          coverMesh.material[4].map = tex;
+          coverMesh.material[4].color.set(0xffffff);
+          coverMesh.material[4].needsUpdate = true;
+        });
 
-      loadCachedTexture(directBack, (tex) => {
-        if (thisSeq !== currentTextureSeq) return;
-        coverMesh.material[5].map = tex;
-        coverMesh.material[5].color.set(0xffffff);
-        coverMesh.material[5].needsUpdate = true;
-      });
+        loadCachedTexture(directBack, (tex) => {
+          if (thisSeq !== currentTextureSeq) return;
+          coverMesh.material[5].map = tex;
+          coverMesh.material[5].color.set(0xffffff);
+          coverMesh.material[5].needsUpdate = true;
+        });
 
-      loadCachedTexture(directLabel, (tex) => {
-        if (thisSeq !== currentTextureSeq) return;
-        labelMesh.material.map = tex;
-        labelMesh.material.color.set(0xffffff);
-        labelMesh.material.needsUpdate = true;
-      });
+        loadCachedTexture(directLabel, (tex) => {
+          if (thisSeq !== currentTextureSeq) return;
+          labelMesh.material.map = tex;
+          labelMesh.material.color.set(0xffffff);
+          labelMesh.material.needsUpdate = true;
+        });
+      }, 50);
     }
 
     let isTouching = false;
@@ -2197,7 +2184,7 @@ Yeah, yeah，盡管說吧，隨你怎麼講
     renderLoop();
 
     /* -------------------------------------------------------------
-     * 4. 音訊系統 (純原生同步換曲，徹底維持鎖屏連播)
+     * 4. 音訊系統 (完全純原生同步換曲，保證熄屏與切分頁不中斷)
      * ------------------------------------------------------------*/
     function setPlayState(active) {
       isPlaying = active;
@@ -2238,15 +2225,7 @@ Yeah, yeah，盡管說吧，隨你怎麼講
 
     nativeAudio.addEventListener('timeupdate', () => {
       if (isDraggingSeek) return;
-      const cur = nativeAudio.currentTime;
-      const dur = nativeAudio.duration;
-      updateProgressUI(cur, dur || totalDuration);
-
-      // 當曲目即將結束（剩 0.3 秒），自動切入下一首，徹底防止鎖定畫面休眠暫停
-      if (dur > 0 && cur >= dur - 0.3 && !isAutoSwitching) {
-        isAutoSwitching = true;
-        playNext(true);
-      }
+      updateProgressUI(nativeAudio.currentTime, nativeAudio.duration || totalDuration);
     });
 
     nativeAudio.addEventListener('playing', () => {
@@ -2260,14 +2239,11 @@ Yeah, yeah，盡管說吧，隨你怎麼講
       }
     });
 
+    // 歌曲播畢時，以最直接純淨方式立刻觸發下一首
     nativeAudio.addEventListener('ended', () => {
-      if (!isAutoSwitching) {
-        isAutoSwitching = true;
-        playNext(true);
-      }
+      playNext(true);
     });
 
-    // 關鍵修復：直接將檔名賦值，消除延遲，保證第二歌單秒播
     function playActiveSong(isNewTrack = false, isAutoNext = false) {
       const curPl = store[plIdx];
       if (!curPl || !curPl.songs[trackIdx]) return;
@@ -2282,7 +2258,7 @@ Yeah, yeah，盡管說吧，隨你怎麼講
       }
 
       totalDuration = song.duration || 211;
-      const directSrc = song.source; // 直接採用乾淨檔名
+      const directSrc = song.source;
 
       nativeAudio.volume = Math.min(1.0, Math.max(0, song.volume || 1.0));
 
@@ -2290,7 +2266,7 @@ Yeah, yeah，盡管說吧，隨你怎麼講
       currentSec = 0;
       updateProgressUI(0, totalDuration);
 
-      // 先暫停並重新指定 src，確保舊緩衝被完全丟棄
+      // 強制清空重置，消除阻塞排隊
       nativeAudio.pause();
       nativeAudio.src = directSrc;
       nativeAudio.load();
@@ -2310,7 +2286,7 @@ Yeah, yeah，盡管說吧，隨你怎麼講
                 setPlayState(false);
                 isAutoSwitching = false;
               });
-            }, 80);
+            }, 60);
           } else {
             setPlayState(false);
             isAutoSwitching = false;
@@ -2527,7 +2503,6 @@ Yeah, yeah，盡管說吧，隨你怎麼講
       navModal.style.display = 'none';
     };
 
-    // 重新整理鍵：重設快取並載入預設曲目 UP
     document.getElementById('menu-btn-reload').onclick = () => {
       localStorage.clear();
       window.location.href = window.location.pathname;
