@@ -3,38 +3,42 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  
+  <!-- iOS 桌面圖示與主畫面標題宣告 -->
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="apple-mobile-web-app-title" content="WINTER PLAYLIST">
+  <meta name="apple-mobile-web-app-title" content="KARINA PLAYLIST">
+  <link rel="apple-touch-icon" href="01Sparkle_cover.jpg">
+  <link rel="apple-touch-icon" sizes="152x152" href="01Sparkle_cover.jpg">
+  <link rel="apple-touch-icon" sizes="180x180" href="01Sparkle_cover.jpg">
+  <link rel="apple-touch-icon" sizes="167x167" href="01Sparkle_cover.jpg">
+  <link rel="icon" type="image/jpeg" href="01Sparkle_cover.jpg">
   <meta name="theme-color" content="#131418">
 
-  <title>WINTER PLAYLIST</title>
+  <!-- 內嵌 PWA Manifest 鎖定獨立應用與根網址，徹底解決 iOS 誤跳 Melon 售票網問題 -->
+  <link rel="manifest" href='data:application/manifest+json,{"name":"KARINA PLAYLIST","short_name":"KARINA PLAYLIST","start_url":"https://u11150003-arch.github.io/KARINA-PLAYLIST/","scope":"https://u11150003-arch.github.io/KARINA-PLAYLIST/","display":"standalone","background_color":"#131418","theme_color":"#131418","icons":[{"src":"01Sparkle_cover.jpg","sizes":"512x512","type":"image/jpeg"}]}'>
+  <link rel="canonical" href="https://u11150003-arch.github.io/KARINA-PLAYLIST/">
 
-  <!-- PWA 獨立宣告：鎖定當前頁面為唯一的媒體獨立主體，徹底防止 iOS 鎖屏卡片點擊跳往 Melon 等背景分頁 -->
-  <link rel="manifest" href="data:application/manifest+json,%7B%22name%22%3A%22WINTER%20PLAYLIST%22%2C%22short_name%22%3A%22WINTER%22%2C%22start_url%22%3A%22https%3A%2F%2Fu11150003-arch.github.io%2FWINTER-PLAYLIST%2F%22%2C%22scope%22%3A%22https%3A%2F%2Fu11150003-arch.github.io%2FWINTER-PLAYLIST%2F%22%2C%22display%22%3A%22standalone%22%2C%22background_color%22%3A%22%23131418%22%2C%22theme_color%22%3A%22%23131418%22%7D">
+  <title>KARINA PLAYLIST</title>
 
-  <!-- iOS 主畫面圖示 (app_cover.jpg) -->
-  <link rel="apple-touch-icon" href="https://raw.githubusercontent.com/u11150003-arch/WINTER-PLAYLIST/main/app_cover.jpg">
-  <link rel="apple-touch-icon" sizes="152x152" href="https://raw.githubusercontent.com/u11150003-arch/WINTER-PLAYLIST/main/app_cover.jpg">
-  <link rel="apple-touch-icon" sizes="180x180" href="https://raw.githubusercontent.com/u11150003-arch/WINTER-PLAYLIST/main/app_cover.jpg">
-  <link rel="apple-touch-icon" sizes="167x167" href="https://raw.githubusercontent.com/u11150003-arch/WINTER-PLAYLIST/main/app_cover.jpg">
-  <link rel="icon" type="image/jpeg" href="https://raw.githubusercontent.com/u11150003-arch/WINTER-PLAYLIST/main/app_cover.jpg">
-
-  <!-- Open Graph 標籤 -->
-  <meta property="og:site_name" content="WINTER PLAYLIST">
-  <meta property="og:title" content="WINTER PLAYLIST">
-  <meta property="og:description" content="Playlist for WINTER">
-  <meta name="description" content="Playlist for WINTER">
-  <meta property="og:type" content="music.playlist">
-  <meta property="og:url" content="https://u11150003-arch.github.io/WINTER-PLAYLIST/">
-  <meta property="og:image" content="https://raw.githubusercontent.com/u11150003-arch/WINTER-PLAYLIST/main/WINTER_PLAYLIST_cover.jpg">
-  <meta property="og:image:secure_url" content="https://raw.githubusercontent.com/u11150003-arch/WINTER-PLAYLIST/main/WINTER_PLAYLIST_cover.jpg">
+  <!-- Open Graph 網址縮圖與社群卡片（指定為 KARINA_PLAYLIST_cover.jpg） -->
+  <meta property="og:site_name" content="KARINA PLAYLIST">
+  <meta property="og:title" content="KARINA PLAYLIST">
+  <meta property="og:description" content="Playlist for KARINA">
+  <meta name="description" content="Playlist for KARINA">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://u11150003-arch.github.io/KARINA-PLAYLIST/">
+  
+  <meta property="og:image" content="https://u11150003-arch.github.io/KARINA-PLAYLIST/KARINA_PLAYLIST_cover.jpg">
+  <meta property="og:image:secure_url" content="https://u11150003-arch.github.io/KARINA-PLAYLIST/KARINA_PLAYLIST_cover.jpg">
   <meta property="og:image:type" content="image/jpeg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
 
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="WINTER PLAYLIST">
-  <meta name="twitter:description" content="Playlist for WINTER">
-  <meta name="twitter:image" content="https://raw.githubusercontent.com/u11150003-arch/WINTER-PLAYLIST/main/WINTER_PLAYLIST_cover.jpg">
+  <meta name="twitter:title" content="KARINA PLAYLIST">
+  <meta name="twitter:description" content="Playlist for KARINA">
+  <meta name="twitter:image" content="https://u11150003-arch.github.io/KARINA-PLAYLIST/KARINA_PLAYLIST_cover.jpg">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -55,7 +59,8 @@
       --steel-dim: #9ca3af;
       --steel-border: #2a2c35;
       --accent-glow: rgba(244, 244, 245, 0.25);
-      --star-cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="rgba(255,255,255,0.65)" stroke="rgba(0,0,0,0.5)" stroke-width="0.8" d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>') 12 12, pointer;
+      /* 白色愛心游標 */
+      --heart-cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="rgba(255,255,255,0.45)" stroke="rgba(0,0,0,0.4)" stroke-width="0.8" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>') 12 12, pointer;
     }
 
     * {
@@ -66,8 +71,8 @@
       -webkit-tap-highlight-color: transparent;
     }
 
-    button, select, input[type="range"], .menu-link-item, .seek-groove, .lyric-row, .brand-title, .threads-link {
-      cursor: var(--star-cursor) !important;
+    button, select, input[type="range"], .menu-link-item, .seek-groove, .lyric-row, .brand-title, .external-contact-link {
+      cursor: var(--heart-cursor) !important;
     }
 
     html, body {
@@ -86,7 +91,7 @@
     }
 
     header {
-      padding: calc(12px + env(safe-area-inset-top, 0px)) 18px 4px;
+      padding: calc(12px + env(safe-area-inset-top, 0px)) 20px 4px;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -109,17 +114,19 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 6px;
-      color: rgba(255, 255, 255, 0.45);
-      font-size: 1.15rem;
+      width: 38px;
+      height: 38px;
+      padding: 4px;
+      color: rgba(255, 255, 255, 0.65);
+      font-size: 1.55rem;
       line-height: 1;
       transition: all 0.25s ease;
-      text-shadow: 0 0 4px rgba(255, 255, 255, 0.2);
+      text-shadow: 0 0 6px rgba(255, 255, 255, 0.35);
     }
     .admin-star-btn:hover, .admin-star-btn:active {
-      color: rgba(255, 255, 255, 0.95);
+      color: rgba(255, 255, 255, 1);
       transform: scale(1.15);
-      text-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
+      text-shadow: 0 0 12px rgba(255, 255, 255, 0.8);
     }
 
     main {
@@ -339,17 +346,18 @@
 
     @media (min-width: 768px) {
       .timeline-strip, .deck-controls {
-        max-width: 640px;
+        max-width: 780px;
       }
       .steel-select {
-        font-size: 0.78rem;
-        padding: 6px 10px;
+        font-size: 0.8rem;
+        padding: 7px 12px;
       }
       #sel-playlist {
-        flex: 0 0 155px;
+        flex: 0 0 215px;
+        min-width: 200px;
       }
       #sel-song {
-        flex: 0 0 240px;
+        flex: 1;
       }
     }
 
@@ -424,79 +432,100 @@
       letter-spacing: 1px;
     }
 
+    /* 現代簡約低飽和選單項目 */
     .menu-link-item {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 12px 14px;
-      background: #111216;
+      padding: 14px 14px;
+      background: #13141a;
       border: 1px solid #282a35;
       border-radius: 8px;
-      color: #f4f4f5;
+      color: #ffffff;
       text-decoration: none;
       font-size: 0.88rem;
-      margin-bottom: 8px;
+      margin-bottom: 6px;
       transition: all 0.2s ease;
     }
-    .menu-link-item:hover {
-      background: #1d1f27;
-      border-color: #4b4e5d;
+    .menu-link-item:hover, .menu-link-item:active {
+      background: #1a1c24;
+      border-color: #424657;
       transform: translateX(2px);
     }
-    .menu-left-content {
+    .menu-item-left {
       display: flex;
       align-items: center;
       gap: 12px;
+      min-width: 0;
     }
-    .menu-icon-svg {
-      width: 18px;
-      height: 18px;
-      stroke: #9ca3af;
-      stroke-width: 1.75;
-      fill: none;
+    .menu-item-icon {
+      width: 22px;
+      height: 22px;
+      min-width: 22px;
+      min-height: 22px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       flex-shrink: 0;
     }
-    .menu-arrow-svg {
+    .menu-item-icon svg {
+      width: 20px;
+      height: 20px;
+      fill: #d1d5db;
+      display: block;
+    }
+    .menu-item-title {
+      color: #ffffff;
+      font-weight: 600;
+      font-size: 0.88rem;
+      letter-spacing: 0.5px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .menu-item-arrow {
       width: 14px;
       height: 14px;
-      stroke: #6b7280;
-      stroke-width: 2;
-      fill: none;
+      min-width: 14px;
+      fill: #6b7280;
+      flex-shrink: 0;
     }
 
-    .menu-info-box {
-      display: flex;
-      align-items: flex-start;
-      gap: 10px;
-      padding: 10px 12px;
-      background: #121318;
-      border: 1px solid #242632;
+    /* 現代低飽和說明提示欄位 */
+    .menu-notice-card {
+      margin-top: 8px;
+      padding: 11px 13px;
+      background: #121319;
+      border: 1px solid #232530;
       border-radius: 8px;
-      color: #9ca3af;
-      font-size: 0.74rem;
-      line-height: 1.45;
-      margin-bottom: 8px;
-      font-family: 'Chocolate Classical Sans', sans-serif;
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
     }
-    .menu-info-icon {
-      width: 15px;
-      height: 15px;
-      stroke: #6b7280;
-      stroke-width: 1.8;
-      fill: none;
+    .menu-notice-icon {
+      width: 16px;
+      height: 16px;
+      min-width: 16px;
+      fill: #9ca3af;
       flex-shrink: 0;
       margin-top: 2px;
     }
+    .menu-notice-text {
+      font-size: 0.74rem;
+      line-height: 1.5;
+      color: #9ca3af;
+      font-family: 'Chocolate Classical Sans', 'Noto Sans TC', sans-serif;
+    }
 
-    .threads-link {
-      color: #f4f4f5;
+    .external-contact-link {
+      color: #ffffff;
+      font-weight: 600;
       text-decoration: underline;
       text-underline-offset: 3px;
-      font-weight: 600;
       transition: color 0.2s ease;
     }
-    .threads-link:hover {
-      color: #60a5fa;
+    .external-contact-link:hover, .external-contact-link:active {
+      color: #cbd5e1;
     }
 
     .field-row {
@@ -574,8 +603,6 @@
       gap: 12px;
       align-items: center;
       margin-bottom: 14px;
-      cursor: default !important;
-      pointer-events: none !important;
     }
     .preview-cover-thumb {
       width: 72px;
@@ -587,8 +614,6 @@
       flex-shrink: 0;
       position: relative;
       overflow: hidden;
-      cursor: default !important;
-      pointer-events: none !important;
     }
   </style>
 
@@ -602,20 +627,20 @@
 </head>
 <body>
 
-  <!-- 原生音訊：強制設定為可自動解碼背景通道 -->
-  <audio id="native-audio" playsinline preload="auto" crossorigin="anonymous"></audio>
+  <!-- 純原生 Audio 元件：不接入任何 Web Audio API，徹底維持 iOS/Android 系統背景播放焦點 -->
+  <audio id="native-audio" playsinline preload="auto"></audio>
 
   <header>
-    <div class="brand-title" id="logo-trigger">WINTER PLAYLIST</div>
-    <button class="admin-star-btn" id="btn-open-menu" title="Navigation & Settings">★</button>
+    <div class="brand-title" id="logo-trigger">KARINA PLAYLIST</div>
+    <button class="admin-star-btn" id="btn-open-menu" title="Navigation & Settings">♥</button>
   </header>
 
   <main>
     <div id="threejs-box"></div>
     <div class="info-lyrics-container">
       <div class="track-meta">
-        <h1 id="disp-title">Lips</h1>
-        <p id="disp-artist">WINTER</p>
+        <h1 id="disp-title">UP</h1>
+        <p id="disp-artist">KARINA</p>
       </div>
       <div class="lyrics-view" id="lyrics-scroller"></div>
     </div>
@@ -654,80 +679,63 @@
     </div>
   </footer>
 
-  <!-- 右上角導覽選單 -->
   <div class="modal-veil" id="nav-modal">
     <div class="modal-inner" style="max-width: 360px;">
-      <h3>WINTER SPACE</h3>
-      <div style="display:flex; flex-direction:column; gap:4px; margin-top:14px;">
+      <h3>KARINA SPACE</h3>
+      <div style="display:flex; flex-direction:column; gap:6px; margin-top:14px;">
         
-        <div class="menu-link-item" id="menu-btn-reset">
-          <div class="menu-left-content">
-            <svg class="menu-icon-svg" viewBox="0 0 24 24"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/></svg>
-            <div style="font-weight:600;">Reset Playlist 重新整理</div>
+        <!-- Reset Playlist 重新整理 -->
+        <div class="menu-link-item" id="menu-btn-reload">
+          <div class="menu-item-left">
+            <div class="menu-item-icon">
+              <svg viewBox="0 0 24 24" width="20" height="20"><path d="M17.65 6.35A7.958 7.958 0 0 0 12 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08A5.99 5.99 0 0 1 12 18c-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"/></svg>
+            </div>
+            <div>
+              <div class="menu-item-title">Reset Playlist 重新整理</div>
+            </div>
           </div>
-          <svg class="menu-arrow-svg" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+          <svg class="menu-item-arrow" viewBox="0 0 24 24" width="14" height="14"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/></svg>
         </div>
 
-        <a class="menu-link-item" href="https://u11150003-arch.github.io/2027-winter-bday-desktop/" target="_blank" rel="noopener">
-          <div class="menu-left-content">
-            <svg class="menu-icon-svg" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
-            <div>
-              <div>WINTER Desktop</div>
-              <span class="desc">回到桌面</span>
-            </div>
-          </div>
-          <svg class="menu-arrow-svg" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
-        </a>
-
-        <a class="menu-link-item" href="https://u11150003-arch.github.io/winter-cd-player/" target="_blank" rel="noopener">
-          <div class="menu-left-content">
-            <svg class="menu-icon-svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/><line x1="12" y1="2" x2="12" y2="4"/><line x1="12" y1="20" x2="12" y2="22"/></svg>
-            <div>
-              <div>Retro CD Player</div>
-              <span class="desc">前往復古CD隨身聽</span>
-            </div>
-          </div>
-          <svg class="menu-arrow-svg" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
-        </a>
-
-        <a class="menu-link-item" href="https://u11150003-arch.github.io/winter-wildwest/" target="_blank" rel="noopener">
-          <div class="menu-left-content">
-            <svg class="menu-icon-svg" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-            <div>
-              <div>WINTER WILD WEST</div>
-              <span class="desc">前往荒野西部視訊</span>
-            </div>
-          </div>
-          <svg class="menu-arrow-svg" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
-        </a>
-
+        <!-- System Access 管理者設定 -->
         <div class="menu-link-item" id="menu-btn-admin">
-          <div class="menu-left-content">
-            <svg class="menu-icon-svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+          <div class="menu-item-left">
+            <div class="menu-item-icon">
+              <svg viewBox="0 0 24 24" width="20" height="20"><path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/></svg>
+            </div>
             <div>
-              <div>System Access</div>
-              <span class="desc">管理者設定</span>
+              <div class="menu-item-title">System Access 管理者設定</div>
             </div>
           </div>
-          <svg class="menu-arrow-svg" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
-        </div>
-
-        <div class="menu-info-box" style="margin-top:6px;">
-          <svg class="menu-info-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
-          <div>若歌曲或圖示無法順利載入，點擊上方「Reset Playlist 重新整理」。</div>
-        </div>
-
-        <div class="menu-info-box">
-          <svg class="menu-info-icon" viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
-          <div>手機點擊「分享」&gt;「加入主畫面」，即可享最佳聆聽體驗。</div>
-        </div>
-
-        <div class="menu-info-box">
-          <svg class="menu-info-icon" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-          <div>若歌詞有誤或操作不順，請聯繫 <a class="threads-link" href="https://www.threads.com/@kelly_lee_805" target="_blank" rel="noopener">@kelly_lee_805</a></div>
+          <svg class="menu-item-arrow" viewBox="0 0 24 24" width="14" height="14"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/></svg>
         </div>
 
       </div>
+
+      <!-- 說明欄位 1 -->
+      <div class="menu-notice-card">
+        <svg class="menu-notice-icon" viewBox="0 0 24 24" width="16" height="16"><path d="M11 17h2v-6h-2v6zm1-15C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zM11 9h2V7h-2v2z"/></svg>
+        <div class="menu-notice-text">
+          若歌曲或圖示無法順利載入,點擊上方「Reset Playlist 重新整理」。
+        </div>
+      </div>
+
+      <!-- 說明欄位 2 -->
+      <div class="menu-notice-card" style="margin-top: 6px;">
+        <svg class="menu-notice-icon" viewBox="0 0 24 24" width="16" height="16"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"/></svg>
+        <div class="menu-notice-text">
+          手機點擊「分享」>「加入主畫面」,即可享最佳聆聽體驗。
+        </div>
+      </div>
+
+      <!-- 說明欄位 3：聯繫資訊 -->
+      <div class="menu-notice-card" style="margin-top: 6px;">
+        <svg class="menu-notice-icon" viewBox="0 0 24 24" width="16" height="16"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+        <div class="menu-notice-text">
+          若歌詞有誤或操作不順，請聯繫 <a class="external-contact-link" href="https://www.threads.com/@kelly_lee_805" target="_blank" rel="noopener noreferrer">@kelly_lee_805</a>
+        </div>
+      </div>
+
       <div style="text-align:right; margin-top:14px;">
         <button class="btn-cancel" id="btn-close-nav">關閉選單</button>
       </div>
@@ -786,7 +794,7 @@
             <div style="flex:1; min-width:0;">
               <div style="font-size:0.72rem; color:#60a5fa; font-weight:bold;">✦ 即時預覽 (LIVE PREVIEW)</div>
               <div id="preview-box-title" style="font-size:0.84rem; font-weight:bold; color:#fff; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; margin-top:2px;">歌曲名稱</div>
-              <div id="preview-box-artist" style="font-size:0.72rem; color:#9ca3af;">WINTER</div>
+              <div id="preview-box-artist" style="font-size:0.72rem; color:#9ca3af;">KARINA</div>
             </div>
           </div>
 
@@ -796,27 +804,27 @@
           </div>
           <div class="field-row">
             <label>歌曲名稱</label>
-            <input type="text" id="form-song-title" placeholder="例如：Lips">
+            <input type="text" id="form-song-title" placeholder="例如：UP">
           </div>
           <div class="field-row">
             <label>演唱者 / 專輯名稱</label>
-            <input type="text" id="form-song-artist" placeholder="WINTER" value="WINTER">
+            <input type="text" id="form-song-artist" placeholder="KARINA" value="KARINA">
           </div>
           <div class="field-row">
-            <label>音訊來源 (本機檔名或 GitHub 網址)</label>
-            <input type="text" id="form-song-source" placeholder="如：lips (online-audio-converter.com).mp3">
+            <label>音訊來源 (本機檔名、GitHub 網址)</label>
+            <input type="text" id="form-song-source" placeholder="如：UP.mp3">
           </div>
           <div class="field-row">
             <label style="display:flex; justify-content:space-between;">
-              <span>音量增益調整 (Volume Gain)</span>
+              <span>音量微調 (Volume)</span>
               <span id="form-vol-lbl">1.00x</span>
             </label>
-            <input type="range" id="form-song-vol" min="0.3" max="1.0" step="0.05" value="1.0" style="width:100%; margin-top:4px;">
+            <input type="range" id="form-song-vol" min="0.1" max="1.0" step="0.05" value="1.0" style="width:100%; margin-top:4px;">
           </div>
 
           <div class="field-row">
             <label>專輯封面 (正面)</label>
-            <input type="text" id="form-song-cover" placeholder="貼上圖片網址（自動轉直連）">
+            <input type="text" id="form-song-cover" placeholder="貼上圖片檔名">
             <div style="margin-top:6px; display:flex; align-items:center; gap:8px;">
               <input type="file" id="local-img-picker" accept="image/*" style="display:none;">
               <button type="button" class="btn-cancel" id="btn-pick-img" style="font-size:0.72rem;">📁 從手機圖庫挑選正面</button>
@@ -898,28 +906,39 @@
   <script type="module">
     import * as THREE from 'three';
 
-    // 全域安全防護：阻止任何意外重導向
-    window.addEventListener('click', (e) => {
-      const targetA = e.target.closest('a');
-      if (targetA && targetA.href) {
-        if (targetA.href.includes('melon.com') || targetA.href.includes('ticket.melon')) {
-          e.preventDefault();
-          e.stopPropagation();
-        }
-      }
-    }, true);
+    // 嚴格將網頁網址鎖定在當前 GitHub Pages 站點
+    const CANONICAL_URL = "https://u11150003-arch.github.io/KARINA-PLAYLIST/";
+    try {
+      window.history.replaceState({}, document.title, CANONICAL_URL);
+    } catch(e) {}
 
-    const CD_PROJECT_BASE = "https://u11150003-arch.github.io/winter-cd-player/";
-    
-    const COVER_LIPS = "https://lh3.googleusercontent.com/d/1uaaVb_4JOQ9dF7wSlNxtIVHKMViueEa6";
-    const COVER_SPARK = "https://lh3.googleusercontent.com/d/1XSzga0t8grbH0Ez_NIeTrc3c17ud4CiB";
-    const COVER_BLUE = "https://lh3.googleusercontent.com/d/17-sGD8zhNCLqU_cNCDeXovJ8-Ww6ZcK7";
-    const COVER_SADDLE = "https://lh3.googleusercontent.com/d/1smNAdV5IfQNN8C2o1x7uK4POeFz95sYi";
-    const COVER_SUMMER = "https://lh3.googleusercontent.com/d/1R3m2fbip6zXRkHx0ujIQtW4VcoOkDnax";
-    const COVER_TIME = "https://lh3.googleusercontent.com/d/1kQhuuF5qHFeDLs9J2ScV50W0wl7jq_cm";
-    const COVER_VOYAGE = "https://lh3.googleusercontent.com/d/1PGz8beXPyyJavuXhTpdK5loQBuqHhnX5";
-    const COVER_BLUES = "https://lh3.googleusercontent.com/d/1m0rcmkTEsJ3lKawRlObJM2uqfZABrTud";
+    const REPO_BASE = "https://u11150003-arch.github.io/KARINA-PLAYLIST/";
 
+    function toAbsUrl(fileName) {
+      if (!fileName) return '';
+      if (fileName.startsWith('http://') || fileName.startsWith('https://')) return fileName;
+      return REPO_BASE + encodeURI(fileName.replace(/^\.\//, ''));
+    }
+
+    /* 圖片檔名對應表 */
+    const COVER_UP = "UP_cover.jpg";
+    const COVER_GOOD_STUFF = "GOOD STUFF_cover.jpg";
+    const COVER_16_BIT = "16 Bit_cover.jpg";
+    const COVER_TENDERNESS = "May the TENDERNESS be with you_album cover.jpg";
+    const VINYL_TENDERNESS = "May the TENDERNESS be with you_CD cover.jpg";
+    const COVER_SERENADE = "Serenade_album cover.jpg";
+    const VINYL_SERENADE = "Serenade_CD cover.jpg";
+    const COVER_ORANGE = "Orange_cover.jpg";
+
+    const COVER_SPARKLE = "01Sparkle_cover.jpg";
+    const COVER_HARD_TO_SAY = "02Hard to say_cover.jpg";
+    const COVER_SAD_LOVE = "03_cover.jpg";
+    const COVER_AS_YOU_ARE = "04_cover.jpg";
+    const COVER_CANT_TAKE_EYES = "05Cant Take My Eyes Off You_cover.jpg";
+    const COVER_YOU_KNOW = "06Rock_cover.jpg";
+    const MEMORY_BOX_VINYL_LABEL = "KARINA MEMORY BOX_cover_compress.jpg";
+
+    /* 強效雙行與多行容錯歌詞解析器 */
     function parseLrc(txt) {
       if (!txt) return [];
       const lines = txt.split('\n');
@@ -934,8 +953,12 @@
           if (currentItem) result.push(currentItem);
           const t = parseInt(m[1]) * 60 + parseFloat(m[2]);
           currentItem = { time: t, text: m[3] || '', trans: '' };
-        } else if (currentItem && !currentItem.trans) {
-          currentItem.trans = line;
+        } else if (currentItem) {
+          if (!currentItem.trans) {
+            currentItem.trans = line;
+          } else {
+            currentItem.trans += ' ' + line;
+          }
         }
       }
       if (currentItem) result.push(currentItem);
@@ -948,1105 +971,850 @@
       return `[${String(m).padStart(2,'0')}:${String(s).padStart(5,'0')}]`;
     }
 
-    const LIPS_LRC_TEXT = `[00:12.21]오늘따라 건조한 느낌
-今天格外乏味
-[00:18.70]목소리 쉽게 나오질 않아
-聲音不容易發出
-[00:27.10]한참을 못 했던 말 너무 많은데
-有太多一直沒說出來的話
-[00:34.81]내 말 잘 안 들릴까 봐 겁나
-害怕你聽不清我說的話
-[00:41.99]긴 긴 시간이 지나간 사이
-漫長的時間已經流逝
-[00:49.65]여전이 내 맘은 그댈 향하고
-我的心依舊向著你
-[00:56.55]늦은 건 아니라 고 말해줘요
-告訴我現在還不算晚
-[01:04.54]숨이 차고 조금은 떨리는데
-雖然喘不過氣，又有些顫抖
-[01:08.47]오랜만이라 이 고백
-這是我久違的告白
-[01:12.19]I love you
-[01:14.86]완벽한 타이밍 아니라도
-就算不是完美時機
-[01:19.64]눈 돌리지 말고 내 입모양을 봐, babe
-不要把眼睛移開 看著我的嘴唇 寶貝
-[01:25.96]귀 기울여 듣지 말고
-不需傾聽 
-[01:30.47]그냥 내 입술을 읽어봐
-只要讀懂我的嘴唇就好
-[01:34.72]아주 천천히 말해줄게
-我會慢慢地告訴你
-[01:46.10]긴 긴 여정이 지나간 사이
-漫長的旅程過去了
-[01:53.54]속에서만 매일 표현 못하고
-只在心裡無法表達
-[02:00.18]그대도 같은 맘이라 해줘요
-告訴我你也有一樣的心情
-[02:06.29]입이 말라 전보다 떨리는데
-變得乾燥比以前更加緊張
-[02:12.39]오랜만이라 이 고백
-這是我久違的告白
-[02:16.06]I love you
-[02:18.73]완벽한 타이밍 아니라도
-就算不是完美時機
-[02:23.52]눈 돌리지 말고 내 입모양을 봐, babe
-不要把眼睛移開 看著我的嘴唇 寶貝
-[02:29.90]귀 기울여 듣지 말고
-不需傾聽
-[02:34.14]그냥 내 입술을 읽어봐
-只要讀懂我的嘴唇就好
-[02:38.18]아주 천천히 말해줄게
-我會慢慢地更準確地
-[02:47.16]말해줄게
-告訴你
-[02:49.82]우린 서로 가 동시에 좋아하는
-在我們互相喜歡的時刻
-[02:55.34]어려운 확률 속에
-在艱難的機率中
-[02:59.02]다 들어온 것 같아
-好像一切都發生了
-[03:05.63]밤새워 반복해줄게
-徹夜重複此話題
-[03:10.40]크게 말 못 하고 조용히
-無法大聲說出 只能安靜地
-[03:14.11]입가를 촉촉이 하고
-浸濕我的嘴角
-[03:17.80]I love you
-[03:20.71]완벽한 타이밍 온 것 같아
-似乎是完美時機
-[03:25.50]진지한 내 표정 내 입모양을 봐, babe
-我誠摯的表情和嘴型 寶貝
-[03:31.91]두 손으로 귀를 막고
-用雙手摀住耳朵
-[03:35.90]그냥 내 입술을 읽어봐
-試著讀懂我的唇語
-[03:40.15]아주 천천히 말해줄게
-我會慢慢地告訴你`;
+    /* 內建動態歌詞配置 */
+    const LRC_UP = `[00:09.74]다들 뻔해 또 거짓말 just fine
+大家心知肚明，又一次謊無妨
+[00:12.26]Don't switch it up whenever you like
+別想隨心所欲地改變一切
+[00:14.85]번듯한 말 get it, get it, all out
+動聽的話語，就放手去爭取
+[00:17.04]I pump it, I pump it, I pump it up, up
+我不斷讓熱度節節攀升
+[00:19.64]So we roll up every weekend (yeah)
+每個週末，我們都要盡情狂歡
+[00:22.03]어디든 뛰어다녀 여기저기 freakin'
+四處奔走，無論身在何方
+[00:24.35]'Cause we be winning, be winning in a row (yeah)
+因為我們一路連勝，勢不可擋
+[00:26.74]다 가져갈게, yeah, yeah
+我會將一切盡收囊中
+[00:28.93]I'ma run it up, get it, get it all mine
+我要向上，把一切都握在手中
+[00:31.72]한 순간에 and I'm losing my mind
+就在一瞬間，我幾乎失去理智
+[00:34.11]타올라 다 I'm never gon' stop it
+盡情燃燒吧，我絕不停止
+[00:36.51]I pump it, I pump it, I pump it up (yeah)
+我不斷讓熱度節節攀升
+[00:39.10]Spice it up, up, up, hold up
+讓興致逐漸升溫然後停下 
+[00:42.09]Burn it up, see me down, controller
+盡情燃燒，看我掌控全場
+[00:44.29]Up, up, up, roll up (mm)
+不斷攀升，席捲而來
+[00:47.08]내게 좀 더 가까이 (가까이)
+再靠近我一點（更近一點）
+[00:48.66]살며시 스르르, 스르르, 스르르 널
+悄然無聲地，一點一點將你纏繞
+[00:51.25]감아 니 안에 모든 걸 잊게 해
+讓你深陷其中，忘卻一切
+[00:53.65]Run it up, up, up, up
+繼續攀升，不斷向上
+[00:56.33]Yeah, I feel it in my body
+這股悸動，我全身都能感受到
+[00:59.12]Whippin', whippin', 친절히 너를 감아내
+鞭策著 ，輕柔地將你纏繞
+[01:01.32]이제부터 난 네 모든 걸 다 알아내 (hey)
+從現在起，我要看透你的一切
+[01:03.92]They're hating, 너나 나나 눈치는 없거든
+他們儘管嫉妒，你我都不在乎旁人的眼光
+[01:06.17]They're faking, 괜히 들러붙기만 하거든
+他們虛情假意，只會一味地攀附
+[01:07.95]And like my, my, my so fine
+而我依然如此耀眼，無可挑剔
+[01:10.52]Looking like a ten, ten, ten, times five
+魅力滿分，甚至超越五倍
+[01:12.77]왜 쉬어 move (move)
+為何停下？繼續動起來
+[01:14.68]느낌을 알아 get groove up (groove up)
+掌握這份感覺，跟上節奏
+[01:17.47]I'ma run it up, get it get it all mine
+我要不斷向上，把一切都握在手中
+[01:20.26]한 순간에 and I'm losing my mind
+就在一瞬間，我幾乎失去理智
+[01:22.45]타올라 다 I'm never gon' stop it
+盡情燃燒吧，我絕不會停下
+[01:25.05]I pump it, I pump it, I pump it up
+我不斷讓熱度節節攀升
+[01:27.43]Spice it up, up, up, hold up
+讓興致逐漸升溫然後停下
+[01:30.42]Burn it up, see me down, controller
+盡情燃燒，看我掌控全場
+[01:32.61]Up, up, up, roll up (uh)
+不斷攀升，席捲而來
+[01:35.40]내게 좀 더 가까이 (가까이)
+再靠近我一點（更近一點）
+[01:37.00]살며시 스르르, 스르르, 스르르 널
+悄然無聲地，一點一點將你纏繞
+[01:39.52]감아 니 안에 모든 걸 잊게 해
+讓你深陷其中，忘卻一切
+[01:42.11]Run it up, up, up, up
+繼續攀升，不斷向上
+[01:44.81]Yeah, I feel it in my body
+這股悸動，我全身都能感受到
+[01:49.79]Knockin', knockin', knock
+敲響心門，一聲又一聲
+[01:50.88]Make you fall in love (like a choir sings)
+讓你墜入愛河（宛如合唱團高聲吟唱）
+[01:54.58]아무도 넘보지 못한 height
+那是無人能企及的高度
+[01:56.97]다른 누구도 겸비 못 할
+旁人無法兼得的本領
+[01:59.17]When I say never know (yeah)
+當我說出「永遠無法預料」（yeah）
+[02:01.36]버려 be watching how it's done (yeah)
+拋開一切，看我如何做到（yeah）
+[02:03.75]I'ma show you where I'm from (yeah)
+我要讓你見識，我來自何方（yeah）
+[02:06.73]Everybody knows I don't leave no clues (yeah)
+所有人都知道，我從不留下任何線索（yeah）
+[02:11.10]Spice it up, up, up, hold up
+讓興致逐漸升溫然後停下
+[02:14.09]Burn it up, see me down, controller (uh)
+盡情燃燒，看我掌控全場（uh）
+[02:16.49]Up, up, up, roll up (uh)
+不斷攀升，席捲而來
+[02:19.28]내게 좀 더 가까이 (내게 좀 더 가까이)
+再靠近我一點（再靠近我一點）
+[02:21.52]꽉 잡아 놓지마 (놓지마)
+緊緊抓住，別放開（別放開）
+[02:23.71]니 안에 모든 걸 잊게 돼 (잊게 돼)
+讓你忘卻心中的一切（忘卻一切）
+[02:25.71]Run it up, up, up, up
+繼續攀升，不斷向上
+[02:28.49]Yeah, I feel it in my body (yeah, uh)
+這股悸動，我全身都能感受到（yeah, uh）
+[02:32.47]I'ma run it, I'ma run it up (umm, yeah)
+我要繼續向前，不斷攀升（umm, yeah）
+[02:40.24]Spice it up, up, up, roll up
+讓氣氛持續升溫`;
 
-    const BLUE_LRC_TEXT = `[00:12.96]Days go by and I’m not feeling better
-日子一天天過去，我卻始終沒有好轉
-[00:18.55]Coffee’s always bitter if it even has a taste
-咖啡總是苦澀，甚至嚐不出一絲滋味
-[00:24.38]And I know why, so watch me get a haircut
-我知道為什麼，就看著我剪去一頭煩惱
-[00:29.91]I know every shortcut to avoid the pain
-我熟知每一條逃避痛苦的捷徑
-[00:34.16]So I don’t have to feel what I need to feel
-只為了不去面對那些本該感受的情緒
-[00:36.78]I keep running from myself
-我始終在逃避自己
-[00:39.93]I don’t have to feel what I need to feel
-只要不去感受，就不必面對那些情緒
-[00:42.28]I keep running from myself
-我一次次逃離自己
-[00:44.90]But there’s just no moving mountains, you’re bound to lose (You’re bound to lose)
-有些高山終究無法繞過，逃避只會讓你注定失敗
-[00:51.54]Gotta let the rain pour down to see the blue (To see the blue)
-唯有讓大雨落下，才能看見蔚藍
-[00:57.14]No point in walking around it if you wanna get out
-若想真正走出去，繞著困境打轉毫無意義
-[01:01.66]You gotta go through, you gotta go through
-你必須穿越，你必須面對
-[01:07.23]You gotta go through, you gotta go through
-你必須穿越，你必須面對
-[01:15.19]Fake a smile, 난 웃어야만 했고
-強顏歡笑，我只能逼自己笑著
-[01:20.78]떨리는 숨은 삼켜내 들키지 않도록
-將顫抖的呼吸吞回去，不讓任何人察覺
-[01:26.34]Stuck in blue, 언젠간 지나겠지
-困在憂鬱之中，總有一天會過去吧
-[01:32.18]Force a little patience but I stay in bed
-勉強自己再多一點耐心，卻依然躺在床上
-[01:35.92]So I don’t have to feel what I need to feel
-只為了不去面對那些本該感受的情緒
-[01:38.53]I keep running from myself
-我始終在逃避自己
-[01:41.93]I don’t have to feel what I need to feel
-只要不去感受，就不必面對那些情緒
-[01:44.29]I keep running from myself
-我一次次逃離自己
-[01:46.91]But there’s just no moving mountains, you’re bound to lose (You’re bound to lose)
-有些高山終究無法繞過，逃避只會讓你注定失敗
-[01:53.52]Gotta let the rain pour down to see the blue (To see the blue)
-唯有讓大雨落下，才能看見蔚藍
-[01:59.36]No point in walking around it if you wanna get out
-若想真正走出去，繞著困境打轉毫無意義
-[02:03.62]You gotta go through, you gotta go through
-你必須穿越，你必須面對
-[02:09.46]You gotta go through, you gotta go through
-你必須穿越，你必須面對
-[02:15.03]Yeah, you gotta go, you gotta go
-是啊，你得向前走，不能停在原地
-[02:18.19]You gotta go through
-你必須面對
-[02:21.07]You gotta go, you gotta go
-你得繼續走，不能就此停下
-[02:23.99]You gotta go through
-你必須面對
-[02:26.66]I keep walking, 여전히 겨울에 잠겨
-我仍不停走著，卻依舊深陷寒冬
-[02:31.17]It’s too tight to breathe
-胸口像被緊緊束住，連呼吸都困難
-[02:32.44]But I’ve been holding back my cries (Cries)
-可我始終強忍著淚水，不讓哭聲洩漏
-[02:35.56]That’s why I can’t sleep at night (At night, at night)
-所以每到夜裡，我始終無法入睡
-[02:41.69]It’s just no moving mountains, you’re bound to lose
-有些高山終究無法繞過，逃避只會讓你注定失敗
-[02:47.21]Gotta let the rain pour down to see the blue
-唯有讓大雨落下，才能看見蔚藍
-[02:52.98]No point in walking around it if you wanna get out (Oh)
-若想真正走出去，繞著困境打轉毫無意義
-[02:57.42]You gotta go through, you gotta go through
-你必須穿越，你必須面對
-[03:02.99]You gotta go through, you gotta go through
-你必須穿越，你必須面對
-[03:08.71]Yeah, you gotta go, you gotta go (You gotta go through)
-是啊，你得向前走，不能停下（你必須穿越）
-[03:11.85]You gotta go through (You gotta go through)
-你必須走過這一切（你必須面對）
-[03:14.71]You gotta go, you gotta go (You gotta go through)
-你得繼續走，不能就此停下（你必須穿越）
-[03:17.55]You gotta go through (You gotta go through)
-你必須穿越（你必須面對）
-[03:20.17]Yeah, you gotta go, you gotta go
-是啊，你得向前走，不能停在原地
-[03:23.03]You gotta go through
-你必須面對`;
+    const LRC_GOOD_STUFF = `[00:00.00]Good stuff
+好東西
+[00:01.54]Good stuff
+好東西
+[00:02.86]I’m so good, I’m so mad
+我如此出色，也如此狂野
+[00:05.65]아무도 모르게, let you know
+不動聲色，卻讓你知曉
+[00:08.44]I switch up, make it look brand new
+變換風格，展現全新模樣
+[00:11.03]Meet me in the back, that’s a rendezvous
+後方見，來場私下約會
+[00:13.82]I don’t need hype, yeah, what you feel like
+我不需要炒作，你又是什麼感覺
+[00:16.61]아닌 척 걸어 난 관심꺼, keep it light
+若無其事地走過，我毫不在意，輕鬆就好
+[00:19.40]Yeah, yeah, blah, blah, say what you like
+Yeah, yeah，盡管說吧，隨你怎麼講
+[00:22.19]여기 넘쳐나, I’m everybody’s type
+魅力在此滿溢，我是眾人心中的理想型
+[00:26.17]Class is in session
+現在開始上課
+[00:28.96]Come pay attention
+都給我專心聽好
+[00:31.74]서서히 놀랄걸
+你很快就會大吃一驚
+[00:33.86]봐 so good, wanna take a bite?
+看，多麼誘人，想不想嚐一口？
+[00:36.47]Got me cookin’, goody, goody, yeah, you can’t get enough
+讓我大展身手，美味連連，你怎麼也嚐不夠
+[00:39.16]I’m getting money, money, money, keep on running it up
+財富不斷累積，金錢源源而來
+[00:41.95]Top down, 뭔가 달라, giddy, giddy it up
+敞篷馳騁，氣氛截然不同，讓興奮持續升溫
+[00:44.74]I got the good stuff, good stuff
+我有真正的好東西
+[00:47.73]Got me cookin’, goody, goody, yeah, switch to the top
+讓我大展身手，美味連連，直登巔峰
+[00:50.32]You like that honey, honey, honey, yeah, 어질어질해
+你很喜歡吧，甜心，已讓你暈頭轉向
+[00:53.30]Top down, 뭔가 달라, giddy, giddy it up
+敞篷馳騁，氣氛截然不同，讓興奮持續升溫
+[00:56.09]I got the good stuff, good stuff
+我有真正的好東西
+[00:59.28]왠지 좀 다른느낌, face screwed up
+感覺就是與眾不同，讓你驚訝得變了臉色
+[01:02.09]Good stuff, 색다른 기분, get clued up
+好東西，前所未有的感受，快來見識
+[01:04.69]When I pull up, 여기저기 물어봐
+我一登場，四處便有人打聽
+[01:07.48]When I pull up, everybody’s getting down
+我一現身，全場立刻沸騰
+[01:10.27]I don’t need the hype, I’m one of a kind, I got my glow in my mind
+我不需要炒作，我獨一無二，光芒自心底綻放
+[01:13.79]Sippin’ on that gold and ice, ice, ice, ice
+啜飲金黃美酒與冰塊
+[01:15.89]And they look good on me, so good it makes you hungry
+穿在我身上如此出色，甚至讓你垂涎
+[01:18.48]And if KARINA said to do it, then you do it, honey
+只要 KARINA 開了口，你就照做吧，甜心
+[01:22.58]Class is in session
+現在開始上課
+[01:25.37]Come pay attention
+都給我專心聽好
+[01:28.16]서서히 놀랄걸
+你很快就會大吃一驚
+[01:30.35]봐 so good, wanna take a bite?
+看，多麼誘人，想不想嚐一口？
+[01:32.73]Got me cookin’, goody, goody, goody, yeah, you can’t get enough
+讓我大展身手，美味連連，你怎麼也嚐不夠
+[01:35.53]I’m getting money, money, money, keep on running it up
+財富不斷累積，金錢源源而來
+[01:38.52]Top down, 뭔가 달라, giddy, giddy it up
+敞篷馳騁，氣氛截然不同，讓興奮持續升溫
+[01:41.11]I got the good stuff, good stuff
+我有真正的好東西
+[01:44.11]Got me cookin’, goody, goody, yeah, switch to the top
+讓我大展身手，美味連連，直登巔峰
+[01:46.70]You like that honey, honey, honey, yeah, 어질어질해
+你很喜歡吧，甜心，已讓你暈頭轉向
+[01:49.68]Top down, 뭔가 달라, giddy, giddy it up
+敞篷馳騁，氣氛截然不同，讓興奮持續升溫
+[01:52.47]I got the good stuff, good stuff
+我有真正的好東西
+[01:56.06]I’m so good, I’m so mad
+我如此出色，也如此狂野
+[01:58.78]I don’t want it to let you know
+我不想讓你看穿
+[02:01.37]I’m so good, I’m so bad
+我如此出色，也如此不羈
+[02:04.36]I don’t want it to let you know
+我不想讓你看穿
+[02:06.94]I’m so good, I’m so mad
+我如此出色，也如此狂野
+[02:10.13]I don’t want it to let you know
+我不想讓你看穿
+[02:12.73]I’m so good, I’m so mad
+我如此出色，也如此狂野
+[02:15.32]I don’t want it to let you know
+我不想讓你看穿
+[02:17.90]Got me cookin’, goody, goody, goody, yeah, you can’t get enough
+讓我大展身手，美味連連，你怎麼也嚐不夠
+[02:20.69]I’m getting money, money, money, keep on running it up
+財富不斷累積，金錢源源而來
+[02:23.59]Top down, 뭔가 달라, giddy, giddy it up
+敞篷馳騁，氣氛截然不同，讓興奮持續升溫
+[02:26.38]I got the good stuff, good stuff
+我有真正的好東西
+[02:29.36]Got me cookin’, goody, goody, goody, yeah, switch to the top
+讓我大展身手，美味連連，直登巔峰
+[02:32.15]You like that honey, honey, honey, yeah, 어질어질해
+你很喜歡吧，甜心，已讓你暈頭轉向
+[02:34.94]Top down, 뭔가 달라, giddy, giddy it up
+敞篷馳騁，氣氛截然不同，讓興奮持續升溫
+[02:37.53]I got the good stuff, good stuff
+我有真正的好東西
+[02:42.78]Uh, yeah
+[02:51.35]Good stuff
+好東西`;
 
-    const SADDLE_LRC_TEXT = `[00:00.20]Oh-oh, oh-oh, oh-oh, oh-oh
-[00:03.00]Oh-oh, oh-oh, oh-oh, oh-oh-oh (Ah)
-[00:05.76]Oh-oh, oh-oh, oh-oh, oh-oh
-[00:08.22]Oh-oh, oh-oh, oh-oh, oh-oh-oh (Yeah, ah)
-[00:11.05]Watch me, if you see something that you like
-看著我，若我恰好是你心之所向
-[00:15.17]Oh, I like how you want me
-我喜歡你為我心動的模樣
-[00:17.76]Heavy on the heat when we hit the lights (Participate)
-燈光亮起，曖昧便在熱度之中蔓延
-[00:21.21]Warning
-警告
-[00:22.98]When I play, no, I don't play nice
-這場遊戲一旦開始，我從不手下留情
-[00:25.44]Boy, I wanna see you risk it all (Participate)
-我要看你是否有膽量，為我孤注一擲
-[00:31.81]You’re my man for the moment
-此刻，你是我欽定的人選
-[00:34.59]Are you man enough to hold it down? (Ho-hold it down, hold it down; Ah)
-你有沒有足夠的膽識，接住這場局面？
-[00:42.06]You’re my man for the moment
-此刻，你是我欽定的人選
-[00:44.53]Guess you act like you own it now
-看來，你已經開始展露主場氣勢
-[00:50.94]If you walk it like you talk it, baby, please stand up
-若你真能言出必行，就大方站到我面前
-[00:56.13]If you down and if you with it, baby, we go up (So show me)
-若你心意已決，也敢與我同行，我們便一同登頂
-[01:01.88]You’re grown, we ain’t gonna go home alone
-你我皆已成熟，今夜何必各自歸去
-[01:06.53]So if I like your energy, then the rest is up to me, come saddle up
-若你的氣場正合我意，往後的一切便由我定奪，來吧，準備迎戰
-[01:12.18]Oh-oh, oh-oh, oh-oh, oh-oh
-[01:14.77]Oh-oh, oh-oh, oh-oh, oh-oh-oh (Oh, saddle up)
-準備迎戰
-[01:17.12]Oh-oh, oh-oh, oh-oh, oh-oh
-[01:19.74]Oh-oh, oh-oh, oh-oh (Oh, come saddle up)
-準備迎戰
-[01:22.34]Yeah, I need a man with ice in the big black tee
-我要的是黑色寬版 T 恤下，那份冷冽不羈的氣場
-[01:25.47]Shut it down when he steps out
-一經登場，便足以令全場失色
-[01:27.52]He makes sure that I got everything I need
-我所求的一切，都能被妥善安放
-[01:30.65]He knows it’s me they keep talkin’ about, uh
-對方心知肚明，眾人談論的焦點始終是我
-[01:32.73]Oh, he lovin’ it, he wanna stay with me
-對方沉醉其中，渴望繼續留在我身旁
-[01:35.32]But I had enough, so I move onto the next thing
-可惜熱情已盡，我便轉身奔赴下一場際遇
-[01:37.64]You gotta prove to me, why I should stick with ya
-你得拿出足以讓我留下的理由
-[01:40.51]Boy, if you don’t, yeah, it’s you who’s gonna lose
-若你做不到，最終錯失良機的只會是你
-[01:43.39]You’re my man for the moment (Oh)
-此刻，你是我欽定的人選
-[01:45.77]Are you man enough to hold it down (Oh, I wanna see you hold it down for me; Woah)
-你有沒有本事，為我穩住這場局面
-[01:53.68]You’re my man for the moment (Oh, yeah)
-此刻，你是我欽定的人選
-[01:56.02]Can’t you act like you own it, down (Oh)
-就不能展現出掌控全局的氣勢嗎
-[02:02.33]If you walk it like you talk it, baby, please stand up (Oh)
-若你真能言出必行，就大方站到我面前
-[02:07.58]If you down and if you with it, baby, we go up (Ooh-oh, so show me)
-若你心意已決，也敢與我同行，我們便一同登頂
-[02:13.66]You’re grown, we ain’t gonna go home alone (Ooh)
-你我皆已成熟，今夜何必各自歸去
-[02:17.33]So if I like your energy, then the rest is up to me (Oh), come saddle up
-若你的氣場正合我意，往後的一切便由我定奪，來吧，準備迎戰
-[02:23.62]Give me what I want or get back in line
-給我所要的一切，否則便退回人群之中
-[02:25.65]Show me what you got, better show me that you ride for me
-亮出你的本事，更要讓我看見，你是否願為我挺身而出
-[02:28.75]It just ain’t enough, I’m speaking my mind
-這些還遠遠不夠，我只是在坦然表明心意
-[02:31.08]Keepin’ it a buck with you, what comes next is up to you
-我對你從不拐彎抹角，接下來如何，全憑你的選擇
-[02:33.92]Be careful what you pray for
-許下心願之前，最好先想清楚
-[02:35.98]I’m way more than you can handle, oh-woah
-我的分量，遠非你所能輕易駕馭
-[02:38.84]Boy, saddle up, don’t waste my time
-若要入局，就即刻上場，別再虛耗我的時間
-[02:41.45]Show me what you want, baby, show me that you ride for me, yeah
-讓我看清你的渴望，也讓我知道，你是否願為我赴湯蹈火
-[02:45.88]If you walk it like you talk it, baby, please stand up (Like you talk it, oh, woah-woah-woah)
-若你真能言出必行，就大方站到我面前
-[02:50.86]If you down and if you with it, baby, we go up (Oh, oh, come on, oh-yeah)
-若你心意已決，也敢與我同行，我們便一同登頂
-[02:55.85]So show me, you’re grown, we ain’t gonna go home alone (Oh)
-那就讓我看見你的決心，你我皆已成熟，今夜何必各自歸去
-[03:00.55]So if I like your energy, then the rest is up to me, come saddle up (Woah)
-若你的氣場正合我意，往後的一切便由我定奪，來吧，準備迎戰
-[03:07.13]If you walk it like you talk it, baby, please stand up (Get up, up, here with me, take the reins, buckle up, my baby)
-若你真能言出必行，就大方站到我面前 (起身到我身邊，握緊韁繩、繫好安全帶，親愛的)
-[03:11.31]If you down and if you with it, baby, we go up (I want it, take me, don’t be shy, come and drive me crazy)
-若你心意已決，也敢與我同行，我們便一同登頂 (我渴望這一切，帶我走吧，別害羞，讓我為你瘋狂)
-[03:17.61]You’re grown, we ain’t gonna go home alone (Put your money where your mouth is when you talk, boy)
-你我皆已成熟，今夜何必各自歸去 (既然話說得漂亮，就拿出實際行動來證明，別只會說)
-[03:20.99]So if I like your energy, then the rest is up to me, come saddle up
-若你的氣場正合我意，往後的一切便由我定奪，來吧，準備迎戰
-[03:29.16](Ah)
-[03:36.52]Come saddle up
-來吧，準備迎戰
-[03:37.52]Oh-oh, oh-oh, oh-oh, oh-oh
-[03:40.10]Oh-oh, oh-oh-oh (Ah)
-[03:42.76]Oh-oh, oh-oh, oh-oh, oh-oh
-[03:45.15]Oh-oh, oh-oh, oh-oh
-[03:47.27]Saddle up`;
+    const LRC_16_BIT = `[00:12.26]I'm breaking down, 이 깊은 어둠, 속에 갇혀 나
+我逐漸崩潰，困在這片深邃的黑暗之中
+[00:18.44]I've had enough, 똑같은 환상, 속에 빠졌나
+我已厭倦，難道又陷入那千篇一律的幻象 
+[00:25.01]These days, I can't picture my face
+這些日子，我甚至看不清自己的模樣
+[00:30.39]눈을 뜨면 다를까, ah, ah, ah, ah
+若睜開雙眼，一切是否就會不同
+[00:36.96]I'm sixteen bit, pixelated
+我化作十六位元的像素，逐漸失真
+[00:40.35]I can't focus on me, baby, no
+迷失了焦距，再也看不清自己
+[00:45.52]Ah, ah, ah, ah
+[00:48.43]Ah, ah, ah, ah (Ooh)
+[00:51.16]Pixelated (Ooh) in a thousand pieces (Ooh)
+像素化的我，碎裂成千萬片段
+[00:56.85]되돌려줘, so real me, bye, ah, ah, ah, ah
+將真實的我還給我，就此告別
+[01:03.83]I can't do anything to stop me, can't no more
+無法阻止失控的自己，已無能為力
+[01:10.01]비겁해진 attitude, no more gain, no more (Gain, no more)
+日漸怯懦的姿態，一無所獲，再無（再無所獲） 
+[01:26.67]Baby
+[01:28.25]Now, shut that "Blah, blah, blah," is that all you got? Yeah
+現在，收起那些「喋喋不休」，你就只有這點本事？是的
+[01:32.83]Daily
+日復一日
+[01:34.23]Been so much a battle or two (Battle or two), not for you (Not for you)
+早已歷經無數次苦戰，但不是為了你
+[01:39.58]Sorry, camouflaged
+抱歉，我曾以偽裝掩飾自己
+[01:41.97]Don't you wanna breathe? Come out (Don't you wanna breathe?)
+難道不想好好呼吸？走出來吧（難道不想呼吸嗎？）
+[01:45.75]Story, without any lies
+褪去謊言的故事
+[01:48.54]A tragedy, Ms. R.I.P, I came for a reason
+一場悲劇，輓歌女士，我的到來自有理由
+[01:51.24]These days, I can't picture my face
+這些日子，我已看不清自己的模樣
+[01:56.61]벗어날 수 없을까
+難道再也無法掙脫了嗎
+[01:59.21]Ah, ah, ah, ah
+[02:02.20]Ah, ah, ah, ah (Ooh)
+[02:04.98]Pixelated (Ooh) in a thousand pieces (Ooh)
+像素化的我，碎裂成千萬片段
+[02:10.76]되돌려줘, so real me, bye, ah, ah, ah, ah
+把真實的我還給我，就此告別
+[02:17.53]I can't do anything to stop me, can't no more
+無法阻止失控的自己，已無能為力
+[02:23.91]비겁해진 attitude, no more gain, no more (No more)
+日漸怯懦的姿態，不再奢求，不再繼續（不再繼續）
+[02:27.62]Click once to repeat, click once to delete
+點擊重播，一鍵刪除 
+[02:32.01]Oh, look, I'm faded now
+噢，看吧，我已逐漸消散 
+[02:33.80]Click once to repeat, click once to delete
+點擊重播，一鍵刪除
+[02:38.18]Oh, I'm gon' phase you out
+噢，我要將你徹底抹去
+[02:39.78]Click once to repeat (Once to repeat), click once to delete (Once to delete)
+點擊重播（反覆重播），一鍵刪除（就此抹除） 
+[02:44.16]Oh, look, I'm faded now
+看吧，我已逐漸消散 
+[02:45.95]Click once to repeat (Once to repeat), click once to delete (Once to delete)
+點擊重播（反覆重播），一鍵刪除（就此抹除)
+[02:50.44]Once to delete
+就此抹除
+[02:54.62]Ah-ah-ah-ah, ah-ah-ah-ah
+[03:06.99]Ah-ah-ah-ah, ah-ah-ah-ah
+[03:16.94]I'm sixteen bit, pixelated, 아무것도 찾지 못해, no
+我化作十六位元的像素，卻什麼也尋不著
+[03:25.43]Ah-ah-ah-ah, ah-ah-ah-ah
+[03:33.00]Hmm
+[03:34.72]Hmm
+[03:38.11]Hmm
+[03:41.09]Hmm`;
 
-    const TIME_WALKING_LRC_TEXT = `[00:00.54]아직도 너의 소리를 듣고
-至今仍能聽見你的聲音
-[00:06.58]아직도 너의 손길을 느껴
-至今仍能感受到你的觸碰
-[00:12.43]오늘도 난 너의 흔적 안에 살았죠
-今天的我，依然活在你留下的痕跡
-[00:24.33]아직도 너의 모습이 보여
-至今仍能看見你的身影
-[00:30.72]아직도 너의 온기를 느껴
-仍能感受到你的溫度
-[00:36.56]오늘도 난 너의 시간 안에 살았죠
-今天的我，依然活在有你的時光
-[00:49.26]길을 지나는 어떤 낯선 이의 모습 속에도
-即使是街上陌生人的身影裡
-[00:55.05]바람을 타고 쓸쓸히 춤추는 저 낙엽 위에도
-隨風孤寂起舞的落葉之上
-[01:01.14]뺨을 스치는 어느 저녁에 그 공기 속에도
-拂面而過的傍晚空氣中
-[01:07.26]내가 보고 듣고 느끼는 모든 것에 니가 있어 그래
-我所看見、聽見、感受到的一切都有你
-[01:14.69]어떤가요 그댄 어떤가요 그댄
-你過得如何？如今的你，還好嗎？
-[01:23.46]당신도 나와 같나요 어떤가요 그댄
-你是否也和我一樣？如今的你，過得如何？
-[01:30.56]지금도 난 너를 느끼죠
-直到現在，我依然能感受到你
-[01:36.67]이렇게 노랠 부르는 지금 이 순간도
-就連此刻唱著這首歌的瞬間
-[01:44.64]난 그대가 보여
-我彷彿仍能看見你
-[01:54.41]내일도 난 너를 보겠죠
-明天的我，依然會看見你
-[02:00.51]내일도 모든 게 오늘 하루와 같겠죠
-明天的一切，還是會和今天相同 
-[02:19.31]길을 지나는 어떤 낯선 이의 모습 속에도
-即使是街上陌生人的身影裡
-[02:25.42]바람을 타고 쓸쓸히 춤추는 저 낙엽 위에도
-在隨風孤寂起舞的落葉之上
-[02:31.00]뺨을 스치는 어느 저녁에 그 공기 속에도
-在輕拂臉頰的傍晚空氣之中
-[02:37.11]내가 보고 듣고 느끼는 모든 것에 니가 있어 그래
-我所看見、聽見、感受到的一切都有你
-[02:44.82]어떤가요 그댄 어떤가요 그댄
-你過得如何？如今的你，還好嗎？
-[02:53.59]당신도 나와 같나요 어떤가요 그댄
-你是否也和我一樣？如今的你，過得如何？
-[03:04.30]길가에 덩그러니 놓여진 저 의자 위에도
-就連路邊孤零零擺放的椅子
-[03:10.11]물을 마시려 무심코 집어든 유리잔 안에도
-無意間拿起，準備喝水的玻璃杯中
-[03:16.21]나를 바라보기 위해 마주한 그 거울 속에도
-為了看著自己，目光投向的鏡子裡
-[03:22.05]귓가에 살며시 내려앉은 음악 속에도 니가 있어
-輕輕落在耳畔的音樂裡，也有你的存在
-[03:29.78]어떡하죠 이젠 어떡하죠 이젠
-如今該怎麼辦？我究竟該怎麼辦？
-[03:38.28]그대는 지웠을 텐
-你大概早已將一切抹去
-[03:41.73]어떡하죠 이젠 우린
-如今的我們，該怎麼辦？
-[03:56.82]어떡하죠 이젠 어떡하죠 이젠
-如今該怎麼辦？往後又該如何是好？
-[04:10.89]그리움의 문을 열고 너의 기억이 날 찾아와
-思念之門開啟，關於你的回憶再次找上
-[04:16.74]자꾸 눈시울이 붉어져 어떡하죠 이젠
-眼眶一次次泛紅，如今我該怎麼辦？
-[04:22.84]그리움의 문을 열고 너의 기억이 날 찾아와
-思念之門開啟，關於你的回憶再次找上
-[04:28.96]자꾸만 가슴이 미어져 어떡하죠 이젠
-心口一次次揪痛，如今我該怎麼辦？
-[04:34.79]그리움의 문을 열고 너의 기억이 날 찾아와
-思念之門開啟，關於你的回憶再次找上
-[04:40.90]자꾸 눈시울이 붉어져 어떡하죠 이젠
-眼眶忍不住泛紅，如今我該怎麼辦？
-[04:47.01]그리움의 문을 열고 너의 기억이 날 찾아와
-思念之門開啟，關於你的回憶再次找上
-[04:52.87]자꾸만 가슴이 미어져 
-心口痛得幾乎碎裂
-[05:02.64]어떡하죠 이젠
-如今我該怎麼辦？
-[05:08.75]어떡하죠 이젠
-我究竟該怎麼辦？`;
+    const LRC_TENDERNESS = `[00:05.51]단순함이라는 거 우린 알 수 있을까
+我們能否真正理解，何謂簡單？
+[00:20.11]사랑은 먼 별에서 온 복잡한 일들만 같고
+愛情彷彿是來自遙遠星辰的種種繁複
+[00:27.51]이 시대는 내겐 아직 어지러워
+對我來說，這個時代依然令人感到迷惘
+[00:40.26](어디든) 사랑을 찾아서
+（無論何處）尋覓愛情
+[00:44.44](빛바래진) 그 의미를 찾아서
+（逐漸褪色的）尋回那份意義
+[00:47.82](이 밤도) 쏟아지는 사람들 사람들
+（今夜也）人潮如雨，接連湧現
+[00:54.21]이곳은 답을 쫓는 연인들의 밤하늘과 테라스
+這裡是追尋答案的戀人們仰望的夜空與露臺
+[01:01.65]사랑의 이름으로-
+以愛之名——
+[01:05.04]To You
+獻給你
+[01:12.70]단순함이라는 건 진리의 가장 앳된 얼굴
+所謂的「簡單」，正是真理最稚嫩的面容
+[01:27.00]굴하지 않는 미소는 우리의 자랑이니까
+因為不向命運低頭的微笑，是我們的驕傲
+[01:34.70]다정함이 깃들기를
+願溫柔在此停留
+[01:40.23]어디든 사랑을 찾아서
+無論身在何處，都要尋覓愛情
+[01:45.00](빛바래진) 그 의미를 찾아서
+（逐漸褪色的）尋回那份意義
+[01:47.34](이 밤도) 쏟아지는 사람들 사람들
+（今夜也）人潮如雨，接連湧現
+[01:54.23]이곳은 답을 쫓는 연인들의 밤하늘과 테라스
+這裡是追尋答案的戀人們仰望的夜空與露臺
+[02:01.68]사랑의 이름으로-
+以愛之名——
+[02:33.07](잊지 마) 찾아온 사랑과
+（別忘了）那份如期而至的愛
+[02:37.31](눈 감으면) 그를 둘러싼 어둠과
+（閉上雙眼）以及環繞著它的黑暗
+[02:40.18](그 위로) 발재간을 부리던 작은 춤
+（在那之上）那一支輕巧起舞的舞步
+[02:47.11]그러다 나는 너를 사랑하고
+於是，我愛上了你
+[02:51.89]너도 날 사랑하는
+而你也愛著我
+[02:54.54]“이 시절을 기억해! 그리 길진 못할 거야!”
+「記住這段時光！它不會持續太久！」
+[03:01.46]사랑의 이름으로!
+以愛之名！
+[03:05.18]To You
+獻給你`;
 
-    const VOYAGE_LRC_TEXT = `[00:08.15]짙은 어둠 속을 항해하는 너의 바다에
-在幽深黑暗中，航行於你的海上
-[00:13.66]내가 잠시나마 등대가 돼 널 비춰준다면
-若我能暫時化作燈塔，照亮你
-[00:19.16]그 순간만큼은 너도 다시 고개를 들고
-至少在那一刻，你也能再次抬起頭
-[00:24.55]너의 머리 위에 꽃 핀 별들을
-你頭頂綻放的繁星
-[00:28.27]바라볼 수 있지 않을까
-能否看見那些星光呢
-[00:52.95]고단했던 하루의 빛을 쏟아내듯
-彷彿傾瀉出疲憊一日所積攢的光芒般
-[00:58.86]너의 눈물은 어둠 속에서 더 빛나고
-你的淚水在黑暗中更加閃耀
-[01:03.94]움츠러진 어깨에 드리우는 그림자
-落在你聳起肩頭的陰影
-[01:09.31]그건 누군가 너의 날개를 감추기 위해
-或許是有人想將你的翅膀藏起
-[01:14.61]어제 지나온 길 위엔
-昨天走過的路上
-[01:17.21]너의 눈물이 남았고
-仍留著你落下的淚水
-[01:19.99]채 마르기도 전에 너는 다시 걷고 있지만
-淚痕尚未乾透，你便再次踏上旅途
-[01:25.77]언젠간 마주할 그날에
-某天相遇的那一刻
-[01:29.95]넌 오늘을 꼭 기억할 거야
-你一定會記得今天
-[01:35.53]짙은 어둠 속을 항해하는 너의 바다에
-在幽深黑暗中，航行於你的海上
-[01:40.91]내가 잠시나마 등대가 돼 널 비춰준다면
-若我能暫時化作燈塔，照亮你
-[01:46.29]그 순간만큼은 너도 다시 고개를 들고
-至少在那一刻，你也能再次抬起頭
-[01:51.68]너의 머리 위에 꽃 핀 별들을
-你頭頂綻放的繁星
-[01:58.72]바라볼 수 있지 않을까
-能否看見那些星光呢
-[02:01.32]기적은 소리 없이 우릴 찾아오니까
-因為奇蹟總會悄無聲息地找上我們 
-[02:04.04]아직 너의 눈엔 그 모습이 보이지 않아도
-即使此刻你還看不見它的模樣
-[02:09.42]나는 느낄 수 있어 아름답게 피어날
-我卻已能感受到，將綻放得如此美麗 
-[02:15.20]너의 내일 속 환하게 미소 짓는 너를
-在未來的日子裡，看見你綻放燦爛的笑容
-[02:19.97]멀어 보인 꿈들은
-那些看似遙不可及的夢想
-[02:22.76]한 뼘 남은 거리만큼
-其實只剩一步之遙
-[02:25.56]가까워졌단 걸 넌 아직은 몰랐겠지만
-或許你還不知道，自己已離它如此接近
-[02:31.34]하나둘씩 쌓인 너의 시간은
-一點一滴累積的歲月
-[02:35.31]원하는 그곳에 데려갈 거야
-終將帶你抵達心之所向
-[02:38.63](You will fly shining like a star)
-（你將如星辰般閃耀飛翔）
-[02:41.01]짙은 어둠 속을 항해하는 너의 바다에
-在幽深黑暗中，航行於你的海上
-[02:46.19]내가 잠시나마 등대가 돼 널 비춰준다면
-若我能暫時化作燈塔，照亮你
-[02:51.78]그 순간만큼은 너도 다시 고개를 들고
-至少在那一刻，你也能再次抬起頭
-[02:57.15]너의 머리 위에 꽃 핀 별들을
-你頭頂綻放的繁星
-[03:00.94]바라볼 수 있지 않을까
-能否看見那些星光呢
-[03:11.90]비가 내리고 나면
-雨過天晴後
-[03:16.00]끝엔 널 위해 피어난
-盡頭便有為你綻放的
-[03:21.91]무지개가 너를 기다리고 있어
-一道彩虹，正等著你
-[03:24.71]짙은 어둠 속을 항해하는 너의 바다에
-在幽深黑暗中，航行於你的海上
-[03:30.09]내가 잠시나마 등대가 돼 널 비춰준다면
-若我能暫時化作燈塔，照亮你
-[03:35.41]그 순간만큼은 너도 다시 고개를 들고
-至少在那一刻，你也能再次抬起頭
-[03:40.78]너의 머리 위에 꽃 핀 별들을
-你頭頂綻放的繁星
-[03:44.58]바라볼 수 있지 않을까
-能否看見那些星光呢`;
+    const LRC_SERENADE = `[00:01.51]Sorry to break it to you
+抱歉打破你的幻想
+[00:05.23]But this is our covenant
+但這是我們的盟約
+[00:09.49]Our bodies built our future
+我們以血肉之軀，鑄就未來
+[00:13.20]We'll forever serenade (Yeah)
+將永遠高唱小夜曲
+[00:19.00]I've got to intervene
+換我來主宰
+[00:21.32]Show what I mean to me
+見識我的姿態 
+[00:23.45]In my reality
+在我的世界裡
+[00:25.58]Keep rising naturally
+一路攀升，勢不可擋
+[00:26.91]So let 'em say what they like (Yeah)
+任憑他們議論
+[00:29.05]Tongue as sharp as a knife (Yeah)
+任憑惡言如刀
+[00:31.18]Yes, I've chosen this life
+沒錯，這就是我選擇的人生
+[00:32.46]We don't ever sleep, we do it all night (Yeah)
+不眠不休 ，徹夜盡情燃燒
+[00:35.59]Sorry to break it to you (Break it to you)
+抱歉打破你的幻想（打破幻想）
+[00:39.31]But this is our covenant (Covenant)
+但這是我們的盟約（盟約）
+[00:43.56]Our bodies built our future
+我們以血肉之軀，鑄就未來
+[00:47.21]We'll forever serenade
+將永遠高唱小夜曲
+[00:51.20]Life is a cinch and I'm in my prime
+活得游刃有餘，而我正值巔峰
+[00:53.32]I get kicks when they don't like
+他們越看不慣，我越樂在其中 
+[00:55.13]Yeah, call me crazy, call me wild
+說我瘋狂也好，說我狂野也罷
+[00:57.25]But life's a cinch and I like the ride
+人生不過如此，而我樂在其中
+[00:59.33]Life is a cinch and I'm in my prime
+人生輕而易舉，而我正值巔峰
+[01:01.46]I get kicks when they don't like
+他們越是不認同，我越覺得痛快
+[01:03.31]Yeah, call me crazy, call me wild
+說我瘋狂也好，說我狂野也罷
+[01:05.12]But life's a cinch and I like the ride
+人生不過如此，而我樂在其中
+[01:07.45]Running the scene, we take what we need
+掌控全局，我們予取予求 
+[01:10.63]Too many eyes on me, I like the way they stare at me
+萬眾矚目，我就享受這種注視
+[01:14.55]I'ma take it, drop your superficial vision
+我照單全收，收起你那膚淺的眼光 
+[01:16.53]All that sugarcoated talk, not my thing
+那些糖衣包裝的廢話，不合我胃口
+[01:19.25]No restrictions, I just live it
+不受任何束縛，只管活出自己
+[01:21.17]So let me do it all night
+就讓我徹夜狂放
+[01:22.76]Sorry to break it to you, but this is our covenant
+抱歉，恐怕得打破你的幻想，但這是我們的盟約
+[01:26.74]Our bodies built our future, we'll forever serenade
+我們以血肉之軀，鑄就未來，並將永遠高唱小夜曲
+[01:30.72]Don't wait here for the thunder, moving when the lightning hits
+不必等到雷聲響起，閃電劈落便出擊
+[01:35.02]We let the storm rage longer 'cause I love to feel the rain
+任憑風暴肆虐，我就愛大雨淋漓
+[01:39.73]Life is a cinch and I'm in my prime
+人生輕而易舉，而我正值巔峰
+[01:41.73]I get kicks when they don't like
+他們越是不認同，我越覺得痛快
+[01:43.52]Yeah, call me crazy, call me wild
+說我瘋狂也好，說我狂野也罷
+[01:45.51]But life's a cinch and I like the ride
+人生不過如此，而我樂在其中
+[01:47.70]Life is a cinch and I'm in my prime
+人生輕而易舉，而我正值巔峰
+[01:49.69]I get kicks when they don't like
+他們越是不認同，我越覺得痛快
+[01:51.42]Yeah, call me crazy, call me wild
+說我瘋狂也好，說我狂野也罷
+[01:53.42]But life's a cinch and I like the ride
+人生不過如此，而我樂在其中
+[01:57.79]Life is a cinch and I'm in my prime
+人生輕而易舉，而我正值巔峰
+[02:01.78]Life's a cinch and I like the ride
+人生不過如此，而我樂在其中
+[02:05.96]Life is a cinch and I'm in my prime
+一切得心應手，我正迎來巔峰
+[02:09.94]Life's a cinch and I like the ride
+人生盡在掌握，我享受這趟旅程
+[02:12.07](I-I-I-I-I-I-I-I—)
+[02:14.38](I get kicks when they don't like)
+（他們越是不認同，我越覺得痛快）
+[02:15.90](Yeah, call me crazy, call me wild)
+（說我瘋狂也好，說我狂野也罷）
+[02:17.81](I get kicks when they don't like)
+（越是看不慣，我越覺得痛快）
+[02:20.00](Yeah, life's a cinch and I like the ride)
+（人生不過如此，而我樂在其中）
+[02:22.24](Ri-ri-ri-ri-ri-ri-ride)
+[02:23.76](Yeah, call me crazy, call me wild)
+（說我瘋癲也好，說我狂野也罷）
+[02:25.88](But life's a cinch and I like the ride)
+（但人生不過如此，而我樂在其中）
+[02:28.08]Life is a beat and we feel it now
+人生如節拍，此刻我們深陷其中
+[02:30.07]We do everything we like
+隨心所欲，一切由我們主宰 
+[02:31.67]Yeah, see me rising, see me shine
+看我一路攀升，看我耀眼奪目 
+[02:33.66]'Cause life is our beat until we die
+這節奏由我掌控，直至生命盡頭 
+[02:36.05]Life is a beat and we feel it now
+人生如節拍，此刻我們正感受它的律動
+[02:38.05]We do everything we like
+隨心所欲，一切由我們主宰 
+[02:39.84]Yeah, see me rising, see me shine
+看我一路攀升，看我耀眼奪目
+[02:41.84]'Cause life is our beat until we die
+這節奏由我掌控，直至生命盡頭
+[02:46.28]Life is a beat and we feel it now (Life is a)
+人生如節拍，此刻我們深陷其中（這人生） 
+[02:50.27]Life is our beat, until we die
+人生隨我們律動，直至生命盡頭
+[02:54.26]Life is a beat and we feel it now
+人生就是節拍，此刻我們正感受它的律動
+[02:58.25]Life is our beat until we die
+人生隨我們律動，直至生命盡頭`;
 
-    const BE_BE_YOUR_LOVE_LRC_TEXT = `[00:10.61]If I could take you away
-如果我能帶你遠走高飛
-[00:17.24]Pretend I was queen
-假裝自己是女王
-[00:23.31]What would you say?
-你會怎麼回答？
-[00:29.15]Would you think I'm unreal?
-你會覺得這一切不切實際嗎？
-[00:36.80]'Cause everybody's got their way I should feel
-因為每個人都認為，我理應有自己的感受方式
-[00:42.87]Everybody's talking how I can't be your love
-所有人都說，我不可能成為你的愛
-[00:47.06]But I want to be your love
-但我依然渴望成為你的愛
-[00:49.96]Want to be your love, for real
-真真切切地，成為你的愛
-[00:54.96]Everybody's talking how I can't be your love
-所有人都說，我不可能成為你的愛
-[00:58.94]But I want to be your love
-但我依然渴望成為你的愛
-[01:02.12]Want to be your love for real
-真真切切地，成為你的愛
-[01:07.68]Want to be your everything
-渴望成為你的一切
-[01:16.14]Everything's falling, and I am included in that
-一切都在崩塌，而我也身陷其中
-[01:26.73]Oh, how I try to be just okay
-噢，我多麼努力，只想讓自己看起來還好
-[01:39.18]Yeah, but all I ever really wanted was a little piece of you
-但我真正想要的，始終只是你的一點點
-[01:46.03]Everybody's talking how I can't be your love
-所有人都說，我不可能成為你的愛
-[01:50.24]But I want to be your love
-但我依然渴望成為你的愛
-[01:53.14]Want to be your love for real
-真真切切地，成為你的愛
-[01:57.94]Everybody's talking how I can't be your love
-所有人都說，我不可能成為你的愛
-[02:01.86]But I want to be your love
-但我依然渴望成為你的愛
-[02:05.00]Want to be your love for real
-真真切切地，成為你的愛
-[02:10.52]Everything will be alright if you just stay the night
-只要你今晚留下，一切都會好起來
-[02:24.87]Please, sir, don't you walk away
-求求你，別就這樣轉身離開
-[02:51.94]Everybody's talking how I can't be your love
-所有人都說，我不可能成為你的愛
-[02:55.87]But I want to be your love
-但我依然渴望成為你的愛
-[02:58.99]Want to be your love for real
-真真切切地，成為你的愛
-[03:04.02]Everybody's talking how I can't be your love
-所有人都說，我不可能成為你的愛
-[03:07.93]But I want to be your love
-但我依然渴望成為你的愛
-[03:11.06]Want to be your love for real
-真真切切地，成為你的愛
-[03:15.81]Everybody's talking how I can't be your love
-所有人都說，我不可能成為你的愛
-[03:20.00]But I want to be your love
-但我依然渴望成為你的愛
-[03:22.85]Want to be your love for real
-真真切切地，成為你的愛
-[03:27.87]Everybody's talking how I can't be your love
-所有人都說，我不可能成為你的愛
-[03:32.06]But I want to be your love
-但我依然渴望成為你的愛
-[03:34.93]Want to be your love for real
-真真切切地，成為你的愛
-[03:41.01]Want to be your love
-成為你的愛`;
+    const LRC_ORANGE = `[00:01.52]그거 아세요?
+你知道嗎？
+[00:05.23]귤에 붙어 있는 하얀 거
+橘子上那層白色的絲絡
+[00:07.57]이름은 귤락입니다
+它的名字叫作「橘絡」
+[00:12.09]찰떡아이스는 세 알이었고
+年糕冰淇淋有三粒
+[00:14.74]하와이안 피자는
+至於夏威夷披薩
+[00:16.00]캐나다에서 만들었죠
+其實是加拿大發明的
+[00:18.92]제가 또 계란을 기가 맥히게 삶습니다
+我還超級無敵會煮雞蛋
+[00:26.35]우리 아빠 안경 썼어요
+我爸爸戴眼鏡
+[00:30.08]오늘 아침 쑥 캐고 옴
+今天早上還去採了艾草`;
 
-    const WHAT_YOU_WONT_DO_LRC_TEXT = `[00:02.60]I guess you wonder where I've been
-想必你也好奇，我這些日子去了哪裡
-[00:08.39]I searched to find a love within
-我曾試著尋覓，找回心中的愛
-[00:14.46]I came back to let you know
-如今我回來，只為讓你知道
-[00:18.99]Got a thing for you and I can't let go
-我對你情有獨鍾，始終無法放手
-[00:25.83]My friends wonder what is wrong with me
-朋友們都不明白，我究竟怎麼了
-[00:30.35]Well, I'm in a daze from your love, you see
-只因你的愛，令我深深沉醉
-[00:37.18]I came back to let you know
-如今我回來，只為讓你知道
-[00:41.70]Got a thing for you and I can't let it go
-我對你情有獨鍾，始終無法割捨
-[00:48.27]Some people go around the world for love
-有些人為了愛，走遍世界各地
-[00:53.01]But they may never find what they dream of
-卻未必能尋得，夢中所求的愛
-[00:58.26]What you won't do, to do for love
-為了愛，有些事是你無論如何也不願做的
-[01:04.30]You've tried everything, but you don't give up
-你試遍所有方法，卻始終不肯放棄
-[01:09.84]In my world, only you
-在我的世界裡，唯有你
-[01:15.92]Make me do for love what I would not do
-讓我為了愛，做出從前不曾做過的事
-[01:22.80]My friends wonder what is wrong with me
-朋友們都不明白，我究竟怎麼了
-[01:27.53]Well, I'm in a daze from your love, you see
-只因你的愛，令我深深沉醉
-[01:34.15]I came back to let you know
-如今我回來，只為讓你知道
-[01:38.88]Got a thing for you, and I can't let go
-我對你情有獨鍾，始終無法放手
-[01:45.76]And though I only want the best, it's true
-我確實只盼一切都能盡善盡美
-[01:49.96]I can't believe the things I do for you
-卻連自己都難以置信，竟為你做到如此
-[01:55.23]What you won't do, do for love
-為了愛，有些事是你原本不願去做的
-[02:01.58]You've tried everything, but you won't give up
-你試遍所有方法，卻依然不願放棄
-[02:07.41]In my world, only you
-在我的世界裡，唯有你
-[02:13.20]Make me do for love what I would not do
-讓我為了愛，做出從前不曾做過的事
-[02:18.99]Make me do for love what I would not do
-讓我為了愛，做出從前不曾做過的事
-[02:24.54]Make me do for love what I would not do
-讓我為了愛，做出從前不曾做過的事`;
+    const LRC_SPARKLE = `[00:21.81]まだこの世界は 僕を飼いならしてたいみたいだ
+這個世界似乎依然想將我馴服
+[00:29.97]望み通りいいだろう 美しくもがくよ
+如你所願，我會美麗地掙扎
+[00:37.17]互いの砂時計 眺めながらキスをしようよ
+讓我們凝望著彼此的沙漏，深情一吻吧
+[00:44.77]「さよなら」から一番 遠い 場所で待ち合わせよう
+約好在離「再見」最遙遠的地方相見吧
+[00:52.55]ついに時はきた 昨日までは序章の序章で
+時機終於到來，直至昨天都只是序章中的序章 
+[01:00.43]飛ばし読みでいいから ここからが僕だよ
+即使略覽也無妨，從這裡開始，才是真正的我
+[01:07.85]経験と知識と カビの生えかかった勇気を持って
+帶著經驗、知識，以及幾乎快發霉的勇氣
+[01:15.62]いまだかつてないスピードで 君のもとへダイブを
+以從未有的速度，朝你縱身躍去
+[01:22.78]まどろみの中で 生温いコーラに
+於朦朧睡意中，望著已微溫的可樂
+[01:26.58]ここでないどこかを 夢見たよ
+夢見了某個不屬於此的地方
+[01:30.57]教室の窓の外に
+在教室的窗外
+[01:34.37]電車に揺られ 運ばれる朝に
+在電車搖晃的晨光中被載往遠方
+[01:45.15]運命だとか未来とかって 言葉がどれだけ手を
+無論我們如何伸手，都無法觸及那些名為「命運」與「未來」的詞彙
+[01:53.55]伸ばそうと届かない 場所で僕ら恋をする
+我們在伸出手也無法觸及的地方相愛
+[02:00.86]時計の針も二人を 横目に見ながら進む
+就連時鐘指針也斜睨著我們，並向前流轉
+[02:08.65]こんな世界を二人で 一生 いや、何章でも
+讓我們在這樣的世界裡，共度一生——不， 是無論多少篇章
+[02:16.44]生き抜いていこう
+都一起堅持活下去
+[02:23.58]運命だとか未来とかって 言葉がどれだけ手を
+無論我們如何伸手，都無法觸及那些名為「命運」與「未來」的詞彙
+[02:31.69]伸ばそうと届かない 場所で僕ら恋をする
+我們在伸出手也無法觸及的地方相愛
+[02:39.40]時計の針也二人を 横目に見ながら進む
+就連時鐘指針也斜睨著我們，並向前流轉
+[02:47.37]こんな世界を二人で 一生 いや、何章でも
+讓我們在這樣的世界裡，共度一生——不， 是無論多少篇章
+[02:54.91]生き抜いていこう
+都一起堅持活下去`;
 
-    const ONLY_WANNA_GIVE_IT_LRC_TEXT = `[00:10.10]Thought you were just another Romeo
-原以為你不過是另一個羅密歐
-[00:14.82]The shoe you pass by in the store window
-就像商店櫥窗擦肩而過的那雙鞋
-[00:18.71]But soon as I got home I wish I'd bought you instead
-可一回到家，我便後悔當時沒有選擇你
-[00:23.94]I got it bad, I'll take the black, take the navy and red
-我已深陷其中，黑色、藏青與紅色，我全都想要
-[00:28.99]No other man has ever ever had quite this effect
-從未有人能像你這樣，令我如此心動
-[00:33.42]I sleep alone 'cause there's no room in my bed for any other lover
-我仍獨自入眠，因為我的床再也容不下其他戀人
-[00:40.50]With no gun to my head
-我並非受人脅迫
-[00:42.77]Your kisses hold me hostage and I don't wanna stop it
-你的吻將我俘虜，而我甘願沉溺其中
-[00:48.60]'Cause I only wanna give it to you
-因為我只想將一切都給你
-[00:52.69]And I want you more than a new pair of shoes
-對你的渴望，甚至勝過一雙嶄新的鞋
-[00:58.56]I only wanna give it to you
-我只想將一切都給你
-[01:02.16]And I sure do hope that you feel like I do
-我真心盼望，你也有著與我相同的心意
-[01:08.79]I came before this digital ocean
-在這片數位洪流席捲一切之前，我便已存在
-[01:13.18]Where folks only move in digital motion
-人們如今只在數位世界裡來去穿梭
-[01:18.06]But you're so classic I want you more than my Adidas
-但你如此經典，令我對你的渴望甚至勝過我的愛迪達
-[01:22.84]All the bees are gettin' at you 'cause your honey is sweeter
-蜜蜂都向你飛去，只因你的甜美更勝蜜糖
-[01:27.93]I need ya, with no gun to my head
-我需要你，這並非出於任何脅迫
-[01:31.65]Your kisses hold me hostage and I don't wanna stop it
-你的吻將我俘虜，而我甘願沉溺其中
-[01:37.51]'Cause I only wanna give it to you
-因為我只想將一切都給你
-[01:41.86]And I want you more than a new pair of shoes
-對你的渴望，甚至勝過一雙嶄新的鞋
-[01:47.53]I only wanna give it to you
-我只想將一切都給你
-[01:51.50]And I sure do hope that you feel like I do
-我真心盼望，你也有著與我相同的心意
-[01:56.78]I said I only wanna give it to you
-我說過，我只想將一切都給你
-[02:01.29]And I want you more than a new pair of shoes
-對你的渴望，甚至勝過一雙嶄新的鞋
-[02:06.25]I, I, I wanna give it to you
-我只想，只想將一切都給你
-[02:11.40]And I sure do hope that you feel like I do
-我真心盼望，你也有著與我相同的心意
-[02:31.82]I like, I like, I like that y'all, I like that y'all
-我喜歡，我真的喜歡這一切，我就是如此著迷`;
+    const LRC_HARD_TO_SAY = `[00:17.12]寶貝 今晚的我有點醉
+[00:22.96]別理會你聽的那些謊話
+[00:26.67]我沒辦法
+[00:29.07]把真相都證明給你啊
+[00:31.99]So 我的寶貝
+[00:34.91]你別看我渣也會累
+[00:38.89]脆弱的心被你一擊就碎
+[00:42.60]So what you say?
+[00:45.01]能不能再給個機會?
+[00:49.26]誰能把你的心撫慰?
+[00:51.87]就算天黑 我也不怕會疲憊
+[00:57.46]犯過的罪沒人能體會
+[01:00.37]是我不對 剩自己在流淚
+[01:05.15]我想念你 我恨自己錯過
+[01:10.20]愛你但說不出口
+[01:13.65]你說太累所以是誰惹的禍
+[01:16.86]是我 愛你但說不出口
+[01:29.30]你說太累所以是誰惹的禍
+[01:32.76]是我 愛你但說不出口
+[01:37.21]寶貝 今晚的我有點累
+[01:43.07]不知道該跟你說些什麼
+[01:46.52]寫了這首歌 送給你一個交代
+[01:53.17]誰能把你的心撫慰?
+[01:55.82]就算天黑 我也不怕會疲憊
+[02:01.40]犯過的罪 沒人能體會
+[02:04.59]是我不對 剩自己在流淚
+[02:09.10]我想念你 我恨自己錯過
+[02:14.18]愛你 但說不出口
+[02:17.61]你說太累所以是誰惹的禍
+[02:20.80]是我 愛你但說不出口
+[02:33.29]你說太累所以是誰惹的禍
+[02:36.74]是我 愛你但說不出口
+[02:54.24]愛你但說不出口`;
 
-    const IMPERFECT_FOR_YOU_LRC_TEXT = `[00:04.17]My boy, come take my hand
-親愛的，來牽起我的手
-[00:08.43]Throw your guitar and your clothes in the back seat
-把吉他和衣物放進後座
-[00:13.69]My love, they don't understand
-親愛的，他們不會明白
-[00:17.85]But I'll hold your hurt in the box here beside me
-但我會將你的傷痛收進盒中，放在身旁珍藏
-[00:23.87]How could we know
-我們怎會料到
-[00:26.17]We'd rearrange all the cosmos? Mm
-我們竟會讓彼此的世界徹底改變
-[00:33.27]We crashed, and we burned
-我們曾經歷碰撞，也曾遍體鱗傷
-[00:35.55]Now I just can't go where you don't go
-如今，沒有你的地方，我已無法獨自前往
-[00:40.20]And usually, I'm
-而平日的我
-[00:43.40]Fucked up, anxious, too much
-總是狼狽不堪、焦慮不安，情緒過於強烈
-[00:47.10]But I'll love you like you need me to
-但我會視你所需的真心愛你
-[00:51.02]Imperfect for you
-如此完美的適合你
-[00:53.14]Messy, completely distressed
-一團混亂，滿心不安
-[00:57.02]But I'm not like that since I met you
-但自從遇見你，我便不再如從前那般
-[01:00.66]Imperfect for you
-我並不完美，卻是為你而生的契合
-[01:03.52]Let's go tonight
-今晚就讓我們出發
-[01:05.82]'Cause there's just a few seconds left 'til tomorrow
-因為距離明天，只剩下短短幾秒
-[01:11.40]We have all that we need
-我們已擁有所需的一切
-[01:15.65]Let's leave our baggage and wine at the table (Mm), mm
-就把行囊與酒留在桌上，別再帶走
-[01:21.51]How could we know
-我們怎會料到
-[01:23.54]That this was a happy disaster? (Happy disaster) Mm (Mm)
-這場混亂，竟也能成為幸福的意外？
-[01:30.44]I'm glad we crashed and burned (We crashed and burned)
-我很慶幸，我們曾經歷碰撞，也曾遍體鱗傷
-[01:33.00]I'll never forget when you told me
-我永遠不會忘記，你曾對我說
-[01:37.78]You said, "Usually, I'm"
-你說：「平日的我」
-[01:41.16]Fucked up, anxious, too much
-總是狼狽不堪、焦慮不安，情緒也過於強烈
-[01:44.55]But I'll love you like you need me to
-但我會視你所需的真心愛你
-[01:48.74]Imperfect for you
-如此完美的適合你
-[01:50.55]Messy, completely distressed
-一團混亂，滿心不安
-[01:54.76]But I'm not like that since I met you
-但自從遇見你，我便不再如從前那般
-[01:59.24]Mm, how could we know
-我們怎會料到
-[02:02.42]We'd make the bad stuff delightful? Mm
-我們竟能讓那些糟糕的事，也有了美好的意義
-[02:08.74]I'm glad we crashed and burned
-我很慶幸，我們曾經歷碰撞，也曾遍體鱗傷
-[02:11.66]I know we'll be there for each other
-我知道，無論何時，我們都會陪伴彼此
-[02:16.35]When we're feeling
-當我們再次感到
-[02:19.43]Fucked up, anxious, too much
-狼狽不堪、焦慮不安，情緒難以平復
-[02:22.89]But I'll love you like you need me to
-但我會視你所需的真心愛你
-[02:26.87]Imperfect for you
-我是你的完美人選 
-[02:29.00]Messy, completely distressed
-一團混亂，滿心不安
-[02:32.98]But I'm not like that since I met you
-但自從遇見你，我便不再如從前那般
-[02:36.70]Imperfect for you
-我並不完美，卻是為你而生的契合
-[02:38.56]Fucked up, anxious, too much
-狼狽不堪、焦慮不安，情緒也過於強烈
-[02:42.16]Like you need me to (Like you need me to)
-就像你所需要的那樣
-[02:46.31]Imperfect for you
-如此完美的適合你
-[02:48.31]Messy, completely distressed
-一團混亂，滿心不安
-[02:52.68]Not like that since I met you
-自從遇見你，我便不再如從前那般
-[02:56.02]Imperfect for you
-我並不完美，卻是為你而生的契合`;
-
-    const YUKON_LRC_TEXT = `[00:00.45]In the city, uh, remember you used to drive a Yukon
-在這座城市裡，還記得你從前總開著 Yukon(GMC豪華SUV車款)嗎？
-[00:05.15]I'd pick up whenever you called
-每當你來電，我總會接起
-[00:07.76]In the parkin' lot in Tucson, like, "Uh, are you with me?"
-在圖森的停車場裡，你彷彿問著：「你會陪在我身邊嗎？」
-[00:12.81]In the Phantom with the roof gone, I pull up like Jimmy Neutron
-我開著敞篷的 Phantom(勞斯萊斯幻影) 現身，如同 Jimmy Neutron(動畫主角-天才小子吉米)般引人注目
-[00:17.84]I can help you get a move on, like U-Haul, and I know
-我能助你踏上新的旅程，就像 U-Haul(搬家與貨車租賃公司)般替你打點一切，而我明白
-[00:22.83]Uh, you like to go slow, but we could go faster, tell me the password
-你喜歡循序漸進，但我們也能加快腳步，告訴我那句暗號
-[00:30.53]Slide city, slide city, you know what that means, uh
-悄然來去，悄然穿梭，你明白其中的意思
-[00:35.58]I'm coming up on you quickly, mm, I'll bring nice things, uh
-我正迅速向你靠近，也會為你帶來美好的事物
-[00:40.62]Slide city, slide, plenty other men tryna get in the bed
-悄然來去，悄然靠近，還有許多人試圖與你共度一夜
-[00:45.69]So when it gets lost and sick, I know it's gonna make you beg
-所以當一切失控、令人難以承受時，我知道你終究會開口挽留
-[00:50.73]What would I do (What would I do?), if I didn't love you, babe?
-如果我不愛你，我又該如何是好？
-[00:55.78]What would I do if I didn't lock you, babe?
-如果我沒有認定你、與你相守，我又該如何是好？
-[01:00.83]What would I do (What would I do?), if I didn't love you?
-如果我不愛你，我又該如何是好？
-[01:11.98]Just wanna be the one to give you what you want
-我只想成為那個能給你所求之物的人
-[01:17.02]I could put you in the Yves Saint Laurent
-我能讓你身著 YSL
-[01:19.31]Riding around town with your hair down, uh (True)
-讓你披散著長髮，在城裡自在兜風
-[01:22.50]I know you like it when I tell you what you want
-我知道，你喜歡聽我說出那些合你心意的話
-[01:25.34]Give you back what you done and what you want
-你曾為我付出的一切，我都會回報，也會給你所渴望的
-[01:27.71]I can tell your friends if you don't want them, uh, uh
-若你不想讓朋友知道，我也能替你保守秘密
-[01:33.17]Uh, you like to go slow, but we could go faster, tell me the password (Uh)
-你喜歡循序漸進，但我們也能加快腳步，告訴我那句暗號
-[01:41.29]Slide city, slide city, you know what that means, uh
-悄然來去，悄然穿梭，你明白其中的意思
-[01:46.07]I'm coming up on you quickly, mm, I'll bring nice things, uh (Yeah, baby, I'll bring nice things)
-我正迅速向你靠近，也會為你帶來美好的事物（是的，親愛的，我會帶來美好的一切）
-[01:51.52]Slide city, slide, plenty other men tryna get in the bed
-悄然來去，悄然靠近，還有許多人試圖與你共度一夜
-[01:56.19]So when it gets lost and sick, I know it's gonna make you beg
-所以當一切失控、令人難以承受時，我知道你終究會開口挽留
-[02:01.66]What would I do, uh, if I didn't love you, babe?
-如果我不愛你，我又該如何是好？
-[02:06.31]What would I do if I didn't lock you, babe?
-如果我沒有認定你、與你相守，我又該如何是好？
-[02:11.76]What would I do (What would I do?), if I didn't love you? (What would I, what would I do?)
-如果我不愛你，我又該如何是好？`;
-
-    const TWO_ONE_LRC_TEXT = `[00:15.53]I missed your 21st birthday
-我錯過了你二十一歲的生日
-[00:18.12]I've been up at home
-那晚我獨自在家，徹夜未眠
-[00:19.88]Almost tried to call you, don't know if I should
-幾乎忍不住想打給你，卻不知是否該這麼做
-[00:23.52]Hate to picture you half-drunk happy
-不願想像你微醺著，滿心歡喜的模樣
-[00:27.49]Hate to think you went out without me
-也不願去想，你已能獨自赴約，不再有我陪伴
-[00:31.75]I'm sorry if you blame me, if I were you, I would
-若你因此責怪我，我很抱歉；換作是我，想必也會如此
-[00:36.01]Thought you'd see it coming, but you never could
-我以為你早該有所察覺，沒想到你始終毫無預料
-[00:39.62]I still haven't heard from your family
-至今，我仍未收到你家人的消息
-[00:43.61]But you said your mom always loved me
-但你曾說過，你的母親一直都很喜歡我
-[00:49.34]Sometimes I go blurry-eyed
-有時，淚水會模糊我的視線
-[00:53.32]Small talk and you tell me that you're on fire
-我們閒聊幾句，你說自己最近正意氣風發
-[00:57.56]Lights on and it's black and white, I couldn't stay forever
-燈光亮起，世界只剩黑白分明，我終究無法永遠停留
-[01:04.21]I see the look in your eye and I'm biting my tongue
-望見你眼中的神情，我只能將滿腹的話咽回心底
-[01:08.46]You'll be the love of my life when I was young
-你會是我年少時，生命中最深刻的愛
-[01:12.17]When the night is over
-當夜色散盡
-[01:15.18]Don't call me up, I'm already under
-別再打給我，那時我早已沉沉睡去
-[01:19.16]I get a little bit alone sometimes and I miss you again
-偶爾感到些許孤單，對你的思念便再次湧現
-[01:24.21]I'll be the love of your life inside your head
-我會留在你的記憶裡，成為你心中曾經最愛的人
-[01:28.20]When the night is over
-當夜色散盡
-[01:31.15]Don't call me up, I'm already under
-別再打給我，我依舊為失去你而心痛 
-[01:35.94]Audrey said she saw you out past twelve o'clock
-Audre 說，她看見你在午夜十二點後仍在外頭
-[01:39.94]Just because you're hurting doesn't mean I'm not
-你會痛苦，不代表我就不曾受傷
-[01:43.41]If it doesn't go away by the time I turn thirty
-如果等我年滿三十，這份傷痛仍未消散
-[01:48.18]I made a mistake and I'll tell you I'm sorry
-那就表示我犯了錯，而我會親口向你道歉
-[01:50.91]"Sorry"
-「對不起」
-[01:53.31]Sometimes I go blurry-eyed
-有時，淚水會模糊我的視線
-[01:57.37]Small talk and you tell me that you're on fire
-我們閒聊幾句，你說自己最近正意氣風發
-[02:01.35]Lights on and it's black and white, I couldn't stay forever
-燈光亮起，世界只剩黑白分明，我終究無法永遠停留
-[02:08.19]I see the look in your eye and I'm biting my tongue
-望見你眼中的神情，我只能將滿腹的話咽回心底
-[02:12.17]You'll be the love of my life when I was young
-你會是我年少時，生命中最深刻的愛
-[02:16.15]When the night is over
-當夜色散盡
-[02:19.08]Don't call me up, I'm already under
-別再打給我，那時我早已沉沉睡去
-[02:23.33]I get a little bit alone sometimes and I miss you again
-偶爾感到些許孤單，對你的思念便再次湧現
-[02:28.12]I'll be the love of your life inside your head
-我會留在你的記憶裡，成為你心中曾經最愛的人
-[02:32.28]When the night is over
-當夜色散盡
-[02:35.48]Don't call me up, I'm already under
-別再打給我，我依舊為失去你而心痛`;
-
-    const BLUE_BLUES_LRC_TEXT = `[00:12.54]Days go by and I’m not feeling better
-日子一天天過去，我卻始終沒有好轉
-[00:18.32]Coffee’s always bitter if it even has a taste
-咖啡總是苦澀，甚至嚐不出一絲滋味
-[00:23.90]And I know why, so watch me get a haircut
-我知道為什麼，就看著我剪去一頭煩惱
-[00:29.65]I know every shortcut to avoid the pain
-我熟知每一條逃避痛苦的捷徑
-[00:33.52]So I don’t have to feel what I need to feel
-只為了不去面對那些本該感受的情緒
-[00:36.31]I keep running from myself
-我始終在逃避自己
-[00:39.50]I don’t have to feel what I need to feel
-只要不去感受，就不必面對那些情緒
-[00:41.77]I keep running from myself
-我一次次逃離自己
-[00:44.42]But there’s just no moving mountains, you’re bound to lose (You’re bound to lose)
-有些高山終究無法繞過，逃避只會讓你注定失敗
-[00:51.07]Gotta let the rain pour down to see the blue (To see the blue)
-唯有讓大雨落下，才能看見蔚藍
-[00:56.66]No point in walking around it if you wanna get out
-若想真正走出去，繞著困境打轉毫無意義
-[01:01.27]You gotta go through, you gotta go through
-你必須穿越，你必須面對
-[01:06.88]You gotta go through, you gotta go through
-你必須穿越，你必須面對
-[01:14.85]Fake a smile, 난 웃어야만 했고
-強顏歡笑，我只能逼自己笑著
-[01:17.50]떨리는 숨은 삼켜내 들키지 않도록
-將顫抖的呼吸吞回去，不讓任何人察覺
-[01:26.00]Stuck in blue, 언젠간 지나겠지
-困在憂鬱之中，總有一天會過去吧
-[01:31.85]Force a little patience but I stay in bed
-勉強自己再多一點耐心，卻依然躺在床上
-[01:35.57]So I don’t have to feel what I need to feel
-只為了不去面對那些本該感受的情緒
-[01:38.22]I keep running from myself
-我始終在逃避自己
-[01:41.41]I don’t have to feel what I need to feel
-只要不去感受，就不必面對那些情緒
-[01:44.07]I keep running from myself
-我一次次逃離自己
-[01:46.55]But there’s just no moving mountains, you’re bound to lose (You’re bound to lose)
-有些高山終究無法繞過，逃避只會讓你注定失敗
-[01:53.20]Gotta let the rain pour down to see the blue (To see the blue)
-唯有讓大雨落下，才能看見蔚藍
-[01:58.80]No point in walking around it if you wanna get out
-若想真正走出去，繞著困境打轉毫無意義
-[02:03.31]You gotta go through, you gotta go through
-你必須穿越，你必須面對
-[02:08.93]You gotta go through, you gotta go through
-你必須穿越，你必須面對
-[02:14.77]Yeah, you gotta go, you gotta go
-是啊，你得向前走，不能停在原地
-[02:17.96]You gotta go through
-你必須面對
-[02:20.62]You gotta go, you gotta go
-你得繼續走，不能就此停下
-[02:23.59]You gotta go through
-你必須面對
-[02:26.26]I keep walking, 여전히 겨울에 잠겨
-我仍不停走著，卻依舊深陷寒冬
-[02:30.78]It’s too tight to breathe
-胸口像被緊緊束住，連呼吸都困難
-[02:32.14]But I’ve been holding back my cries (Cries)
-可我始終強忍著淚水，不讓哭聲洩漏
-[02:35.32]That’s why I can’t sleep at night (At night, at night)
-所以每到夜裡，我始終無法入睡
-[02:41.16]It’s just no moving mountains, you’re bound to lose
-有些高山終究無法繞過，逃避只會讓你注定失敗
-[02:46.75]Gotta let the rain pour down to see the blue
-唯有讓大雨落下，才能看見蔚藍
-[02:52.35]No point in walking around it if you wanna get out (Oh)
-若想真正走出去，繞著困境打轉毫無意義
-[02:56.88]You gotta go through, you gotta go through
-你必須穿越，你必須面對
-[03:02.65]You gotta go through, you gotta go through
-你必須穿越，你必須面對
-[03:09.17]Yeah, you gotta go, you gotta go (You gotta go through)
-是啊，你得向前走，不能停下（你必須穿越）
-[03:11.45]You gotta go through (You gotta go through)
-你必須走過這一切（你必須面對）
-[03:14.55]You gotta go, you gotta go (You gotta go through)
-你得繼續走，不能就此停下（你必須穿越）
-[03:17.10]You gotta go through (You gotta go through)
-你必須穿越（你必須面對）
-[03:19.88]Yeah, you gotta go, you gotta go
-是啊，你得向前走，不能停在原地
-[03:22.95]You gotta go through
-你必須面對`;
+    const LRC_CANT_TAKE_EYES = `[00:21.49]You're just too good to be true
+你美好得令人難以置信
+[00:24.13]Can't keep my eyes off you
+讓我無法將目光從你身上移開
+[00:26.98]You feel like heaven to touch
+觸碰你，彷彿觸及天堂
+[00:29.64]I wanna hold you so much
+我多麼渴望將你緊緊擁入懷中
+[00:32.31]At long last love has arrived
+漫長等待後，愛終於降臨
+[00:34.97]And I thank God I'm alive
+感謝上天，讓我有幸活著遇見你
+[00:37.64]You're just too good to be true
+你美好得宛如夢境
+[00:40.29]Can't take my eyes off you
+我的目光始終離不開你
+[00:47.16]I need you, baby
+我需要你，親愛的
+[00:50.88]And if it's quite all right
+如果你願意接受
+[00:53.53]I need you, baby
+我需要你，親愛的
+[00:56.21]To warm the lonely nights
+為我孤寂的長夜帶來溫暖
+[00:58.86]I love you, baby
+我愛你，親愛的
+[01:02.04]Trust in me when I say ok
+請相信我說的每一句話
+[01:08.63]Oh, pretty baby
+噢，親愛的
+[01:12.36]Don't bring me down, I pray
+求你別讓我失望
+[01:14.97]Oh, pretty baby
+噢，親愛的
+[01:17.62]Now that I found you, stay
+既然終於找到你，就請留在我身邊
+[01:20.28]And let me love you, baby
+讓我好好愛你，親愛的
+[01:23.67]Baby let me love you all day
+讓我好好愛你每一天
+[01:31.58]You're just too good to be true
+你美好得宛如夢境
+[01:34.45]Can't take my eyes off you
+我的目光始終離不開你
+[01:37.03]You feel like heaven to touch
+觸碰你，宛如觸及天堂
+[01:39.70]I wanna hold you so much
+我多麼渴望將你緊緊擁入懷中
+[01:42.37]At long last love has arrived
+盼望已久的愛，終於降臨
+[01:45.03]And I thank God I'm alive
+感謝上天，讓我有幸遇見你
+[01:47.68]You're just too good to be true
+你美好得宛如夢境
+[01:50.60]Can't take my eyes off you
+我的目光始終離不開你
+[01:54.58]I need you, baby
+我需要你，親愛的
+[01:58.24]And if it's quite all right
+如果你願意接受
+[02:01.16]I need you, baby
+我需要你，親愛的
+[02:03.55]To warm the lonely nights
+為我寂寥的漫漫長夜帶來溫暖
+[02:06.21]I love you, baby
+我愛你，親愛的
+[02:09.39]Trust in me when I say ok
+請相信我對你說的話
+[02:15.98]It's pretty baby
+親愛的
+[02:19.65]Don't let me down, I pray
+求你別讓我滿懷期待化為失落
+[02:22.52]Oh, pretty baby
+噢，親愛的
+[02:25.13]Now that I found you, stay
+既然終於找到你，就請留在我身邊
+[02:27.73]And let me love you
+讓我好好愛你
+[02:30.86]Baby let me love you all day
+讓我好好愛你每一天，親愛的
+[02:39.06]You're just too good to be true
+你美好得令人難以置信
+[02:41.71]Can't keep my eyes off you
+讓我無法將目光從你身上移開
+[02:44.36]You feel like heaven to touch
+觸碰你，宛如觸及天堂
+[02:47.27]I wanna hold you so much
+我多麼渴望將你緊緊擁入懷中
+[02:49.87]At long last love has arrived
+盼望已久的愛，終於降臨
+[02:52.52]And I thank God I'm alive
+感謝上天，讓我有幸遇見你
+[02:55.18]You're just too good to be true
+你美好得宛如夢境
+[02:57.84]Can't take my eyes off you
+我的目光始終離不開你
+[03:01.22]Too good to be true
+美好得令人難以置信
+[03:03.36]Can't take my eyes off you
+我的目光始終離不開你
+[03:06.54]Too good to be true
+美好得宛如夢境`;
 
     const TWO_PLAYLISTS_DATA = [
       {
-        id: "pl_solo",
-        name: "WINTER SOLO",
-        cover: COVER_LIPS,
+        id: "pl_karina_song",
+        name: "KARINA SONG",
+        cover: COVER_UP,
         songs: [
           {
-            title: "Lips",
-            artist: "WINTER",
-            source: "lips (online-audio-converter.com).mp3",
-            cover: COVER_LIPS,
-            labelImg: "",
-            backCover: "",
+            title: "UP",
+            artist: "KARINA",
+            source: "UP.mp3",
+            cover: COVER_UP,
+            labelImg: COVER_UP,
+            backCover: COVER_UP,
             imgScale: 1.0,
             imgOffsetX: 0.0,
             imgOffsetY: 0.0,
-            duration: 230,
-            volume: 0.65,
-            lyrics: parseLrc(LIPS_LRC_TEXT)
-          },
-          {
-            title: "Spark",
-            artist: "WINTER",
-            source: "spark (online-audio-converter.com).mp3",
-            cover: COVER_SPARK,
-            labelImg: "",
-            backCover: "",
-            imgScale: 1.0,
-            imgOffsetX: 0.0,
-            imgOffsetY: 0.0,
-            duration: 195,
+            duration: 220,
             volume: 0.60,
-            lyrics: []
+            lyrics: parseLrc(LRC_UP)
           },
           {
-            title: "BLUE",
-            artist: "WINTER",
-            source: "blue (online-audio-converter.com).mp3",
-            cover: COVER_BLUE,
-            labelImg: "",
-            backCover: "",
-            imgScale: 1.0,
-            imgOffsetX: 0.0,
-            imgOffsetY: 0.0,
-            duration: 211,
-            volume: 0.60,
-            lyrics: parseLrc(BLUE_LRC_TEXT)
-          },
-          {
-            title: "SaddIe Up",
-            artist: "WINTER",
-            source: "Saddle Up (online-audio-converter.com).mp3",
-            cover: COVER_SADDLE,
-            labelImg: "",
-            backCover: "",
-            imgScale: 1.0,
-            imgOffsetX: 0.0,
-            imgOffsetY: 0.0,
-            duration: 230,
-            volume: 0.60,
-            lyrics: parseLrc(SADDLE_LRC_TEXT)
-          },
-          {
-            title: "Speed of Summer",
-            artist: "WINTER",
-            source: "speed of summer (online-audio-converter.com).mp3",
-            cover: COVER_SUMMER,
-            labelImg: "",
-            backCover: "",
+            title: "GOOD STUFF",
+            artist: "KARINA",
+            source: "GOOD STUFF.mp3",
+            cover: COVER_GOOD_STUFF,
+            labelImg: COVER_GOOD_STUFF,
+            backCover: COVER_GOOD_STUFF,
             imgScale: 1.0,
             imgOffsetX: 0.0,
             imgOffsetY: 0.0,
             duration: 210,
             volume: 0.60,
-            lyrics: []
+            lyrics: parseLrc(LRC_GOOD_STUFF)
           },
           {
-            title: "Time Walking On Memories기억을 걷는 시간",
-            artist: "WINTER",
-            source: "time walking on memories (online-audio-converter.com).mp3",
-            cover: COVER_TIME,
-            labelImg: "",
-            backCover: "",
+            title: "16 Bit",
+            artist: "KARINA",
+            source: "16Bit.mp3",
+            cover: COVER_16_BIT,
+            labelImg: COVER_16_BIT,
+            backCover: COVER_16_BIT,
             imgScale: 1.0,
             imgOffsetX: 0.0,
             imgOffsetY: 0.0,
-            duration: 323,
+            duration: 198,
             volume: 0.60,
-            lyrics: parseLrc(TIME_WALKING_LRC_TEXT)
+            lyrics: parseLrc(LRC_16_BIT)
           },
           {
-            title: "Voyage",
-            artist: "WINTER",
-            source: "Voyage_WlNTER_128k.mp3",
-            cover: COVER_VOYAGE,
-            labelImg: COVER_VOYAGE,
-            backCover: COVER_VOYAGE,
-            imgScale: 1.25,
+            title: "May the TENDERNESS be with you!",
+            artist: "JANNABI ft.KARINA",
+            source: "May the TENDERNESS be with you.mp3",
+            cover: COVER_TENDERNESS,
+            labelImg: VINYL_TENDERNESS,
+            backCover: COVER_TENDERNESS,
+            imgScale: 1.0,
             imgOffsetX: 0.0,
-            imgOffsetY: 0.1,
-            duration: 235,
+            imgOffsetY: 0.0,
+            duration: 245,
             volume: 0.65,
-            lyrics: parseLrc(VOYAGE_LRC_TEXT)
+            lyrics: parseLrc(LRC_TENDERNESS)
+          },
+          {
+            title: "Serenade",
+            artist: "KARINA&WINTER",
+            source: "Serenade.mp3",
+            cover: COVER_SERENADE,
+            labelImg: VINYL_SERENADE,
+            backCover: COVER_SERENADE,
+            imgScale: 1.0,
+            imgOffsetX: 0.0,
+            imgOffsetY: 0.0,
+            duration: 215,
+            volume: 0.65,
+            lyrics: parseLrc(LRC_SERENADE)
+          },
+          {
+            title: "你知道嗎그거 아세요",
+            artist: "KARINA ft.Lee Mujin",
+            source: "Orange.mp3",
+            cover: COVER_ORANGE,
+            labelImg: COVER_ORANGE,
+            backCover: COVER_ORANGE,
+            imgScale: 1.0,
+            imgOffsetX: 0.0,
+            imgOffsetY: 0.0,
+            duration: 205,
+            volume: 1.0,
+            lyrics: parseLrc(LRC_ORANGE)
           }
         ]
       },
       {
-        id: "pl_blues",
-        name: "WINTER Blues",
-        cover: COVER_BLUES,
+        id: "pl_karina_memory_box",
+        name: "KARINA MEMORY BOX",
+        cover: COVER_SPARKLE,
         songs: [
           {
-            title: "Be Be Your Love",
-            artist: "WINTER",
-            source: "01 Be Be Your Love.mp3",
-            cover: COVER_BLUES,
-            labelImg: "",
-            backCover: "",
+            title: "スパークル(Sparkle)",
+            artist: "KARINA",
+            source: "01Sparkle.mp3",
+            cover: COVER_SPARKLE,
+            labelImg: MEMORY_BOX_VINYL_LABEL,
+            backCover: COVER_SPARKLE,
             imgScale: 1.0,
             imgOffsetX: 0.0,
             imgOffsetY: 0.0,
             duration: 220,
             volume: 1.0,
-            lyrics: parseLrc(BE_BE_YOUR_LOVE_LRC_TEXT)
+            lyrics: parseLrc(LRC_SPARKLE)
           },
           {
-            title: "What You Won’t Do For Love",
-            artist: "WINTER",
-            source: "02 What You Won_t Do For Love.mp3",
-            cover: COVER_BLUES,
-            labelImg: "",
-            backCover: "",
+            title: "愛你但說不出口(Hard to say)",
+            artist: "KARINA",
+            source: "02Hard to say.mp3",
+            cover: COVER_HARD_TO_SAY,
+            labelImg: MEMORY_BOX_VINYL_LABEL,
+            backCover: COVER_HARD_TO_SAY,
             imgScale: 1.0,
             imgOffsetX: 0.0,
             imgOffsetY: 0.0,
             duration: 210,
             volume: 1.0,
-            lyrics: parseLrc(WHAT_YOU_WONT_DO_LRC_TEXT)
+            lyrics: parseLrc(LRC_HARD_TO_SAY)
           },
           {
-            title: "YUKON",
-            artist: "WINTER",
-            source: "03 YUKON.mp3",
-            cover: COVER_BLUES,
-            labelImg: "",
-            backCover: "",
+            title: "슬픈 사랑 노래",
+            artist: "KARINA",
+            source: "03.mp3",
+            cover: COVER_SAD_LOVE,
+            labelImg: MEMORY_BOX_VINYL_LABEL,
+            backCover: COVER_SAD_LOVE,
             imgScale: 1.0,
             imgOffsetX: 0.0,
             imgOffsetY: 0.0,
             duration: 198,
             volume: 1.0,
-            lyrics: parseLrc(YUKON_LRC_TEXT)
+            lyrics: []
           },
           {
-            title: "거짓말 거짓말 거짓말",
-            artist: "WINTER",
+            title: "그대는 그대로",
+            artist: "KARINA",
             source: "04.mp3",
-            cover: COVER_BLUES,
-            labelImg: "",
-            backCover: "",
+            cover: COVER_AS_YOU_ARE,
+            labelImg: MEMORY_BOX_VINYL_LABEL,
+            backCover: COVER_AS_YOU_ARE,
             imgScale: 1.0,
             imgOffsetX: 0.0,
             imgOffsetY: 0.0,
@@ -2055,81 +1823,41 @@ Audre 說，她看見你在午夜十二點後仍在外頭
             lyrics: []
           },
           {
-            title: "Only Wanna Give It To You",
-            artist: "WINTER",
-            source: "05 Only Wanna Give It To You.mp3",
-            cover: COVER_BLUES,
-            labelImg: "",
-            backCover: "",
+            title: "Can’t Take My Eyes Off You",
+            artist: "KARINA",
+            source: "05Cant Take My Eyes Off You.mp3",
+            cover: COVER_CANT_TAKE_EYES,
+            labelImg: MEMORY_BOX_VINYL_LABEL,
+            backCover: COVER_CANT_TAKE_EYES,
             imgScale: 1.0,
             imgOffsetX: 0.0,
             imgOffsetY: 0.0,
             duration: 215,
             volume: 1.0,
-            lyrics: parseLrc(ONLY_WANNA_GIVE_IT_LRC_TEXT)
+            lyrics: parseLrc(LRC_CANT_TAKE_EYES)
           },
           {
-            title: "21",
-            artist: "WINTER",
-            source: "06 21.mp3",
-            cover: COVER_BLUES,
-            labelImg: "",
-            backCover: "",
+            title: "있잖아 (Rock Ver.)",
+            artist: "KARINA",
+            source: "06Rock.mp3",
+            cover: COVER_YOU_KNOW,
+            labelImg: MEMORY_BOX_VINYL_LABEL,
+            backCover: COVER_YOU_KNOW,
             imgScale: 1.0,
             imgOffsetX: 0.0,
             imgOffsetY: 0.0,
             duration: 190,
             volume: 1.0,
-            lyrics: parseLrc(TWO_ONE_LRC_TEXT)
-          },
-          {
-            title: "imperfect for you",
-            artist: "WINTER",
-            source: "07 imperfect for you.mp3",
-            cover: COVER_BLUES,
-            labelImg: "",
-            backCover: "",
-            imgScale: 1.0,
-            imgOffsetX: 0.0,
-            imgOffsetY: 0.0,
-            duration: 202,
-            volume: 1.0,
-            lyrics: parseLrc(IMPERFECT_FOR_YOU_LRC_TEXT)
-          },
-          {
-            title: "BLUE",
-            artist: "WINTER",
-            source: "08 BLUE - WINTER Solo.mp3",
-            cover: COVER_BLUES,
-            labelImg: "",
-            backCover: "",
-            imgScale: 1.0,
-            imgOffsetX: 0.0,
-            imgOffsetY: 0.0,
-            duration: 215,
-            volume: 1.0,
-            lyrics: parseLrc(BLUE_BLUES_LRC_TEXT)
+            lyrics: []
           }
         ]
       }
     ];
 
+    localStorage.clear();
+
     let store = TWO_PLAYLISTS_DATA;
-    try {
-      const saved = JSON.parse(localStorage.getItem('winter_playlist_store_v65'));
-      if (Array.isArray(saved) && saved.length > 0 && saved[0].songs && saved[0].songs.length > 0) {
-        store = saved;
-      }
-    } catch(e) {
-      store = TWO_PLAYLISTS_DATA;
-    }
-
-    let modelScale = parseFloat(localStorage.getItem('winter_model_scale')) || 1.0;
-
-    function persistData() {
-      localStorage.setItem('winter_playlist_store_v65', JSON.stringify(store));
-      localStorage.setItem('winter_model_scale', modelScale);
-    }
+    let modelScale = 1.0;
 
     let plIdx = 0;
     let trackIdx = 0;
@@ -2138,11 +1866,41 @@ Audre 說，她看見你在午夜十二點後仍在外頭
     let currentSec = 0;
     let totalDuration = 230;
     let hasPlayedFirstTrack = false;
+    let isAutoSwitching = false;
+    let currentTextureSeq = 0;
 
     const nativeAudio = document.getElementById('native-audio');
 
+    // 嚴格綁定系統媒體控制中心
+    function updateMediaSession(song, pl) {
+      if ('mediaSession' in navigator) {
+        const directCover = toAbsUrl(song.cover || pl.cover);
+        navigator.mediaSession.metadata = new MediaMetadata({
+          title: song.title,
+          artist: song.artist || "KARINA",
+          album: pl.name || "KARINA PLAYLIST",
+          artwork: [
+            { src: directCover, sizes: '512x512', type: 'image/jpeg' }
+          ]
+        });
+
+        navigator.mediaSession.setActionHandler('play', () => { playActiveSong(false); });
+        navigator.mediaSession.setActionHandler('pause', () => { pauseActiveSong(); });
+        navigator.mediaSession.setActionHandler('previoustrack', () => { playPrev(); });
+        navigator.mediaSession.setActionHandler('nexttrack', () => { playNext(false); });
+      }
+    }
+
+    function extractYoutubeId(url) {
+      if (!url) return null;
+      if (url.includes("v=")) return url.split("v=")[1].substring(0, 11);
+      if (url.includes("youtu.be/")) return url.split("youtu.be/")[1].substring(0, 11);
+      if (url.length === 11 && !url.includes("/") && !url.includes(".")) return url.trim();
+      return null;
+    }
+
     /* -------------------------------------------------------------
-     * 3. Three.js 3D
+     * 3. Three.js 3D 渲染
      * ------------------------------------------------------------*/
     const container = document.getElementById('threejs-box');
     const scene = new THREE.Scene();
@@ -2161,18 +1919,18 @@ Audre 說，她看見你在午夜十二點後仍在外頭
 
     const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, powerPreference: "high-performance" });
     renderer.setSize(container.clientWidth, container.clientHeight);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 3));
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     renderer.outputColorSpace = THREE.SRGBColorSpace;
     container.appendChild(renderer.domElement);
 
-    const ambLight = new THREE.AmbientLight(0xffffff, 2.2);
+    const ambLight = new THREE.AmbientLight(0xffffff, 1.8);
     scene.add(ambLight);
 
-    const dirLight = new THREE.DirectionalLight(0xffffff, 2.6);
+    const dirLight = new THREE.DirectionalLight(0xffffff, 1.9);
     dirLight.position.set(3, 4, 3.5);
     scene.add(dirLight);
 
-    const rimLight = new THREE.DirectionalLight(0xd4d4d8, 2.2);
+    const rimLight = new THREE.DirectionalLight(0xd4d4d8, 1.4);
     rimLight.position.set(4, -1.8, 2.8);
     scene.add(rimLight);
 
@@ -2249,6 +2007,31 @@ Audre 說，她看見你在午夜十二點後仍在外頭
     }
 
     const texLoader = new THREE.TextureLoader();
+    texLoader.setCrossOrigin('anonymous');
+    const textureCache = new Map();
+
+    function loadCachedTexture(url, callback) {
+      if (!url) return;
+      if (textureCache.has(url)) {
+        callback(textureCache.get(url));
+        return;
+      }
+      texLoader.load(
+        url,
+        (tex) => {
+          tex.colorSpace = THREE.SRGBColorSpace;
+          tex.minFilter = THREE.LinearFilter;
+          tex.magFilter = THREE.LinearFilter;
+          tex.generateMipmaps = false;
+          textureCache.set(url, tex);
+          callback(tex);
+        },
+        undefined,
+        (err) => {
+          console.error("貼圖載入失敗:", url, err);
+        }
+      );
+    }
 
     const coverGeo = new THREE.BoxGeometry(2.0, 2.0, 0.05);
     const coverSideMat = [
@@ -2256,14 +2039,17 @@ Audre 說，她看見你在午夜十二點後仍在外頭
       new THREE.MeshStandardMaterial({ color: 0x14151a, roughness: 0.5 }),
       new THREE.MeshStandardMaterial({ color: 0x14151a, roughness: 0.5 }),
       new THREE.MeshStandardMaterial({ color: 0x14151a, roughness: 0.5 }),
-      new THREE.MeshStandardMaterial({ color: 0xffffff, roughness: 0.35 }),
-      new THREE.MeshStandardMaterial({ color: 0xffffff, roughness: 0.35 })
+      new THREE.MeshStandardMaterial({ color: 0x222226, roughness: 0.35 }),
+      new THREE.MeshStandardMaterial({ color: 0x222226, roughness: 0.35 })
     ];
     const coverMesh = new THREE.Mesh(coverGeo, coverSideMat);
     coverMesh.position.set(-0.55, 0, 0);
     turntableGroup.add(coverMesh);
 
+    const discSpinGroup = new THREE.Group();
     const discGroup = new THREE.Group();
+    discGroup.add(discSpinGroup);
+
     const discGeo = new THREE.CylinderGeometry(0.95, 0.95, 0.02, 64);
     const discMat = new THREE.MeshStandardMaterial({
       color: 0x14151a,
@@ -2273,98 +2059,57 @@ Audre 說，她看見你在午夜十二點後仍在外頭
     });
     const discMesh = new THREE.Mesh(discGeo, discMat);
     discMesh.rotation.x = Math.PI / 2;
-    discGroup.add(discMesh);
+    discSpinGroup.add(discMesh);
 
     const labelGeo = new THREE.CylinderGeometry(0.35, 0.35, 0.025, 32);
-    const labelMesh = new THREE.Mesh(labelGeo, new THREE.MeshStandardMaterial({ color: 0xffffff, roughness: 0.25 }));
+    const labelMesh = new THREE.Mesh(
+      labelGeo,
+      new THREE.MeshStandardMaterial({
+        color: 0xffffff,
+        roughness: 0.85,
+        metalness: 0.05
+      })
+    );
     labelMesh.rotation.x = Math.PI / 2;
-    discGroup.add(labelMesh);
+    discSpinGroup.add(labelMesh);
 
     const VINYL_REST_X = 0.52;
     const VINYL_OUT_X = 0.95;
     discGroup.position.set(VINYL_REST_X, 0, 0.01);
     turntableGroup.add(discGroup);
 
-    function setupHighQualityTexture(tex) {
-      tex.colorSpace = THREE.SRGBColorSpace;
-      tex.minFilter = THREE.LinearFilter;
-      tex.magFilter = THREE.LinearFilter;
-      tex.generateMipmaps = false;
-      tex.anisotropy = renderer.capabilities.getMaxAnisotropy();
-      tex.needsUpdate = true;
-    }
-
-    function sampleEdgeColorAndApplySides(img) {
-      try {
-        const canvas = document.createElement('canvas');
-        canvas.width = img.width || 64;
-        canvas.height = img.height || 64;
-        const ctx = canvas.getContext('2d');
-        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-
-        const leftPixel = ctx.getImageData(2, Math.floor(canvas.height / 2), 1, 1).data;
-        const leftColor = new THREE.Color(leftPixel[0]/255, leftPixel[1]/255, leftPixel[2]/255);
-
-        const topPixel = ctx.getImageData(Math.floor(canvas.width / 2), 2, 1, 1).data;
-        const topColor = new THREE.Color(topPixel[0]/255, topPixel[1]/255, topPixel[2]/255);
-
-        const btmPixel = ctx.getImageData(Math.floor(canvas.width / 2), canvas.height - 3, 1, 1).data;
-        const btmColor = new THREE.Color(btmPixel[0]/255, btmPixel[1]/255, btmPixel[2]/255);
-
-        const rightPixel = ctx.getImageData(canvas.width - 3, Math.floor(canvas.height / 2), 1, 1).data;
-        const rightColor = new THREE.Color(rightPixel[0]/255, rightPixel[1]/255, rightPixel[2]/255);
-
-        coverMesh.material[0].color.copy(rightColor);
-        coverMesh.material[1].color.copy(leftColor);
-        coverMesh.material[2].color.copy(topColor);
-        coverMesh.material[3].color.copy(btmColor);
-
-        for (let i = 0; i < 4; i++) {
-          coverMesh.material[i].needsUpdate = true;
-        }
-      } catch (err) {
-        const fallbackColor = new THREE.Color(0x0c0e14);
-        for (let i = 0; i < 4; i++) {
-          coverMesh.material[i].color.copy(fallbackColor);
-          coverMesh.material[i].needsUpdate = true;
-        }
-      }
-    }
-
     function applyCoverTo3D(frontUrl, backUrl, labelUrl, scale = 1.0, ox = 0.0, oy = 0.0) {
       if (!frontUrl) return;
-      const directFront = normalizeImageUrl(frontUrl);
-      const directBack = backUrl ? normalizeImageUrl(backUrl) : directFront;
-      const directLabel = labelUrl ? normalizeImageUrl(labelUrl) : directFront;
+      const thisSeq = ++currentTextureSeq;
 
-      texLoader.load(directFront, (tex) => {
-        setupHighQualityTexture(tex);
+      const directFront = toAbsUrl(frontUrl);
+      const directBack = backUrl ? toAbsUrl(backUrl) : directFront;
+      const directLabel = labelUrl ? toAbsUrl(labelUrl) : directFront;
+
+      loadCachedTexture(directFront, (tex) => {
+        if (thisSeq !== currentTextureSeq) return;
         tex.repeat.set(1 / scale, 1 / scale);
-        tex.offset.set(
-          (1 - 1/scale)/2 - (ox / scale),
-          (1 - 1/scale)/2 - (oy / scale)
-        );
+        tex.offset.set((1 - 1/scale)/2 - (ox / scale), (1 - 1/scale)/2 - (oy / scale));
         coverMesh.material[4].map = tex;
+        coverMesh.material[4].color.set(0xffffff);
         coverMesh.material[4].needsUpdate = true;
-        sampleEdgeColorAndApplySides(tex.image);
       });
 
-      texLoader.load(directBack, (tex) => {
-        setupHighQualityTexture(tex);
+      loadCachedTexture(directBack, (tex) => {
+        if (thisSeq !== currentTextureSeq) return;
         coverMesh.material[5].map = tex;
+        coverMesh.material[5].color.set(0xffffff);
         coverMesh.material[5].needsUpdate = true;
       });
 
-      texLoader.load(directLabel, (tex) => {
-        setupHighQualityTexture(tex);
+      loadCachedTexture(directLabel, (tex) => {
+        if (thisSeq !== currentTextureSeq) return;
         labelMesh.material.map = tex;
+        labelMesh.material.color.set(0xffffff);
         labelMesh.material.needsUpdate = true;
       });
     }
 
-    /* -------------------------------------------------------------
-     * 旋轉展示動態控制 (平穩統一 1 圈旋轉，無回彈)
-     * ------------------------------------------------------------*/
     let isTouching = false;
     let prevPointerX = 0;
     let prevPointerY = 0;
@@ -2441,6 +2186,10 @@ Audre 說，她看見你在午夜十二點後仍在外頭
     function renderLoop() {
       requestAnimationFrame(renderLoop);
 
+      if (isPlaying || isAutoRotating) {
+        discSpinGroup.rotation.z -= 0.014;
+      }
+
       if (isAutoRotating) {
         const elapsed = performance.now() - autoRotStartTime;
         const progress = Math.min(1, elapsed / AUTO_ROT_DURATION);
@@ -2459,7 +2208,6 @@ Audre 說，她看見你在午夜十二點後仍在外頭
       }
 
       if (isPlaying) {
-        discGroup.rotation.z -= 0.010;
         discGroup.position.x = THREE.MathUtils.lerp(discGroup.position.x, VINYL_OUT_X, 0.06);
       } else {
         discGroup.position.x = THREE.MathUtils.lerp(discGroup.position.x, VINYL_REST_X, 0.06);
@@ -2470,7 +2218,7 @@ Audre 說，她看見你在午夜十二點後仍在外頭
     renderLoop();
 
     /* -------------------------------------------------------------
-     * 4. 音訊系統 (鎖屏與背景連續播放防中斷機制)
+     * 4. 音訊系統 (純原生同步換曲，保證熄屏與背景自動連續播放)
      * ------------------------------------------------------------*/
     function setPlayState(active) {
       isPlaying = active;
@@ -2479,6 +2227,9 @@ Audre 說，她看見你在午夜十二點後仍在外頭
         svg.innerHTML = '<path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>';
       } else {
         svg.innerHTML = '<path d="M8 5v14l11-7z"/>';
+      }
+      if ('mediaSession' in navigator) {
+        navigator.mediaSession.playbackState = active ? "playing" : "paused";
       }
     }
 
@@ -2494,30 +2245,46 @@ Audre 說，她看見你在午夜十二點後仍在外頭
       document.getElementById('lbl-curr').textContent = `${String(curM).padStart(2,'0')}:${String(curS).padStart(2,'0')}`;
       document.getElementById('lbl-total').textContent = `${String(totM).padStart(2,'0')}:${String(totS).padStart(2,'0')}`;
       syncLyrics(cur);
+      
+      if ('mediaSession' in navigator && ('setPositionState' in navigator.mediaSession) && totalDuration > 0) {
+        try {
+          navigator.mediaSession.setPositionState({
+            duration: totalDuration,
+            playbackRate: nativeAudio.playbackRate || 1,
+            position: Math.min(cur, totalDuration)
+          });
+        } catch(e) {}
+      }
     }
 
     nativeAudio.addEventListener('timeupdate', () => {
       if (isDraggingSeek) return;
       updateProgressUI(nativeAudio.currentTime, nativeAudio.duration || totalDuration);
     });
-    nativeAudio.addEventListener('playing', () => setPlayState(true));
-    nativeAudio.addEventListener('pause', () => setPlayState(false));
 
-    // 當前首播畢時，以同一個 audio 元件立即換曲播放，維持背景音訊授權
-    nativeAudio.addEventListener('ended', () => {
-      playNext();
+    nativeAudio.addEventListener('playing', () => {
+      setPlayState(true);
+      isAutoSwitching = false;
     });
 
-    function playActiveSong(isNewTrack = false) {
-      if (!store || !store[plIdx] || !store[plIdx].songs[trackIdx]) return;
+    nativeAudio.addEventListener('pause', () => {
+      if (!isAutoSwitching) {
+        setPlayState(false);
+      }
+    });
+
+    // 關鍵修復：歌曲播畢時，以直接、同步方式觸發下一首，讓系統音訊焦點持續保持活躍
+    nativeAudio.addEventListener('ended', () => {
+      playNext(true);
+    });
+
+    function playActiveSong(isNewTrack = false, isAutoNext = false) {
       const curPl = store[plIdx];
+      if (!curPl || !curPl.songs[trackIdx]) return;
       const song = curPl.songs[trackIdx];
 
       renderUI();
       updateMediaSession(song, curPl);
-
-      // 明確鎖定瀏覽器分頁標題，防止 iOS 焦點飄回其他分頁
-      document.title = `${song.title} - WINTER PLAYLIST`;
 
       if (isNewTrack || !hasPlayedFirstTrack) {
         triggerSlow15sSpin();
@@ -2525,32 +2292,36 @@ Audre 說，她看見你在午夜十二點後仍在外頭
       }
 
       totalDuration = song.duration || 211;
-      const targetVolume = (typeof song.volume === 'number') ? song.volume : (plIdx === 1 ? 1.0 : 0.65);
-
-      let directSrc = song.source.replace(/^\.\//, '');
-      if (!directSrc.startsWith('http')) {
-        directSrc = CD_PROJECT_BASE + encodeURIComponent(directSrc).replace(/%2F/g, '/');
-      } else if (directSrc.includes('github.com') && directSrc.includes('/blob/')) {
-        directSrc = directSrc.replace('github.com', 'raw.githubusercontent.com').replace('/blob/', '/');
-      }
-
-      nativeAudio.volume = Math.min(1.0, Math.max(0, targetVolume));
+      const directSrc = toAbsUrl(song.source);
+      
+      // 原生音量輸出，完全杜絕 Web Audio 造成背景暫停問題
+      nativeAudio.volume = Math.min(1.0, Math.max(0, song.volume || 1.0));
 
       if (isNewTrack || nativeAudio.src !== directSrc) {
+        isAutoSwitching = isAutoNext;
         currentSec = 0;
         updateProgressUI(0, totalDuration);
 
         nativeAudio.src = directSrc;
-        nativeAudio.currentTime = 0;
-
+        
         const p = nativeAudio.play();
         if (p !== undefined) {
           p.then(() => {
             setPlayState(true);
-            if ('mediaSession' in navigator) navigator.mediaSession.playbackState = "playing";
+            isAutoSwitching = false;
           }).catch(err => {
-            console.log("Audio waiting for gesture:", err);
-            setPlayState(false);
+            if (isAutoNext) {
+              nativeAudio.play().then(() => {
+                setPlayState(true);
+                isAutoSwitching = false;
+              }).catch(() => {
+                setPlayState(false);
+                isAutoSwitching = false;
+              });
+            } else {
+              setPlayState(false);
+              isAutoSwitching = false;
+            }
           });
         }
       } else {
@@ -2559,24 +2330,16 @@ Audre 說，她看見你在午夜十二點後仍在外頭
         }
         const p = nativeAudio.play();
         if (p !== undefined) {
-          p.then(() => {
-            setPlayState(true);
-            if ('mediaSession' in navigator) navigator.mediaSession.playbackState = "playing";
-          }).catch(err => {
-            console.log("Audio waiting for gesture:", err);
-            setPlayState(false);
-          });
+          p.then(() => setPlayState(true)).catch(() => setPlayState(false));
         }
       }
     }
 
     function pauseActiveSong() {
       setPlayState(false);
+      isAutoSwitching = false;
       currentSec = nativeAudio.currentTime;
       nativeAudio.pause();
-      if ('mediaSession' in navigator) {
-        navigator.mediaSession.playbackState = "paused";
-      }
     }
 
     /* -------------------------------------------------------------
@@ -2607,7 +2370,6 @@ Audre 說，她看見你在午夜十二點後仍在外頭
       isDraggingSeek = false;
       const frac = getSeekFraction(e.changedTouches ? e.changedTouches[0] : e);
       currentSec = frac * totalDuration;
-
       nativeAudio.currentTime = currentSec;
       updateProgressUI(currentSec, totalDuration);
     }
@@ -2617,11 +2379,11 @@ Audre 說，她看見你在午夜十二點後仍在外頭
     window.addEventListener('mouseup', handleSeekEnd);
 
     seekContainer.addEventListener('touchstart', (e) => { isDraggingSeek = true; handleSeekMove(e); }, { passive: false });
-    window.addEventListener('touchmove', handleSeekMove, { passive: false });
+    window.addEventListener('touchmove', handleSeekMove);
     window.addEventListener('touchend', handleSeekEnd);
 
     /* -------------------------------------------------------------
-     * 6. 歌詞渲染
+     * 6. 歌詞渲染 (切換歌曲強制歸零捲動至第 1 行)
      * ------------------------------------------------------------*/
     function syncLyrics(sec) {
       const song = store[plIdx]?.songs[trackIdx];
@@ -2649,24 +2411,19 @@ Audre 說，她看見你在午夜十二點後仍在外頭
 
     function renderLyricsList() {
       const scroller = document.getElementById('lyrics-scroller');
-      scroller.innerHTML = '';
-      
       scroller.style.scrollBehavior = 'auto';
       scroller.scrollTop = 0;
-      setTimeout(() => {
-        scroller.style.scrollBehavior = 'smooth';
-      }, 50);
-
+      scroller.innerHTML = '';
       const song = store[plIdx]?.songs[trackIdx];
 
       if (!song || !song.lyrics || song.lyrics.length === 0) {
-        scroller.innerHTML = '<div class="lyric-row"><div class="lyric-primary">純音樂 / Instrumental</div></div>';
+        scroller.innerHTML = '<div class="lyric-row"><div class="lyric-primary">純音樂 / 歌詞準備中</div></div>';
         return;
       }
 
-      song.lyrics.forEach(l => {
+      song.lyrics.forEach((l, idx) => {
         const div = document.createElement('div');
-        div.className = 'lyric-row';
+        div.className = idx === 0 ? 'lyric-row active' : 'lyric-row';
 
         const pSpan = document.createElement('div');
         pSpan.className = 'lyric-primary';
@@ -2683,20 +2440,21 @@ Audre 說，她看見你在午夜十二點後仍在外頭
         div.onclick = () => {
           currentSec = l.time;
           nativeAudio.currentTime = currentSec;
-          playActiveSong(false);
         };
         scroller.appendChild(div);
       });
+
+      scroller.scrollTop = 0;
+      scroller.style.scrollBehavior = 'smooth';
     }
 
     function renderUI() {
-      if (!store || !store[plIdx]) return;
       const curPl = store[plIdx];
-      const song = curPl.songs[trackIdx];
+      const song = curPl?.songs[trackIdx];
       if (!song) return;
 
       document.getElementById('disp-title').textContent = song.title;
-      document.getElementById('disp-artist').textContent = song.artist || "WINTER";
+      document.getElementById('disp-artist').textContent = song.artist || "KARINA";
 
       applyCoverTo3D(
         song.cover || curPl.cover, 
@@ -2710,12 +2468,12 @@ Audre 說，她看見你在午夜十二點後仍在外頭
       populateDropdowns();
     }
 
-    function playNext() {
+    function playNext(isAuto = false) {
       const pl = store[plIdx];
       if (!pl || pl.songs.length === 0) return;
       trackIdx = (trackIdx + 1) % pl.songs.length;
       currentSec = 0;
-      playActiveSong(true);
+      playActiveSong(true, isAuto);
     }
 
     function playPrev() {
@@ -2723,17 +2481,17 @@ Audre 說，她看見你在午夜十二點後仍在外頭
       if (!pl || pl.songs.length === 0) return;
       trackIdx = (trackIdx - 1 + pl.songs.length) % pl.songs.length;
       currentSec = 0;
-      playActiveSong(true);
+      playActiveSong(true, false);
     }
 
     document.getElementById('btn-play').onclick = () => {
       if (isPlaying) {
         pauseActiveSong();
       } else {
-        playActiveSong(false);
+        playActiveSong(false, false);
       }
     };
-    document.getElementById('btn-next').onclick = playNext;
+    document.getElementById('btn-next').onclick = () => playNext(false);
     document.getElementById('btn-prev').onclick = playPrev;
 
     function populateDropdowns() {
@@ -2763,13 +2521,13 @@ Audre 說，她看見你在午夜十二點後仍在外頭
       plIdx = parseInt(e.target.value);
       trackIdx = 0;
       currentSec = 0;
-      playActiveSong(true);
+      playActiveSong(true, false);
     };
 
     document.getElementById('sel-song').onchange = (e) => {
       trackIdx = parseInt(e.target.value);
       currentSec = 0;
-      playActiveSong(true);
+      playActiveSong(true, false);
     };
 
     /* -------------------------------------------------------------
@@ -2785,9 +2543,10 @@ Audre 說，她看見你在午夜十二點後仍在外頭
       navModal.style.display = 'none';
     };
 
-    document.getElementById('menu-btn-reset').onclick = () => {
-      localStorage.removeItem('winter_playlist_store_v65');
-      window.location.reload();
+    // 重新整理鍵：重設快取並載入預設曲目 UP
+    document.getElementById('menu-btn-reload').onclick = () => {
+      localStorage.clear();
+      window.location.href = window.location.pathname;
     };
 
     document.getElementById('menu-btn-admin').onclick = () => {
@@ -2814,9 +2573,9 @@ Audre 說，她看見你在午夜十二點後仍在外頭
 
     function updateLivePreviewBox() {
       const title = document.getElementById('form-song-title')?.value.trim() || '未命名歌曲';
-      const artist = document.getElementById('form-song-artist')?.value.trim() || 'WINTER';
-      const rawCover = document.getElementById('form-song-cover')?.value.trim() || COVER_LIPS;
-      const direct = normalizeImageUrl(rawCover);
+      const artist = document.getElementById('form-song-artist')?.value.trim() || 'KARINA';
+      const rawCover = document.getElementById('form-song-cover')?.value.trim() || COVER_UP;
+      const direct = toAbsUrl(rawCover);
 
       const scale = parseFloat(document.getElementById('form-img-scale')?.value || 1.0);
       const ox = parseFloat(document.getElementById('form-img-ox')?.value || 0.0);
@@ -2912,7 +2671,6 @@ Audre 說，她看見你在午夜十二點後仍在外頭
 
       document.getElementById('btn-close-admin').onclick = () => {
         mountPoint.innerHTML = '';
-        persistData();
         renderUI();
       };
 
@@ -2972,7 +2730,7 @@ Audre 說，她看見你在午夜十二點後仍在外頭
         p.songs.forEach((s, sI) => {
           const isFirstSong = sI === 0;
           const isLastSong = sI === p.songs.length - 1;
-          const volDisplay = typeof s.volume === 'number' ? s.volume : (pI === 1 ? 1.0 : 0.65);
+          const volDisplay = typeof s.volume === 'number' ? s.volume : 1.0;
 
           const sRow = document.createElement('div');
           sRow.className = 'song-item-row';
@@ -2999,7 +2757,6 @@ Audre 說，她看見你在午夜十二點後仍在外頭
       store[targetIndex] = temp;
       if (plIdx === pI) plIdx = targetIndex;
       else if (plIdx === targetIndex) plIdx = pI;
-      persistData();
       renderAdminTree();
       renderUI();
     };
@@ -3015,7 +2772,6 @@ Audre 說，她看見你在午夜十二點後仍在外頭
         if (trackIdx === sI) trackIdx = targetIndex;
         else if (trackIdx === targetIndex) trackIdx = sI;
       }
-      persistData();
       renderAdminTree();
       renderUI();
     };
@@ -3026,7 +2782,6 @@ Audre 說，她看見你在午夜十二點後仍在外頭
         store.splice(pI, 1);
         if (plIdx >= store.length) plIdx = 0;
         trackIdx = 0;
-        persistData();
         renderAdminTree();
         renderUI();
       }
@@ -3037,7 +2792,6 @@ Audre 說，她看見你在午夜十二點後仍在外頭
       if (plIdx === pI && trackIdx >= store[pI].songs.length) {
         trackIdx = Math.max(0, store[pI].songs.length - 1);
       }
-      persistData();
       renderAdminTree();
       renderUI();
     };
@@ -3048,10 +2802,10 @@ Audre 說，她看見你在午夜十二點後仍在外頭
       document.getElementById('edit-song-id').value = `${pI}_${sI}`;
       document.getElementById('form-pl-target').value = pI;
       document.getElementById('form-song-title').value = s.title;
-      document.getElementById('form-song-artist').value = s.artist || 'WINTER';
+      document.getElementById('form-song-artist').value = s.artist || 'KARINA';
       document.getElementById('form-song-source').value = s.source;
 
-      const currentVol = (typeof s.volume === 'number') ? s.volume : (pI === 1 ? 1.0 : 0.65);
+      const currentVol = (typeof s.volume === 'number') ? s.volume : 1.0;
       document.getElementById('form-song-vol').value = currentVol;
       document.getElementById('form-vol-lbl').textContent = `${currentVol.toFixed(2)}x`;
 
@@ -3087,7 +2841,7 @@ Audre 說，她看見你在午夜十二點後仍在外頭
       document.getElementById('form-mode-title').textContent = '✦ 新增歌曲';
       document.getElementById('edit-song-id').value = '';
       document.getElementById('form-song-title').value = '';
-      document.getElementById('form-song-artist').value = 'WINTER';
+      document.getElementById('form-song-artist').value = 'KARINA';
       document.getElementById('form-song-source').value = '';
       document.getElementById('form-song-vol').value = 1.0;
       document.getElementById('form-vol-lbl').textContent = '1.00x';
@@ -3115,7 +2869,7 @@ Audre 說，她看見你在午夜十二點後仍在外頭
       const editKey = document.getElementById('edit-song-id').value;
       const targetPl = parseInt(document.getElementById('form-pl-target').value);
       const title = document.getElementById('form-song-title').value.trim();
-      const artist = document.getElementById('form-song-artist').value.trim() || 'WINTER';
+      const artist = document.getElementById('form-song-artist').value.trim() || 'KARINA';
       const source = document.getElementById('form-song-source').value.trim();
       const volume = parseFloat(document.getElementById('form-song-vol').value) || 1.0;
       const imgScale = parseFloat(document.getElementById('form-img-scale').value) || 1.0;
@@ -3126,9 +2880,9 @@ Audre 說，她看見你在午夜十二點後仍在外頭
       const rawLabelImg = document.getElementById('form-song-label-img').value.trim();
       const rawBackCover = document.getElementById('form-song-back-cover').value.trim();
       
-      const cover = normalizeImageUrl(rawCover) || store[targetPl]?.cover || COVER_LIPS;
-      const labelImg = normalizeImageUrl(rawLabelImg) || '';
-      const backCover = normalizeImageUrl(rawBackCover) || '';
+      const cover = rawCover || store[targetPl]?.cover || COVER_UP;
+      const labelImg = rawLabelImg || '';
+      const backCover = rawBackCover || '';
       const lyricsRaw = document.getElementById('form-song-lyrics').value;
 
       if (!title || !source) return alert('請填寫完整歌名與音訊來源！');
@@ -3160,7 +2914,6 @@ Audre 說，她看見你在午夜十二點後仍在外頭
         store[targetPl].songs.push(songObj);
       }
 
-      persistData();
       renderAdminTree();
       renderUI();
       resetSongForm();
@@ -3170,26 +2923,13 @@ Audre 說，她看見你在午夜十二點後仍在外頭
     function addPlaylistHandler() {
       const name = document.getElementById('admin-new-pl-name').value.trim();
       if (!name) return alert('請輸入歌單名稱！');
-      store.push({ id: 'pl_' + Date.now(), name, cover: COVER_LIPS, songs: [] });
+      store.push({ id: 'pl_' + Date.now(), name, cover: COVER_UP, songs: [] });
       document.getElementById('admin-new-pl-name').value = '';
-      persistData();
       renderAdminTree();
       renderUI();
     }
 
-    // 初始化渲染
     renderUI();
-    
-    // 預先掛載第一首音訊
-    if (store && store[plIdx] && store[plIdx].songs && store[plIdx].songs[trackIdx]) {
-      const firstSong = store[plIdx].songs[trackIdx];
-      let firstSrc = firstSong.source.replace(/^\.\//, '');
-      if (!firstSrc.startsWith('http')) {
-        firstSrc = CD_PROJECT_BASE + encodeURIComponent(firstSrc).replace(/%2F/g, '/');
-      }
-      nativeAudio.src = firstSrc;
-      updateMediaSession(firstSong, store[plIdx]);
-    }
   </script>
 </body>
 </html>
