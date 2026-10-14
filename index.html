@@ -10,16 +10,19 @@
 
   <title>KARINA PLAYLIST</title>
 
+  <!-- 標準站點網址宣告，防止系統通知卡片跳轉外部 App 或 Melon -->
+  <link rel="canonical" href="https://u11150003-arch.github.io/KARINA-PLAYLIST/">
+
   <!-- Open Graph 標籤 -->
   <meta property="og:site_name" content="KARINA PLAYLIST">
   <meta property="og:title" content="KARINA PLAYLIST">
   <meta property="og:description" content="Playlist for KARINA">
   <meta name="description" content="Playlist for KARINA">
-  <meta property="og:type" content="music.playlist">
+  <meta property="og:type" content="website">
   <meta property="og:url" content="https://u11150003-arch.github.io/KARINA-PLAYLIST/">
   
-  <meta property="og:image" content="UP_cover.jpg">
-  <meta property="og:image:secure_url" content="UP_cover.jpg">
+  <meta property="og:image" content="https://u11150003-arch.github.io/KARINA-PLAYLIST/UP_cover.jpg">
+  <meta property="og:image:secure_url" content="https://u11150003-arch.github.io/KARINA-PLAYLIST/UP_cover.jpg">
   <meta property="og:image:type" content="image/jpeg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
@@ -27,7 +30,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="KARINA PLAYLIST">
   <meta name="twitter:description" content="Playlist for KARINA">
-  <meta name="twitter:image" content="UP_cover.jpg">
+  <meta name="twitter:image" content="https://u11150003-arch.github.io/KARINA-PLAYLIST/UP_cover.jpg">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -48,7 +51,8 @@
       --steel-dim: #9ca3af;
       --steel-border: #2a2c35;
       --accent-glow: rgba(244, 244, 245, 0.25);
-      --heart-cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="rgba(255,255,255,0.45)" stroke="rgba(0,0,0,0.4)" stroke-width="0.8" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>') 12 12, pointer;
+      /* 白色愛心游標 */
+      --heart-cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="rgba(255,255,255,0.45)" stroke="rgba(0,0,0,0.4)" stroke-width="0.8" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>') 12 12, pointer;
     }
 
     * {
@@ -59,7 +63,7 @@
       -webkit-tap-highlight-color: transparent;
     }
 
-    button, select, input[type="range"], .menu-link-item, .seek-groove, .lyric-row, .brand-title {
+    button, select, input[type="range"], .menu-link-item, .seek-groove, .lyric-row, .brand-title, .external-contact-link {
       cursor: var(--heart-cursor) !important;
     }
 
@@ -420,6 +424,7 @@
       letter-spacing: 1px;
     }
 
+    /* 現代簡約低飽和選單項目 */
     .menu-link-item {
       display: flex;
       align-items: center;
@@ -478,6 +483,7 @@
       flex-shrink: 0;
     }
 
+    /* 現代低飽和說明提示欄位 */
     .menu-notice-card {
       margin-top: 8px;
       padding: 11px 13px;
@@ -501,6 +507,17 @@
       line-height: 1.5;
       color: #9ca3af;
       font-family: 'Chocolate Classical Sans', 'Noto Sans TC', sans-serif;
+    }
+
+    .external-contact-link {
+      color: #ffffff;
+      font-weight: 600;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      transition: color 0.2s ease;
+    }
+    .external-contact-link:hover, .external-contact-link:active {
+      color: #cbd5e1;
     }
 
     .field-row {
@@ -602,7 +619,7 @@
 </head>
 <body>
 
-  <!-- 原生 Audio 元件：絕對不接 Web Audio 節點，保證螢幕關閉時原生 Audio Session 持續活躍 -->
+  <!-- 純原生 Audio 元件：不接入任何 Web Audio API，徹底維持 iOS/Android 系統背景播放焦點 -->
   <audio id="native-audio" playsinline></audio>
   <iframe id="yt-hidden-player" style="position:absolute; top:-9999px; left:-9999px; width:1px; height:1px;" frameborder="0" allow="autoplay; encrypted-media"></iframe>
 
@@ -701,6 +718,14 @@
         <svg class="menu-notice-icon" viewBox="0 0 24 24" width="16" height="16"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"/></svg>
         <div class="menu-notice-text">
           手機點擊「分享」>「加入主畫面」,即可享最佳聆聽體驗。
+        </div>
+      </div>
+
+      <!-- 說明欄位 3：聯繫資訊（最下方） -->
+      <div class="menu-notice-card" style="margin-top: 6px;">
+        <svg class="menu-notice-icon" viewBox="0 0 24 24" width="16" height="16"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+        <div class="menu-notice-text">
+          若歌詞有誤或操作不順，請聯繫 <a class="external-contact-link" href="https://www.threads.com/@kelly_lee_805" target="_blank" rel="noopener noreferrer">@kelly_lee_805</a>
         </div>
       </div>
 
@@ -874,7 +899,7 @@
   <script type="module">
     import * as THREE from 'three';
 
-    // 嚴格將網頁網址鎖定在當前 GitHub Pages 站點
+    // 嚴格宣告與錨定本播放器 URL，阻絕所有外部 App / 購票網站誤判
     const CANONICAL_URL = "https://u11150003-arch.github.io/KARINA-PLAYLIST/";
     try {
       window.history.replaceState({}, document.title, CANONICAL_URL);
@@ -2299,7 +2324,6 @@ Yeah, yeah，盡管說吧，隨你怎麼講
           currentSec = 0;
           updateProgressUI(0, totalDuration);
 
-          // 核心更換：即時切換 src 並直接呼叫 play()，完全無非同步計時器阻斷
           nativeAudio.src = directSrc;
           
           const p = nativeAudio.play();
@@ -2308,7 +2332,6 @@ Yeah, yeah，盡管說吧，隨你怎麼講
               setPlayState(true);
               isAutoSwitching = false;
             }).catch(err => {
-              // 針對 iOS 螢幕關閉時進行即刻重試
               if (isAutoNext) {
                 nativeAudio.play().then(() => {
                   setPlayState(true);
@@ -2421,6 +2444,7 @@ Yeah, yeah，盡管說吧，隨你怎麼講
 
     function renderLyricsList() {
       const scroller = document.getElementById('lyrics-scroller');
+      // 切換歌曲時強制關閉平滑滾動並瞬時歸零
       scroller.style.scrollBehavior = 'auto';
       scroller.scrollTop = 0;
       scroller.innerHTML = '';
