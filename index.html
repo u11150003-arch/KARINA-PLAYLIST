@@ -1,977 +1,964 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-  
-  <!-- iOS 桌面圖示與主畫面標題設定（徹底消除灰底 K 圖示） -->
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="apple-mobile-web-app-title" content="KARINA PLAYLIST">
-  <link rel="apple-touch-icon" href="01Sparkle_cover.jpg">
-  <link rel="apple-touch-icon" sizes="152x152" href="01Sparkle_cover.jpg">
-  <link rel="apple-touch-icon" sizes="180x180" href="01Sparkle_cover.jpg">
-  <link rel="apple-touch-icon" sizes="167x167" href="01Sparkle_cover.jpg">
-  <link rel="icon" type="image/jpeg" href="01Sparkle_cover.jpg">
-  <meta name="theme-color" content="#131418">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  
+  <!-- iOS 桌面圖示與主畫面標題宣告 -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="KARINA PLAYLIST">
+  <link rel="apple-touch-icon" href="01Sparkle_cover.jpg">
+  <link rel="apple-touch-icon" sizes="152x152" href="01Sparkle_cover.jpg">
+  <link rel="apple-touch-icon" sizes="180x180" href="01Sparkle_cover.jpg">
+  <link rel="apple-touch-icon" sizes="167x167" href="01Sparkle_cover.jpg">
+  <link rel="icon" type="image/jpeg" href="01Sparkle_cover.jpg">
+  <meta name="theme-color" content="#131418">
 
-  <!-- 內嵌 PWA Manifest 鎖定獨立應用與根網址，徹底解決 iOS 下拉卡片誤開 Melon 問題 -->
-  <link rel="manifest" href='data:application/manifest+json,{"name":"KARINA PLAYLIST","short_name":"KARINA PLAYLIST","start_url":"https://u11150003-arch.github.io/KARINA-PLAYLIST/","scope":"https://u11150003-arch.github.io/KARINA-PLAYLIST/","display":"standalone","background_color":"#131418","theme_color":"#131418","icons":[{"src":"01Sparkle_cover.jpg","sizes":"512x512","type":"image/jpeg"}]}'>
-  <link rel="canonical" href="https://u11150003-arch.github.io/KARINA-PLAYLIST/">
+  <!-- 內嵌 PWA Manifest 鎖定獨立應用與根網址，徹底解決 iOS 誤跳外部網址問題 -->
+  <link rel="manifest" href='data:application/manifest+json,{"name":"KARINA PLAYLIST","short_name":"KARINA PLAYLIST","start_url":"https://u11150003-arch.github.io/KARINA-PLAYLIST/","scope":"https://u11150003-arch.github.io/KARINA-PLAYLIST/","display":"standalone","background_color":"#131418","theme_color":"#131418","icons":[{"src":"01Sparkle_cover.jpg","sizes":"512x512","type":"image/jpeg"}]}'>
+  <link rel="canonical" href="https://u11150003-arch.github.io/KARINA-PLAYLIST/">
 
-  <title>KARINA PLAYLIST</title>
+  <title>KARINA PLAYLIST</title>
 
-  <!-- Open Graph 網址縮圖與社群卡片（指定為 KARINA_PLAYLIST_cover.jpg） -->
-  <meta property="og:site_name" content="KARINA PLAYLIST">
-  <meta property="og:title" content="KARINA PLAYLIST">
-  <meta property="og:description" content="Playlist for KARINA">
-  <meta name="description" content="Playlist for KARINA">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://u11150003-arch.github.io/KARINA-PLAYLIST/">
-  
-  <meta property="og:image" content="https://u11150003-arch.github.io/KARINA-PLAYLIST/KARINA_PLAYLIST_cover.jpg">
-  <meta property="og:image:secure_url" content="https://u11150003-arch.github.io/KARINA-PLAYLIST/KARINA_PLAYLIST_cover.jpg">
-  <meta property="og:image:type" content="image/jpeg">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
+  <!-- Open Graph 網址縮圖與社群卡片 -->
+  <meta property="og:site_name" content="KARINA PLAYLIST">
+  <meta property="og:title" content="KARINA PLAYLIST">
+  <meta property="og:description" content="Playlist for KARINA">
+  <meta name="description" content="Playlist for KARINA">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://u11150003-arch.github.io/KARINA-PLAYLIST/">
+  
+  <meta property="og:image" content="https://u11150003-arch.github.io/KARINA-PLAYLIST/KARINA_PLAYLIST_cover.jpg">
+  <meta property="og:image:secure_url" content="https://u11150003-arch.github.io/KARINA-PLAYLIST/KARINA_PLAYLIST_cover.jpg">
+  <meta property="og:image:type" content="image/jpeg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
 
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="KARINA PLAYLIST">
-  <meta name="twitter:description" content="Playlist for KARINA">
-  <meta name="twitter:image" content="https://u11150003-arch.github.io/KARINA-PLAYLIST/KARINA_PLAYLIST_cover.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="KARINA PLAYLIST">
+  <meta name="twitter:description" content="Playlist for KARINA">
+  <meta name="twitter:image" content="https://u11150003-arch.github.io/KARINA-PLAYLIST/KARINA_PLAYLIST_cover.jpg">
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com">
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800;900&family=Syne:wght@500;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800;900&family=Syne:wght@500;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
 
-  <style>
-    @font-face {
-      font-family: 'Chocolate Classical Sans';
-      src: local('Chocolate Classical Sans'), local('ChocolateClassicalSans'), local('Chocolate Classical Sans Medium');
-      font-weight: normal;
-      font-style: normal;
-    }
+  <style>
+    @font-face {
+      font-family: 'Chocolate Classical Sans';
+      src: local('Chocolate Classical Sans'), local('ChocolateClassicalSans'), local('Chocolate Classical Sans Medium');
+      font-weight: normal;
+      font-style: normal;
+    }
 
-    :root {
-      --bg: #18191e;
-      --deck-bg: #131418;
-      --steel: #f4f4f5;
-      --steel-dim: #9ca3af;
-      --steel-border: #2a2c35;
-      --accent-glow: rgba(244, 244, 245, 0.25);
-      --heart-cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="rgba(255,255,255,0.45)" stroke="rgba(0,0,0,0.4)" stroke-width="0.8" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>') 12 12, pointer;
-    }
+    :root {
+      --bg: #18191e;
+      --deck-bg: #131418;
+      --steel: #f4f4f5;
+      --steel-dim: #9ca3af;
+      --steel-border: #2a2c35;
+      --accent-glow: rgba(244, 244, 245, 0.25);
+      /* 白色愛心游標 */
+      --heart-cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="rgba(255,255,255,0.45)" stroke="rgba(0,0,0,0.4)" stroke-width="0.8" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>') 12 12, pointer;
+    }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      user-select: none;
-      -webkit-tap-highlight-color: transparent;
-    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
+    }
 
-    button, select, input[type="range"], .menu-link-item, .seek-groove, .lyric-row, .brand-title, .external-contact-link {
-      cursor: var(--heart-cursor) !important;
-    }
+    button, select, input[type="range"], .menu-link-item, .seek-groove, .lyric-row, .brand-title, .external-contact-link {
+      cursor: var(--heart-cursor) !important;
+    }
 
-    html, body {
-      width: 100vw;
-      height: 100vh;
-      height: 100dvh;
-      background: var(--bg) !important;
-      color: var(--steel);
-      font-family: 'Syne', 'Chocolate Classical Sans', 'Noto Sans TC', sans-serif;
-      overflow: hidden;
-      position: fixed;
-      inset: 0;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
+    html, body {
+      width: 100vw;
+      height: 100vh;
+      height: 100dvh;
+      background: var(--bg) !important;
+      color: var(--steel);
+      font-family: 'Syne', 'Chocolate Classical Sans', 'Noto Sans TC', sans-serif;
+      overflow: hidden;
+      position: fixed;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
 
-    header {
-      padding: calc(12px + env(safe-area-inset-top, 0px)) 20px 4px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      z-index: 30;
-      background: var(--bg) !important;
-    }
+    header {
+      padding: calc(12px + env(safe-area-inset-top, 0px)) 20px 4px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      z-index: 30;
+      background: var(--bg) !important;
+    }
 
-    .brand-title {
-      font-family: 'Orbitron', sans-serif;
-      font-size: 1.15rem;
-      font-weight: 800;
-      letter-spacing: 2px;
-      color: #ffffff;
-    }
+    .brand-title {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.15rem;
+      font-weight: 800;
+      letter-spacing: 2px;
+      color: #ffffff;
+    }
 
-    .admin-star-btn {
-      background: none;
-      border: none;
-      outline: none;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 38px;
-      height: 38px;
-      padding: 4px;
-      color: rgba(255, 255, 255, 0.65);
-      font-size: 1.55rem;
-      line-height: 1;
-      transition: all 0.25s ease;
-      text-shadow: 0 0 6px rgba(255, 255, 255, 0.35);
-    }
-    .admin-star-btn:hover, .admin-star-btn:active {
-      color: rgba(255, 255, 255, 1);
-      transform: scale(1.15);
-      text-shadow: 0 0 12px rgba(255, 255, 255, 0.8);
-    }
+    .admin-star-btn {
+      background: none;
+      border: none;
+      outline: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 38px;
+      height: 38px;
+      padding: 4px;
+      color: rgba(255, 255, 255, 0.65);
+      font-size: 1.55rem;
+      line-height: 1;
+      transition: all 0.25s ease;
+      text-shadow: 0 0 6px rgba(255, 255, 255, 0.35);
+    }
+    .admin-star-btn:hover, .admin-star-btn:active {
+      color: rgba(255, 255, 255, 1);
+      transform: scale(1.15);
+      text-shadow: 0 0 12px rgba(255, 255, 255, 0.8);
+    }
 
-    main {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      position: relative;
-      min-height: 0;
-      overflow: hidden;
-      background: var(--bg) !important;
-    }
+    main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      min-height: 0;
+      overflow: hidden;
+      background: var(--bg) !important;
+    }
 
-    #threejs-box {
-      width: 100%;
-      height: 52%;
-      position: relative;
-      touch-action: none;
-      cursor: grab;
-      background: transparent !important;
-    }
-    #threejs-box:active {
-      cursor: grabbing;
-    }
+    #threejs-box {
+      width: 100%;
+      height: 52%;
+      position: relative;
+      touch-action: none;
+      cursor: grab;
+      background: transparent !important;
+    }
+    #threejs-box:active {
+      cursor: grabbing;
+    }
 
-    .info-lyrics-container {
-      height: 48%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      position: relative;
-      padding: 0 16px;
-      mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%);
-      -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%);
-    }
+    .info-lyrics-container {
+      height: 48%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      padding: 0 16px;
+      mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%);
+      -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%);
+    }
 
-    .track-meta {
-      text-align: center;
-      margin-bottom: 2px;
-      z-index: 10;
-    }
-    .track-meta h1 {
-      font-family: 'Orbitron', 'Syne', 'Chocolate Classical Sans', sans-serif;
-      font-size: 1.05rem;
-      letter-spacing: 1px;
-      color: #ffffff;
-    }
-    .track-meta p {
-      font-size: 0.75rem;
-      color: var(--steel-dim);
-      margin-top: 2px;
-      font-family: 'Syne', sans-serif;
-      letter-spacing: 1px;
-    }
+    .track-meta {
+      text-align: center;
+      margin-bottom: 2px;
+      z-index: 10;
+    }
+    .track-meta h1 {
+      font-family: 'Orbitron', 'Syne', 'Chocolate Classical Sans', sans-serif;
+      font-size: 1.05rem;
+      letter-spacing: 1px;
+      color: #ffffff;
+    }
+    .track-meta p {
+      font-size: 0.75rem;
+      color: var(--steel-dim);
+      margin-top: 2px;
+      font-family: 'Syne', sans-serif;
+      letter-spacing: 1px;
+    }
 
-    .lyrics-view {
-      width: 100%;
-      max-width: 580px;
-      flex: 1;
-      overflow-y: auto;
-      scroll-behavior: smooth;
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-      padding: 24px 16px 80px;
-      scrollbar-width: none;
-    }
-    .lyrics-view::-webkit-scrollbar {
-      display: none;
-    }
+    .lyrics-view {
+      width: 100%;
+      max-width: 580px;
+      flex: 1;
+      overflow-y: auto;
+      scroll-behavior: smooth;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      padding: 24px 16px 80px;
+      scrollbar-width: none;
+    }
+    .lyrics-view::-webkit-scrollbar {
+      display: none;
+    }
 
-    .lyric-row {
-      text-align: center;
-      color: #6b7280;
-      line-height: 1.45;
-      transition: all 0.25s ease;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 3px;
-    }
-    .lyric-primary {
-      font-size: 0.85rem;
-      font-family: 'Syne', 'Chocolate Classical Sans', sans-serif;
-    }
-    .lyric-trans {
-      font-size: 0.78rem;
-      color: #585c6d;
-      font-family: 'Chocolate Classical Sans', sans-serif;
-      letter-spacing: 0.5px;
-    }
+    .lyric-row {
+      text-align: center;
+      color: #6b7280;
+      line-height: 1.45;
+      transition: all 0.25s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 3px;
+    }
+    .lyric-primary {
+      font-size: 0.85rem;
+      font-family: 'Syne', 'Chocolate Classical Sans', sans-serif;
+    }
+    .lyric-trans {
+      font-size: 0.78rem;
+      color: #585c6d;
+      font-family: 'Chocolate Classical Sans', sans-serif;
+      letter-spacing: 0.5px;
+    }
 
-    .lyric-row.active {
-      transform: scale(1.02);
-    }
-    .lyric-row.active .lyric-primary {
-      color: #ffffff;
-      font-size: 0.98rem;
-      font-weight: 600;
-      text-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
-    }
-    .lyric-row.active .lyric-trans {
-      color: #e4e4e7;
-      font-size: 0.88rem;
-      font-weight: 500;
-    }
+    .lyric-row.active {
+      transform: scale(1.02);
+    }
+    .lyric-row.active .lyric-primary {
+      color: #ffffff;
+      font-size: 0.98rem;
+      font-weight: 600;
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
+    }
+    .lyric-row.active .lyric-trans {
+      color: #e4e4e7;
+      font-size: 0.88rem;
+      font-weight: 500;
+    }
 
-    footer.retro-deck {
-      background: var(--deck-bg) !important;
-      border-top: 1px solid var(--steel-border);
-      box-shadow: 0 -8px 30px rgba(0,0,0,0.5);
-      padding: 10px 14px calc(24px + env(safe-area-inset-bottom, 20px));
-      z-index: 25;
-      width: 100%;
-      flex-shrink: 0;
-    }
+    footer.retro-deck {
+      background: var(--deck-bg) !important;
+      border-top: 1px solid var(--steel-border);
+      box-shadow: 0 -8px 30px rgba(0,0,0,0.5);
+      padding: 10px 14px calc(24px + env(safe-area-inset-bottom, 20px));
+      z-index: 25;
+      width: 100%;
+      flex-shrink: 0;
+    }
 
-    .timeline-strip {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      max-width: 480px;
-      margin: 0 auto 10px;
-      padding: 0 4px;
-    }
-    .retro-time {
-      font-family: 'Orbitron', monospace;
-      font-size: 0.7rem;
-      color: var(--steel-dim);
-      min-width: 36px;
-    }
+    .timeline-strip {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      max-width: 480px;
+      margin: 0 auto 10px;
+      padding: 0 4px;
+    }
+    .retro-time {
+      font-family: 'Orbitron', monospace;
+      font-size: 0.7rem;
+      color: var(--steel-dim);
+      min-width: 36px;
+    }
 
-    .seek-groove {
-      flex: 1;
-      height: 24px;
-      display: flex;
-      align-items: center;
-      position: relative;
-      touch-action: none;
-    }
-    .seek-track {
-      width: 100%;
-      height: 4px;
-      background: #23252d;
-      border-radius: 2px;
-      position: relative;
-    }
-    .seek-bar {
-      height: 100%;
-      background: linear-gradient(90deg, #6b7280, #e4e4e7);
-      border-radius: 2px;
-      width: 0%;
-      pointer-events: none;
-      position: relative;
-    }
-    .seek-thumb {
-      position: absolute;
-      right: -5px;
-      top: -4px;
-      width: 12px;
-      height: 12px;
-      background: #ffffff;
-      border-radius: 50%;
-      box-shadow: 0 0 8px rgba(255,255,255,0.8);
-      pointer-events: none;
-    }
+    .seek-groove {
+      flex: 1;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      position: relative;
+      touch-action: none;
+    }
+    .seek-track {
+      width: 100%;
+      height: 4px;
+      background: #23252d;
+      border-radius: 2px;
+      position: relative;
+    }
+    .seek-bar {
+      height: 100%;
+      background: linear-gradient(90deg, #6b7280, #e4e4e7);
+      border-radius: 2px;
+      width: 0%;
+      pointer-events: none;
+      position: relative;
+    }
+    .seek-thumb {
+      position: absolute;
+      right: -5px;
+      top: -4px;
+      width: 12px;
+      height: 12px;
+      background: #ffffff;
+      border-radius: 50%;
+      box-shadow: 0 0 8px rgba(255,255,255,0.8);
+      pointer-events: none;
+    }
 
-    .deck-controls {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      max-width: 480px;
-      margin: 0 auto;
-      gap: 8px;
-      padding: 0 2px;
-    }
+    .deck-controls {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: 480px;
+      margin: 0 auto;
+      gap: 8px;
+      padding: 0 2px;
+    }
 
-    .steel-select-group {
-      display: flex;
-      gap: 6px;
-      flex: 1;
-      min-width: 0;
-    }
+    .steel-select-group {
+      display: flex;
+      gap: 6px;
+      flex: 1;
+      min-width: 0;
+    }
 
-    .steel-select {
-      background: #1c1d24;
-      border: 1px solid #333642;
-      color: #e4e4e7;
-      font-family: 'Syne', sans-serif !important;
-      font-size: 0.7rem;
-      letter-spacing: 0.2px;
-      font-weight: 600;
-      padding: 5px 6px;
-      border-radius: 6px;
-      outline: none;
-      white-space: nowrap;
-      text-overflow: ellipsis;
-      overflow: hidden;
-      transition: all 0.2s ease;
-    }
-    #sel-playlist {
-      flex: 0 0 120px;
-      min-width: 110px;
-    }
-    #sel-song {
-      flex: 1;
-      min-width: 0;
-    }
+    .steel-select {
+      background: #1c1d24;
+      border: 1px solid #333642;
+      color: #e4e4e7;
+      font-family: 'Syne', sans-serif !important;
+      font-size: 0.7rem;
+      letter-spacing: 0.2px;
+      font-weight: 600;
+      padding: 5px 6px;
+      border-radius: 6px;
+      outline: none;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      transition: all 0.2s ease;
+    }
+    #sel-playlist {
+      flex: 0 0 120px;
+      min-width: 110px;
+    }
+    #sel-song {
+      flex: 1;
+      min-width: 0;
+    }
 
-    .steel-select:focus, .steel-select:hover {
-      border-color: #555869;
-    }
-    .steel-select option {
-      font-family: 'Syne', sans-serif !important;
-      background: #1c1d24;
-      color: #fff;
-    }
+    .steel-select:focus, .steel-select:hover {
+      border-color: #555869;
+    }
+    .steel-select option {
+      font-family: 'Syne', sans-serif !important;
+      background: #1c1d24;
+      color: #fff;
+    }
 
-    @media (min-width: 768px) {
-      .timeline-strip, .deck-controls {
-        max-width: 780px;
-      }
-      .steel-select {
-        font-size: 0.8rem;
-        padding: 7px 12px;
-      }
-      #sel-playlist {
-        flex: 0 0 215px;
-        min-width: 200px;
-      }
-      #sel-song {
-        flex: 1;
-      }
-    }
+    @media (min-width: 768px) {
+      .timeline-strip, .deck-controls {
+        max-width: 780px;
+      }
+      .steel-select {
+        font-size: 0.8rem;
+        padding: 7px 12px;
+      }
+      #sel-playlist {
+        flex: 0 0 215px;
+        min-width: 200px;
+      }
+      #sel-song {
+        flex: 1;
+      }
+    }
 
-    .buttons-group {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      flex-shrink: 0;
-    }
-    .steel-knob-btn {
-      width: 38px;
-      height: 38px;
-      border-radius: 50%;
-      background: radial-gradient(circle at 35% 35%, #2a2c36 0%, #171820 100%);
-      border: 1px solid #3e414f;
-      box-shadow: 0 3px 6px rgba(0,0,0,0.5), inset 0 1px 1px rgba(255,255,255,0.15);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: all 0.15s ease;
-      flex-shrink: 0;
-    }
-    .steel-knob-btn:active {
-      transform: scale(0.92);
-    }
-    .steel-knob-btn svg {
-      width: 14px;
-      height: 14px;
-      fill: #d1d5db;
-    }
+    .buttons-group {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+    .steel-knob-btn {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 35%, #2a2c36 0%, #171820 100%);
+      border: 1px solid #3e414f;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.5), inset 0 1px 1px rgba(255,255,255,0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.15s ease;
+      flex-shrink: 0;
+    }
+    .steel-knob-btn:active {
+      transform: scale(0.92);
+    }
+    .steel-knob-btn svg {
+      width: 14px;
+      height: 14px;
+      fill: #d1d5db;
+    }
 
-    .play-master-btn {
-      width: 46px;
-      height: 46px;
-      background: radial-gradient(circle at 35% 35%, #4b4e5d 0%, #20222a 100%);
-      border: 1.5px solid #8b90a0;
-      box-shadow: 0 0 12px var(--accent-glow), inset 0 1px 2px rgba(255,255,255,0.25);
-    }
-    .play-master-btn svg {
-      width: 17px;
-      height: 17px;
-      fill: #ffffff;
-    }
+    .play-master-btn {
+      width: 46px;
+      height: 46px;
+      background: radial-gradient(circle at 35% 35%, #4b4e5d 0%, #20222a 100%);
+      border: 1.5px solid #8b90a0;
+      box-shadow: 0 0 12px var(--accent-glow), inset 0 1px 2px rgba(255,255,255,0.25);
+    }
+    .play-master-btn svg {
+      width: 17px;
+      height: 17px;
+      fill: #ffffff;
+    }
 
-    .modal-veil {
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.85);
-      backdrop-filter: blur(8px);
-      z-index: 100;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      padding: 16px;
-    }
-    .modal-inner {
-      background: #181920;
-      border: 1px solid #333642;
-      border-radius: 12px;
-      width: 100%;
-      max-width: 520px;
-      max-height: 85vh;
-      overflow-y: auto;
-      padding: 20px;
-      font-family: 'Syne', 'Chocolate Classical Sans', sans-serif;
-    }
-    .modal-inner h3 {
-      font-family: 'Orbitron', sans-serif;
-      font-size: 1.05rem;
-      color: #f4f4f5;
-      margin-bottom: 12px;
-      letter-spacing: 1px;
-    }
+    .modal-veil {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.85);
+      backdrop-filter: blur(8px);
+      z-index: 100;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+    }
+    .modal-inner {
+      background: #181920;
+      border: 1px solid #333642;
+      border-radius: 12px;
+      width: 100%;
+      max-width: 520px;
+      max-height: 85vh;
+      overflow-y: auto;
+      padding: 20px;
+      font-family: 'Syne', 'Chocolate Classical Sans', sans-serif;
+    }
+    .modal-inner h3 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.05rem;
+      color: #f4f4f5;
+      margin-bottom: 12px;
+      letter-spacing: 1px;
+    }
 
-    /* 現代簡約低飽和選單項目 */
-    .menu-link-item {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 14px 14px;
-      background: #13141a;
-      border: 1px solid #282a35;
-      border-radius: 8px;
-      color: #ffffff;
-      text-decoration: none;
-      font-size: 0.88rem;
-      margin-bottom: 6px;
-      transition: all 0.2s ease;
-    }
-    .menu-link-item:hover, .menu-link-item:active {
-      background: #1a1c24;
-      border-color: #424657;
-      transform: translateX(2px);
-    }
-    .menu-item-left {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      min-width: 0;
-    }
-    .menu-item-icon {
-      width: 22px;
-      height: 22px;
-      min-width: 22px;
-      min-height: 22px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-    }
-    .menu-item-icon svg {
-      width: 20px;
-      height: 20px;
-      fill: #d1d5db;
-      display: block;
-    }
-    .menu-item-title {
-      color: #ffffff;
-      font-weight: 600;
-      font-size: 0.88rem;
-      letter-spacing: 0.5px;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
-    .menu-item-arrow {
-      width: 14px;
-      height: 14px;
-      min-width: 14px;
-      fill: #6b7280;
-      flex-shrink: 0;
-    }
+    /* 現代簡約低飽和選單項目 */
+    .menu-link-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 14px;
+      background: #13141a;
+      border: 1px solid #282a35;
+      border-radius: 8px;
+      color: #ffffff;
+      text-decoration: none;
+      font-size: 0.88rem;
+      margin-bottom: 6px;
+      transition: all 0.2s ease;
+    }
+    .menu-link-item:hover, .menu-link-item:active {
+      background: #1a1c24;
+      border-color: #424657;
+      transform: translateX(2px);
+    }
+    .menu-item-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+    }
+    .menu-item-icon {
+      width: 22px;
+      height: 22px;
+      min-width: 22px;
+      min-height: 22px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .menu-item-icon svg {
+      width: 20px;
+      height: 20px;
+      fill: #d1d5db;
+      display: block;
+    }
+    .menu-item-title {
+      color: #ffffff;
+      font-weight: 600;
+      font-size: 0.88rem;
+      letter-spacing: 0.5px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .menu-item-arrow {
+      width: 14px;
+      height: 14px;
+      min-width: 14px;
+      fill: #6b7280;
+      flex-shrink: 0;
+    }
 
-    /* 現代低飽和說明提示欄位 */
-    .menu-notice-card {
-      margin-top: 8px;
-      padding: 11px 13px;
-      background: #121319;
-      border: 1px solid #232530;
-      border-radius: 8px;
-      display: flex;
-      gap: 10px;
-      align-items: flex-start;
-    }
-    .menu-notice-icon {
-      width: 16px;
-      height: 16px;
-      min-width: 16px;
-      fill: #9ca3af;
-      flex-shrink: 0;
-      margin-top: 2px;
-    }
-    .menu-notice-text {
-      font-size: 0.74rem;
-      line-height: 1.5;
-      color: #9ca3af;
-      font-family: 'Chocolate Classical Sans', 'Noto Sans TC', sans-serif;
-    }
+    /* 現代低飽和說明提示欄位 */
+    .menu-notice-card {
+      margin-top: 8px;
+      padding: 11px 13px;
+      background: #121319;
+      border: 1px solid #232530;
+      border-radius: 8px;
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+    }
+    .menu-notice-icon {
+      width: 16px;
+      height: 16px;
+      min-width: 16px;
+      fill: #9ca3af;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .menu-notice-text {
+      font-size: 0.74rem;
+      line-height: 1.5;
+      color: #9ca3af;
+      font-family: 'Chocolate Classical Sans', 'Noto Sans TC', sans-serif;
+    }
 
-    .external-contact-link {
-      color: #ffffff;
-      font-weight: 600;
-      text-decoration: underline;
-      text-underline-offset: 3px;
-      transition: color 0.2s ease;
-    }
-    .external-contact-link:hover, .external-contact-link:active {
-      color: #cbd5e1;
-    }
+    .external-contact-link {
+      color: #ffffff;
+      font-weight: 600;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      transition: color 0.2s ease;
+    }
+    .external-contact-link:hover, .external-contact-link:active {
+      color: #cbd5e1;
+    }
 
-    .field-row {
-      margin-bottom: 12px;
-    }
-    .field-row label {
-      display: block;
-      font-size: 0.78rem;
-      color: var(--steel-dim);
-      margin-bottom: 4px;
-    }
-    .field-row input, .field-row textarea, .field-row select {
-      width: 100%;
-      background: #111216;
-      border: 1px solid #2d303a;
-      border-radius: 6px;
-      color: #fff;
-      font-size: 0.85rem;
-      padding: 8px 10px;
-      outline: none;
-    }
-    .field-row textarea {
-      font-family: monospace;
-      font-size: 0.78rem;
-      resize: vertical;
-    }
-    .btn-steel {
-      background: #2b2e3a;
-      border: 1px solid #454959;
-      color: #fafafa;
-      font-weight: 600;
-      padding: 8px 14px;
-      border-radius: 6px;
-    }
-    .btn-cancel {
-      background: transparent;
-      border: 1px solid #333642;
-      color: #9ca3af;
-      padding: 8px 12px;
-      border-radius: 6px;
-    }
-    .song-item-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 6px 10px;
-      background: #111216;
-      border: 1px solid #242630;
-      margin-bottom: 4px;
-      border-radius: 4px;
-      font-size: 0.8rem;
-    }
-    .song-actions {
-      display: flex;
-      gap: 4px;
-      align-items: center;
-    }
-    .btn-act {
-      border: none;
-      border-radius: 3px;
-      padding: 3px 6px;
-      font-size: 0.72rem;
-    }
-    .btn-edit { background: #3b82f6; color: #fff; }
-    .btn-del { background: #ef4444; color: #fff; }
-    .btn-order { background: #27272a; color: #d4d4d8; border: 1px solid #3f3f46; font-size: 0.7rem; padding: 2px 5px; }
-    .btn-order:disabled { opacity: 0.3; cursor: not-allowed; }
+    .field-row {
+      margin-bottom: 12px;
+    }
+    .field-row label {
+      display: block;
+      font-size: 0.78rem;
+      color: var(--steel-dim);
+      margin-bottom: 4px;
+    }
+    .field-row input, .field-row textarea, .field-row select {
+      width: 100%;
+      background: #111216;
+      border: 1px solid #2d303a;
+      border-radius: 6px;
+      color: #fff;
+      font-size: 0.85rem;
+      padding: 8px 10px;
+      outline: none;
+    }
+    .field-row textarea {
+      font-family: monospace;
+      font-size: 0.78rem;
+      resize: vertical;
+    }
+    .btn-steel {
+      background: #2b2e3a;
+      border: 1px solid #454959;
+      color: #fafafa;
+      font-weight: 600;
+      padding: 8px 14px;
+      border-radius: 6px;
+    }
+    .btn-cancel {
+      background: transparent;
+      border: 1px solid #333642;
+      color: #9ca3af;
+      padding: 8px 12px;
+      border-radius: 6px;
+    }
+    .song-item-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 6px 10px;
+      background: #111216;
+      border: 1px solid #242630;
+      margin-bottom: 4px;
+      border-radius: 4px;
+      font-size: 0.8rem;
+    }
+    .song-actions {
+      display: flex;
+      gap: 4px;
+      align-items: center;
+    }
+    .btn-act {
+      border: none;
+      border-radius: 3px;
+      padding: 3px 6px;
+      font-size: 0.72rem;
+    }
+    .btn-edit { background: #3b82f6; color: #fff; }
+    .btn-del { background: #ef4444; color: #fff; }
+    .btn-order { background: #27272a; color: #d4d4d8; border: 1px solid #3f3f46; font-size: 0.7rem; padding: 2px 5px; }
+    .btn-order:disabled { opacity: 0.3; cursor: not-allowed; }
 
-    .preview-card-box {
-      background: #101115;
-      border: 1px dashed #3f4252;
-      border-radius: 8px;
-      padding: 10px;
-      display: flex;
-      gap: 12px;
-      align-items: center;
-      margin-bottom: 14px;
-    }
-    .preview-cover-thumb {
-      width: 72px;
-      height: 72px;
-      border-radius: 4px;
-      border: 1px solid #2c2d38;
-      background-size: cover;
-      background-position: center;
-      flex-shrink: 0;
-      position: relative;
-      overflow: hidden;
-    }
-  </style>
+    .preview-card-box {
+      background: #101115;
+      border: 1px dashed #3f4252;
+      border-radius: 8px;
+      padding: 10px;
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      margin-bottom: 14px;
+    }
+    .preview-cover-thumb {
+      width: 72px;
+      height: 72px;
+      border-radius: 4px;
+      border: 1px solid #2c2d38;
+      background-size: cover;
+      background-position: center;
+      flex-shrink: 0;
+      position: relative;
+      overflow: hidden;
+    }
+  </style>
 
-  <script type="importmap">
-    {
-      "imports": {
-        "three": "https://unpkg.com/three@0.160.0/build/three.module.js"
-      }
-    }
-  </script>
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://unpkg.com/three@0.160.0/build/three.module.js"
+      }
+    }
+  </script>
 </head>
 <body>
 
-  <!-- 純原生 Audio 元件：不接入任何 Web Audio API，確保背景播放與 Audio Focus 完全活躍 -->
-  <audio id="native-audio" playsinline></audio>
-  <iframe id="yt-hidden-player" style="position:absolute; top:-9999px; left:-9999px; width:1px; height:1px;" frameborder="0" allow="autoplay; encrypted-media"></iframe>
+  <!-- 純原生 Audio 元件 -->
+  <audio id="native-audio" playsinline preload="auto"></audio>
 
-  <header>
-    <div class="brand-title" id="logo-trigger">KARINA PLAYLIST</div>
-    <button class="admin-star-btn" id="btn-open-menu" title="Navigation & Settings">♥</button>
-  </header>
+  <header>
+    <div class="brand-title" id="logo-trigger">KARINA PLAYLIST</div>
+    <button class="admin-star-btn" id="btn-open-menu" title="Navigation & Settings">♥</button>
+  </header>
 
-  <main>
-    <div id="threejs-box"></div>
-    <div class="info-lyrics-container">
-      <div class="track-meta">
-        <h1 id="disp-title">UP</h1>
-        <p id="disp-artist">KARINA</p>
-      </div>
-      <div class="lyrics-view" id="lyrics-scroller"></div>
-    </div>
-  </main>
+  <main>
+    <div id="threejs-box"></div>
+    <div class="info-lyrics-container">
+      <div class="track-meta">
+        <h1 id="disp-title">UP</h1>
+        <p id="disp-artist">KARINA</p>
+      </div>
+      <div class="lyrics-view" id="lyrics-scroller"></div>
+    </div>
+  </main>
 
-  <footer class="retro-deck">
-    <div class="timeline-strip">
-      <span class="retro-time" id="lbl-curr">00:00</span>
-      <div class="seek-groove" id="seek-container">
-        <div class="seek-track">
-          <div class="seek-bar" id="seek-progress">
-            <div class="seek-thumb"></div>
-          </div>
-        </div>
-      </div>
-      <span class="retro-time" id="lbl-total">00:00</span>
-    </div>
+  <footer class="retro-deck">
+    <div class="timeline-strip">
+      <span class="retro-time" id="lbl-curr">00:00</span>
+      <div class="seek-groove" id="seek-container">
+        <div class="seek-track">
+          <div class="seek-bar" id="seek-progress">
+            <div class="seek-thumb"></div>
+          </div>
+        </div>
+      </div>
+      <span class="retro-time" id="lbl-total">00:00</span>
+    </div>
 
-    <div class="deck-controls">
-      <div class="steel-select-group">
-        <select class="steel-select" id="sel-playlist"></select>
-        <select class="steel-select" id="sel-song"></select>
-      </div>
+    <div class="deck-controls">
+      <div class="steel-select-group">
+        <select class="steel-select" id="sel-playlist"></select>
+        <select class="steel-select" id="sel-song"></select>
+      </div>
 
-      <div class="buttons-group">
-        <button class="steel-knob-btn" id="btn-prev" title="上一首">
-          <svg viewBox="0 0 24 24"><path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/></svg>
-        </button>
-        <button class="steel-knob-btn play-master-btn" id="btn-play" title="播放 / 暫停">
-          <svg id="play-svg-icon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-        </button>
-        <button class="steel-knob-btn" id="btn-next" title="下一首">
-          <svg viewBox="0 0 24 24"><path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/></svg>
-        </button>
-      </div>
-    </div>
-  </footer>
+      <div class="buttons-group">
+        <button class="steel-knob-btn" id="btn-prev" title="上一首">
+          <svg viewBox="0 0 24 24"><path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/></svg>
+        </button>
+        <button class="steel-knob-btn play-master-btn" id="btn-play" title="播放 / 暫停">
+          <svg id="play-svg-icon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+        </button>
+        <button class="steel-knob-btn" id="btn-next" title="下一首">
+          <svg viewBox="0 0 24 24"><path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/></svg>
+        </button>
+      </div>
+    </div>
+  </footer>
 
-  <div class="modal-veil" id="nav-modal">
-    <div class="modal-inner" style="max-width: 360px;">
-      <h3>KARINA SPACE</h3>
-      <div style="display:flex; flex-direction:column; gap:6px; margin-top:14px;">
-        
-        <!-- Reset Playlist 重新整理 -->
-        <div class="menu-link-item" id="menu-btn-reload">
-          <div class="menu-item-left">
-            <div class="menu-item-icon">
-              <svg viewBox="0 0 24 24" width="20" height="20"><path d="M17.65 6.35A7.958 7.958 0 0 0 12 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08A5.99 5.99 0 0 1 12 18c-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"/></svg>
-            </div>
-            <div>
-              <div class="menu-item-title">Reset Playlist 重新整理</div>
-            </div>
-          </div>
-          <svg class="menu-item-arrow" viewBox="0 0 24 24" width="14" height="14"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/></svg>
-        </div>
+  <div class="modal-veil" id="nav-modal">
+    <div class="modal-inner" style="max-width: 360px;">
+      <h3>KARINA SPACE</h3>
+      <div style="display:flex; flex-direction:column; gap:6px; margin-top:14px;">
+        
+        <!-- Reset Playlist 重新整理 -->
+        <div class="menu-link-item" id="menu-btn-reload">
+          <div class="menu-item-left">
+            <div class="menu-item-icon">
+              <svg viewBox="0 0 24 24" width="20" height="20"><path d="M17.65 6.35A7.958 7.958 0 0 0 12 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08A5.99 5.99 0 0 1 12 18c-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"/></svg>
+            </div>
+            <div>
+              <div class="menu-item-title">Reset Playlist 重新整理</div>
+            </div>
+          </div>
+          <svg class="menu-item-arrow" viewBox="0 0 24 24" width="14" height="14"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/></svg>
+        </div>
 
-        <!-- System Access 管理者設定 -->
-        <div class="menu-link-item" id="menu-btn-admin">
-          <div class="menu-item-left">
-            <div class="menu-item-icon">
-              <svg viewBox="0 0 24 24" width="20" height="20"><path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/></svg>
-            </div>
-            <div>
-              <div class="menu-item-title">System Access 管理者設定</div>
-            </div>
-          </div>
-          <svg class="menu-item-arrow" viewBox="0 0 24 24" width="14" height="14"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/></svg>
-        </div>
+        <!-- System Access 管理者設定 -->
+        <div class="menu-link-item" id="menu-btn-admin">
+          <div class="menu-item-left">
+            <div class="menu-item-icon">
+              <svg viewBox="0 0 24 24" width="20" height="20"><path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/></svg>
+            </div>
+            <div>
+              <div class="menu-item-title">System Access 管理者設定</div>
+            </div>
+          </div>
+          <svg class="menu-item-arrow" viewBox="0 0 24 24" width="14" height="14"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/></svg>
+        </div>
 
-      </div>
+      </div>
 
-      <!-- 說明欄位 1 -->
-      <div class="menu-notice-card">
-        <svg class="menu-notice-icon" viewBox="0 0 24 24" width="16" height="16"><path d="M11 17h2v-6h-2v6zm1-15C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zM11 9h2V7h-2v2z"/></svg>
-        <div class="menu-notice-text">
-          若歌曲或圖示無法順利載入,點擊上方「Reset Playlist 重新整理」。
-        </div>
-      </div>
+      <!-- 說明欄位 1 -->
+      <div class="menu-notice-card">
+        <svg class="menu-notice-icon" viewBox="0 0 24 24" width="16" height="16"><path d="M11 17h2v-6h-2v6zm1-15C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zM11 9h2V7h-2v2z"/></svg>
+        <div class="menu-notice-text">
+          若歌曲或圖示無法順利載入,點擊上方「Reset Playlist 重新整理」。
+        </div>
+      </div>
 
-      <!-- 說明欄位 2 -->
-      <div class="menu-notice-card" style="margin-top: 6px;">
-        <svg class="menu-notice-icon" viewBox="0 0 24 24" width="16" height="16"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"/></svg>
-        <div class="menu-notice-text">
-          手機點擊「分享」>「加入主畫面」,即可享最佳聆聽體驗。
-        </div>
-      </div>
+      <!-- 說明欄位 2 -->
+      <div class="menu-notice-card" style="margin-top: 6px;">
+        <svg class="menu-notice-icon" viewBox="0 0 24 24" width="16" height="16"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"/></svg>
+        <div class="menu-notice-text">
+          手機點擊「分享」>「加入主畫面」,即可享最佳聆聽體驗。
+        </div>
+      </div>
 
-      <!-- 說明欄位 3：聯繫資訊 -->
-      <div class="menu-notice-card" style="margin-top: 6px;">
-        <svg class="menu-notice-icon" viewBox="0 0 24 24" width="16" height="16"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
-        <div class="menu-notice-text">
-          若歌詞有誤或操作不順，請聯繫 <a class="external-contact-link" href="https://www.threads.com/@kelly_lee_805" target="_blank" rel="noopener noreferrer">@kelly_lee_805</a>
-        </div>
-      </div>
+      <!-- 說明欄位 3：聯繫資訊 -->
+      <div class="menu-notice-card" style="margin-top: 6px;">
+        <svg class="menu-notice-icon" viewBox="0 0 24 24" width="16" height="16"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+        <div class="menu-notice-text">
+          若歌詞有誤或操作不順，請聯繫 <a class="external-contact-link" href="https://www.threads.com/@kelly_lee_805" target="_blank" rel="noopener noreferrer">@kelly_lee_805</a>
+        </div>
+      </div>
 
-      <div style="text-align:right; margin-top:14px;">
-        <button class="btn-cancel" id="btn-close-nav">關閉選單</button>
-      </div>
-    </div>
-  </div>
+      <div style="text-align:right; margin-top:14px;">
+        <button class="btn-cancel" id="btn-close-nav">關閉選單</button>
+      </div>
+    </div>
+  </div>
 
-  <div id="admin-mount-point"></div>
+  <div id="admin-mount-point"></div>
 
-  <template id="auth-tpl">
-    <div class="modal-veil" id="auth-modal" style="display:flex;">
-      <div class="modal-inner" style="max-width: 300px; text-align: center;">
-        <h3>System Access</h3>
-        <div class="field-row" style="margin-top: 14px;">
-          <input type="password" id="auth-input" placeholder="請輸入管理密碼" autocomplete="off">
-        </div>
-        <div style="display:flex; justify-content:center; gap:8px; margin-top:14px;">
-          <button class="btn-cancel" id="btn-auth-close">取消</button>
-          <button class="btn-steel" id="btn-auth-submit">驗證</button>
-        </div>
-      </div>
-    </div>
-  </template>
+  <template id="auth-tpl">
+    <div class="modal-veil" id="auth-modal" style="display:flex;">
+      <div class="modal-inner" style="max-width: 300px; text-align: center;">
+        <h3>System Access</h3>
+        <div class="field-row" style="margin-top: 14px;">
+          <input type="password" id="auth-input" placeholder="請輸入管理密碼" autocomplete="off">
+        </div>
+        <div style="display:flex; justify-content:center; gap:8px; margin-top:14px;">
+          <button class="btn-cancel" id="btn-auth-close">取消</button>
+          <button class="btn-steel" id="btn-auth-submit">驗證</button>
+        </div>
+      </div>
+    </div>
+  </template>
 
-  <template id="admin-tpl">
-    <div class="modal-veil" id="admin-modal" style="display:flex;">
-      <div class="modal-inner">
-        <h3>歌單與曲目核心管理</h3>
+  <template id="admin-tpl">
+    <div class="modal-veil" id="admin-modal" style="display:flex;">
+      <div class="modal-inner">
+        <h3>歌單與曲目核心管理</h3>
 
-        <div style="display:flex; gap:8px; margin-bottom:14px;">
-          <button class="btn-steel" id="btn-copy-code" style="flex:1; font-size:0.75rem;">📋 複製當前更新程式碼</button>
-          <button class="btn-cancel" id="btn-dl-html" style="font-size:0.75rem;">💾 下載更新 HTML</button>
-        </div>
+        <div style="display:flex; gap:8px; margin-bottom:14px;">
+          <button class="btn-steel" id="btn-copy-code" style="flex:1; font-size:0.75rem;">📋 複製當前更新程式碼</button>
+          <button class="btn-cancel" id="btn-dl-html" style="font-size:0.75rem;">💾 下載更新 HTML</button>
+        </div>
 
-        <div style="background:#111216; padding:10px; border-radius:6px; border:1px solid #282a35; margin-bottom:12px;">
-          <label style="font-size:0.75rem; color:#a1a1aa; display:flex; justify-content:space-between;">
-            <span>黑膠與封面尺寸縮放</span>
-            <span id="scale-val-lbl">1.0x</span>
-          </label>
-          <input type="range" id="scale-slider" min="0.6" max="1.5" step="0.05" value="1.0" style="width:100%; margin-top:6px;">
-        </div>
+        <div style="background:#111216; padding:10px; border-radius:6px; border:1px solid #282a35; margin-bottom:12px;">
+          <label style="font-size:0.75rem; color:#a1a1aa; display:flex; justify-content:space-between;">
+            <span>黑膠與封面尺寸縮放</span>
+            <span id="scale-val-lbl">1.0x</span>
+          </label>
+          <input type="range" id="scale-slider" min="0.6" max="1.5" step="0.05" value="1.0" style="width:100%; margin-top:6px;">
+        </div>
 
-        <div style="background:#111216; padding:10px; border-radius:6px; border:1px solid #282a35; margin-bottom:12px;">
-          <label style="font-size:0.78rem; color:#e4e4e7; font-weight:bold;">新增歌單</label>
-          <div style="display:flex; gap:8px; margin-top:6px;">
-            <input type="text" id="admin-new-pl-name" placeholder="歌單名稱...">
-            <button class="btn-steel" id="btn-add-pl">新增</button>
-          </div>
-        </div>
+        <div style="background:#111216; padding:10px; border-radius:6px; border:1px solid #282a35; margin-bottom:12px;">
+          <label style="font-size:0.78rem; color:#e4e4e7; font-weight:bold;">新增歌單</label>
+          <div style="display:flex; gap:8px; margin-top:6px;">
+            <input type="text" id="admin-new-pl-name" placeholder="歌單名稱...">
+            <button class="btn-steel" id="btn-add-pl">新增</button>
+          </div>
+        </div>
 
-        <div style="background:#111216; padding:12px; border-radius:6px; border:1px solid #282a35; margin-bottom:12px;">
-          <h4 id="form-mode-title" style="color:#fafafa; font-size:0.85rem; margin-bottom:8px;">✦ 新增歌曲</h4>
-          <input type="hidden" id="edit-song-id" value="">
+        <div style="background:#111216; padding:12px; border-radius:6px; border:1px solid #282a35; margin-bottom:12px;">
+          <h4 id="form-mode-title" style="color:#fafafa; font-size:0.85rem; margin-bottom:8px;">✦ 新增歌曲</h4>
+          <input type="hidden" id="edit-song-id" value="">
 
-          <div class="preview-card-box">
-            <div class="preview-cover-thumb" id="preview-box-thumb"></div>
-            <div style="flex:1; min-width:0;">
-              <div style="font-size:0.72rem; color:#60a5fa; font-weight:bold;">✦ 即時預覽 (LIVE PREVIEW)</div>
-              <div id="preview-box-title" style="font-size:0.84rem; font-weight:bold; color:#fff; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; margin-top:2px;">歌曲名稱</div>
-              <div id="preview-box-artist" style="font-size:0.72rem; color:#9ca3af;">KARINA</div>
-            </div>
-          </div>
+          <div class="preview-card-box">
+            <div class="preview-cover-thumb" id="preview-box-thumb"></div>
+            <div style="flex:1; min-width:0;">
+              <div style="font-size:0.72rem; color:#60a5fa; font-weight:bold;">✦ 即時預覽 (LIVE PREVIEW)</div>
+              <div id="preview-box-title" style="font-size:0.84rem; font-weight:bold; color:#fff; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; margin-top:2px;">歌曲名稱</div>
+              <div id="preview-box-artist" style="font-size:0.72rem; color:#9ca3af;">KARINA</div>
+            </div>
+          </div>
 
-          <div class="field-row">
-            <label>所屬歌單</label>
-            <select id="form-pl-target"></select>
-          </div>
-          <div class="field-row">
-            <label>歌曲名稱</label>
-            <input type="text" id="form-song-title" placeholder="例如：UP">
-          </div>
-          <div class="field-row">
-            <label>演唱者 / 專輯名稱</label>
-            <input type="text" id="form-song-artist" placeholder="KARINA" value="KARINA">
-          </div>
-          <div class="field-row">
-            <label>音訊來源 (本機檔名、GitHub 網址 或 YouTube 連結)</label>
-            <input type="text" id="form-song-source" placeholder="如：UP.mp3 或 YouTube 網址">
-          </div>
-          <div class="field-row">
-            <label style="display:flex; justify-content:space-between;">
-              <span>音量微調 (Volume)</span>
-              <span id="form-vol-lbl">1.00x</span>
-            </label>
-            <input type="range" id="form-song-vol" min="0.3" max="1.0" step="0.05" value="1.0" style="width:100%; margin-top:4px;">
-          </div>
+          <div class="field-row">
+            <label>所屬歌單</label>
+            <select id="form-pl-target"></select>
+          </div>
+          <div class="field-row">
+            <label>歌曲名稱</label>
+            <input type="text" id="form-song-title" placeholder="例如：UP">
+          </div>
+          <div class="field-row">
+            <label>演唱者 / 專輯名稱</label>
+            <input type="text" id="form-song-artist" placeholder="KARINA" value="KARINA">
+          </div>
+          <div class="field-row">
+            <label>音訊來源 (本機檔名、GitHub 網址)</label>
+            <input type="text" id="form-song-source" placeholder="如：UP.mp3">
+          </div>
+          <div class="field-row">
+            <label style="display:flex; justify-content:space-between;">
+              <span>音量微調 (Volume)</span>
+              <span id="form-vol-lbl">1.00x</span>
+            </label>
+            <input type="range" id="form-song-vol" min="0.1" max="1.0" step="0.05" value="1.0" style="width:100%; margin-top:4px;">
+          </div>
 
-          <div class="field-row">
-            <label>專輯封面 (正面)</label>
-            <input type="text" id="form-song-cover" placeholder="貼上圖片檔名">
-            <div style="margin-top:6px; display:flex; align-items:center; gap:8px;">
-              <input type="file" id="local-img-picker" accept="image/*" style="display:none;">
-              <button type="button" class="btn-cancel" id="btn-pick-img" style="font-size:0.72rem;">📁 從手機圖庫挑選正面</button>
-              <span id="img-picker-status" style="font-size:0.72rem; color:#71717a;"></span>
-            </div>
-          </div>
+          <div class="field-row">
+            <label>專輯封面 (正面)</label>
+            <input type="text" id="form-song-cover" placeholder="貼上圖片檔名">
+            <div style="margin-top:6px; display:flex; align-items:center; gap:8px;">
+              <input type="file" id="local-img-picker" accept="image/*" style="display:none;">
+              <button type="button" class="btn-cancel" id="btn-pick-img" style="font-size:0.72rem;">📁 從手機圖庫挑選正面</button>
+              <span id="img-picker-status" style="font-size:0.72rem; color:#71717a;"></span>
+            </div>
+          </div>
 
-          <div style="background:#171822; padding:10px; border-radius:6px; border:1px solid #282a3c; margin-bottom:12px;">
-            <div style="font-size:0.75rem; color:#e4e4e7; font-weight:bold; margin-bottom:8px;">🖼️ 封面照片尺寸與位置微調</div>
-            
-            <div class="field-row" style="margin-bottom:8px;">
-              <label style="display:flex; justify-content:space-between;">
-                <span>圖片縮放倍率 (Scale)</span>
-                <span id="lbl-img-scale">1.00x</span>
-              </label>
-              <input type="range" id="form-img-scale" min="0.6" max="2.5" step="0.05" value="1.0">
-            </div>
+          <div style="background:#171822; padding:10px; border-radius:6px; border:1px solid #282a3c; margin-bottom:12px;">
+            <div style="font-size:0.75rem; color:#e4e4e7; font-weight:bold; margin-bottom:8px;">🖼️ 封面照片尺寸與位置微調</div>
+            
+            <div class="field-row" style="margin-bottom:8px;">
+              <label style="display:flex; justify-content:space-between;">
+                <span>圖片縮放倍率 (Scale)</span>
+                <span id="lbl-img-scale">1.00x</span>
+              </label>
+              <input type="range" id="form-img-scale" min="0.6" max="2.5" step="0.05" value="1.0">
+            </div>
 
-            <div class="field-row" style="margin-bottom:8px;">
-              <label style="display:flex; justify-content:space-between;">
-                <span>水平位置移動 (Offset X)</span>
-                <span id="lbl-img-ox">0%</span>
-              </label>
-              <input type="range" id="form-img-ox" min="-0.5" max="0.5" step="0.02" value="0.0">
-            </div>
+            <div class="field-row" style="margin-bottom:8px;">
+              <label style="display:flex; justify-content:space-between;">
+                <span>水平位置移動 (Offset X)</span>
+                <span id="lbl-img-ox">0%</span>
+              </label>
+              <input type="range" id="form-img-ox" min="-0.5" max="0.5" step="0.02" value="0.0">
+            </div>
 
-            <div class="field-row" style="margin-bottom:0;">
-              <label style="display:flex; justify-content:space-between;">
-                <span>垂直位置移動 (Offset Y)</span>
-                <span id="lbl-img-oy">0%</span>
-              </label>
-              <input type="range" id="form-img-oy" min="-0.5" max="0.5" step="0.02" value="0.0">
-            </div>
-          </div>
+            <div class="field-row" style="margin-bottom:0;">
+              <label style="display:flex; justify-content:space-between;">
+                <span>垂直位置移動 (Offset Y)</span>
+                <span id="lbl-img-oy">0%</span>
+              </label>
+              <input type="range" id="form-img-oy" min="-0.5" max="0.5" step="0.02" value="0.0">
+            </div>
+          </div>
 
-          <div class="field-row">
-            <label>黑膠中央圓形貼標 (留空則預設同正面封面)</label>
-            <input type="text" id="form-song-label-img" placeholder="留空則預設跟正面相同">
-            <div style="margin-top:6px; display:flex; align-items:center; gap:8px;">
-              <input type="file" id="local-label-img-picker" accept="image/*" style="display:none;">
-              <button type="button" class="btn-cancel" id="btn-pick-label-img" style="font-size:0.72rem;">📁 從手機圖庫挑選貼標</button>
-              <span id="label-img-picker-status" style="font-size:0.72rem; color:#71717a;"></span>
-            </div>
-          </div>
+          <div class="field-row">
+            <label>黑膠中央圓形貼標 (留空則預設同正面封面)</label>
+            <input type="text" id="form-song-label-img" placeholder="留空則預設跟正面相同">
+            <div style="margin-top:6px; display:flex; align-items:center; gap:8px;">
+              <input type="file" id="local-label-img-picker" accept="image/*" style="display:none;">
+              <button type="button" class="btn-cancel" id="btn-pick-label-img" style="font-size:0.72rem;">📁 從手機圖庫挑選貼標</button>
+              <span id="label-img-picker-status" style="font-size:0.72rem; color:#71717a;"></span>
+            </div>
+          </div>
 
-          <div class="field-row">
-            <label>專輯外殼 (背面，留空則預設同正面)</label>
-            <input type="text" id="form-song-back-cover" placeholder="留空則預設跟正面相同">
-            <div style="margin-top:6px; display:flex; align-items:center; gap:8px;">
-              <input type="file" id="local-back-img-picker" accept="image/*" style="display:none;">
-              <button type="button" class="btn-cancel" id="btn-pick-back-img" style="font-size:0.72rem;">📁 從手機圖庫挑選背面</button>
-              <span id="back-img-picker-status" style="font-size:0.72rem; color:#71717a;"></span>
-            </div>
-          </div>
+          <div class="field-row">
+            <label>專輯外殼 (背面，留空則預設同正面)</label>
+            <input type="text" id="form-song-back-cover" placeholder="留空則預設跟正面相同">
+            <div style="margin-top:6px; display:flex; align-items:center; gap:8px;">
+              <input type="file" id="local-back-img-picker" accept="image/*" style="display:none;">
+              <button type="button" class="btn-cancel" id="btn-pick-back-img" style="font-size:0.72rem;">📁 從手機圖庫挑選背面</button>
+              <span id="back-img-picker-status" style="font-size:0.72rem; color:#71717a;"></span>
+            </div>
+          </div>
 
-          <div class="field-row">
-            <label>動態歌詞 (支援 [分:秒.毫秒] 與下一行中文翻譯)</label>
-            <textarea id="form-song-lyrics" rows="6" placeholder="[00:12.21]原語歌詞&#10;中文翻譯&#10;[00:18.70]第二句原語&#10;第二句中文"></textarea>
-          </div>
+          <div class="field-row">
+            <label>動態歌詞 (支援 [分:秒.毫秒] 與下一行中文翻譯)</label>
+            <textarea id="form-song-lyrics" rows="6" placeholder="[00:12.21]原語歌詞&#10;中文翻譯&#10;[00:18.70]第二句原語&#10;第二句中文"></textarea>
+          </div>
 
-          <div style="display:flex; gap:8px; margin-top:8px;">
-            <button class="btn-steel" id="btn-save-song" style="flex:1;">儲存歌曲</button>
-            <button class="btn-cancel" id="btn-cancel-edit" style="display:none;">取消編輯</button>
-          </div>
-        </div>
+          <div style="display:flex; gap:8px; margin-top:8px;">
+            <button class="btn-steel" id="btn-save-song" style="flex:1;">儲存歌曲</button>
+            <button class="btn-cancel" id="btn-cancel-edit" style="display:none;">取消編輯</button>
+          </div>
+        </div>
 
-        <div>
-          <label style="font-size:0.75rem; color:#71717a; margin-bottom:6px; display:block;">歌單與歌曲排序管理</label>
-          <div id="admin-tree-view"></div>
-        </div>
+        <div>
+          <label style="font-size:0.75rem; color:#71717a; margin-bottom:6px; display:block;">歌單與歌曲排序管理</label>
+          <div id="admin-tree-view"></div>
+        </div>
 
-        <div style="text-align:right; margin-top:14px;">
-          <button class="btn-cancel" id="btn-close-admin">關閉管理後台</button>
-        </div>
-      </div>
-    </div>
-  </template>
+        <div style="text-align:right; margin-top:14px;">
+          <button class="btn-cancel" id="btn-close-admin">關閉管理後台</button>
+        </div>
+      </div>
+    </div>
+  </template>
 
-  <script type="module">
-    import * as THREE from 'three';
+  <script type="module">
+    import * as THREE from 'three';
 
-    const CANONICAL_URL = "https://u11150003-arch.github.io/KARINA-PLAYLIST/";
-    try {
-      window.history.replaceState({}, document.title, CANONICAL_URL);
-    } catch(e) {}
+    // 乾淨相對檔名直連（完全移除會導致 CORS 與 404 編碼錯誤的 toAbsUrl）
+    const COVER_UP = "UP_cover.jpg";
+    const COVER_GOOD_STUFF = "GOOD STUFF_cover.jpg";
+    const COVER_16_BIT = "16 Bit_cover.jpg";
+    const COVER_TENDERNESS = "May the TENDERNESS be with you_album cover.jpg";
+    const VINYL_TENDERNESS = "May the TENDERNESS be with you_CD cover.jpg";
+    const COVER_SERENADE = "Serenade_album cover.jpg";
+    const VINYL_SERENADE = "Serenade_CD cover.jpg";
+    const COVER_ORANGE = "Orange_cover.jpg";
 
-    const REPO_BASE = "https://u11150003-arch.github.io/KARINA-PLAYLIST/";
+    const COVER_SPARKLE = "01Sparkle_cover.jpg";
+    const COVER_HARD_TO_SAY = "02Hard to say_cover.jpg";
+    const COVER_SAD_LOVE = "03_cover.jpg";
+    const COVER_AS_YOU_ARE = "04_cover.jpg";
+    const COVER_CANT_TAKE_EYES = "05Cant Take My Eyes Off You_cover.jpg";
+    const COVER_YOU_KNOW = "06Rock_cover.jpg";
+    const MEMORY_BOX_VINYL_LABEL = "KARINA MEMORY BOX_cover_compress.jpg";
 
-    function toAbsUrl(fileName) {
-      if (!fileName) return '';
-      if (fileName.startsWith('http://') || fileName.startsWith('https://')) return fileName;
-      return REPO_BASE + encodeURI(fileName.replace(/^\.\//, ''));
-    }
+    /* 強效雙行與多行容錯歌詞解析器 */
+    function parseLrc(txt) {
+      if (!txt) return [];
+      const lines = txt.split('\n');
+      const result = [];
+      let currentItem = null;
 
-    /* 圖片檔名對應表 */
-    const COVER_UP = "UP_cover.jpg";
-    const COVER_GOOD_STUFF = "GOOD STUFF_cover.jpg";
-    const COVER_16_BIT = "16 Bit_cover.jpg";
-    const COVER_TENDERNESS = "May the TENDERNESS be with you_album cover.jpg";
-    const VINYL_TENDERNESS = "May the TENDERNESS be with you_CD cover.jpg";
-    const COVER_SERENADE = "Serenade_album cover.jpg";
-    const VINYL_SERENADE = "Serenade_CD cover.jpg";
-    const COVER_ORANGE = "Orange_cover.jpg";
+      for (let i = 0; i < lines.length; i++) {
+        const line = lines[i].trim();
+        if (!line) continue;
+        const m = line.match(/\[(\d+):(\d+(?:\.\d+)?)\]\s*(.*)/);
+        if (m) {
+          if (currentItem) result.push(currentItem);
+          const t = parseInt(m[1]) * 60 + parseFloat(m[2]);
+          currentItem = { time: t, text: m[3] || '', trans: '' };
+        } else if (currentItem) {
+          if (!currentItem.trans) {
+            currentItem.trans = line;
+          } else {
+            currentItem.trans += ' ' + line;
+          }
+        }
+      }
+      if (currentItem) result.push(currentItem);
+      return result.sort((a,b) => a.time - b.time);
+    }
 
-    const COVER_SPARKLE = "01Sparkle_cover.jpg";
-    const COVER_HARD_TO_SAY = "02Hard to say_cover.jpg";
-    const COVER_SAD_LOVE = "03_cover.jpg";
-    const COVER_AS_YOU_ARE = "04_cover.jpg";
-    const COVER_CANT_TAKE_EYES = "05Cant Take My Eyes Off You_cover.jpg";
-    const COVER_YOU_KNOW = "06Rock_cover.jpg";
-    const MEMORY_BOX_VINYL_LABEL = "KARINA MEMORY BOX_cover_compress.jpg";
+    function formatLrcTime(sec) {
+      const m = Math.floor(sec / 60);
+      const s = (sec % 60).toFixed(2);
+      return `[${String(m).padStart(2,'0')}:${String(s).padStart(5,'0')}]`;
+    }
 
-    /* 強效雙行與多行容錯歌詞解析器 */
-    function parseLrc(txt) {
-      if (!txt) return [];
-      const lines = txt.split('\n');
-      const result = [];
-      let currentItem = null;
-
-      for (let i = 0; i < lines.length; i++) {
-        const line = lines[i].trim();
-        if (!line) continue;
-        const m = line.match(/\[(\d+):(\d+(?:\.\d+)?)\]\s*(.*)/);
-        if (m) {
-          if (currentItem) result.push(currentItem);
-          const t = parseInt(m[1]) * 60 + parseFloat(m[2]);
-          currentItem = { time: t, text: m[3] || '', trans: '' };
-        } else if (currentItem) {
-          if (!currentItem.trans) {
-            currentItem.trans = line;
-          } else {
-            currentItem.trans += ' ' + line;
-          }
-        }
-      }
-      if (currentItem) result.push(currentItem);
-      return result.sort((a,b) => a.time - b.time);
-    }
-
-    function formatLrcTime(sec) {
-      const m = Math.floor(sec / 60);
-      const s = (sec % 60).toFixed(2);
-      return `[String(m).padStart(2,'0'):{String(s).padStart(5,'0')}]`;
-    }
-
-    /* 內建動態歌詞配置 */
-    const LRC_UP = `[00:09.74]다들 뻔해 또 거짓말 just fine
+    /* 內建動態歌詞配置 */
+    const LRC_UP = `[00:09.74]다들 뻔해 또 거짓말 just fine
 大家心知肚明，又一次謊無妨
 [00:12.26]Don't switch it up whenever you like
 別想隨心所欲地改變一切
@@ -996,7 +983,7 @@
 [00:36.51]I pump it, I pump it, I pump it up (yeah)
 我不斷讓熱度節節攀升
 [00:39.10]Spice it up, up, up, hold up
-讓興致逐漸升溫然後停下 
+讓興致逐漸升溫然後停下 
 [00:42.09]Burn it up, see me down, controller
 盡情燃燒，看我掌控全場
 [00:44.29]Up, up, up, roll up (mm)
@@ -1065,7 +1052,7 @@
 拋開一切，看我如何做到（yeah）
 [02:03.75]I'ma show you where I'm from (yeah)
 我要讓你見識，我來自何方（yeah）
-[02:06.73]Everybody knows I don't leave no clues (yeah)
+[02:06.73]Everybody knows I donleave no clues (yeah)
 所有人都知道，我從不留下任何線索（yeah）
 [02:11.10]Spice it up, up, up, hold up
 讓興致逐漸升溫然後停下
@@ -1088,7 +1075,7 @@
 [02:40.24]Spice it up, up, up, roll up
 讓氣氛持續升溫`;
 
-    const LRC_GOOD_STUFF = `[00:00.00]Good stuff
+    const LRC_GOOD_STUFF = `[00:00.00]Good stuff
 好東西
 [00:01.54]Good stuff
 好東西
@@ -1208,10 +1195,10 @@ Yeah, yeah，盡管說吧，隨你怎麼講
 [02:51.35]Good stuff
 好東西`;
 
-    const LRC_16_BIT = `[00:12.26]I'm breaking down, 이 깊은 어둠, 속에 갇혀 나
+    const LRC_16_BIT = `[00:12.26]I'm breaking down, 이 깊은 어둠, 속에 갇혀 나
 我逐漸崩潰，困在這片深邃的黑暗之中
 [00:18.44]I've had enough, 똑같은 환상, 속에 빠졌나
-我已厭倦，難道又陷入那千篇一律的幻象 
+我已厭倦，難道又陷入那千篇一律的幻象 
 [00:25.01]These days, I can't picture my face
 這些日子，我甚至看不清自己的模樣
 [00:30.39]눈을 뜨면 다를까, ah, ah, ah, ah
@@ -1229,7 +1216,7 @@ Yeah, yeah，盡管說吧，隨你怎麼講
 [01:03.83]I can't do anything to stop me, can't no more
 無法阻止失控的自己，已無能為力
 [01:10.01]비겁해진 attitude, no more gain, no more (Gain, no more)
-日漸怯懦的姿態，一無所獲，再無（再無所獲） 
+日漸怯懦的姿態，一無所獲，再無（再無所獲） 
 [01:26.67]Baby
 [01:28.25]Now, shut that "Blah, blah, blah," is that all you got? Yeah
 現在，收起那些「喋喋不休」，你就只有這點本事？是的
@@ -1260,17 +1247,17 @@ Yeah, yeah，盡管說吧，隨你怎麼講
 [02:23.91]비겁해진 attitude, no more gain, no more (No more)
 日漸怯懦的姿態，不再奢求，不再繼續（不再繼續）
 [02:27.62]Click once to repeat, click once to delete
-點擊重播，一鍵刪除 
+點擊重播，一鍵刪除 
 [02:32.01]Oh, look, I'm faded now
-噢，看吧，我已逐漸消散 
+噢，看吧，我已逐漸消散 
 [02:33.80]Click once to repeat, click once to delete
 點擊重播，一鍵刪除
 [02:38.18]Oh, I'm gon' phase you out
 噢，我要將你徹底抹去
 [02:39.78]Click once to repeat (Once to repeat), click once to delete (Once to delete)
-點擊重播（反覆重播），一鍵刪除（就此抹除） 
+點擊重播（反覆重播），一鍵刪除（就此抹除） 
 [02:44.16]Oh, look, I'm faded now
-看吧，我已逐漸消散 
+看吧，我已逐漸消散 
 [02:45.95]Click once to repeat (Once to repeat), click once to delete (Once to delete)
 點擊重播（反覆重播），一鍵刪除（就此抹除)
 [02:50.44]Once to delete
@@ -1285,7 +1272,7 @@ Yeah, yeah，盡管說吧，隨你怎麼講
 [03:38.11]Hmm
 [03:41.09]Hmm`;
 
-    const LRC_TENDERNESS = `[00:05.51]단순함이라는 거 우린 알 수 있을까
+    const LRC_TENDERNESS = `[00:05.51]단순함이라는 거 우린 알 수 있을까
 我們能否真正理解，何謂簡單？
 [00:20.11]사랑은 먼 별에서 온 복잡한 일들만 같고
 愛情彷彿是來自遙遠星辰的種種繁複
@@ -1336,7 +1323,7 @@ Yeah, yeah，盡管說吧，隨你怎麼講
 [03:05.18]To You
 獻給你`;
 
-    const LRC_SERENADE = `[00:01.51]Sorry to break it to you
+    const LRC_SERENADE = `[00:01.51]Sorry to break it to you
 抱歉打破你的幻想
 [00:05.23]But this is our covenant
 但這是我們的盟約
@@ -1347,7 +1334,7 @@ Yeah, yeah，盡管說吧，隨你怎麼講
 [00:19.00]I've got to intervene
 換我來主宰
 [00:21.32]Show what I mean to me
-見識我的姿態 
+見識我的姿態 
 [00:23.45]In my reality
 在我的世界裡
 [00:25.58]Keep rising naturally
@@ -1371,7 +1358,7 @@ Yeah, yeah，盡管說吧，隨你怎麼講
 [00:51.20]Life is a cinch and I'm in my prime
 活得游刃有餘，而我正值巔峰
 [00:53.32]I get kicks when they don't like
-他們越看不慣，我越樂在其中 
+他們越看不慣，我越樂在其中 
 [00:55.13]Yeah, call me crazy, call me wild
 說我瘋狂也好，說我狂野也罷
 [00:57.25]But life's a cinch and I like the ride
@@ -1385,11 +1372,11 @@ Yeah, yeah，盡管說吧，隨你怎麼講
 [01:05.12]But life's a cinch and I like the ride
 人生不過如此，而我樂在其中
 [01:07.45]Running the scene, we take what we need
-掌控全局，我們予取予求 
+掌控全局，我們予取予求 
 [01:10.63]Too many eyes on me, I like the way they stare at me
 萬眾矚目，我就享受這種注視
 [01:14.55]I'ma take it, drop your superficial vision
-我照單全收，收起你那膚淺的眼光 
+我照單全收，收起你那膚淺的眼光 
 [01:16.53]All that sugarcoated talk, not my thing
 那些糖衣包裝的廢話，不合我胃口
 [01:19.25]No restrictions, I just live it
@@ -1445,21 +1432,21 @@ Yeah, yeah，盡管說吧，隨你怎麼講
 [02:28.08]Life is a beat and we feel it now
 人生如節拍，此刻我們深陷其中
 [02:30.07]We do everything we like
-隨心所欲，一切由我們主宰 
+隨心所欲，一切由我們主宰 
 [02:31.67]Yeah, see me rising, see me shine
-看我一路攀升，看我耀眼奪目 
+看我一路攀升，看我耀眼奪目 
 [02:33.66]'Cause life is our beat until we die
-這節奏由我掌控，直至生命盡頭 
+這節奏由我掌控，直至生命盡頭 
 [02:36.05]Life is a beat and we feel it now
 人生如節拍，此刻我們正感受它的律動
 [02:38.05]We do everything we like
-隨心所欲，一切由我們主宰 
+隨心所欲，一切由我們主宰 
 [02:39.84]Yeah, see me rising, see me shine
 看我一路攀升，看我耀眼奪目
 [02:41.84]'Cause life is our beat until we die
 這節奏由我掌控，直至生命盡頭
 [02:46.28]Life is a beat and we feel it now (Life is a)
-人生如節拍，此刻我們深陷其中（這人生） 
+人生如節拍，此刻我們深陷其中（這人生） 
 [02:50.27]Life is our beat, until we die
 人生隨我們律動，直至生命盡頭
 [02:54.26]Life is a beat and we feel it now
@@ -1467,7 +1454,7 @@ Yeah, yeah，盡管說吧，隨你怎麼講
 [02:58.25]Life is our beat until we die
 人生隨我們律動，直至生命盡頭`;
 
-    const LRC_ORANGE = `[00:01.52]그거 아세요?
+    const LRC_ORANGE = `[00:01.52]그거 아세요?
 你知道嗎？
 [00:05.23]귤에 붙어 있는 하얀 거
 橘子上那層白色的絲絡
@@ -1486,7 +1473,7 @@ Yeah, yeah，盡管說吧，隨你怎麼講
 [00:30.08]오늘 아침 쑥 캐고 옴
 今天早上還去採了艾草`;
 
-    const LRC_SPARKLE = `[00:21.81]まだこの世界は 僕を飼いならしてたいみたいだ
+    const LRC_SPARKLE = `[00:21.81]まだこの世界は 僕を飼いならしてたいみたいだ
 這個世界似乎依然想將我馴服
 [00:29.97]望み通りいいだろう 美しくもがくよ
 如你所願，我會美麗地掙扎
@@ -1495,7 +1482,7 @@ Yeah, yeah，盡管說吧，隨你怎麼講
 [00:44.77]「さよなら」から一番 遠い 場所で待ち合わせよう
 約好在離「再見」最遙遠的地方相見吧
 [00:52.55]ついに時はきた 昨日までは序章の序章で
-時機終於到來，直至昨天都只是序章中的序章 
+時機終於到來，直至昨天都只是序章中的序章 
 [01:00.43]飛ばし読みでいいから ここからが僕だよ
 即使略覽也無妨，從這裡開始，才是真正的我
 [01:07.85]経験と知識と カビの生えかかった勇気を持って
@@ -1531,7 +1518,7 @@ Yeah, yeah，盡管說吧，隨你怎麼講
 [02:54.91]生き抜いていこう
 都一起堅持活下去`;
 
-    const LRC_HARD_TO_SAY = `[00:17.12]寶貝 今晚的我有點醉
+    const LRC_HARD_TO_SAY = `[00:17.12]寶貝 今晚的我有點醉
 [00:22.96]別理會你聽的那些謊話
 [00:26.67]我沒辦法
 [00:29.07]把真相都證明給你啊
@@ -1565,7 +1552,7 @@ Yeah, yeah，盡管說吧，隨你怎麼講
 [02:36.74]是我 愛你但說不出口
 [02:54.24]愛你但說不出口`;
 
-    const LRC_CANT_TAKE_EYES = `[00:21.49]You're just too good to be true
+    const LRC_CANT_TAKE_EYES = `[00:21.49]You're just too good to be true
 你美好得令人難以置信
 [00:24.13]Can't keep my eyes off you
 讓我無法將目光從你身上移開
@@ -1668,1309 +1655,1265 @@ Yeah, yeah，盡管說吧，隨你怎麼講
 [03:06.54]Too good to be true
 美好得宛如夢境`;
 
-    const TWO_PLAYLISTS_DATA = [
-      {
-        id: "pl_karina_song",
-        name: "KARINA SONG",
-        cover: COVER_UP,
-        songs: [
-          {
-            title: "UP",
-            artist: "KARINA",
-            source: "UP.mp3",
-            cover: COVER_UP,
-            labelImg: COVER_UP,
-            backCover: COVER_UP,
-            imgScale: 1.0,
-            imgOffsetX: 0.0,
-            imgOffsetY: 0.0,
-            duration: 220,
-            volume: 0.60, // 微調至 0.6x，使整張播放清單體感音量完全齊平
-            lyrics: parseLrc(LRC_UP)
-          },
-          {
-            title: "GOOD STUFF",
-            artist: "KARINA",
-            source: "GOOD STUFF.mp3",
-            cover: COVER_GOOD_STUFF,
-            labelImg: COVER_GOOD_STUFF,
-            backCover: COVER_GOOD_STUFF,
-            imgScale: 1.0,
-            imgOffsetX: 0.0,
-            imgOffsetY: 0.0,
-            duration: 210,
-            volume: 0.60,
-            lyrics: parseLrc(LRC_GOOD_STUFF)
-          },
-          {
-            title: "16 Bit",
-            artist: "KARINA",
-            source: "16Bit.mp3",
-            cover: COVER_16_BIT,
-            labelImg: COVER_16_BIT,
-            backCover: COVER_16_BIT,
-            imgScale: 1.0,
-            imgOffsetX: 0.0,
-            imgOffsetY: 0.0,
-            duration: 198,
-            volume: 0.60,
-            lyrics: parseLrc(LRC_16_BIT)
-          },
-          {
-            title: "May the TENDERNESS be with you!",
-            artist: "JANNABI ft.KARINA",
-            source: "May the TENDERNESS be with you.mp3",
-            cover: COVER_TENDERNESS,
-            labelImg: VINYL_TENDERNESS,
-            backCover: COVER_TENDERNESS,
-            imgScale: 1.0,
-            imgOffsetX: 0.0,
-            imgOffsetY: 0.0,
-            duration: 245,
-            volume: 0.65,
-            lyrics: parseLrc(LRC_TENDERNESS)
-          },
-          {
-            title: "Serenade",
-            artist: "KARINA&WINTER",
-            source: "Serenade.mp3",
-            cover: COVER_SERENADE,
-            labelImg: VINYL_SERENADE,
-            backCover: COVER_SERENADE,
-            imgScale: 1.0,
-            imgOffsetX: 0.0,
-            imgOffsetY: 0.0,
-            duration: 215,
-            volume: 0.65,
-            lyrics: parseLrc(LRC_SERENADE)
-          },
-          {
-            title: "你知道嗎그거 아세요",
-            artist: "KARINA ft.Lee Mujin",
-            source: "Orange.mp3",
-            cover: COVER_ORANGE,
-            labelImg: COVER_ORANGE,
-            backCover: COVER_ORANGE,
-            imgScale: 1.0,
-            imgOffsetX: 0.0,
-            imgOffsetY: 0.0,
-            duration: 205,
-            volume: 1.0, // 原生滿格輸出
-            lyrics: parseLrc(LRC_ORANGE)
-          }
-        ]
-      },
-      {
-        id: "pl_karina_memory_box",
-        name: "KARINA MEMORY BOX",
-        cover: COVER_SPARKLE,
-        songs: [
-          {
-            title: "スパークル(Sparkle)",
-            artist: "KARINA",
-            source: "01Sparkle.mp3",
-            cover: COVER_SPARKLE,
-            labelImg: MEMORY_BOX_VINYL_LABEL,
-            backCover: COVER_SPARKLE,
-            imgScale: 1.0,
-            imgOffsetX: 0.0,
-            imgOffsetY: 0.0,
-            duration: 220,
-            volume: 1.0, // 原生滿格輸出
-            lyrics: parseLrc(LRC_SPARKLE)
-          },
-          {
-            title: "愛你但說不出口(Hard to say)",
-            artist: "KARINA",
-            source: "02Hard to say.mp3",
-            cover: COVER_HARD_TO_SAY,
-            labelImg: MEMORY_BOX_VINYL_LABEL,
-            backCover: COVER_HARD_TO_SAY,
-            imgScale: 1.0,
-            imgOffsetX: 0.0,
-            imgOffsetY: 0.0,
-            duration: 210,
-            volume: 1.0,
-            lyrics: parseLrc(LRC_HARD_TO_SAY)
-          },
-          {
-            title: "슬픈 사랑 노래",
-            artist: "KARINA",
-            source: "03.mp3",
-            cover: COVER_SAD_LOVE,
-            labelImg: MEMORY_BOX_VINYL_LABEL,
-            backCover: COVER_SAD_LOVE,
-            imgScale: 1.0,
-            imgOffsetX: 0.0,
-            imgOffsetY: 0.0,
-            duration: 198,
-            volume: 1.0,
-            lyrics: []
-          },
-          {
-            title: "그대는 그대로",
-            artist: "KARINA",
-            source: "04.mp3",
-            cover: COVER_AS_YOU_ARE,
-            labelImg: MEMORY_BOX_VINYL_LABEL,
-            backCover: COVER_AS_YOU_ARE,
-            imgScale: 1.0,
-            imgOffsetX: 0.0,
-            imgOffsetY: 0.0,
-            duration: 245,
-            volume: 1.0,
-            lyrics: []
-          },
-          {
-            title: "Can’t Take My Eyes Off You",
-            artist: "KARINA",
-            source: "05Cant Take My Eyes Off You.mp3",
-            cover: COVER_CANT_TAKE_EYES,
-            labelImg: MEMORY_BOX_VINYL_LABEL,
-            backCover: COVER_CANT_TAKE_EYES,
-            imgScale: 1.0,
-            imgOffsetX: 0.0,
-            imgOffsetY: 0.0,
-            duration: 215,
-            volume: 1.0,
-            lyrics: parseLrc(LRC_CANT_TAKE_EYES)
-          },
-          {
-            title: "있잖아 (Rock Ver.)",
-            artist: "KARINA",
-            source: "06Rock.mp3",
-            cover: COVER_YOU_KNOW,
-            labelImg: MEMORY_BOX_VINYL_LABEL,
-            backCover: COVER_YOU_KNOW,
-            imgScale: 1.0,
-            imgOffsetX: 0.0,
-            imgOffsetY: 0.0,
-            duration: 190,
-            volume: 1.0,
-            lyrics: []
-          }
-        ]
-      }
-    ];
-
-    localStorage.clear();
-
-    let store = TWO_PLAYLISTS_DATA;
-    let modelScale = 1.0;
-
-    let plIdx = 0;
-    let trackIdx = 0;
-    let isPlaying = false;
-    let isDraggingSeek = false;
-    let playMode = 'file';
-    let currentSec = 0;
-    let totalDuration = 230;
-    let ytTimer = null;
-    let hasPlayedFirstTrack = false;
-    let isAutoSwitching = false;
-    let currentTextureSeq = 0;
-
-    const nativeAudio = document.getElementById('native-audio');
-    const ytIframe = document.getElementById('yt-hidden-player');
-
-    // 嚴格綁定系統媒體控制中心
-    function updateMediaSession(song, pl) {
-      if ('mediaSession' in navigator) {
-        const directCover = toAbsUrl(song.cover || pl.cover);
-        navigator.mediaSession.metadata = new MediaMetadata({
-          title: song.title,
-          artist: song.artist || "KARINA",
-          album: pl.name || "KARINA PLAYLIST",
-          artwork: [
-            { src: directCover, sizes: '512x512', type: 'image/jpeg' }
-          ]
-        });
-
-        navigator.mediaSession.setActionHandler('play', () => { playActiveSong(false); });
-        navigator.mediaSession.setActionHandler('pause', () => { pauseActiveSong(); });
-        navigator.mediaSession.setActionHandler('previoustrack', () => { playPrev(); });
-        navigator.mediaSession.setActionHandler('nexttrack', () => { playNext(false); });
-      }
-    }
-
-    function extractYoutubeId(url) {
-      if (!url) return null;
-      if (url.includes("v=")) return url.split("v=")[1].substring(0, 11);
-      if (url.includes("youtu.be/")) return url.split("youtu.be/")[1].substring(0, 11);
-      if (url.length === 11 && !url.includes("/") && !url.includes(".")) return url.trim();
-      return null;
-    }
-
-    /* -------------------------------------------------------------
-     * 3. Three.js 3D 渲染
-     * ------------------------------------------------------------*/
-    const container = document.getElementById('threejs-box');
-    const scene = new THREE.Scene();
-
-    const camera = new THREE.PerspectiveCamera(38, container.clientWidth / container.clientHeight, 0.1, 100);
-    const DEFAULT_CAM_POS = new THREE.Vector3(0, 0.1, 5.2);
-
-    function resizeCamera() {
-      const isMobile = window.innerWidth < 600;
-      DEFAULT_CAM_POS.set(0, isMobile ? 0.1 : 0.15, isMobile ? 5.2 : 4.6);
-      camera.position.copy(DEFAULT_CAM_POS);
-      camera.aspect = container.clientWidth / container.clientHeight;
-      camera.updateProjectionMatrix();
-      renderer.setSize(container.clientWidth, container.clientHeight);
-    }
-
-    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, powerPreference: "high-performance" });
-    renderer.setSize(container.clientWidth, container.clientHeight);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-    renderer.outputColorSpace = THREE.SRGBColorSpace;
-    container.appendChild(renderer.domElement);
-
-    const ambLight = new THREE.AmbientLight(0xffffff, 1.8);
-    scene.add(ambLight);
-
-    const dirLight = new THREE.DirectionalLight(0xffffff, 1.9);
-    dirLight.position.set(3, 4, 3.5);
-    scene.add(dirLight);
-
-    const rimLight = new THREE.DirectionalLight(0xd4d4d8, 1.4);
-    rimLight.position.set(4, -1.8, 2.8);
-    scene.add(rimLight);
-
-    const turntableGroup = new THREE.Group();
-    turntableGroup.scale.set(modelScale, modelScale, modelScale);
-    scene.add(turntableGroup);
-
-    function createShadowCanvas() {
-      const c = document.createElement('canvas');
-      c.width = 512; c.height = 512;
-      const ctx = c.getContext('2d');
-      const grad = ctx.createRadialGradient(256, 256, 30, 256, 256, 240);
-      grad.addColorStop(0, 'rgba(0, 0, 0, 0.7)');
-      grad.addColorStop(0.5, 'rgba(0, 0, 0, 0.3)');
-      grad.addColorStop(1, 'rgba(0, 0, 0, 0)');
-      ctx.fillStyle = grad;
-      ctx.fillRect(0, 0, 512, 512);
-      return new THREE.CanvasTexture(c);
-    }
-    const shadowGeo = new THREE.PlaneGeometry(3.8, 2.8);
-    const shadowMat = new THREE.MeshBasicMaterial({
-      map: createShadowCanvas(),
-      transparent: true,
-      opacity: 0.85,
-      depthWrite: false
-    });
-    const shadowMesh = new THREE.Mesh(shadowGeo, shadowMat);
-    shadowMesh.position.set(0.1, -0.05, -0.15);
-    turntableGroup.add(shadowMesh);
-
-    function createGrooveVinylTexture() {
-      const c = document.createElement('canvas');
-      c.width = 1024; c.height = 1024;
-      const ctx = c.getContext('2d');
-
-      ctx.fillStyle = '#0f1014';
-      ctx.fillRect(0, 0, 1024, 1024);
-
-      const grad = ctx.createConicGradient(0, 512, 512);
-      grad.addColorStop(0.00, 'rgba(15, 16, 20, 1)');
-      grad.addColorStop(0.12, 'rgba(65, 68, 80, 0.65)');
-      grad.addColorStop(0.25, 'rgba(15, 16, 20, 1)');
-      grad.addColorStop(0.50, 'rgba(15, 16, 20, 1)');
-      grad.addColorStop(0.62, 'rgba(65, 68, 80, 0.65)');
-      grad.addColorStop(0.75, 'rgba(15, 16, 20, 1)');
-      grad.addColorStop(1.00, 'rgba(15, 16, 20, 1)');
-      ctx.fillStyle = grad;
-      ctx.beginPath();
-      ctx.arc(512, 512, 500, 0, Math.PI * 2);
-      ctx.fill();
-
-      for (let r = 85; r < 496; r += 2.2) {
-        ctx.beginPath();
-        ctx.arc(512, 512, r, 0, Math.PI * 2);
-        if (r % 14 === 0) {
-          ctx.strokeStyle = 'rgba(255, 255, 255, 0.18)';
-          ctx.lineWidth = 1.2;
-        } else {
-          ctx.strokeStyle = 'rgba(0, 0, 0, 0.45)';
-          ctx.lineWidth = 0.8;
-        }
-        ctx.stroke();
-      }
-
-      ctx.beginPath();
-      ctx.arc(512, 512, 496, 0, Math.PI * 2);
-      ctx.strokeStyle = 'rgba(255, 255, 255, 0.28)';
-      ctx.lineWidth = 2.5;
-      ctx.stroke();
-
-      const tex = new THREE.CanvasTexture(c);
-      tex.anisotropy = renderer.capabilities.getMaxAnisotropy();
-      return tex;
-    }
-
-    const texLoader = new THREE.TextureLoader();
-    texLoader.setCrossOrigin('anonymous');
-    const textureCache = new Map();
-
-    function loadCachedTexture(url, callback) {
-      if (!url) return;
-      if (textureCache.has(url)) {
-        callback(textureCache.get(url));
-        return;
-      }
-      texLoader.load(
-        url,
-        (tex) => {
-          tex.colorSpace = THREE.SRGBColorSpace;
-          tex.minFilter = THREE.LinearFilter;
-          tex.magFilter = THREE.LinearFilter;
-          tex.generateMipmaps = false;
-          textureCache.set(url, tex);
-          callback(tex);
-        },
-        undefined,
-        (err) => {
-          console.error("貼圖載入失敗:", url, err);
-        }
-      );
-    }
-
-    const coverGeo = new THREE.BoxGeometry(2.0, 2.0, 0.05);
-    const coverSideMat = [
-      new THREE.MeshStandardMaterial({ color: 0x14151a, roughness: 0.5 }),
-      new THREE.MeshStandardMaterial({ color: 0x14151a, roughness: 0.5 }),
-      new THREE.MeshStandardMaterial({ color: 0x14151a, roughness: 0.5 }),
-      new THREE.MeshStandardMaterial({ color: 0x14151a, roughness: 0.5 }),
-      new THREE.MeshStandardMaterial({ color: 0x222226, roughness: 0.35 }),
-      new THREE.MeshStandardMaterial({ color: 0x222226, roughness: 0.35 })
-    ];
-    const coverMesh = new THREE.Mesh(coverGeo, coverSideMat);
-    coverMesh.position.set(-0.55, 0, 0);
-    turntableGroup.add(coverMesh);
-
-    const discSpinGroup = new THREE.Group();
-    const discGroup = new THREE.Group();
-    discGroup.add(discSpinGroup);
-
-    const discGeo = new THREE.CylinderGeometry(0.95, 0.95, 0.02, 64);
-    const discMat = new THREE.MeshStandardMaterial({
-      color: 0x14151a,
-      map: createGrooveVinylTexture(),
-      roughness: 0.32,
-      metalness: 0.55
-    });
-    const discMesh = new THREE.Mesh(discGeo, discMat);
-    discMesh.rotation.x = Math.PI / 2;
-    discSpinGroup.add(discMesh);
-
-    const labelGeo = new THREE.CylinderGeometry(0.35, 0.35, 0.025, 32);
-    const labelMesh = new THREE.Mesh(
-      labelGeo,
-      new THREE.MeshStandardMaterial({
-        color: 0xffffff,
-        roughness: 0.85,
-        metalness: 0.05
-      })
-    );
-    labelMesh.rotation.x = Math.PI / 2;
-    discSpinGroup.add(labelMesh);
-
-    const VINYL_REST_X = 0.52;
-    const VINYL_OUT_X = 0.95;
-    discGroup.position.set(VINYL_REST_X, 0, 0.01);
-    turntableGroup.add(discGroup);
-
-    function applyCoverTo3D(frontUrl, backUrl, labelUrl, scale = 1.0, ox = 0.0, oy = 0.0) {
-      if (!frontUrl) return;
-      const thisSeq = ++currentTextureSeq;
-
-      const directFront = toAbsUrl(frontUrl);
-      const directBack = backUrl ? toAbsUrl(backUrl) : directFront;
-      const directLabel = labelUrl ? toAbsUrl(labelUrl) : directFront;
-
-      loadCachedTexture(directFront, (tex) => {
-        if (thisSeq !== currentTextureSeq) return;
-        tex.repeat.set(1 / scale, 1 / scale);
-        tex.offset.set((1 - 1/scale)/2 - (ox / scale), (1 - 1/scale)/2 - (oy / scale));
-        coverMesh.material[4].map = tex;
-        coverMesh.material[4].color.set(0xffffff);
-        coverMesh.material[4].needsUpdate = true;
-      });
-
-      loadCachedTexture(directBack, (tex) => {
-        if (thisSeq !== currentTextureSeq) return;
-        coverMesh.material[5].map = tex;
-        coverMesh.material[5].color.set(0xffffff);
-        coverMesh.material[5].needsUpdate = true;
-      });
-
-      loadCachedTexture(directLabel, (tex) => {
-        if (thisSeq !== currentTextureSeq) return;
-        labelMesh.material.map = tex;
-        labelMesh.material.color.set(0xffffff);
-        labelMesh.material.needsUpdate = true;
-      });
-    }
-
-    let isTouching = false;
-    let prevPointerX = 0;
-    let prevPointerY = 0;
-    let targetRotY = 0;
-    let targetRotX = 0;
-    let hasMoved = false;
-
-    let isAutoRotating = false;
-    let autoRotStartTime = 0;
-    const AUTO_ROT_DURATION = 15000;
-
-    function triggerSlow15sSpin() {
-      isAutoRotating = true;
-      autoRotStartTime = performance.now();
-      turntableGroup.rotation.y = 0;
-      targetRotY = 0;
-      targetRotX = 0;
-    }
-
-    function onPointerDown(e) {
-      isAutoRotating = false;
-      isTouching = true;
-      hasMoved = false;
-      const clientX = e.touches ? e.touches[0].clientX : e.clientX;
-      const clientY = e.touches ? e.touches[0].clientY : e.clientY;
-      prevPointerX = clientX;
-      prevPointerY = clientY;
-    }
-
-    function onPointerMove(e) {
-      if (!isTouching) return;
-      const clientX = e.touches ? e.touches[0].clientX : e.clientX;
-      const clientY = e.touches ? e.touches[0].clientY : e.clientY;
-      const deltaX = clientX - prevPointerX;
-      const deltaY = clientY - prevPointerY;
-
-      if (Math.abs(deltaX) > 3 || Math.abs(deltaY) > 3) {
-        hasMoved = true;
-      }
-
-      targetRotY += deltaX * 0.008;
-      targetRotX += deltaY * 0.006;
-      targetRotX = Math.max(-0.55, Math.min(0.55, targetRotX));
-
-      prevPointerX = clientX;
-      prevPointerY = clientY;
-    }
-
-    function onPointerUp() {
-      if (!hasMoved && isTouching) {
-        triggerResetView();
-      }
-      isTouching = false;
-    }
-
-    const stageEl = renderer.domElement;
-    stageEl.addEventListener('mousedown', onPointerDown);
-    window.addEventListener('mousemove', onPointerMove);
-    window.addEventListener('mouseup', onPointerUp);
-
-    stageEl.addEventListener('touchstart', onPointerDown, { passive: true });
-    window.addEventListener('touchmove', onPointerMove, { passive: true });
-    window.addEventListener('touchend', onPointerUp);
-
-    function triggerResetView() {
-      isAutoRotating = false;
-      targetRotX = 0;
-      targetRotY = 0;
-    }
-
-    window.addEventListener('resize', resizeCamera);
-    resizeCamera();
-
-    function renderLoop() {
-      requestAnimationFrame(renderLoop);
-
-      if (isPlaying || isAutoRotating) {
-        discSpinGroup.rotation.z -= 0.014;
-      }
-
-      if (isAutoRotating) {
-        const elapsed = performance.now() - autoRotStartTime;
-        const progress = Math.min(1, elapsed / AUTO_ROT_DURATION);
-        turntableGroup.rotation.y = progress * (Math.PI * 2);
-        turntableGroup.rotation.x = THREE.MathUtils.lerp(turntableGroup.rotation.x, 0, 0.08);
-
-        if (progress >= 1) {
-          isAutoRotating = false;
-          turntableGroup.rotation.y = 0;
-          targetRotY = 0;
-          targetRotX = 0;
-        }
-      } else {
-        turntableGroup.rotation.y = THREE.MathUtils.lerp(turntableGroup.rotation.y, targetRotY, 0.1);
-        turntableGroup.rotation.x = THREE.MathUtils.lerp(turntableGroup.rotation.x, targetRotX, 0.1);
-      }
-
-      if (isPlaying) {
-        discGroup.position.x = THREE.MathUtils.lerp(discGroup.position.x, VINYL_OUT_X, 0.06);
-      } else {
-        discGroup.position.x = THREE.MathUtils.lerp(discGroup.position.x, VINYL_REST_X, 0.06);
-      }
-
-      renderer.render(scene, camera);
-    }
-    renderLoop();
-
-    /* -------------------------------------------------------------
-     * 4. 音訊系統 (純原生直通模式，保證鎖屏、切換分頁不中斷)
-     * ------------------------------------------------------------*/
-    function setPlayState(active) {
-      isPlaying = active;
-      const svg = document.getElementById('play-svg-icon');
-      if (active) {
-        svg.innerHTML = '<path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>';
-      } else {
-        svg.innerHTML = '<path d="M8 5v14l11-7z"/>';
-      }
-      if ('mediaSession' in navigator) {
-        navigator.mediaSession.playbackState = active ? "playing" : "paused";
-      }
-    }
-
-    function updateProgressUI(cur, total) {
-      currentSec = cur;
-      totalDuration = total || 211;
-      const pct = Math.min(100, Math.max(0, (cur / totalDuration) * 100));
-      document.getElementById('seek-progress').style.width = `${pct}%`;
-      const curM = Math.floor(cur / 60);
-      const curS = Math.floor(cur % 60);
-      const totM = Math.floor(totalDuration / 60);
-      const totS = Math.floor(totalDuration % 60);
-      document.getElementById('lbl-curr').textContent = `String(curM).padStart(2,'0'):{String(curS).padStart(2,'0')}`;
-      document.getElementById('lbl-total').textContent = `String(totM).padStart(2,'0'):{String(totS).padStart(2,'0')}`;
-      syncLyrics(cur);
-      
-      if ('mediaSession' in navigator && ('setPositionState' in navigator.mediaSession) && totalDuration > 0) {
-        try {
-          navigator.mediaSession.setPositionState({
-            duration: totalDuration,
-            playbackRate: nativeAudio.playbackRate || 1,
-            position: Math.min(cur, totalDuration)
-          });
-        } catch(e) {}
-      }
-    }
-
-    nativeAudio.addEventListener('timeupdate', () => {
-      if (playMode !== 'file' || isDraggingSeek) return;
-      updateProgressUI(nativeAudio.currentTime, nativeAudio.duration || totalDuration);
-    });
-
-    nativeAudio.addEventListener('playing', () => {
-      setPlayState(true);
-      isAutoSwitching = false;
-    });
-
-    nativeAudio.addEventListener('pause', () => {
-      if (!isAutoSwitching) {
-        setPlayState(false);
-      }
-    });
-
-    // 關鍵：同步換曲，讓系統音訊焦點持續保持活躍
-    nativeAudio.addEventListener('ended', () => {
-      playNext(true);
-    });
-
-    function startYtProgressTimer() {
-      clearInterval(ytTimer);
-      ytTimer = setInterval(() => {
-        if (!isPlaying || playMode !== 'yt' || isDraggingSeek) return;
-        currentSec += 0.25;
-        updateProgressUI(currentSec, totalDuration);
-        if (currentSec >= totalDuration) {
-          playNext(true);
-        }
-      }, 250);
-    }
-
-    function playActiveSong(isNewTrack = false, isAutoNext = false) {
-      const curPl = store[plIdx];
-      if (!curPl || !curPl.songs[trackIdx]) return;
-      const song = curPl.songs[trackIdx];
-
-      renderUI();
-      updateMediaSession(song, curPl);
-
-      if (isNewTrack || !hasPlayedFirstTrack) {
-        triggerSlow15sSpin();
-        hasPlayedFirstTrack = true;
-      }
-
-      totalDuration = song.duration || 211;
-      const ytId = extractYoutubeId(song.source);
-
-      if (ytId) {
-        playMode = 'yt';
-        nativeAudio.pause();
-        nativeAudio.removeAttribute('src');
-
-        const startSec = Math.floor(currentSec || 0);
-        ytIframe.src = `https://www.youtube.com/embed/ytId?autoplay=1&start={startSec}&playsinline=1&controls=0&enablejsapi=1`;
-        setPlayState(true);
-        startYtProgressTimer();
-      } else {
-        playMode = 'file';
-        clearInterval(ytTimer);
-        ytIframe.src = '';
-
-        const directSrc = toAbsUrl(song.source);
-        // 原生音量輸出，完全杜絕 Web Audio 造成背景暫停問題
-        nativeAudio.volume = Math.min(1.0, Math.max(0, song.volume || 1.0));
-
-        if (isNewTrack || nativeAudio.src !== directSrc) {
-          isAutoSwitching = isAutoNext;
-          currentSec = 0;
-          updateProgressUI(0, totalDuration);
-
-          nativeAudio.src = directSrc;
-          
-          const p = nativeAudio.play();
-          if (p !== undefined) {
-            p.then(() => {
-              setPlayState(true);
-              isAutoSwitching = false;
-            }).catch(err => {
-              if (isAutoNext) {
-                nativeAudio.play().then(() => {
-                  setPlayState(true);
-                  isAutoSwitching = false;
-                }).catch(() => {
-                  setPlayState(false);
-                  isAutoSwitching = false;
-                });
-              } else {
-                setPlayState(false);
-                isAutoSwitching = false;
-              }
-            });
-          }
-        } else {
-          if (currentSec > 0 && Math.abs(nativeAudio.currentTime - currentSec) > 1) {
-            nativeAudio.currentTime = currentSec;
-          }
-          const p = nativeAudio.play();
-          if (p !== undefined) {
-            p.then(() => setPlayState(true)).catch(() => setPlayState(false));
-          }
-        }
-      }
-    }
-
-    function pauseActiveSong() {
-      setPlayState(false);
-      isAutoSwitching = false;
-      if (playMode === 'file') {
-        currentSec = nativeAudio.currentTime;
-        nativeAudio.pause();
-      } else {
-        clearInterval(ytTimer);
-        ytIframe.src = '';
-      }
-    }
-
-    /* -------------------------------------------------------------
-     * 5. 進度條拖曳
-     * ------------------------------------------------------------*/
-    const seekContainer = document.getElementById('seek-container');
-    const seekProgress = document.getElementById('seek-progress');
-
-    function getSeekFraction(e) {
-      const rect = seekContainer.getBoundingClientRect();
-      const clientX = e.touches ? e.touches[0].clientX : e.clientX;
-      const pos = clientX - rect.left;
-      return Math.min(1, Math.max(0, pos / rect.width));
-    }
-
-    function handleSeekMove(e) {
-      if (!isDraggingSeek) return;
-      const frac = getSeekFraction(e);
-      seekProgress.style.width = `${frac * 100}%`;
-      const cur = frac * totalDuration;
-      const m = Math.floor(cur / 60);
-      const s = Math.floor(cur % 60);
-      document.getElementById('lbl-curr').textContent = `String(m).padStart(2,'0'):{String(s).padStart(2,'0')}`;
-    }
-
-    function handleSeekEnd(e) {
-      if (!isDraggingSeek) return;
-      isDraggingSeek = false;
-      const frac = getSeekFraction(e.changedTouches ? e.changedTouches[0] : e);
-      currentSec = frac * totalDuration;
-
-      if (playMode === 'file') {
-        nativeAudio.currentTime = currentSec;
-      } else {
-        if (isPlaying) playActiveSong(false);
-      }
-      updateProgressUI(currentSec, totalDuration);
-    }
-
-    seekContainer.addEventListener('mousedown', (e) => { isDraggingSeek = true; handleSeekMove(e); });
-    window.addEventListener('mousemove', handleSeekMove);
-    window.addEventListener('mouseup', handleSeekEnd);
-
-    seekContainer.addEventListener('touchstart', (e) => { isDraggingSeek = true; handleSeekMove(e); }, { passive: false });
-    window.addEventListener('touchmove', handleSeekMove);
-    window.addEventListener('touchend', handleSeekEnd);
-
-    /* -------------------------------------------------------------
-     * 6. 歌詞渲染 (切換歌曲強制歸零捲動至第 1 行)
-     * ------------------------------------------------------------*/
-    function syncLyrics(sec) {
-      const song = store[plIdx]?.songs[trackIdx];
-      if (!song || !song.lyrics) return;
-
-      let idx = -1;
-      for (let i = 0; i < song.lyrics.length; i++) {
-        if (sec >= song.lyrics[i].time) idx = i;
-        else break;
-      }
-
-      const rows = document.querySelectorAll('.lyric-row');
-      rows.forEach((r, i) => {
-        if (i === idx) {
-          if (!r.classList.contains('active')) {
-            r.classList.add('active');
-            const scroller = document.getElementById('lyrics-scroller');
-            scroller.scrollTo({ top: r.offsetTop - (scroller.clientHeight / 2) + 12, behavior: 'smooth' });
-          }
-        } else {
-          r.classList.remove('active');
-        }
-      });
-    }
-
-    function renderLyricsList() {
-      const scroller = document.getElementById('lyrics-scroller');
-      scroller.style.scrollBehavior = 'auto';
-      scroller.scrollTop = 0;
-      scroller.innerHTML = '';
-      const song = store[plIdx]?.songs[trackIdx];
-
-      if (!song || !song.lyrics || song.lyrics.length === 0) {
-        scroller.innerHTML = '<div class="lyric-row"><div class="lyric-primary">純音樂 / 歌詞準備中</div></div>';
-        return;
-      }
-
-      song.lyrics.forEach((l, idx) => {
-        const div = document.createElement('div');
-        div.className = idx === 0 ? 'lyric-row active' : 'lyric-row';
-
-        const pSpan = document.createElement('div');
-        pSpan.className = 'lyric-primary';
-        pSpan.textContent = l.text;
-        div.appendChild(pSpan);
-
-        if (l.trans) {
-          const tSpan = document.createElement('div');
-          tSpan.className = 'lyric-trans';
-          tSpan.textContent = l.trans;
-          div.appendChild(tSpan);
-        }
-
-        div.onclick = () => {
-          currentSec = l.time;
-          if (playMode === 'file') nativeAudio.currentTime = currentSec;
-          else playActiveSong(false);
-        };
-        scroller.appendChild(div);
-      });
-
-      scroller.scrollTop = 0;
-      scroller.style.scrollBehavior = 'smooth';
-    }
-
-    function renderUI() {
-      const curPl = store[plIdx];
-      const song = curPl?.songs[trackIdx];
-      if (!song) return;
-
-      document.getElementById('disp-title').textContent = song.title;
-      document.getElementById('disp-artist').textContent = song.artist || "KARINA";
-
-      applyCoverTo3D(
-        song.cover || curPl.cover, 
-        song.backCover, 
-        song.labelImg, 
-        song.imgScale || 1.0, 
-        song.imgOffsetX || 0.0, 
-        song.imgOffsetY || 0.0
-      );
-      renderLyricsList();
-      populateDropdowns();
-    }
-
-    function playNext(isAuto = false) {
-      const pl = store[plIdx];
-      if (!pl || pl.songs.length === 0) return;
-      trackIdx = (trackIdx + 1) % pl.songs.length;
-      currentSec = 0;
-      playActiveSong(true, isAuto);
-    }
-
-    function playPrev() {
-      const pl = store[plIdx];
-      if (!pl || pl.songs.length === 0) return;
-      trackIdx = (trackIdx - 1 + pl.songs.length) % pl.songs.length;
-      currentSec = 0;
-      playActiveSong(true, false);
-    }
-
-    document.getElementById('btn-play').onclick = () => {
-      if (isPlaying) {
-        pauseActiveSong();
-      } else {
-        playActiveSong(false, false);
-      }
-    };
-    document.getElementById('btn-next').onclick = () => playNext(false);
-    document.getElementById('btn-prev').onclick = playPrev;
-
-    function populateDropdowns() {
-      const pSel = document.getElementById('sel-playlist');
-      pSel.innerHTML = '';
-      store.forEach((p, i) => {
-        const opt = document.createElement('option');
-        opt.value = i;
-        opt.textContent = p.name;
-        if (i === plIdx) opt.selected = true;
-        pSel.appendChild(opt);
-      });
-
-      const sSel = document.getElementById('sel-song');
-      sSel.innerHTML = '';
-      const songs = store[plIdx]?.songs || [];
-      songs.forEach((s, i) => {
-        const opt = document.createElement('option');
-        opt.value = i;
-        opt.textContent = s.title;
-        if (i === trackIdx) opt.selected = true;
-        sSel.appendChild(opt);
-      });
-    }
-
-    document.getElementById('sel-playlist').onchange = (e) => {
-      plIdx = parseInt(e.target.value);
-      trackIdx = 0;
-      currentSec = 0;
-      playActiveSong(true, false);
-    };
-
-    document.getElementById('sel-song').onchange = (e) => {
-      trackIdx = parseInt(e.target.value);
-      currentSec = 0;
-      playActiveSong(true, false);
-    };
-
-    /* -------------------------------------------------------------
-     * 7. 導覽選單與管理後台控制
-     * ------------------------------------------------------------*/
-    const navModal = document.getElementById('nav-modal');
-    const mountPoint = document.getElementById('admin-mount-point');
-
-    document.getElementById('btn-open-menu').onclick = () => {
-      navModal.style.display = 'flex';
-    };
-    document.getElementById('btn-close-nav').onclick = () => {
-      navModal.style.display = 'none';
-    };
-
-    // 重新整理鍵：重設快取並載入預設曲目 UP
-    document.getElementById('menu-btn-reload').onclick = () => {
-      localStorage.clear();
-      window.location.href = window.location.pathname;
-    };
-
-    document.getElementById('menu-btn-admin').onclick = () => {
-      navModal.style.display = 'none';
-      openAuthModal();
-    };
-
-    function openAuthModal() {
-      mountPoint.innerHTML = document.getElementById('auth-tpl').innerHTML;
-      const authInput = document.getElementById('auth-input');
-      authInput.focus();
-
-      document.getElementById('btn-auth-close').onclick = () => { mountPoint.innerHTML = ''; };
-      document.getElementById('btn-auth-submit').onclick = () => {
-        if (authInput.value === '0401') {
-          openAdminDashboard();
-        } else {
-          alert('驗證失敗！');
-        }
-      };
-    }
-
-    document.getElementById('logo-trigger').onclick = openAuthModal;
-
-    function updateLivePreviewBox() {
-      const title = document.getElementById('form-song-title')?.value.trim() || '未命名歌曲';
-      const artist = document.getElementById('form-song-artist')?.value.trim() || 'KARINA';
-      const rawCover = document.getElementById('form-song-cover')?.value.trim() || COVER_UP;
-      const direct = toAbsUrl(rawCover);
-
-      const scale = parseFloat(document.getElementById('form-img-scale')?.value || 1.0);
-      const ox = parseFloat(document.getElementById('form-img-ox')?.value || 0.0);
-      const oy = parseFloat(document.getElementById('form-img-oy')?.value || 0.0);
-
-      const thumbEl = document.getElementById('preview-box-thumb');
-      const titleEl = document.getElementById('preview-box-title');
-      const artistEl = document.getElementById('preview-box-artist');
-
-      if (titleEl) titleEl.textContent = title;
-      if (artistEl) artistEl.textContent = artist;
-      if (thumbEl) {
-        thumbEl.style.backgroundImage = `url("${direct}")`;
-        thumbEl.style.backgroundSize = `${scale * 100}%`;
-        thumbEl.style.backgroundPosition = `${50 + ox * 100}% ${50 + oy * 100}%`;
-      }
-    }
-
-    function openAdminDashboard() {
-      mountPoint.innerHTML = document.getElementById('admin-tpl').innerHTML;
-
-      const scaleSlider = document.getElementById('scale-slider');
-      scaleSlider.value = modelScale;
-      document.getElementById('scale-val-lbl').textContent = `${modelScale}x`;
-      scaleSlider.oninput = (e) => {
-        modelScale = parseFloat(e.target.value);
-        document.getElementById('scale-val-lbl').textContent = `${modelScale}x`;
-        turntableGroup.scale.set(modelScale, modelScale, modelScale);
-      };
-
-      const volSlider = document.getElementById('form-song-vol');
-      volSlider.oninput = (e) => {
-        document.getElementById('form-vol-lbl').textContent = `${parseFloat(e.target.value).toFixed(2)}x`;
-      };
-
-      const imgScale = document.getElementById('form-img-scale');
-      const imgOx = document.getElementById('form-img-ox');
-      const imgOy = document.getElementById('form-img-oy');
-
-      imgScale.oninput = (e) => {
-        document.getElementById('lbl-img-scale').textContent = `${parseFloat(e.target.value).toFixed(2)}x`;
-        updateLivePreviewBox();
-      };
-      imgOx.oninput = (e) => {
-        document.getElementById('lbl-img-ox').textContent = `${Math.round(e.target.value * 100)}%`;
-        updateLivePreviewBox();
-      };
-      imgOy.oninput = (e) => {
-        document.getElementById('lbl-img-oy').textContent = `${Math.round(e.target.value * 100)}%`;
-        updateLivePreviewBox();
-      };
-
-      document.getElementById('form-song-title').oninput = updateLivePreviewBox;
-      document.getElementById('form-song-artist').oninput = updateLivePreviewBox;
-      document.getElementById('form-song-cover').oninput = updateLivePreviewBox;
-
-      document.getElementById('btn-pick-img').onclick = () => document.getElementById('local-img-picker').click();
-      document.getElementById('local-img-picker').onchange = (e) => {
-        const file = e.target.files[0];
-        if (!file) return;
-        const reader = new FileReader();
-        reader.onload = (event) => {
-          document.getElementById('form-song-cover').value = event.target.result;
-          document.getElementById('img-picker-status').textContent = `已載入: ${file.name}`;
-          updateLivePreviewBox();
-        };
-        reader.readAsDataURL(file);
-      };
-
-      document.getElementById('btn-pick-label-img').onclick = () => document.getElementById('local-label-img-picker').click();
-      document.getElementById('local-label-img-picker').onchange = (e) => {
-        const file = e.target.files[0];
-        if (!file) return;
-        const reader = new FileReader();
-        reader.onload = (event) => {
-          document.getElementById('form-song-label-img').value = event.target.result;
-          document.getElementById('label-img-picker-status').textContent = `已載入: ${file.name}`;
-        };
-        reader.readAsDataURL(file);
-      };
-
-      document.getElementById('btn-pick-back-img').onclick = () => document.getElementById('local-back-img-picker').click();
-      document.getElementById('local-back-img-picker').onchange = (e) => {
-        const file = e.target.files[0];
-        if (!file) return;
-        const reader = new FileReader();
-        reader.onload = (event) => {
-          document.getElementById('form-song-back-cover').value = event.target.result;
-          document.getElementById('back-img-picker-status').textContent = `已載入: ${file.name}`;
-        };
-        reader.readAsDataURL(file);
-      };
-
-      document.getElementById('btn-close-admin').onclick = () => {
-        mountPoint.innerHTML = '';
-        renderUI();
-      };
-
-      document.getElementById('btn-save-song').onclick = saveSongHandler;
-      document.getElementById('btn-cancel-edit').onclick = resetSongForm;
-      document.getElementById('btn-add-pl').onclick = addPlaylistHandler;
-
-      document.getElementById('btn-copy-code').onclick = () => {
-        navigator.clipboard.writeText(document.documentElement.outerHTML).then(() => {
-          alert('已將當前完整 HTML 程式碼複製到剪貼簿！');
-        });
-      };
-
-      document.getElementById('btn-dl-html').onclick = () => {
-        const blob = new Blob([document.documentElement.outerHTML], { type: 'text/html;charset=utf-8' });
-        const a = document.createElement('a');
-        a.href = URL.createObjectURL(blob);
-        a.download = 'index.html';
-        a.click();
-      };
-
-      renderAdminTree();
-      updateLivePreviewBox();
-    }
-
-    function renderAdminTree() {
-      const targetPlSel = document.getElementById('form-pl-target');
-      if (!targetPlSel) return;
-      targetPlSel.innerHTML = '';
-      store.forEach((p, idx) => {
-        const opt = document.createElement('option');
-        opt.value = idx;
-        opt.textContent = p.name;
-        targetPlSel.appendChild(opt);
-      });
-
-      const tree = document.getElementById('admin-tree-view');
-      tree.innerHTML = '';
-      store.forEach((p, pI) => {
-        const pBox = document.createElement('div');
-        pBox.style.cssText = "margin-bottom:12px; background:#111216; padding:10px; border-radius:6px; border:1px solid #282a35;";
-        
-        const isFirstPl = pI === 0;
-        const isLastPl = pI === store.length - 1;
-
-        pBox.innerHTML = `
-          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px; border-bottom:1px solid #222530; padding-bottom:6px;">
-            <strong style="color:#e4e4e7; font-size:0.84rem;">📁 p.name({p.songs.length} 首)</strong>
-            <div style="display:flex; gap:4px;">
-              <button class="btn-order" onclick="window.movePl(${pI}, -1)" ${isFirstPl ? 'disabled' : ''} title="上移歌單">⬆</button>
-              <button class="btn-order" onclick="window.movePl(${pI}, 1)" ${isLastPl ? 'disabled' : ''} title="下移歌單">⬇</button>
-              <button class="btn-act btn-del" onclick="window.delPl(${pI})" style="margin-left:4px;">刪除歌單</button>
-            </div>
-          </div>
-        `;
-
-        p.songs.forEach((s, sI) => {
-          const isFirstSong = sI === 0;
-          const isLastSong = sI === p.songs.length - 1;
-          const volDisplay = typeof s.volume === 'number' ? s.volume : 1.0;
-
-          const sRow = document.createElement('div');
-          sRow.className = 'song-item-row';
-          sRow.innerHTML = `
-            <span style="overflow:hidden; text-overflow:ellipsis; white-space:nowrap; max-width:180px;">🎵 ${sI + 1}. s.title<smallstyle="color:#71717a;">({volDisplay.toFixed(2)}x)</small></span>
-            <div class="song-actions">
-              <button class="btn-order" onclick="window.moveSong(${pI}, ${sI}, -1)" ${isFirstSong ? 'disabled' : ''} title="上移">⬆</button>
-              <button class="btn-order" onclick="window.moveSong(${pI}, ${sI}, 1)" ${isLastSong ? 'disabled' : ''} title="下移">⬇</button>
-              <button class="btn-act btn-edit" onclick="window.editS(${pI}, ${sI})">編輯</button>
-              <button class="btn-act btn-del" onclick="window.delS(${pI}, ${sI})">刪除</button>
-            </div>
-          `;
-          pBox.appendChild(sRow);
-        });
-        tree.appendChild(pBox);
-      });
-    }
-
-    window.movePl = (pI, dir) => {
-      const targetIndex = pI + dir;
-      if (targetIndex < 0 || targetIndex >= store.length) return;
-      const temp = store[pI];
-      store[pI] = store[targetIndex];
-      store[targetIndex] = temp;
-      if (plIdx === pI) plIdx = targetIndex;
-      else if (plIdx === targetIndex) plIdx = pI;
-      renderAdminTree();
-      renderUI();
-    };
-
-    window.moveSong = (pI, sI, dir) => {
-      const songs = store[pI].songs;
-      const targetIndex = sI + dir;
-      if (targetIndex < 0 || targetIndex >= songs.length) return;
-      const temp = songs[sI];
-      songs[sI] = songs[targetIndex];
-      songs[targetIndex] = temp;
-      if (plIdx === pI) {
-        if (trackIdx === sI) trackIdx = targetIndex;
-        else if (trackIdx === targetIndex) trackIdx = sI;
-      }
-      renderAdminTree();
-      renderUI();
-    };
-
-    window.delPl = (pI) => {
-      if (store.length <= 1) return alert('請至少保留一個歌單！');
-      if (confirm(`確定刪除歌單《${store[pI].name}》？`)) {
-        store.splice(pI, 1);
-        if (plIdx >= store.length) plIdx = 0;
-        trackIdx = 0;
-        renderAdminTree();
-        renderUI();
-      }
-    };
-
-    window.delS = (pI, sI) => {
-      store[pI].songs.splice(sI, 1);
-      if (plIdx === pI && trackIdx >= store[pI].songs.length) {
-        trackIdx = Math.max(0, store[pI].songs.length - 1);
-      }
-      renderAdminTree();
-      renderUI();
-    };
-
-    window.editS = (pI, sI) => {
-      const s = store[pI].songs[sI];
-      document.getElementById('form-mode-title').textContent = `✦ 編輯歌曲: ${s.title}`;
-      document.getElementById('edit-song-id').value = `${pI}_${sI}`;
-      document.getElementById('form-pl-target').value = pI;
-      document.getElementById('form-song-title').value = s.title;
-      document.getElementById('form-song-artist').value = s.artist || 'KARINA';
-      document.getElementById('form-song-source').value = s.source;
-
-      const currentVol = (typeof s.volume === 'number') ? s.volume : 1.0;
-      document.getElementById('form-song-vol').value = currentVol;
-      document.getElementById('form-vol-lbl').textContent = `${currentVol.toFixed(2)}x`;
-
-      const currentScale = typeof s.imgScale === 'number' ? s.imgScale : 1.0;
-      const currentOx = typeof s.imgOffsetX === 'number' ? s.imgOffsetX : 0.0;
-      const currentOy = typeof s.imgOffsetY === 'number' ? s.imgOffsetY : 0.0;
-
-      document.getElementById('form-img-scale').value = currentScale;
-      document.getElementById('lbl-img-scale').textContent = `${currentScale.toFixed(2)}x`;
-      document.getElementById('form-img-ox').value = currentOx;
-      document.getElementById('lbl-img-ox').textContent = `${Math.round(currentOx * 100)}%`;
-      document.getElementById('form-img-oy').value = currentOy;
-      document.getElementById('lbl-img-oy').textContent = `${Math.round(currentOy * 100)}%`;
-
-      document.getElementById('form-song-cover').value = s.cover || '';
-      document.getElementById('form-song-label-img').value = s.labelImg || '';
-      document.getElementById('form-song-back-cover').value = s.backCover || '';
-
-      const lyricsStr = (s.lyrics || []).map(l => {
-        let textPart = `${formatLrcTime(l.time)} ${l.text}`;
-        if (l.trans) textPart += `\n${l.trans}`;
-        return textPart;
-      }).join('\n');
-      document.getElementById('form-song-lyrics').value = lyricsStr;
-
-      document.getElementById('btn-cancel-edit').style.display = 'inline-block';
-      document.getElementById('admin-modal').scrollTo({ top: 0, behavior: 'smooth' });
-
-      updateLivePreviewBox();
-    };
-
-    function resetSongForm() {
-      document.getElementById('form-mode-title').textContent = '✦ 新增歌曲';
-      document.getElementById('edit-song-id').value = '';
-      document.getElementById('form-song-title').value = '';
-      document.getElementById('form-song-artist').value = 'KARINA';
-      document.getElementById('form-song-source').value = '';
-      document.getElementById('form-song-vol').value = 1.0;
-      document.getElementById('form-vol-lbl').textContent = '1.00x';
-
-      document.getElementById('form-img-scale').value = 1.0;
-      document.getElementById('lbl-img-scale').textContent = '1.00x';
-      document.getElementById('form-img-ox').value = 0.0;
-      document.getElementById('lbl-img-ox').textContent = '0%';
-      document.getElementById('form-img-oy').value = 0.0;
-      document.getElementById('lbl-img-oy').textContent = '0%';
-
-      document.getElementById('form-song-cover').value = '';
-      document.getElementById('form-song-label-img').value = '';
-      document.getElementById('form-song-back-cover').value = '';
-      document.getElementById('form-song-lyrics').value = '';
-      document.getElementById('img-picker-status').textContent = '';
-      document.getElementById('label-img-picker-status').textContent = '';
-      document.getElementById('back-img-picker-status').textContent = '';
-      document.getElementById('btn-cancel-edit').style.display = 'none';
-
-      updateLivePreviewBox();
-    }
-
-    function saveSongHandler() {
-      const editKey = document.getElementById('edit-song-id').value;
-      const targetPl = parseInt(document.getElementById('form-pl-target').value);
-      const title = document.getElementById('form-song-title').value.trim();
-      const artist = document.getElementById('form-song-artist').value.trim() || 'KARINA';
-      const source = document.getElementById('form-song-source').value.trim();
-      const volume = parseFloat(document.getElementById('form-song-vol').value) || 1.0;
-      const imgScale = parseFloat(document.getElementById('form-img-scale').value) || 1.0;
-      const imgOffsetX = parseFloat(document.getElementById('form-img-ox').value) || 0.0;
-      const imgOffsetY = parseFloat(document.getElementById('form-img-oy').value) || 0.0;
-
-      const rawCover = document.getElementById('form-song-cover').value.trim();
-      const rawLabelImg = document.getElementById('form-song-label-img').value.trim();
-      const rawBackCover = document.getElementById('form-song-back-cover').value.trim();
-      
-      const cover = rawCover || store[targetPl]?.cover || COVER_UP;
-      const labelImg = rawLabelImg || '';
-      const backCover = rawBackCover || '';
-      const lyricsRaw = document.getElementById('form-song-lyrics').value;
-
-      if (!title || !source) return alert('請填寫完整歌名與音訊來源！');
-
-      const songObj = {
-        title,
-        artist,
-        source,
-        volume,
-        cover,
-        labelImg,
-        backCover,
-        imgScale,
-        imgOffsetX,
-        imgOffsetY,
-        duration: 210,
-        lyrics: parseLrc(lyricsRaw)
-      };
-
-      if (editKey) {
-        const [oldPI, oldSI] = editKey.split('_').map(Number);
-        if (oldPI === targetPl) {
-          store[oldPI].songs[oldSI] = songObj;
-        } else {
-          store[oldPI].songs.splice(oldSI, 1);
-          store[targetPl].songs.push(songObj);
-        }
-      } else {
-        store[targetPl].songs.push(songObj);
-      }
-
-      renderAdminTree();
-      renderUI();
-      resetSongForm();
-      alert(`歌曲《${title}》已成功儲存！`);
-    }
-
-    function addPlaylistHandler() {
-      const name = document.getElementById('admin-new-pl-name').value.trim();
-      if (!name) return alert('請輸入歌單名稱！');
-      store.push({ id: 'pl_' + Date.now(), name, cover: COVER_UP, songs: [] });
-      document.getElementById('admin-new-pl-name').value = '';
-      renderAdminTree();
-      renderUI();
-    }
-
-    renderUI();
-  </script>
+    const TWO_PLAYLISTS_DATA = [
+      {
+        id: "pl_karina_song",
+        name: "KARINA SONG",
+        cover: COVER_UP,
+        songs: [
+          {
+            title: "UP",
+            artist: "KARINA",
+            source: "UP.mp3",
+            cover: COVER_UP,
+            labelImg: COVER_UP,
+            backCover: COVER_UP,
+            imgScale: 1.0,
+            imgOffsetX: 0.0,
+            imgOffsetY: 0.0,
+            duration: 220,
+            volume: 0.60,
+            lyrics: parseLrc(LRC_UP)
+          },
+          {
+            title: "GOOD STUFF",
+            artist: "KARINA",
+            source: "GOOD STUFF.mp3",
+            cover: COVER_GOOD_STUFF,
+            labelImg: COVER_GOOD_STUFF,
+            backCover: COVER_GOOD_STUFF,
+            imgScale: 1.0,
+            imgOffsetX: 0.0,
+            imgOffsetY: 0.0,
+            duration: 210,
+            volume: 0.60,
+            lyrics: parseLrc(LRC_GOOD_STUFF)
+          },
+          {
+            title: "16 Bit",
+            artist: "KARINA",
+            source: "16Bit.mp3",
+            cover: COVER_16_BIT,
+            labelImg: COVER_16_BIT,
+            backCover: COVER_16_BIT,
+            imgScale: 1.0,
+            imgOffsetX: 0.0,
+            imgOffsetY: 0.0,
+            duration: 198,
+            volume: 0.60,
+            lyrics: parseLrc(LRC_16_BIT)
+          },
+          {
+            title: "May the TENDERNESS be with you!",
+            artist: "JANNABI ft.KARINA",
+            source: "May the TENDERNESS be with you.mp3",
+            cover: COVER_TENDERNESS,
+            labelImg: VINYL_TENDERNESS,
+            backCover: COVER_TENDERNESS,
+            imgScale: 1.0,
+            imgOffsetX: 0.0,
+            imgOffsetY: 0.0,
+            duration: 245,
+            volume: 0.65,
+            lyrics: parseLrc(LRC_TENDERNESS)
+          },
+          {
+            title: "Serenade",
+            artist: "KARINA&WINTER",
+            source: "Serenade.mp3",
+            cover: COVER_SERENADE,
+            labelImg: VINYL_SERENADE,
+            backCover: COVER_SERENADE,
+            imgScale: 1.0,
+            imgOffsetX: 0.0,
+            imgOffsetY: 0.0,
+            duration: 215,
+            volume: 0.65,
+            lyrics: parseLrc(LRC_SERENADE)
+          },
+          {
+            title: "你知道嗎그거 아세요",
+            artist: "KARINA ft.Lee Mujin",
+            source: "Orange.mp3",
+            cover: COVER_ORANGE,
+            labelImg: COVER_ORANGE,
+            backCover: COVER_ORANGE,
+            imgScale: 1.0,
+            imgOffsetX: 0.0,
+            imgOffsetY: 0.0,
+            duration: 205,
+            volume: 1.0,
+            lyrics: parseLrc(LRC_ORANGE)
+          }
+        ]
+      },
+      {
+        id: "pl_karina_memory_box",
+        name: "KARINA MEMORY BOX",
+        cover: COVER_SPARKLE,
+        songs: [
+          {
+            title: "スパークル(Sparkle)",
+            artist: "KARINA",
+            source: "01Sparkle.mp3",
+            cover: COVER_SPARKLE,
+            labelImg: MEMORY_BOX_VINYL_LABEL,
+            backCover: COVER_SPARKLE,
+            imgScale: 1.0,
+            imgOffsetX: 0.0,
+            imgOffsetY: 0.0,
+            duration: 220,
+            volume: 1.0,
+            lyrics: parseLrc(LRC_SPARKLE)
+          },
+          {
+            title: "愛你但說不出口(Hard to say)",
+            artist: "KARINA",
+            source: "02Hard to say.mp3",
+            cover: COVER_HARD_TO_SAY,
+            labelImg: MEMORY_BOX_VINYL_LABEL,
+            backCover: COVER_HARD_TO_SAY,
+            imgScale: 1.0,
+            imgOffsetX: 0.0,
+            imgOffsetY: 0.0,
+            duration: 210,
+            volume: 1.0,
+            lyrics: parseLrc(LRC_HARD_TO_SAY)
+          },
+          {
+            title: "슬픈 사랑 노래",
+            artist: "KARINA",
+            source: "03.mp3",
+            cover: COVER_SAD_LOVE,
+            labelImg: MEMORY_BOX_VINYL_LABEL,
+            backCover: COVER_SAD_LOVE,
+            imgScale: 1.0,
+            imgOffsetX: 0.0,
+            imgOffsetY: 0.0,
+            duration: 198,
+            volume: 1.0,
+            lyrics: []
+          },
+          {
+            title: "그대는 그대로",
+            artist: "KARINA",
+            source: "04.mp3",
+            cover: COVER_AS_YOU_ARE,
+            labelImg: MEMORY_BOX_VINYL_LABEL,
+            backCover: COVER_AS_YOU_ARE,
+            imgScale: 1.0,
+            imgOffsetX: 0.0,
+            imgOffsetY: 0.0,
+            duration: 245,
+            volume: 1.0,
+            lyrics: []
+          },
+          {
+            title: "Can’t Take My Eyes Off You",
+            artist: "KARINA",
+            source: "05Cant Take My Eyes Off You.mp3",
+            cover: COVER_CANT_TAKE_EYES,
+            labelImg: MEMORY_BOX_VINYL_LABEL,
+            backCover: COVER_CANT_TAKE_EYES,
+            imgScale: 1.0,
+            imgOffsetX: 0.0,
+            imgOffsetY: 0.0,
+            duration: 215,
+            volume: 1.0,
+            lyrics: parseLrc(LRC_CANT_TAKE_EYES)
+          },
+          {
+            title: "있잖아 (Rock Ver.)",
+            artist: "KARINA",
+            source: "06Rock.mp3",
+            cover: COVER_YOU_KNOW,
+            labelImg: MEMORY_BOX_VINYL_LABEL,
+            backCover: COVER_YOU_KNOW,
+            imgScale: 1.0,
+            imgOffsetX: 0.0,
+            imgOffsetY: 0.0,
+            duration: 190,
+            volume: 1.0,
+            lyrics: []
+          }
+        ]
+      }
+    ];
+
+    localStorage.clear();
+
+    let store = TWO_PLAYLISTS_DATA;
+    let modelScale = 1.0;
+
+    let plIdx = 0;
+    let trackIdx = 0;
+    let isPlaying = false;
+    let isDraggingSeek = false;
+    let currentSec = 0;
+    let totalDuration = 230;
+    let hasPlayedFirstTrack = false;
+    let isAutoSwitching = false;
+    let currentTextureSeq = 0;
+
+    const nativeAudio = document.getElementById('native-audio');
+
+    // 嚴格綁定系統媒體控制中心
+    function updateMediaSession(song, pl) {
+      if ('mediaSession' in navigator) {
+        // 使用乾淨相對路徑加上隨機戳記刷新 iOS 鎖定畫面暫存
+        const directCover = (song.cover || pl.cover) + '?v=' + Date.now();
+        navigator.mediaSession.metadata = new MediaMetadata({
+          title: song.title,
+          artist: song.artist || "KARINA",
+          album: pl.name || "KARINA PLAYLIST",
+          artwork: [
+            { src: directCover, sizes: '512x512', type: 'image/jpeg' }
+          ]
+        });
+
+        navigator.mediaSession.setActionHandler('play', () => { playActiveSong(false); });
+        navigator.mediaSession.setActionHandler('pause', () => { pauseActiveSong(); });
+        navigator.mediaSession.setActionHandler('previoustrack', () => { playPrev(); });
+        navigator.mediaSession.setActionHandler('nexttrack', () => { playNext(false); });
+      }
+    }
+
+    /* -------------------------------------------------------------
+     * 3. Three.js 3D 渲染
+     * ------------------------------------------------------------*/
+    const container = document.getElementById('threejs-box');
+    const scene = new THREE.Scene();
+
+    const camera = new THREE.PerspectiveCamera(38, container.clientWidth / container.clientHeight, 0.1, 100);
+    const DEFAULT_CAM_POS = new THREE.Vector3(0, 0.1, 5.2);
+
+    function resizeCamera() {
+      const isMobile = window.innerWidth < 600;
+      DEFAULT_CAM_POS.set(0, isMobile ? 0.1 : 0.15, isMobile ? 5.2 : 4.6);
+      camera.position.copy(DEFAULT_CAM_POS);
+      camera.aspect = container.clientWidth / container.clientHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(container.clientWidth, container.clientHeight);
+    }
+
+    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, powerPreference: "high-performance" });
+    renderer.setSize(container.clientWidth, container.clientHeight);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.outputColorSpace = THREE.SRGBColorSpace;
+    container.appendChild(renderer.domElement);
+
+    const ambLight = new THREE.AmbientLight(0xffffff, 1.8);
+    scene.add(ambLight);
+
+    const dirLight = new THREE.DirectionalLight(0xffffff, 1.9);
+    dirLight.position.set(3, 4, 3.5);
+    scene.add(dirLight);
+
+    const rimLight = new THREE.DirectionalLight(0xd4d4d8, 1.4);
+    rimLight.position.set(4, -1.8, 2.8);
+    scene.add(rimLight);
+
+    const turntableGroup = new THREE.Group();
+    turntableGroup.scale.set(modelScale, modelScale, modelScale);
+    scene.add(turntableGroup);
+
+    function createShadowCanvas() {
+      const c = document.createElement('canvas');
+      c.width = 512; c.height = 512;
+      const ctx = c.getContext('2d');
+      const grad = ctx.createRadialGradient(256, 256, 30, 256, 256, 240);
+      grad.addColorStop(0, 'rgba(0, 0, 0, 0.7)');
+      grad.addColorStop(0.5, 'rgba(0, 0, 0, 0.3)');
+      grad.addColorStop(1, 'rgba(0, 0, 0, 0)');
+      ctx.fillStyle = grad;
+      ctx.fillRect(0, 0, 512, 512);
+      return new THREE.CanvasTexture(c);
+    }
+    const shadowGeo = new THREE.PlaneGeometry(3.8, 2.8);
+    const shadowMat = new THREE.MeshBasicMaterial({
+      map: createShadowCanvas(),
+      transparent: true,
+      opacity: 0.85,
+      depthWrite: false
+    });
+    const shadowMesh = new THREE.Mesh(shadowGeo, shadowMat);
+    shadowMesh.position.set(0.1, -0.05, -0.15);
+    turntableGroup.add(shadowMesh);
+
+    function createGrooveVinylTexture() {
+      const c = document.createElement('canvas');
+      c.width = 1024; c.height = 1024;
+      const ctx = c.getContext('2d');
+
+      ctx.fillStyle = '#0f1014';
+      ctx.fillRect(0, 0, 1024, 1024);
+
+      const grad = ctx.createConicGradient(0, 512, 512);
+      grad.addColorStop(0.00, 'rgba(15, 16, 20, 1)');
+      grad.addColorStop(0.12, 'rgba(65, 68, 80, 0.65)');
+      grad.addColorStop(0.25, 'rgba(15, 16, 20, 1)');
+      grad.addColorStop(0.50, 'rgba(15, 16, 20, 1)');
+      grad.addColorStop(0.62, 'rgba(65, 68, 80, 0.65)');
+      grad.addColorStop(0.75, 'rgba(15, 16, 20, 1)');
+      grad.addColorStop(1.00, 'rgba(15, 16, 20, 1)');
+      ctx.fillStyle = grad;
+      ctx.beginPath();
+      ctx.arc(512, 512, 500, 0, Math.PI * 2);
+      ctx.fill();
+
+      for (let r = 85; r < 496; r += 2.2) {
+        ctx.beginPath();
+        ctx.arc(512, 512, r, 0, Math.PI * 2);
+        if (r % 14 === 0) {
+          ctx.strokeStyle = 'rgba(255, 255, 255, 0.18)';
+          ctx.lineWidth = 1.2;
+        } else {
+          ctx.strokeStyle = 'rgba(0, 0, 0, 0.45)';
+          ctx.lineWidth = 0.8;
+        }
+        ctx.stroke();
+      }
+
+      ctx.beginPath();
+      ctx.arc(512, 512, 496, 0, Math.PI * 2);
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.28)';
+      ctx.lineWidth = 2.5;
+      ctx.stroke();
+
+      const tex = new THREE.CanvasTexture(c);
+      tex.anisotropy = renderer.capabilities.getMaxAnisotropy();
+      return tex;
+    }
+
+    const texLoader = new THREE.TextureLoader();
+    const textureCache = new Map();
+
+    function loadCachedTexture(url, callback) {
+      if (!url) return;
+      if (textureCache.has(url)) {
+        callback(textureCache.get(url));
+        return;
+      }
+      texLoader.load(
+        url,
+        (tex) => {
+          tex.colorSpace = THREE.SRGBColorSpace;
+          tex.minFilter = THREE.LinearFilter;
+          tex.magFilter = THREE.LinearFilter;
+          tex.generateMipmaps = false;
+          textureCache.set(url, tex);
+          callback(tex);
+        },
+        undefined,
+        (err) => {
+          console.error("貼圖載入失敗:", url, err);
+        }
+      );
+    }
+
+    const coverGeo = new THREE.BoxGeometry(2.0, 2.0, 0.05);
+    const coverSideMat = [
+      new THREE.MeshStandardMaterial({ color: 0x14151a, roughness: 0.5 }),
+      new THREE.MeshStandardMaterial({ color: 0x14151a, roughness: 0.5 }),
+      new THREE.MeshStandardMaterial({ color: 0x14151a, roughness: 0.5 }),
+      new THREE.MeshStandardMaterial({ color: 0x14151a, roughness: 0.5 }),
+      new THREE.MeshStandardMaterial({ color: 0x222226, roughness: 0.35 }),
+      new THREE.MeshStandardMaterial({ color: 0x222226, roughness: 0.35 })
+    ];
+    const coverMesh = new THREE.Mesh(coverGeo, coverSideMat);
+    coverMesh.position.set(-0.55, 0, 0);
+    turntableGroup.add(coverMesh);
+
+    const discSpinGroup = new THREE.Group();
+    const discGroup = new THREE.Group();
+    discGroup.add(discSpinGroup);
+
+    const discGeo = new THREE.CylinderGeometry(0.95, 0.95, 0.02, 64);
+    const discMat = new THREE.MeshStandardMaterial({
+      color: 0x14151a,
+      map: createGrooveVinylTexture(),
+      roughness: 0.32,
+      metalness: 0.55
+    });
+    const discMesh = new THREE.Mesh(discGeo, discMat);
+    discMesh.rotation.x = Math.PI / 2;
+    discSpinGroup.add(discMesh);
+
+    const labelGeo = new THREE.CylinderGeometry(0.35, 0.35, 0.025, 32);
+    const labelMesh = new THREE.Mesh(
+      labelGeo,
+      new THREE.MeshStandardMaterial({
+        color: 0xffffff,
+        roughness: 0.85,
+        metalness: 0.05
+      })
+    );
+    labelMesh.rotation.x = Math.PI / 2;
+    discSpinGroup.add(labelMesh);
+
+    const VINYL_REST_X = 0.52;
+    const VINYL_OUT_X = 0.95;
+    discGroup.position.set(VINYL_REST_X, 0, 0.01);
+    turntableGroup.add(discGroup);
+
+    function applyCoverTo3D(frontUrl, backUrl, labelUrl, scale = 1.0, ox = 0.0, oy = 0.0) {
+      if (!frontUrl) return;
+      const thisSeq = ++currentTextureSeq;
+
+      // 直接傳遞原始檔名，由瀏覽器最速快取載入，不再受限於編碼轉換
+      const directFront = frontUrl;
+      const directBack = backUrl || frontUrl;
+      const directLabel = labelUrl || frontUrl;
+
+      loadCachedTexture(directFront, (tex) => {
+        if (thisSeq !== currentTextureSeq) return;
+        tex.repeat.set(1 / scale, 1 / scale);
+        tex.offset.set((1 - 1/scale)/2 - (ox / scale), (1 - 1/scale)/2 - (oy / scale));
+        coverMesh.material[4].map = tex;
+        coverMesh.material[4].color.set(0xffffff);
+        coverMesh.material[4].needsUpdate = true;
+      });
+
+      loadCachedTexture(directBack, (tex) => {
+        if (thisSeq !== currentTextureSeq) return;
+        coverMesh.material[5].map = tex;
+        coverMesh.material[5].color.set(0xffffff);
+        coverMesh.material[5].needsUpdate = true;
+      });
+
+      loadCachedTexture(directLabel, (tex) => {
+        if (thisSeq !== currentTextureSeq) return;
+        labelMesh.material.map = tex;
+        labelMesh.material.color.set(0xffffff);
+        labelMesh.material.needsUpdate = true;
+      });
+    }
+
+    let isTouching = false;
+    let prevPointerX = 0;
+    let prevPointerY = 0;
+    let targetRotY = 0;
+    let targetRotX = 0;
+    let hasMoved = false;
+
+    let isAutoRotating = false;
+    let autoRotStartTime = 0;
+    const AUTO_ROT_DURATION = 15000;
+
+    function triggerSlow15sSpin() {
+      isAutoRotating = true;
+      autoRotStartTime = performance.now();
+      turntableGroup.rotation.y = 0;
+      targetRotY = 0;
+      targetRotX = 0;
+    }
+
+    function onPointerDown(e) {
+      isAutoRotating = false;
+      isTouching = true;
+      hasMoved = false;
+      const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+      const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+      prevPointerX = clientX;
+      prevPointerY = clientY;
+    }
+
+    function onPointerMove(e) {
+      if (!isTouching) return;
+      const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+      const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+      const deltaX = clientX - prevPointerX;
+      const deltaY = clientY - prevPointerY;
+
+      if (Math.abs(deltaX) > 3 || Math.abs(deltaY) > 3) {
+        hasMoved = true;
+      }
+
+      targetRotY += deltaX * 0.008;
+      targetRotX += deltaY * 0.006;
+      targetRotX = Math.max(-0.55, Math.min(0.55, targetRotX));
+
+      prevPointerX = clientX;
+      prevPointerY = clientY;
+    }
+
+    function onPointerUp() {
+      if (!hasMoved && isTouching) {
+        triggerResetView();
+      }
+      isTouching = false;
+    }
+
+    const stageEl = renderer.domElement;
+    stageEl.addEventListener('mousedown', onPointerDown);
+    window.addEventListener('mousemove', onPointerMove);
+    window.addEventListener('mouseup', onPointerUp);
+
+    stageEl.addEventListener('touchstart', onPointerDown, { passive: true });
+    window.addEventListener('touchmove', onPointerMove, { passive: true });
+    window.addEventListener('touchend', onPointerUp);
+
+    function triggerResetView() {
+      isAutoRotating = false;
+      targetRotX = 0;
+      targetRotY = 0;
+    }
+
+    window.addEventListener('resize', resizeCamera);
+    resizeCamera();
+
+    function renderLoop() {
+      requestAnimationFrame(renderLoop);
+
+      if (isPlaying || isAutoRotating) {
+        discSpinGroup.rotation.z -= 0.014;
+      }
+
+      if (isAutoRotating) {
+        const elapsed = performance.now() - autoRotStartTime;
+        const progress = Math.min(1, elapsed / AUTO_ROT_DURATION);
+        turntableGroup.rotation.y = progress * (Math.PI * 2);
+        turntableGroup.rotation.x = THREE.MathUtils.lerp(turntableGroup.rotation.x, 0, 0.08);
+
+        if (progress >= 1) {
+          isAutoRotating = false;
+          turntableGroup.rotation.y = 0;
+          targetRotY = 0;
+          targetRotX = 0;
+        }
+      } else {
+        turntableGroup.rotation.y = THREE.MathUtils.lerp(turntableGroup.rotation.y, targetRotY, 0.1);
+        turntableGroup.rotation.x = THREE.MathUtils.lerp(turntableGroup.rotation.x, targetRotX, 0.1);
+      }
+
+      if (isPlaying) {
+        discGroup.position.x = THREE.MathUtils.lerp(discGroup.position.x, VINYL_OUT_X, 0.06);
+      } else {
+        discGroup.position.x = THREE.MathUtils.lerp(discGroup.position.x, VINYL_REST_X, 0.06);
+      }
+
+      renderer.render(scene, camera);
+    }
+    renderLoop();
+
+    /* -------------------------------------------------------------
+     * 4. 音訊系統 (純原生同步換曲，徹底維持鎖屏連播)
+     * ------------------------------------------------------------*/
+    function setPlayState(active) {
+      isPlaying = active;
+      const svg = document.getElementById('play-svg-icon');
+      if (active) {
+        svg.innerHTML = '<path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>';
+      } else {
+        svg.innerHTML = '<path d="M8 5v14l11-7z"/>';
+      }
+      if ('mediaSession' in navigator) {
+        navigator.mediaSession.playbackState = active ? "playing" : "paused";
+      }
+    }
+
+    function updateProgressUI(cur, total) {
+      currentSec = cur;
+      totalDuration = total || 211;
+      const pct = Math.min(100, Math.max(0, (cur / totalDuration) * 100));
+      document.getElementById('seek-progress').style.width = `${pct}%`;
+      const curM = Math.floor(cur / 60);
+      const curS = Math.floor(cur % 60);
+      const totM = Math.floor(totalDuration / 60);
+      const totS = Math.floor(totalDuration % 60);
+      document.getElementById('lbl-curr').textContent = `${String(curM).padStart(2,'0')}:${String(curS).padStart(2,'0')}`;
+      document.getElementById('lbl-total').textContent = `${String(totM).padStart(2,'0')}:${String(totS).padStart(2,'0')}`;
+      syncLyrics(cur);
+      
+      if ('mediaSession' in navigator && ('setPositionState' in navigator.mediaSession) && totalDuration > 0) {
+        try {
+          navigator.mediaSession.setPositionState({
+            duration: totalDuration,
+            playbackRate: nativeAudio.playbackRate || 1,
+            position: Math.min(cur, totalDuration)
+          });
+        } catch(e) {}
+      }
+    }
+
+    nativeAudio.addEventListener('timeupdate', () => {
+      if (isDraggingSeek) return;
+      const cur = nativeAudio.currentTime;
+      const dur = nativeAudio.duration;
+      updateProgressUI(cur, dur || totalDuration);
+
+      // 當曲目即將結束（剩 0.3 秒），自動切入下一首，徹底防止鎖定畫面休眠暫停
+      if (dur > 0 && cur >= dur - 0.3 && !isAutoSwitching) {
+        isAutoSwitching = true;
+        playNext(true);
+      }
+    });
+
+    nativeAudio.addEventListener('playing', () => {
+      setPlayState(true);
+      isAutoSwitching = false;
+    });
+
+    nativeAudio.addEventListener('pause', () => {
+      if (!isAutoSwitching) {
+        setPlayState(false);
+      }
+    });
+
+    nativeAudio.addEventListener('ended', () => {
+      if (!isAutoSwitching) {
+        isAutoSwitching = true;
+        playNext(true);
+      }
+    });
+
+    // 關鍵修復：直接將檔名賦值，消除延遲，保證第二歌單秒播
+    function playActiveSong(isNewTrack = false, isAutoNext = false) {
+      const curPl = store[plIdx];
+      if (!curPl || !curPl.songs[trackIdx]) return;
+      const song = curPl.songs[trackIdx];
+
+      renderUI();
+      updateMediaSession(song, curPl);
+
+      if (isNewTrack || !hasPlayedFirstTrack) {
+        triggerSlow15sSpin();
+        hasPlayedFirstTrack = true;
+      }
+
+      totalDuration = song.duration || 211;
+      const directSrc = song.source; // 直接採用乾淨檔名
+
+      nativeAudio.volume = Math.min(1.0, Math.max(0, song.volume || 1.0));
+
+      isAutoSwitching = isAutoNext;
+      currentSec = 0;
+      updateProgressUI(0, totalDuration);
+
+      // 先暫停並重新指定 src，確保舊緩衝被完全丟棄
+      nativeAudio.pause();
+      nativeAudio.src = directSrc;
+      nativeAudio.load();
+      
+      const p = nativeAudio.play();
+      if (p !== undefined) {
+        p.then(() => {
+          setPlayState(true);
+          isAutoSwitching = false;
+        }).catch(err => {
+          if (isAutoNext) {
+            setTimeout(() => {
+              nativeAudio.play().then(() => {
+                setPlayState(true);
+                isAutoSwitching = false;
+              }).catch(() => {
+                setPlayState(false);
+                isAutoSwitching = false;
+              });
+            }, 80);
+          } else {
+            setPlayState(false);
+            isAutoSwitching = false;
+          }
+        });
+      }
+    }
+
+    function pauseActiveSong() {
+      setPlayState(false);
+      isAutoSwitching = false;
+      currentSec = nativeAudio.currentTime;
+      nativeAudio.pause();
+    }
+
+    /* -------------------------------------------------------------
+     * 5. 進度條拖曳
+     * ------------------------------------------------------------*/
+    const seekContainer = document.getElementById('seek-container');
+    const seekProgress = document.getElementById('seek-progress');
+
+    function getSeekFraction(e) {
+      const rect = seekContainer.getBoundingClientRect();
+      const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+      const pos = clientX - rect.left;
+      return Math.min(1, Math.max(0, pos / rect.width));
+    }
+
+    function handleSeekMove(e) {
+      if (!isDraggingSeek) return;
+      const frac = getSeekFraction(e);
+      seekProgress.style.width = `${frac * 100}%`;
+      const cur = frac * totalDuration;
+      const m = Math.floor(cur / 60);
+      const s = Math.floor(cur % 60);
+      document.getElementById('lbl-curr').textContent = `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+    }
+
+    function handleSeekEnd(e) {
+      if (!isDraggingSeek) return;
+      isDraggingSeek = false;
+      const frac = getSeekFraction(e.changedTouches ? e.changedTouches[0] : e);
+      currentSec = frac * totalDuration;
+      nativeAudio.currentTime = currentSec;
+      updateProgressUI(currentSec, totalDuration);
+    }
+
+    seekContainer.addEventListener('mousedown', (e) => { isDraggingSeek = true; handleSeekMove(e); });
+    window.addEventListener('mousemove', handleSeekMove);
+    window.addEventListener('mouseup', handleSeekEnd);
+
+    seekContainer.addEventListener('touchstart', (e) => { isDraggingSeek = true; handleSeekMove(e); }, { passive: false });
+    window.addEventListener('touchmove', handleSeekMove);
+    window.addEventListener('touchend', handleSeekEnd);
+
+    /* -------------------------------------------------------------
+     * 6. 歌詞渲染 (切換歌曲強制歸零捲動至第 1 行)
+     * ------------------------------------------------------------*/
+    function syncLyrics(sec) {
+      const song = store[plIdx]?.songs[trackIdx];
+      if (!song || !song.lyrics) return;
+
+      let idx = -1;
+      for (let i = 0; i < song.lyrics.length; i++) {
+        if (sec >= song.lyrics[i].time) idx = i;
+        else break;
+      }
+
+      const rows = document.querySelectorAll('.lyric-row');
+      rows.forEach((r, i) => {
+        if (i === idx) {
+          if (!r.classList.contains('active')) {
+            r.classList.add('active');
+            const scroller = document.getElementById('lyrics-scroller');
+            scroller.scrollTo({ top: r.offsetTop - (scroller.clientHeight / 2) + 12, behavior: 'smooth' });
+          }
+        } else {
+          r.classList.remove('active');
+        }
+      });
+    }
+
+    function renderLyricsList() {
+      const scroller = document.getElementById('lyrics-scroller');
+      scroller.style.scrollBehavior = 'auto';
+      scroller.scrollTop = 0;
+      scroller.innerHTML = '';
+      const song = store[plIdx]?.songs[trackIdx];
+
+      if (!song || !song.lyrics || song.lyrics.length === 0) {
+        scroller.innerHTML = '<div class="lyric-row"><div class="lyric-primary">純音樂 / 歌詞準備中</div></div>';
+        return;
+      }
+
+      song.lyrics.forEach((l, idx) => {
+        const div = document.createElement('div');
+        div.className = idx === 0 ? 'lyric-row active' : 'lyric-row';
+
+        const pSpan = document.createElement('div');
+        pSpan.className = 'lyric-primary';
+        pSpan.textContent = l.text;
+        div.appendChild(pSpan);
+
+        if (l.trans) {
+          const tSpan = document.createElement('div');
+          tSpan.className = 'lyric-trans';
+          tSpan.textContent = l.trans;
+          div.appendChild(tSpan);
+        }
+
+        div.onclick = () => {
+          currentSec = l.time;
+          nativeAudio.currentTime = currentSec;
+        };
+        scroller.appendChild(div);
+      });
+
+      scroller.scrollTop = 0;
+      scroller.style.scrollBehavior = 'smooth';
+    }
+
+    function renderUI() {
+      const curPl = store[plIdx];
+      const song = curPl?.songs[trackIdx];
+      if (!song) return;
+
+      document.getElementById('disp-title').textContent = song.title;
+      document.getElementById('disp-artist').textContent = song.artist || "KARINA";
+
+      applyCoverTo3D(
+        song.cover || curPl.cover, 
+        song.backCover, 
+        song.labelImg, 
+        song.imgScale || 1.0, 
+        song.imgOffsetX || 0.0, 
+        song.imgOffsetY || 0.0
+      );
+      renderLyricsList();
+      populateDropdowns();
+    }
+
+    function playNext(isAuto = false) {
+      const pl = store[plIdx];
+      if (!pl || pl.songs.length === 0) return;
+      trackIdx = (trackIdx + 1) % pl.songs.length;
+      currentSec = 0;
+      playActiveSong(true, isAuto);
+    }
+
+    function playPrev() {
+      const pl = store[plIdx];
+      if (!pl || pl.songs.length === 0) return;
+      trackIdx = (trackIdx - 1 + pl.songs.length) % pl.songs.length;
+      currentSec = 0;
+      playActiveSong(true, false);
+    }
+
+    document.getElementById('btn-play').onclick = () => {
+      if (isPlaying) {
+        pauseActiveSong();
+      } else {
+        playActiveSong(false, false);
+      }
+    };
+    document.getElementById('btn-next').onclick = () => playNext(false);
+    document.getElementById('btn-prev').onclick = playPrev;
+
+    function populateDropdowns() {
+      const pSel = document.getElementById('sel-playlist');
+      pSel.innerHTML = '';
+      store.forEach((p, i) => {
+        const opt = document.createElement('option');
+        opt.value = i;
+        opt.textContent = p.name;
+        if (i === plIdx) opt.selected = true;
+        pSel.appendChild(opt);
+      });
+
+      const sSel = document.getElementById('sel-song');
+      sSel.innerHTML = '';
+      const songs = store[plIdx]?.songs || [];
+      songs.forEach((s, i) => {
+        const opt = document.createElement('option');
+        opt.value = i;
+        opt.textContent = s.title;
+        if (i === trackIdx) opt.selected = true;
+        sSel.appendChild(opt);
+      });
+    }
+
+    document.getElementById('sel-playlist').onchange = (e) => {
+      plIdx = parseInt(e.target.value);
+      trackIdx = 0;
+      currentSec = 0;
+      playActiveSong(true, false);
+    };
+
+    document.getElementById('sel-song').onchange = (e) => {
+      trackIdx = parseInt(e.target.value);
+      currentSec = 0;
+      playActiveSong(true, false);
+    };
+
+    /* -------------------------------------------------------------
+     * 7. 導覽選單與管理後台控制
+     * ------------------------------------------------------------*/
+    const navModal = document.getElementById('nav-modal');
+    const mountPoint = document.getElementById('admin-mount-point');
+
+    document.getElementById('btn-open-menu').onclick = () => {
+      navModal.style.display = 'flex';
+    };
+    document.getElementById('btn-close-nav').onclick = () => {
+      navModal.style.display = 'none';
+    };
+
+    // 重新整理鍵：重設快取並載入預設曲目 UP
+    document.getElementById('menu-btn-reload').onclick = () => {
+      localStorage.clear();
+      window.location.href = window.location.pathname;
+    };
+
+    document.getElementById('menu-btn-admin').onclick = () => {
+      navModal.style.display = 'none';
+      openAuthModal();
+    };
+
+    function openAuthModal() {
+      mountPoint.innerHTML = document.getElementById('auth-tpl').innerHTML;
+      const authInput = document.getElementById('auth-input');
+      authInput.focus();
+
+      document.getElementById('btn-auth-close').onclick = () => { mountPoint.innerHTML = ''; };
+      document.getElementById('btn-auth-submit').onclick = () => {
+        if (authInput.value === '0401') {
+          openAdminDashboard();
+        } else {
+          alert('驗證失敗！');
+        }
+      };
+    }
+
+    document.getElementById('logo-trigger').onclick = openAuthModal;
+
+    function updateLivePreviewBox() {
+      const title = document.getElementById('form-song-title')?.value.trim() || '未命名歌曲';
+      const artist = document.getElementById('form-song-artist')?.value.trim() || 'KARINA';
+      const rawCover = document.getElementById('form-song-cover')?.value.trim() || COVER_UP;
+      const direct = rawCover;
+
+      const scale = parseFloat(document.getElementById('form-img-scale')?.value || 1.0);
+      const ox = parseFloat(document.getElementById('form-img-ox')?.value || 0.0);
+      const oy = parseFloat(document.getElementById('form-img-oy')?.value || 0.0);
+
+      const thumbEl = document.getElementById('preview-box-thumb');
+      const titleEl = document.getElementById('preview-box-title');
+      const artistEl = document.getElementById('preview-box-artist');
+
+      if (titleEl) titleEl.textContent = title;
+      if (artistEl) artistEl.textContent = artist;
+      if (thumbEl) {
+        thumbEl.style.backgroundImage = `url("${direct}")`;
+        thumbEl.style.backgroundSize = `${scale * 100}%`;
+        thumbEl.style.backgroundPosition = `${50 + ox * 100}% ${50 + oy * 100}%`;
+      }
+    }
+
+    function openAdminDashboard() {
+      mountPoint.innerHTML = document.getElementById('admin-tpl').innerHTML;
+
+      const scaleSlider = document.getElementById('scale-slider');
+      scaleSlider.value = modelScale;
+      document.getElementById('scale-val-lbl').textContent = `${modelScale}x`;
+      scaleSlider.oninput = (e) => {
+        modelScale = parseFloat(e.target.value);
+        document.getElementById('scale-val-lbl').textContent = `${modelScale}x`;
+        turntableGroup.scale.set(modelScale, modelScale, modelScale);
+      };
+
+      const volSlider = document.getElementById('form-song-vol');
+      volSlider.oninput = (e) => {
+        document.getElementById('form-vol-lbl').textContent = `${parseFloat(e.target.value).toFixed(2)}x`;
+      };
+
+      const imgScale = document.getElementById('form-img-scale');
+      const imgOx = document.getElementById('form-img-ox');
+      const imgOy = document.getElementById('form-img-oy');
+
+      imgScale.oninput = (e) => {
+        document.getElementById('lbl-img-scale').textContent = `${parseFloat(e.target.value).toFixed(2)}x`;
+        updateLivePreviewBox();
+      };
+      imgOx.oninput = (e) => {
+        document.getElementById('lbl-img-ox').textContent = `${Math.round(e.target.value * 100)}%`;
+        updateLivePreviewBox();
+      };
+      imgOy.oninput = (e) => {
+        document.getElementById('lbl-img-oy').textContent = `${Math.round(e.target.value * 100)}%`;
+        updateLivePreviewBox();
+      };
+
+      document.getElementById('form-song-title').oninput = updateLivePreviewBox;
+      document.getElementById('form-song-artist').oninput = updateLivePreviewBox;
+      document.getElementById('form-song-cover').oninput = updateLivePreviewBox;
+
+      document.getElementById('btn-pick-img').onclick = () => document.getElementById('local-img-picker').click();
+      document.getElementById('local-img-picker').onchange = (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = (event) => {
+          document.getElementById('form-song-cover').value = event.target.result;
+          document.getElementById('img-picker-status').textContent = `已載入: ${file.name}`;
+          updateLivePreviewBox();
+        };
+        reader.readAsDataURL(file);
+      };
+
+      document.getElementById('btn-pick-label-img').onclick = () => document.getElementById('local-label-img-picker').click();
+      document.getElementById('local-label-img-picker').onchange = (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = (event) => {
+          document.getElementById('form-song-label-img').value = event.target.result;
+          document.getElementById('label-img-picker-status').textContent = `已載入: ${file.name}`;
+        };
+        reader.readAsDataURL(file);
+      };
+
+      document.getElementById('btn-pick-back-img').onclick = () => document.getElementById('local-back-img-picker').click();
+      document.getElementById('local-back-img-picker').onchange = (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = (event) => {
+          document.getElementById('form-song-back-cover').value = event.target.result;
+          document.getElementById('back-img-picker-status').textContent = `已載入: ${file.name}`;
+        };
+        reader.readAsDataURL(file);
+      };
+
+      document.getElementById('btn-close-admin').onclick = () => {
+        mountPoint.innerHTML = '';
+        renderUI();
+      };
+
+      document.getElementById('btn-save-song').onclick = saveSongHandler;
+      document.getElementById('btn-cancel-edit').onclick = resetSongForm;
+      document.getElementById('btn-add-pl').onclick = addPlaylistHandler;
+
+      document.getElementById('btn-copy-code').onclick = () => {
+        navigator.clipboard.writeText(document.documentElement.outerHTML).then(() => {
+          alert('已將當前完整 HTML 程式碼複製到剪貼簿！');
+        });
+      };
+
+      document.getElementById('btn-dl-html').onclick = () => {
+        const blob = new Blob([document.documentElement.outerHTML], { type: 'text/html;charset=utf-8' });
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = 'index.html';
+        a.click();
+      };
+
+      renderAdminTree();
+      updateLivePreviewBox();
+    }
+
+    function renderAdminTree() {
+      const targetPlSel = document.getElementById('form-pl-target');
+      if (!targetPlSel) return;
+      targetPlSel.innerHTML = '';
+      store.forEach((p, idx) => {
+        const opt = document.createElement('option');
+        opt.value = idx;
+        opt.textContent = p.name;
+        targetPlSel.appendChild(opt);
+      });
+
+      const tree = document.getElementById('admin-tree-view');
+      tree.innerHTML = '';
+      store.forEach((p, pI) => {
+        const pBox = document.createElement('div');
+        pBox.style.cssText = "margin-bottom:12px; background:#111216; padding:10px; border-radius:6px; border:1px solid #282a35;";
+        
+        const isFirstPl = pI === 0;
+        const isLastPl = pI === store.length - 1;
+
+        pBox.innerHTML = `
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px; border-bottom:1px solid #222530; padding-bottom:6px;">
+            <strong style="color:#e4e4e7; font-size:0.84rem;">📁 ${p.name} (${p.songs.length} 首)</strong>
+            <div style="display:flex; gap:4px;">
+              <button class="btn-order" onclick="window.movePl(${pI}, -1)" ${isFirstPl ? 'disabled' : ''} title="上移歌單">⬆</button>
+              <button class="btn-order" onclick="window.movePl(${pI}, 1)" ${isLastPl ? 'disabled' : ''} title="下移歌單">⬇</button>
+              <button class="btn-act btn-del" onclick="window.delPl(${pI})" style="margin-left:4px;">刪除歌單</button>
+            </div>
+          </div>
+        `;
+
+        p.songs.forEach((s, sI) => {
+          const isFirstSong = sI === 0;
+          const isLastSong = sI === p.songs.length - 1;
+          const volDisplay = typeof s.volume === 'number' ? s.volume : 1.0;
+
+          const sRow = document.createElement('div');
+          sRow.className = 'song-item-row';
+          sRow.innerHTML = `
+            <span style="overflow:hidden; text-overflow:ellipsis; white-space:nowrap; max-width:180px;">🎵 ${sI + 1}. ${s.title} <small style="color:#71717a;">(${volDisplay.toFixed(2)}x)</small></span>
+            <div class="song-actions">
+              <button class="btn-order" onclick="window.moveSong(${pI}, ${sI}, -1)" ${isFirstSong ? 'disabled' : ''} title="上移">⬆</button>
+              <button class="btn-order" onclick="window.moveSong(${pI}, ${sI}, 1)" ${isLastSong ? 'disabled' : ''} title="下移">⬇</button>
+              <button class="btn-act btn-edit" onclick="window.editS(${pI}, ${sI})">編輯</button>
+              <button class="btn-act btn-del" onclick="window.delS(${pI}, ${sI})">刪除</button>
+            </div>
+          `;
+          pBox.appendChild(sRow);
+        });
+        tree.appendChild(pBox);
+      });
+    }
+
+    window.movePl = (pI, dir) => {
+      const targetIndex = pI + dir;
+      if (targetIndex < 0 || targetIndex >= store.length) return;
+      const temp = store[pI];
+      store[pI] = store[targetIndex];
+      store[targetIndex] = temp;
+      if (plIdx === pI) plIdx = targetIndex;
+      else if (plIdx === targetIndex) plIdx = pI;
+      renderAdminTree();
+      renderUI();
+    };
+
+    window.moveSong = (pI, sI, dir) => {
+      const songs = store[pI].songs;
+      const targetIndex = sI + dir;
+      if (targetIndex < 0 || targetIndex >= songs.length) return;
+      const temp = songs[sI];
+      songs[sI] = songs[targetIndex];
+      songs[targetIndex] = temp;
+      if (plIdx === pI) {
+        if (trackIdx === sI) trackIdx = targetIndex;
+        else if (trackIdx === targetIndex) trackIdx = sI;
+      }
+      renderAdminTree();
+      renderUI();
+    };
+
+    window.delPl = (pI) => {
+      if (store.length <= 1) return alert('請至少保留一個歌單！');
+      if (confirm(`確定刪除歌單《${store[pI].name}》？`)) {
+        store.splice(pI, 1);
+        if (plIdx >= store.length) plIdx = 0;
+        trackIdx = 0;
+        renderAdminTree();
+        renderUI();
+      }
+    };
+
+    window.delS = (pI, sI) => {
+      store[pI].songs.splice(sI, 1);
+      if (plIdx === pI && trackIdx >= store[pI].songs.length) {
+        trackIdx = Math.max(0, store[pI].songs.length - 1);
+      }
+      renderAdminTree();
+      renderUI();
+    };
+
+    window.editS = (pI, sI) => {
+      const s = store[pI].songs[sI];
+      document.getElementById('form-mode-title').textContent = `✦ 編輯歌曲: ${s.title}`;
+      document.getElementById('edit-song-id').value = `${pI}_${sI}`;
+      document.getElementById('form-pl-target').value = pI;
+      document.getElementById('form-song-title').value = s.title;
+      document.getElementById('form-song-artist').value = s.artist || 'KARINA';
+      document.getElementById('form-song-source').value = s.source;
+
+      const currentVol = (typeof s.volume === 'number') ? s.volume : 1.0;
+      document.getElementById('form-song-vol').value = currentVol;
+      document.getElementById('form-vol-lbl').textContent = `${currentVol.toFixed(2)}x`;
+
+      const currentScale = typeof s.imgScale === 'number' ? s.imgScale : 1.0;
+      const currentOx = typeof s.imgOffsetX === 'number' ? s.imgOffsetX : 0.0;
+      const currentOy = typeof s.imgOffsetY === 'number' ? s.imgOffsetY : 0.0;
+
+      document.getElementById('form-img-scale').value = currentScale;
+      document.getElementById('lbl-img-scale').textContent = `${currentScale.toFixed(2)}x`;
+      document.getElementById('form-img-ox').value = currentOx;
+      document.getElementById('lbl-img-ox').textContent = `${Math.round(currentOx * 100)}%`;
+      document.getElementById('form-img-oy').value = currentOy;
+      document.getElementById('lbl-img-oy').textContent = `${Math.round(currentOy * 100)}%`;
+
+      document.getElementById('form-song-cover').value = s.cover || '';
+      document.getElementById('form-song-label-img').value = s.labelImg || '';
+      document.getElementById('form-song-back-cover').value = s.backCover || '';
+
+      const lyricsStr = (s.lyrics || []).map(l => {
+        let textPart = `${formatLrcTime(l.time)} ${l.text}`;
+        if (l.trans) textPart += `\n${l.trans}`;
+        return textPart;
+      }).join('\n');
+      document.getElementById('form-song-lyrics').value = lyricsStr;
+
+      document.getElementById('btn-cancel-edit').style.display = 'inline-block';
+      document.getElementById('admin-modal').scrollTo({ top: 0, behavior: 'smooth' });
+
+      updateLivePreviewBox();
+    };
+
+    function resetSongForm() {
+      document.getElementById('form-mode-title').textContent = '✦ 新增歌曲';
+      document.getElementById('edit-song-id').value = '';
+      document.getElementById('form-song-title').value = '';
+      document.getElementById('form-song-artist').value = 'KARINA';
+      document.getElementById('form-song-source').value = '';
+      document.getElementById('form-song-vol').value = 1.0;
+      document.getElementById('form-vol-lbl').textContent = '1.00x';
+
+      document.getElementById('form-img-scale').value = 1.0;
+      document.getElementById('lbl-img-scale').textContent = '1.00x';
+      document.getElementById('form-img-ox').value = 0.0;
+      document.getElementById('lbl-img-ox').textContent = '0%';
+      document.getElementById('form-img-oy').value = 0.0;
+      document.getElementById('lbl-img-oy').textContent = '0%';
+
+      document.getElementById('form-song-cover').value = '';
+      document.getElementById('form-song-label-img').value = '';
+      document.getElementById('form-song-back-cover').value = '';
+      document.getElementById('form-song-lyrics').value = '';
+      document.getElementById('img-picker-status').textContent = '';
+      document.getElementById('label-img-picker-status').textContent = '';
+      document.getElementById('back-img-picker-status').textContent = '';
+      document.getElementById('btn-cancel-edit').style.display = 'none';
+
+      updateLivePreviewBox();
+    }
+
+    function saveSongHandler() {
+      const editKey = document.getElementById('edit-song-id').value;
+      const targetPl = parseInt(document.getElementById('form-pl-target').value);
+      const title = document.getElementById('form-song-title').value.trim();
+      const artist = document.getElementById('form-song-artist').value.trim() || 'KARINA';
+      const source = document.getElementById('form-song-source').value.trim();
+      const volume = parseFloat(document.getElementById('form-song-vol').value) || 1.0;
+      const imgScale = parseFloat(document.getElementById('form-img-scale').value) || 1.0;
+      const imgOffsetX = parseFloat(document.getElementById('form-img-ox').value) || 0.0;
+      const imgOffsetY = parseFloat(document.getElementById('form-img-oy').value) || 0.0;
+
+      const rawCover = document.getElementById('form-song-cover').value.trim();
+      const rawLabelImg = document.getElementById('form-song-label-img').value.trim();
+      const rawBackCover = document.getElementById('form-song-back-cover').value.trim();
+      
+      const cover = rawCover || store[targetPl]?.cover || COVER_UP;
+      const labelImg = rawLabelImg || '';
+      const backCover = rawBackCover || '';
+      const lyricsRaw = document.getElementById('form-song-lyrics').value;
+
+      if (!title || !source) return alert('請填寫完整歌名與音訊來源！');
+
+      const songObj = {
+        title,
+        artist,
+        source,
+        volume,
+        cover,
+        labelImg,
+        backCover,
+        imgScale,
+        imgOffsetX,
+        imgOffsetY,
+        duration: 210,
+        lyrics: parseLrc(lyricsRaw)
+      };
+
+      if (editKey) {
+        const [oldPI, oldSI] = editKey.split('_').map(Number);
+        if (oldPI === targetPl) {
+          store[oldPI].songs[oldSI] = songObj;
+        } else {
+          store[oldPI].songs.splice(oldSI, 1);
+          store[targetPl].songs.push(songObj);
+        }
+      } else {
+        store[targetPl].songs.push(songObj);
+      }
+
+      renderAdminTree();
+      renderUI();
+      resetSongForm();
+      alert(`歌曲《${title}》已成功儲存！`);
+    }
+
+    function addPlaylistHandler() {
+      const name = document.getElementById('admin-new-pl-name').value.trim();
+      if (!name) return alert('請輸入歌單名稱！');
+      store.push({ id: 'pl_' + Date.now(), name, cover: COVER_UP, songs: [] });
+      document.getElementById('admin-new-pl-name').value = '';
+      renderAdminTree();
+      renderUI();
+    }
+
+    renderUI();
+  </script>
 </body>
 </html>
