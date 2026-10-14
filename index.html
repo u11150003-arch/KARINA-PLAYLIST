@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
   
+  <!-- iOS 桌面圖示與主畫面標題宣告 -->
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="KARINA PLAYLIST">
@@ -19,6 +20,7 @@
 
   <title>KARINA PLAYLIST</title>
 
+  <!-- Open Graph 網址縮圖與社群卡片 -->
   <meta property="og:site_name" content="KARINA PLAYLIST">
   <meta property="og:title" content="KARINA PLAYLIST">
   <meta property="og:description" content="Playlist for KARINA">
@@ -1536,7 +1538,7 @@ Yeah, yeah，盡管說吧，隨你怎麼講
 [02:17.61]你說太累所以是誰惹的禍
 [02:20.80]是我 愛你但說不出口
 [02:33.29]你說太累所以是誰惹的禍
-[02:36.74]是我 愛你但說不出口
+[02:36.74]偽我 愛你但說不出口
 [02:54.24]愛你但說不出口`;
 
     const LRC_CANT_TAKE_EYES = `[00:21.49]You're just too good to be true
@@ -1988,10 +1990,6 @@ Yeah, yeah，盡管說吧，隨你怎麼講
           tex.generateMipmaps = false;
           textureCache.set(url, tex);
           callback(tex);
-        },
-        undefined,
-        (err) => {
-          console.error("貼圖載入失敗:", url, err);
         }
       );
     }
@@ -2045,7 +2043,7 @@ Yeah, yeah，盡管說吧，隨你怎麼講
       if (!frontUrl) return;
       const thisSeq = ++currentTextureSeq;
 
-      // 排入下一次非同步空檔執行，絕不與 MP3 音訊的首次連線搶頻寬
+      // 延後加載 3D 貼圖，確保 MP3 取得最優先頻寬
       setTimeout(() => {
         const directFront = frontUrl;
         const directBack = backUrl || frontUrl;
@@ -2073,7 +2071,7 @@ Yeah, yeah，盡管說吧，隨你怎麼講
           labelMesh.material.color.set(0xffffff);
           labelMesh.material.needsUpdate = true;
         });
-      }, 50);
+      }, 30);
     }
 
     let isTouching = false;
@@ -2184,7 +2182,7 @@ Yeah, yeah，盡管說吧，隨你怎麼講
     renderLoop();
 
     /* -------------------------------------------------------------
-     * 4. 音訊系統 (完全純原生同步換曲，保證熄屏與切分頁不中斷)
+     * 4. 音訊系統 (極速原生載入，保證換曲秒開與背景連續播放)
      * ------------------------------------------------------------*/
     function setPlayState(active) {
       isPlaying = active;
@@ -2239,11 +2237,12 @@ Yeah, yeah，盡管說吧，隨你怎麼講
       }
     });
 
-    // 歌曲播畢時，以最直接純淨方式立刻觸發下一首
+    // 歌曲播放完畢，以同步呼叫直接連貫至下一首
     nativeAudio.addEventListener('ended', () => {
       playNext(true);
     });
 
+    // 關鍵修復：拿掉打斷載入的 nativeAudio.load()，改為直接指派 src 並 play()
     function playActiveSong(isNewTrack = false, isAutoNext = false) {
       const curPl = store[plIdx];
       if (!curPl || !curPl.songs[trackIdx]) return;
@@ -2266,10 +2265,8 @@ Yeah, yeah，盡管說吧，隨你怎麼講
       currentSec = 0;
       updateProgressUI(0, totalDuration);
 
-      // 強制清空重置，消除阻塞排隊
-      nativeAudio.pause();
+      // 直接給予新來源，不呼叫 load() 避免造成 Safari 重建握手卡死
       nativeAudio.src = directSrc;
-      nativeAudio.load();
       
       const p = nativeAudio.play();
       if (p !== undefined) {
@@ -2286,7 +2283,7 @@ Yeah, yeah，盡管說吧，隨你怎麼講
                 setPlayState(false);
                 isAutoSwitching = false;
               });
-            }, 60);
+            }, 50);
           } else {
             setPlayState(false);
             isAutoSwitching = false;
