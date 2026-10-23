@@ -60,7 +60,7 @@
       --steel-border: #2a2c35;
       --accent-glow: rgba(244, 244, 245, 0.25);
       /* 白色愛心游標 */
-      --heart-cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="rgba(255,255,255,0.45)" stroke="rgba(0,0,0,0.4)" stroke-width="0.8" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>') 12 12, pointer;
+      --heart-cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="rgba(255,255,255,0.45)" stroke="rgba(0,0,0,0.4)" stroke-width="0.8" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>') 12 12, pointer;
     }
 
     * {
@@ -491,6 +491,7 @@
       flex-shrink: 0;
     }
 
+    /* 說明提示欄位 */
     .menu-notice-card {
       margin-top: 8px;
       padding: 11px 13px;
@@ -914,6 +915,7 @@
     const COVER_SERENADE = "Serenade_album cover.jpg";
     const VINYL_SERENADE = "Serenade_CD cover.jpg";
     const COVER_ORANGE = "Orange_cover.jpg";
+    const COVER_WHEN_FALL_COMES = "When Fall Comes_cover.jpeg";
 
     const COVER_SPARKLE = "01Sparkle_cover.jpg";
     const COVER_HARD_TO_SAY = "02Hard to say_cover.jpg";
@@ -1741,6 +1743,20 @@ Yeah, yeah，盡管說吧，隨你怎麼講
             duration: 205,
             volume: 1.0,
             lyrics: parseLrc(LRC_ORANGE)
+          },
+          {
+            title: "當秋天到來가을이 오면",
+            artist: "KARINA",
+            source: "When Fall Comes.mp3",
+            cover: COVER_WHEN_FALL_COMES,
+            labelImg: COVER_WHEN_FALL_COMES,
+            backCover: COVER_WHEN_FALL_COMES,
+            imgScale: 1.0,
+            imgOffsetX: 0.0,
+            imgOffsetY: 0.0,
+            duration: 210,
+            volume: 1.0,
+            lyrics: []
           }
         ]
       },
@@ -1893,7 +1909,7 @@ Yeah, yeah，盡管說吧，隨你怎麼講
 
     function resizeCamera() {
       const isMobile = window.innerWidth < 600;
-      DEFAULT_CAM_POS.set(0, isMobile ? 0.1 : 0.15, isMobile ? 5.2 : 4.6);
+      DEFAULT_CAM_POS.set(0, 0.1, 5.2);
       camera.position.copy(DEFAULT_CAM_POS);
       camera.aspect = container.clientWidth / container.clientHeight;
       camera.updateProjectionMatrix();
@@ -2232,7 +2248,7 @@ Yeah, yeah，盡管說吧，隨你怎麼講
     nativeAudio.addEventListener('playing', () => setPlayState(true));
     nativeAudio.addEventListener('pause', () => setPlayState(false));
     
-    // 關鍵修復：完全比照 Winter，播畢時在 ended 同步直接觸發 playNext()
+    // 播畢時在 ended 同步直接觸發 playNext()
     nativeAudio.addEventListener('ended', () => {
       playNext();
     });
@@ -2255,7 +2271,6 @@ Yeah, yeah，盡管說吧，隨你怎麼講
 
       nativeAudio.volume = Math.min(1.0, Math.max(0, song.volume || 1.0));
 
-      // 比照 Winter：換歌時暫停後直接更換 src 並播放，不呼叫打斷握手的 load()
       if (isNewTrack || nativeAudio.src !== directSrc) {
         nativeAudio.pause();
         currentSec = 0;
@@ -2498,6 +2513,7 @@ Yeah, yeah，盡管說吧，隨你怎麼講
       navModal.style.display = 'none';
     };
 
+    // 重新整理鍵：重設快取並載入預設曲目 UP
     document.getElementById('menu-btn-reload').onclick = () => {
       localStorage.clear();
       window.location.reload();
