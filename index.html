@@ -60,7 +60,7 @@
       --steel-border: #2a2c35;
       --accent-glow: rgba(244, 244, 245, 0.25);
       /* 白色愛心游標 */
-      --heart-cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="rgba(255,255,255,0.45)" stroke="rgba(0,0,0,0.4)" stroke-width="0.8" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>') 12 12, pointer;
+      --heart-cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="rgba(255,255,255,0.45)" stroke="rgba(0,0,0,0.4)" stroke-width="0.8" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>') 12 12, pointer;
     }
 
     * {
@@ -916,6 +916,7 @@
     const VINYL_SERENADE = "Serenade_CD cover.jpg";
     const COVER_ORANGE = "Orange_cover.jpg";
     const COVER_WHEN_FALL_COMES = "When Fall Comes_cover.jpeg";
+    const COVER_WALK = "walk_cover.jpg";
 
     const COVER_SPARKLE = "01Sparkle_cover.jpg";
     const COVER_HARD_TO_SAY = "02Hard to say_cover.jpg";
@@ -1493,6 +1494,27 @@ Yeah, yeah，盡管說吧，隨你怎麼講
 [00:57.50]님의 부드런 고운 미소 가득한 저 하늘에 가을이 오면
 滿是你溫柔甜美笑容的那片天空 當秋天到來`;
 
+    const LRC_WALK = `[00:00.57]한적한 밤 산책하다보면
+漫步在寧靜的夜裡
+[00:06.59]어김없이 생각나는 얼굴
+腦海中總會浮現的那張臉
+[00:13.23]반짝이는 별을 모아 그리는 그런사람
+那個彷彿以點點星光勾勒而成的人
+[00:24.87]좁다란 길 향기를 채우는 가로등 빛
+路燈的光芒，為狹窄的小徑添上芬芳
+[00:33.12]물든 진달래 꽃 이 향기를
+染上杜鵑的花香
+[00:40.81]그와 함께 맡으면 참 좋겠네
+若能與那個人一同感受這香氣，該有多好
+[00:48.47]보고싶어라 그리운 그 얼굴
+真想念啊 那張令人眷戀的臉
+[00:53.98]물로 그린 그림처럼 사라지네
+卻如水中描繪的畫，漸漸消散
+[01:00.62]보고싶어라 오늘도 그 사람을
+好想念啊，今天也
+[01:06.43]떠올리려 산책을 하네
+為了想起那個人去散步了`;
+
     const LRC_SPARKLE = `[00:21.81]まだこの世界は 僕を飼いならしてたいみたいだ
 這個世界似乎依然想將我馴服
 [00:29.97]望み通りいいだろう 美しくもがくよ
@@ -1778,6 +1800,20 @@ Yeah, yeah，盡管說吧，隨你怎麼講
             duration: 210,
             volume: 1.0,
             lyrics: parseLrc(LRC_WHEN_FALL_COMES)
+          },
+          {
+            title: "산책 A Walk",
+            artist: "KARINA",
+            source: "walk.mp3",
+            cover: COVER_WALK,
+            labelImg: COVER_WALK,
+            backCover: COVER_WALK,
+            imgScale: 1.0,
+            imgOffsetX: 0.0,
+            imgOffsetY: 0.0,
+            duration: 210,
+            volume: 1.0,
+            lyrics: parseLrc(LRC_WALK)
           }
         ]
       },
